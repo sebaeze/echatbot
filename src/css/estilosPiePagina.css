@@ -1,0 +1,46 @@
+/*
+*
+*/
+footer {
+    color: white;
+    min-height: 60vh ;
+    background-color: #0E2243 ;
+}
+footer .ant-typography {
+    color: white !important ;
+    /* opacity: 0.7 !important ; */
+}
+footer .ant-typography a {
+    opacity: 0.6 !important;
+}
+/*   */
+footer form label {
+    color: white !important;
+}
+footer form input {
+    width: 100% !important ;
+    height: 45px !important;
+}
+footer form button[type="submit"] {
+    width: 30% !important ;
+    height: 45px !important;
+    margin-left: -30% !important ;
+    color: #001642 ;
+    padding: 0 ;
+    margin: 0 ;
+
+}
+footer div.ant-spin.ant-spin-lg.ant-spin-spinning {
+    margin-left: 50px !important ;
+}
+/*   */
+footer button[type="button"] span {
+    text-align: left !important ;
+    font-size: 24px !important ;
+    padding: 0 !important ;
+    margin: 0 !important  ;
+}
+footer button[type="button"] span:hover {
+    text-decoration: underline !important;
+}
+/*   */

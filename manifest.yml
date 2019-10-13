@@ -1,0 +1,10 @@
+---
+applications:
+- name: webpage-sindoh
+  command: npm run startCloud
+  host: webpage-sindoh
+  domain: mybluemix.net
+  memory: 1024M
+  timeout: 180
+  env:
+    AMBIENTE: produccion

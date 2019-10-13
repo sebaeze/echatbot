@@ -1,0 +1,32 @@
+{
+    "EN":{
+        "contact":"Contact",
+        "about":"About us",
+        "services":"Services",
+        "prices":"Prices",
+        "home":[
+            "Improve the time to response to your customers",
+            "Don't lose sells",
+            "Monitor your clients needs",
+            "Improve your eCommerce using the potential of AI"
+        ]
+    },
+    "ES":{
+        "contact":"Contacto",
+        "about":"A cerca de nosotros",
+        "services":"Servicios",
+        "prices":"Precios",
+        "home":[
+            "Mejora el tiempo de respuesta a tus clientes",
+            "No pierdas ventas",
+            "Monitoria las necesidades de tus clientes",
+            "Aprobecha el poder de AI para analizar las ventas"
+        ]
+    },
+    "PT":{
+        "contact":"Contato",
+        "about":"Sobre nós",
+        "services":"Serviços",
+        "prices":"Preços"
+    }
+}

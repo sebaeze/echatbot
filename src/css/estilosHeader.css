@@ -1,0 +1,71 @@
+/*
+*
+*/
+header {
+    padding: 0 !important ;
+    margin:  0 !important ;
+}
+header .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+}
+header ul.ant-menu {
+    background-color: transparent !important ;
+}
+/*  */
+.shadow-below {
+    margin-bottom:10px;
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	   -moz-box-shadow: 0 8px 6px -6px black;
+	        box-shadow: 0 8px 6px -6px black;
+	   -ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+/*  */
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 160px;
+    line-height: 160px;
+    background: #364d79;
+    overflow: hidden;
+}
+.ant-carousel .slick-slide h3 {
+    color: #fff;
+}
+/*   */
+.whatsapp-icon {
+    position: fixed ;
+    bottom: 10% ;
+    right: 3% ;
+    z-index: 9999 ;
+}
+.whatsapp-icon i svg {
+    width: 60px !important ;
+    height: auto !important ;
+    color: #83B838 !important;
+
+}
+.whatsapp-icon img {
+    width: 90px !important ;
+    height: auto !important ;
+}
+.whatsapp-icon img:hover, .whatsapp-icon i svg:hover {
+    -webkit-filter: drop-shadow(5px 5px 5px #222 );
+    filter: drop-shadow(5px 5px 5px #222);
+    cursor: pointer ;
+}
+@media (max-width: 700px) {
+    .whatsapp-icon { bottom: 18% ; }
+    .whatsapp-icon i svg {
+        width: 40px !important ;
+        height: auto !important ;
+    }
+}
+/*   */
+#main .ant-carousel .slick-slide {
+    background-color: #fff !important ;
+}
+/*   */

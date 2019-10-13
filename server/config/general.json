@@ -1,0 +1,111 @@
+{
+    "nombre":"eChatbot",
+    "descripcion":"eChatbot provee de asistentes virtuales ( chatbot ) a ecommercer",
+    "urlEmpresa":"https://www.echatbot.com.ar",
+    "email":{
+        "emailEmpresa":"sebaeze@gmail.com",
+        "emailSoporte":"sebaeze@gmail.com",
+        "emailGateway":"jym.all.graphics.email@gmail.com",
+        "passwordEmailGateway":"!ZXCasdqwe123",
+        "nombreMuestraEmailGateway":"eChatbot backend"
+    },
+    "mercadolibre":{
+        "sincronizacion":{
+            "activado":"false",
+            "crosSchedule":"0 30 4 * * *"
+        },
+        "appId":"xxxxx",
+        "sellerId":"xxxxxx"
+    },
+    "database":{
+        "dev":{
+            "type":"mongodb",
+            "url":"mongodb://localhost:27017",
+            "database":"echatbotdev"
+        },
+        "produccion":{
+            "type":"mongodb",
+            "url":"mongodb://sebaeze:qaz11qaz@66.97.39.81:20017",
+            "database":"echatbot"
+        }
+    },
+    "passport":{
+        "dev":{
+            "mercadolibre":{
+                "clientID": "5820076076281938",
+                "clientSecret": "NUTGIk5rSkG0GCbRrY1SnY9YAzdr7Sqb",
+                "urlLogin": "/mercadolibre/login",
+                "pathUrlCallback":"/mercadolibre/callback",
+                "callbackURL": "/auth/mercadolibre/callback",
+                "scope": false
+            },
+            "google":{
+                "clientID": "777534133764-06vo7vojcj5dl7s4u0qt1f263kc8j30h.apps.googleusercontent.com",
+                "clientSecret": "L_985JNK9Y9DSZmwfHpkxD1n",
+                "pathUrlCallback":"/google/callback",
+                "callbackURL": "/auth/google/callback",
+                "urlLogin": "/google/login",
+                "scope": ["https://www.googleapis.com/auth/userinfo.profile","https://www.googleapis.com/auth/userinfo.email"]
+            },
+            "facebook":{
+                "clientID": "383443742250970",
+                "clientSecret": "a9e31d0fc60d82da287a50229d5bd0bf",
+                "pathUrlCallback":"/facebook/callback",
+                "callbackURL": "/auth/facebook/callback",
+                "urlLogin": "/facebook/login",
+                "scope": ["public_profile","email"]
+            }
+        },
+        "produccion":{
+            "mercadolibre":{
+                "clientID": "4871118120182682",
+                "clientSecret": "wqXs26GOJv1CiFaRyCQ8m5knX2uJNxtf",
+                "urlLogin": "/mercadolibre/login",
+                "pathUrlCallback":"/mercadolibre/callback",
+                "callbackURL": "/auth/mercadolibre/callback",
+                "scope": false
+            },
+            "google":{
+                "clientID": "777534133764-06vo7vojcj5dl7s4u0qt1f263kc8j30h.apps.googleusercontent.com",
+                "clientSecret": "L_985JNK9Y9DSZmwfHpkxD1n",
+                "pathUrlCallback":"/google/callback",
+                "callbackURL": "/auth/google/callback",
+                "urlLogin": "/google/login",
+                "scope": ["https://www.googleapis.com/auth/userinfo.profile","https://www.googleapis.com/auth/userinfo.email"]
+            },
+            "facebook":{
+                "clientID": "383443742250970",
+                "clientSecret": "a9e31d0fc60d82da287a50229d5bd0bf",
+                "pathUrlCallback":"/facebook/callback",
+                "callbackURL": "/auth/facebook/callback",
+                "urlLogin": "/facebook/login",
+                "scope": ["public_profile","email"]
+            }
+        }
+    },
+    "metaTags":{
+        "default":{
+            "title":"eChatbot | Chatbot",
+            "copyright": "www.echatai.com.ar",
+            "keywords": "chatbot, virtual assistan, ai, watson, ibm",
+            "orgTitle":"eChatbot | Chatbot",
+            "orgDescripcion":"Chatbot / Virtual Assistant with Artificial Intelligence for ecommerce, using IBM Watson AI",
+            "descripcion":"Chatbot / Virtual Assistant with Artificial Intelligence for ecommerce, using IBM Watson AI",
+            "canonical":"https://www.echatai.com.ar",
+            "orgUrl": "https://www.echatai.com.ar",
+            "headerEmpresa":"echatai ecommerce ai",
+            "headerLinksPrincipales":[
+                {"url":"/prices"  ,"id":"prices"  },
+                {"url":"/contact" ,"id":"contact" },
+                {"url":"/api"     ,"id":"api"  }
+            ],
+            "globalTituloPagina":"Chatbot / virtual assistant for ecommerce",
+            "globalSitemap":false,
+            "globalProductos":false
+        },
+        "admin":{
+            "title":"Admin",
+            "keywords": "Admin | User administration"
+        }
+      }
+}

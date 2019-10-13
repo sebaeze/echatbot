@@ -1,0 +1,25 @@
+
+
+* ibmcloud cf map-route webpage-sindoh sindohba.com.ar --hostname www
+* ibmcloud cf map-route webpage-sindoh sindohba.com.ar
+
+* Login webhost linux
+* cd /git/certbot
+* ./certbot-auto certonly --manual --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory --email sebaeze@gmail.com --domains *.sindohba.com.ar --domains sindohba.com.ar --no-bootstrap
+
+
+
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/sindohba.com.ar/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/sindohba.com.ar/privkey.pem
+   Your cert will expire on 2019-12-18. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot-auto
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot-auto renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le

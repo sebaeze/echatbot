@@ -6,6 +6,7 @@ import { Carousel, Button }               from 'antd'   ;
 import AnimacionInicial                   from './animacion/AnimacionInicial' ;
 import { AnimacionCarousel }              from './animacion/AnimacionCarousel' ;
 import AnimacionLogo                      from './animacion/AnimacionLogo'    ;
+import { InicioEncabezado }               from  './inicio/InicioEncabezado'   ;
 import { InicioPorque  }                  from  './inicio/InicioPorque'       ;
 import { InicioEquipos }                  from  './inicio/InicioEquipos'      ;
 //
@@ -21,10 +22,6 @@ class CuerpoInicio extends Component {
   //
   componentDidMount(){
     try {
-      window.addEventListener("resize",function(argEventSCR){
-        this.setState({isMobile: (window.innerWidth<797)});
-      }.bind(this)) ;
-      //
       document.addEventListener('scroll',function(argEvenSCroll){
         let scrollPos = document.body.scrollTop || document.documentElement.scrollTop || 9999 ;
         if ( scrollPos>300 ){
@@ -57,12 +54,12 @@ class CuerpoInicio extends Component {
     return (
           <div id="main" style={{paddingTop:'120px',minHeight: '80vh'}} >
               <div style={{minHeight:'110vh'}}>
-                <AnimacionCarousel translate={this.props.translate} isMobile={this.state.isMobile} siguienteDiv={this.idDivPorq} />
+                <InicioEncabezado translate={this.props.translate} configuracion={this.props.configuracion} siguienteDiv={this.idDivPorq} />
               </div>
               <div id={this.idDivPorq} style={{minHeight: '80vh',backgroundColor:'white', zIndex:'999'}}
                   onFocus={this.onFocusPorque.bind(this)}
               >
-                <InicioPorque translate={this.props.translate} siguienteDiv={"idInicioEquipos"} flagShowDiv={ this.state.showDivPorque } />
+                <InicioPorque translate={this.props.translate} translate={this.props.translate} configuracion={this.props.configuracion} siguienteDiv={"idInicioEquipos"} flagShowDiv={ this.state.showDivPorque } />
               </div>
               <div id={this.idDivEquipos} style={{minHeight: '75vh',backgroundColor:'white', zIndex:'999'}} >
                 <InicioEquipos translate={this.props.translate} flagShowDiv={ this.state.showDivEquipos } />

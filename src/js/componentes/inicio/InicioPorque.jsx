@@ -40,6 +40,7 @@ export class InicioPorque extends React.Component {
     render(){
         //
         let posY = this.state.isMobile==true ? 10 : 50 ;
+        console.log('....inicioPorque:: this.state.showDiv: '+this.state.showDiv+';') ;
         //
         return(
             <Row style={{paddingTop:'45px'}}>
@@ -52,37 +53,28 @@ export class InicioPorque extends React.Component {
                             ]}
                             ease="easeInOutQuart"
                     >
-                            {
-                                this.state.showDiv ? [
-                                        <Col xs={20} md={20} lg={6} xxl={6} key="0">
-                                            <Title level={4}>Dialogos Predefinidos</Title>
-                                            <Paragraph ellipsis={{ rows: 3, expandable: true }}>
-                                            Reutilización de dialogos pre-definidos para su asistente conversational
-                                            </Paragraph>
-                                        </Col>,
-                                        <Col xs={1} md={1} lg={1} xl={1} xxl={1} key="1"></Col>,
-                                        <Col xs={20} md={20} lg={20} xl={6} xxl={6} key="2">
-                                            <Title level={4}>API de integración</Title>
-                                            <Paragraph ellipsis={{ rows: 3, expandable: true }}>
-                                            Utilize nuestro potente APi para integrar nueva funcionalidad
-                                            </Paragraph>
-                                        </Col>,
-                                        <Col xs={1} md={1} lg={1} xl={1} xxl={1} key="3"></Col>,
-                                        <Col xs={20} md={20} lg={20} xl={6} xxl={6} key="4">
-                                            <Title level={4}>De lado de los desarrolladores</Title>
-                                            <Paragraph ellipsis={{ rows: 3, expandable: true }}>
-                                            Estamos orientados a ayudar a desarrolladores a involucrarse en el mundo de chatbots y AI
+                        {
+                            this.state.showDiv ?
+                                this.props.translate.HomeWhy.map((elemWhy,elemIdx)=>{
+                                    return(
+                                        <Col xs={22} md={22} lg={7} xl={7} xxl={7}  key={elemIdx} style={{minHeight:'200px',marginLeft:'10px',marginRight:'10px'}}>
+                                            <Title level={4}>{elemWhy.title}</Title>
+                                            <Paragraph ellipsis={{ rows: 7, expandable: true }}>
+                                                {elemWhy.description}
                                             </Paragraph>
                                         </Col>
-                                ] : []
-                            }
-                        </QueueAnim>
-                    </Row>
-                    <Row>
-                        <div className="btn-continuar" style={{marginLeft: (this.state.isMobile==true ? '7%' : '2%'),marginTop: (this.state.isMobile==true ? '8vh' : '30vh' ),width:'auto'}} >
-                            <AnimacionLink texto={"Portal de ayuda"} siguienteDiv={this.props.siguienteDiv} />
-                        </div>
-                    </Row>
+                                    )
+                                })
+                                :
+                                []
+                        }
+                    </QueueAnim>
+                </Row>
+                <Row>
+                    <div className="btn-continuar" style={{marginLeft: (this.state.isMobile==true ? '7%' : '2%'),marginTop: (this.state.isMobile==true ? '8vh' : '30vh' ),width:'auto'}} >
+                        <AnimacionLink texto={"Portal de ayuda"} siguienteDiv={this.props.siguienteDiv} />
+                    </div>
+                </Row>
             </Row>
         ) ;
     }

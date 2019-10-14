@@ -18,29 +18,52 @@ import FormContacto                       from "./js/componentes/formularios/For
 //
 import { languageLocale }                 from "./js/utils/utiles" ;
 //
-import configJson                         from "./config/configApp.json" ;
+import configApp                         from "./config/configApp.json" ;
 //
 const  { Content }   = Layout ;
 //
 import 'antd/dist/antd.css' ;
 import './css/estilos.css' ;
 //
-export const App = () =>{
-  return (
-    <Layout style={{ background: '#fff',padding: '0' }}>
-        <Encabezado translate={{...languageLocale()}} />
-        <Router>
-          <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
-            <Route exact path="/"                      component={() =>        <CuerpoInicio translate={{...languageLocale()}} configuracion={configJson}   />}  />
-            <Route exact path="/contacto"              component={(argMach) => <FormContacto translate={{...languageLocale()}} configuracion={configJson} {...argMach} />}  />
-            <Route exact path="/nosotros"              component={(argMach) => <CuerpoAbout  translate={{...languageLocale()}} configuracion={configJson} {...argMach} />}  />
-          </Content>
-        </Router>
-        <WhatsappLink configuracion={configJson} />
-        <PiePagina translate={{...languageLocale()}} />
-    </Layout>
-  )
+export class App extends React.Component {
+  constructor(props){
+    super(props) ;
+    this.state = {
+      isMobile: (window.innerWidth<797)
+    }
+  }
+  //
+  componentDidMount(){
+    try {
+      window.addEventListener("resize",function(argEventSCR){
+        this.setState({isMobile: (window.innerWidth<797)});
+      }.bind(this)) ;
+    } catch(errCDM){
+      console.dir(errCDM) ;
+    }
+  }
+  //
+  render() {
+    //
+    configApp.isMobile = this.state.isMobile ;
+    //
+    return (
+      <Layout style={{ background: '#fff',padding: '0' }}>
+          <Encabezado translate={{...languageLocale()}} />
+          <Router>
+            <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
+              <Route exact path="/"                      component={() =>        <CuerpoInicio translate={{...languageLocale()}} configuracion={configApp}   />}  />
+              <Route exact path="/contacto"              component={(argMach) => <FormContacto translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/nosotros"              component={(argMach) => <CuerpoAbout  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
+            </Content>
+          </Router>
+          <WhatsappLink configuracion={configApp} />
+          <PiePagina translate={{...languageLocale()}} />
+      </Layout>
+    )
+  }
+  //
 };
 //
-ReactDOM.render( <App className="container-fluid" />, document.getElementById("app") );
+ReactDOM.render( <App />, document.getElementById("app") );
 //

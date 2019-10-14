@@ -1,8 +1,22 @@
 /*  */
 .bg-inicial {
-    -webkit-shape-outside: polygon(100% 0, 100% 100%, 0 100%);
+  background-color: yellow ;
+  width: 200% !important ;
+  height: 200px !important ;
+  background: linear-gradient(to bottom left,transparent 49.8%,#E0E6E5 50%) top /100% 35%,
+              linear-gradient(to top left,transparent 49.8%,#E0E6E5 50%) bottom/100% 35%,
+              linear-gradient(#E0E6E5,#E0E6E5) center/100% 30%;
+  background-repeat: repeat, repeat, repeat;
+  background-repeat: no-repeat;
+}
+/*  */
+.bg-inicial-BORRAR {
+  -webkit-shape-outside: polygon(100% 0, 100% 100%, 0 100%);
   shape-outside: polygon(100% 0, 100% 100%, 0 100%);
   float: right;
   -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%);
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  background-color: yellow ;
+  width: 25% !important ;
+  height: 200px !important ;
 }

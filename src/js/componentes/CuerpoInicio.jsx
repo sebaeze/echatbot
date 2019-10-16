@@ -15,7 +15,7 @@ class CuerpoInicio extends Component {
     super(props)  ;
     this.state         = { isMobile: (window.innerWidth<797), showDivPorque:false, showDivEquipos: false } ;
     this.onFocusPorque = this.onFocusPorque.bind(this) ;
-    this.idDivPorq     = "idPorquesindoh" ;
+    this.idDivPorq     = "idWhyUs" ;
     this.idDivEquipos  = "idInicoEquipos" ;
     this.divPorque     ;
   }

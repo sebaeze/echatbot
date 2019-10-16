@@ -16,19 +16,29 @@
         "about":"A cerca de nosotros",
         "services":"Servicios",
         "prices":"Precios",
-        "home":[
-            "Mejora el tiempo de respuesta a tus clientes",
-            "No pierdas ventas",
+        "homeHeader":{
+            "title":"Asistente Virtual con AI para e-commerce",
+            "text":[
+            "Implementa un asistente virtual / chatbot de forma rápida y facíl",
+            "Mejora la atención y el tiempo de respuesta a tus clientes",
+            "Reduci la carga laboral en la mesa de ayuda",
             "Monitoria las necesidades de tus clientes",
-            "Aprobecha el poder de AI para analizar las ventas"
-        ],
+            "Con AI vas a poder elaborar patrones de busquedas e implementar estrategias de venta"
+            ]
+        },
         "HomeWhy":[
-            {"title":"Enfoque cognitivo","description":"Nuestro servicio esta orientado a aprender sobre sus servicios y sus clientes, para responder de forma más eficas"} ,
-            {"title":"Mejorar tiempo de respuesta","description":"Nuestro proposito es automatizar y reducir el tiempo de iteración con los clientes, para que usted pueda hacer lo que mejor sabe hacer"} ,
-            {"title":"Simple","description":"Nos orientamos a que la integración de sus app con los Bots sean facil y rapida"} ,
-            {"title":"API de integración","description":"Nuestro API permite integrar el 100% de la funcionalidd a través de sus apps"} ,
-            {"title":"Dialogos Predefinidos","description":"Reutilización de dialogos pre-definidos para su asistente conversational"} ,
-            {"title":"Transparencia","description":"N en nuestro forma de trabajar con AI, para que sea un beneficio para todos"}
+            {
+                "title":"Enfoque cognitivo",
+                "description":"Nuestro servicio esta orientado a utilizar AI para entender a sus clientes, sus necesidades y a usted, como resultado mejorar la satisfacción del cliente"
+            },
+            {
+                "title":"Facil y simple de usar",
+                "description":"Es de suma importancia que sea facil de usar, implementar y entrenar un chatbot debe ser una tarea facíl"
+            },
+            {
+                "title":"Responsabilidad y Transparencia",
+                "description":"AI puede ser un excelente recurso siempre y cuando se utilize con responsabilidad.\n Por eso, nuestra intención es acompañar de forma transparente y cuidadosa en la implementación"
+            }
         ]
     },
     "PT":{

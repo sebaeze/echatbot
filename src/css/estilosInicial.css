@@ -1,11 +1,23 @@
 /*  */
 .bg-inicial {
   background-color: yellow ;
-  width: 200% !important ;
+  width: 100% !important ;
   height: 200px !important ;
+  overflow: hidden ;
   background: linear-gradient(to bottom left,transparent 49.8%,#E0E6E5 50%) top /100% 35%,
               linear-gradient(to top left,transparent 49.8%,#E0E6E5 50%) bottom/100% 35%,
               linear-gradient(#E0E6E5,#E0E6E5) center/100% 30%;
+  background-repeat: repeat, repeat, repeat;
+  background-repeat: no-repeat;
+}
+.bg-azul {
+  background-color: yellow ;
+  width: 100% !important ;
+  height: 100% !important ;
+  overflow: hidden ;
+  background: linear-gradient(to bottom right,transparent 60.8%,#6A8ABE 50%) top /100% 35%,
+              linear-gradient(to top right,transparent 60.8%,#6A8ABE 50%) bottom/100% 35%,
+              linear-gradient(#6A8ABE,#6A8ABE) center/100% 30%;
   background-repeat: repeat, repeat, repeat;
   background-repeat: no-repeat;
 }

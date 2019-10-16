@@ -43,7 +43,7 @@ export class InicioPorque extends React.Component {
         console.log('....inicioPorque:: this.state.showDiv: '+this.state.showDiv+';') ;
         // <Title key="0" style={{textAlign:'center'}}>Solución tecnologica:</Title>
         return(
-            <Row style={{paddingTop:'45px',minHeight:'80vh'}} >
+            <Row style={{paddingTop:'45px'}} >
                 <QueueAnim
                     animConfig={[
                         [{ x: [40, 20], opacity: [1, 0] }, { y: [ posY, 0] }],
@@ -56,7 +56,7 @@ export class InicioPorque extends React.Component {
                             this.props.translate.HomeWhy.map((elemWhy,elemIdx)=>{
                                 return(
                                     //<Col xs={22} md={22} lg={7} xl={7} xxl={7}  key={elemIdx} style={{minHeight:'200px',marginLeft:'10px',marginRight:'10px'}}>
-                                    <Row key={elemIdx} className="bg-azul" >
+                                    <Row key={elemIdx} className="bg-azul" style={{minHeight:'80vh'}} >
                                         <Col xs={1} md={1} lg={1} xl={1} xxl={1} ></Col>
                                         <Col xs={10} md={10} lg={10} xl={10} xxl={10} >
                                             <Title level={4}  >{elemWhy.title}</Title>

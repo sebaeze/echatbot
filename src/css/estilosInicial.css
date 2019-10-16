@@ -15,11 +15,11 @@
   width: 100% !important ;
   height: 100% !important ;
   overflow: hidden ;
-  background: linear-gradient(to bottom right,transparent 60.8%,#6A8ABE 50%) top /100% 35%,
-              linear-gradient(to top right,transparent 60.8%,#6A8ABE 50%) bottom/100% 35%,
-              linear-gradient(#6A8ABE,#6A8ABE) center/100% 30%;
-  background-repeat: repeat, repeat, repeat;
-  background-repeat: no-repeat;
+  background:
+    linear-gradient(to bottom right,transparent 50.8%,#EBF2FE 50%) top /100% 150%,
+    linear-gradient(to top right,transparent 15%,#EBF2FE 15%) bottom/110% 60%;
+  background-repeat: repeat, repeat, repeat ;
+  background-repeat: no-repeat ;
 }
 /*  */
 .bg-inicial-BORRAR {

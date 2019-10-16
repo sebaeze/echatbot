@@ -1,0 +1,37 @@
+/*
+*
+*/
+.box-plan {
+    width: 100% ;
+    height: 400px ;
+    border: 1px solid grey ;
+    transition: box-shadow 1s;
+}
+.box-plan div {
+    width: 100% ;
+    border: 0.5px solid grey ;
+    height: 20% ;
+    text-align: left ;
+    padding-left: 10% ;
+}
+.box-plan i {
+    font-weight: 800 ;
+    color: green ;
+}
+.box-plan span,.box-plan a {
+    padding-left: 10px ;
+    font-size: 24px ;
+}
+.box-plan .title span {
+    font-weight: 600 ;
+    color: #E0E6E5 ;
+}
+.box-plan .price span {
+    font-weight: 600 ;
+    color: #E0E6E5 ;
+}
+.box-plan:hover {
+    -webkit-box-shadow: 0 18px 12px 12px black;
+	   -moz-box-shadow: 0 18px 12px 12px black;
+            box-shadow: 0 18px 12px 12px black;
+}

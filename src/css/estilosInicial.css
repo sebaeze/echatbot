@@ -32,3 +32,28 @@
   width: 25% !important ;
   height: 200px !important ;
 }
+.chat-line-home-BORRAR {
+  font-Size: 22px ;
+  border-Radius: 25px ;
+  color: white ;
+  font-Weight: 600 ;
+  background-Color: #49B6F9 ;
+  padding: 10px 10px 10px 10px ;
+}
+@media screen and (max-width: 400px) and (min-width: 10px) {
+  .chat-line-home { font-Size: 18px ; font-Weight: 500 ; width: 80% ; }
+}
+.chat-line-home {
+  font-Size: 22px ;
+  font-Weight: 600 ;
+  color: #fff;
+  letter-spacing: 0.015rem;
+  /* line-height: 1.3125rem; */
+  background: #49B6F9 ;
+  border-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  border-bottom-right-radius: 0;
+  text-align: left;
+  display: inline-block;
+  padding: 10px 10px 10px 10px ;
+}

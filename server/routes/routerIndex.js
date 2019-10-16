@@ -56,14 +56,12 @@ module.exports = (argConfig,argDb,argCatalogoMarcas) => {
     console.log('....error compilando REACT') ;
   }
   //
-  router.get(['/','/contacto','/nosotros','/distribuidores'], function(req, res) {
+  router.get(['/','/contact','/about','/services','/prices'], function(req, res) {
     res.set('access-Control-Allow-Origin', '*');
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);
     //
     res.render( 'app.html', defaultMetatags ) ;
-    //
-    console.log('...req.baseUrl: '+req.baseUrl+';') ;
     let tempEstadisticaVisita = { _id: 'inicio'/* req.baseUrl */, tipo: 'pagina', titulo: '', http:{...req.headers,...{query:req.query}} } ;
     argDb.estadisticas.addEstadistica( tempEstadisticaVisita )
         .then(function(respDb){ /* no hago nada */  })

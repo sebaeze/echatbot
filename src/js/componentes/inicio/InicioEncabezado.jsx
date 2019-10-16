@@ -19,7 +19,6 @@ export class InicioEncabezado extends React.Component {
         let sumaY    = 190 ;
         let sumDelay = 600 ;
         //
-        let Childs = this.props.children || false ;
         return(
             <div id={this.props.id ? this.props.id : "idDivInicioEncabezado" } style={{minHeight:'90vh'}} className="bg-inicial" >
                 <TweenOne style={{marginLeft:(this.props.configuracion.isMobile==true ? '20px':'70px'),marginTop:(this.props.configuracion.isMobile==true ? '10px':'80px')}}
@@ -31,16 +30,18 @@ export class InicioEncabezado extends React.Component {
                 </TweenOne>
                 {
                     this.props.translate.homeHeader.text.map((elemText,elemIdx)=>{
-                        // sumaY    += 600 ;
                         sumDelay += 900 ;
                         return(
-                            <div key={elemIdx} style={{marginTop:'15px',paddingTop:'10px'}} >
+                            <div key={elemIdx} style={{marginTop:(this.props.configuracion.isMobile==true ? '1px' : '15px'),
+                                               paddingTop:(this.props.configuracion.isMobile==true ? '5px' : '10px'),
+                                               width:'95%'}}
+                            >
                                 <TweenOne key={elemIdx}
                                           style={{marginLeft:(this.props.configuracion.isMobile==true ? '20px':'70px')}}
                                           animation={{ x:450,y: sumaY, opacity: 0, type: 'from', delay: sumDelay, repeat: -1,repeatDelay: 15500 }}
                                           name="TweenOne"
                                 >
-                                    <span style={{fontSize:'22px',borderRadius:'25px',color:'white',fontWeight:'600',backgroundColor:'#49B6F9',padding:'10px 10px 10px 10px'}}>{elemText}</span>
+                                    <span className="chat-line-home" >{elemText}</span>
                                 </TweenOne>
                             </div>
                         ) ;
@@ -51,7 +52,7 @@ export class InicioEncabezado extends React.Component {
                     <div className="btn-continuar" key={"btbNext"}
                          style={{marginTop: '35px',width:'auto'}}
                     >
-                        <AnimacionLink texto={"Nuestras intenciones:"} siguienteDiv={this.props.siguienteDiv} />
+                        <AnimacionLink texto={this.props.translate.homeHeader.ourProposal} siguienteDiv={this.props.siguienteDiv} />
                     </div>
                 </TweenOne>
             </div>

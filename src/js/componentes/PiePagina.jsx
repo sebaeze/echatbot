@@ -27,24 +27,23 @@ class PiePagina extends Component {
     //
     return (
         //
-        <footer id="footer">
+        <footer id="footer" style={{zIndex:'100',marginTop:'10px',boxShadow:'0 -8px -6px -6px black'}}>
           <Row style={{minHeight:'85%'}} >
               <Col xs={1}  md={1}  xl={1}></Col>
               <Col xs={23} md={23} xl={7}>
-                <Title level={3}>Productos</Title>
-                <Text type="secondary"><a href="#">Impresoras</a></Text>
-                <Text type="secondary"><a href="#">Fotocopiadoras</a></Text>
-                <Text type="secondary"><a href="#">Multi-funciones</a></Text>
+                <Title level={3}>{this.props.translate.services}</Title>
+                <Text type="secondary"><a href="#">{this.props.translate.chatbot}</a></Text>
+                <Text type="secondary"><a href="#">{this.props.translate.cognitiveAnalytics}</a></Text>
               </Col>
               <Col xs={1}  md={1}  xl={0}></Col>
               <Col xs={23} md={23} xl={7} >
-                <Title level={3}>Servicios</Title>
-                <Text type="secondary"><a href="#">Servicio Tecnico</a></Text>
-                <Text type="secondary"><a href="#">Soluciones Empresariales</a></Text>
+                <Title level={3}>{this.props.translate.help}</Title>
+                <Text type="secondary"><a href="#">{this.props.translate.FAQ}</a></Text>
+                <Text type="secondary"><a href="#">Blog</a></Text>
               </Col>
               <Col xs={1}  md={1}  xl={0}></Col>
               <Col xs={22} md={22} xl={7} >
-                <Title level={3}>Novedades</Title>
+                <Title level={3}>{this.props.translate.news}</Title>
                 <FormSuscripcion />
               </Col>
           </Row>
@@ -56,7 +55,7 @@ class PiePagina extends Component {
           <Row style={{minHeight:'3%'}} >
             <Col span={1}></Col>
             <Col span={12}>
-              <Text type="secondary">© 2019 Designed by <a href="#">SEA</a></Text>
+              <Text type="secondary">© 2019 Designed by <a href="#">{this.props.configuracion.empresa.name}</a></Text>
             </Col>
             <Col span={8}>
             </Col>

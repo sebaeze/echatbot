@@ -8,7 +8,6 @@ import { AnimacionCarousel }              from './animacion/AnimacionCarousel' ;
 import AnimacionLogo                      from './animacion/AnimacionLogo'    ;
 import { InicioEncabezado }               from  './inicio/InicioEncabezado'   ;
 import { InicioPorque  }                  from  './inicio/InicioPorque'       ;
-import { InicioEquipos }                  from  './inicio/InicioEquipos'      ;
 //
 class CuerpoInicio extends Component {
   constructor(props) {
@@ -53,16 +52,13 @@ class CuerpoInicio extends Component {
     //
     return (
           <div id="main" style={{paddingTop:'120px',minHeight: '80vh'}} >
-              <div style={{minHeight:'110vh'}}>
+              <div style={{minHeight:'90vh'}}>
                 <InicioEncabezado translate={this.props.translate} configuracion={this.props.configuracion} siguienteDiv={this.idDivPorq} />
               </div>
               <div id={this.idDivPorq} style={{minHeight: '80vh',backgroundColor:'white', zIndex:'999'}}
                   onFocus={this.onFocusPorque.bind(this)}
               >
-                <InicioPorque translate={this.props.translate} translate={this.props.translate} configuracion={this.props.configuracion} siguienteDiv={"idInicioEquipos"} flagShowDiv={ this.state.showDivPorque } />
-              </div>
-              <div id={this.idDivEquipos} style={{minHeight: '75vh',backgroundColor:'white', zIndex:'999'}} >
-                <InicioEquipos translate={this.props.translate} flagShowDiv={ this.state.showDivEquipos } />
+                <InicioPorque     translate={this.props.translate} configuracion={this.props.configuracion} siguienteDiv={"idInicioEquipos"} flagShowDiv={ this.state.showDivPorque } />
               </div>
           </div>
       )

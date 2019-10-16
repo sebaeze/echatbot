@@ -4,6 +4,11 @@
         "about":"About us",
         "services":"Services",
         "prices":"Prices",
+        "news":"News",
+        "FAQ":"FAQ",
+        "chatbot":"Chatbot",
+        "help":"Help",
+        "cognitiveAnalytics":"Cognitive Analytics",
         "home":[
             "Improve the time to response to your customers",
             "Don't lose sells",
@@ -16,6 +21,31 @@
         "about":"A cerca de nosotros",
         "services":"Servicios",
         "prices":"Precios",
+        "news":"Novedades",
+        "FAQ":"FAQ",
+        "chatbot":"Chatbot",
+        "help":"Ayuda",
+        "cognitiveAnalytics":"Analisis Cognitivo",
+        "betaPlanLeyend":"Por ahora solo contamos con el plan Beta, el cual consiste en 100 mensajes gratis x mes.\n Si te interesa el servicio, ponete en contacto a travez del formulario de contacto",
+        "plan":{
+            "beta":"100 Mensajes gratis x Mes"
+        },
+        "homeAbout":[
+            {
+                "title":"Sobre Nosotros",
+                "text":[
+                    "Somos un equipo nuevo pero con larga experiencia en desarrollo y mantenimiento de software empresarial"
+                ]
+            },
+            {
+                "title":"Asistentes Virtuales",
+                "text":[
+                    "Los Asistente Virtuales o Chatbot se estan volviendo un elemento fundamental para los eCommerce, ",
+                    "atendiendo rapidamente las visitas de potenciales clientes o reteniendo, a través de rapida respuestas, ",
+                    "a clientes satisfechos."
+                ]
+            }
+        ],
         "homeHeader":{
             "title":"Asistente Virtual con AI para e-commerce",
             "text":[
@@ -23,20 +53,28 @@
             "Mejora la atención y el tiempo de respuesta a tus clientes",
             "Reduci la carga laboral en la mesa de ayuda",
             "Usa AI para elaborar patrones de busquedas e implementar estrategias de venta"
-            ]
+            ],
+            "ourProposal":"Nuestra Propuesta"
         },
         "HomeWhy":[
             {
                 "title":"Enfoque cognitivo",
-                "description":"Nuestro servicio esta orientado a utilizar AI para entender a sus clientes, sus necesidades y a usted, como resultado mejorar la satisfacción del cliente"
+                "description":"Nuestro proposito es acompañarlo en la implementación de asistentes virtuales en su empresa.",
+                "image": false,
+                "text":[
+                    "Un chatbot, puede automatizar y resolver diferentes tareas, como mesa ayuda y ventas,",
+                    "dando como resultado, satisfacción del cliente y reducir la carga laboral"
+                ]
             },
             {
                 "title":"Facil y simple de usar",
-                "description":"Es de suma importancia que sea facil de usar, implementar y entrenar un chatbot debe ser una tarea facíl"
+                "description":"Es de suma importancia que sea facil de usar, implementar y entrenar un chatbot debe ser una tarea facíl",
+                "text":[]
             },
             {
                 "title":"Responsabilidad y Transparencia",
-                "description":"AI puede ser un excelente recurso siempre y cuando se utilize con responsabilidad.\n Por eso, nuestra intención es acompañar de forma transparente y cuidadosa en la implementación"
+                "description":"AI puede ser un excelente recurso siempre y cuando se utilize con responsabilidad.\n Por eso, nuestra intención es acompañar de forma transparente y cuidadosa en la implementación",
+                "text":[]
             }
         ]
     },
@@ -44,6 +82,11 @@
         "contact":"Contato",
         "about":"Sobre nós",
         "services":"Serviços",
-        "prices":"Preços"
+        "prices":"Preços",
+        "news":"Novidades",
+        "cognitiveAnalytics":"Análise Cognitiva",
+        "FAQ":"FAQ",
+        "chatbot":"Chatbot",
+        "help":"Ajuda"
     }
 }

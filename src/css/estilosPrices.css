@@ -1,37 +1,55 @@
 /*
 *
 */
+div {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-variant: tabular-nums;
+}
+/*  */
+.bg-prices {
+    background-color: yellow ;
+    width: 100% !important ;
+    height: 100% !important ;
+    overflow: hidden ;
+    background:
+        linear-gradient(to bottom right,transparent 55.8%,#E0E6E5 50%) top /100% 120%,
+        linear-gradient(to top right,transparent 15%,#E0E6E5 15%) bottom/110% 72% ;
+    background-repeat: repeat, repeat, repeat ;
+    background-repeat: no-repeat ;
+}
+/*  */
 .box-plan {
-    width: 100% ;
-    height: 400px ;
+    width: 80% ;
     border: 1px solid grey ;
     transition: box-shadow 1s;
-}
-.box-plan div {
-    width: 100% ;
-    border: 0.5px solid grey ;
-    height: 20% ;
-    text-align: left ;
-    padding-left: 10% ;
-}
-.box-plan i {
-    font-weight: 800 ;
-    color: green ;
-}
-.box-plan span,.box-plan a {
-    padding-left: 10px ;
-    font-size: 24px ;
-}
-.box-plan .title span {
-    font-weight: 600 ;
-    color: #E0E6E5 ;
-}
-.box-plan .price span {
-    font-weight: 600 ;
-    color: #E0E6E5 ;
+    margin-top: 10px ;
 }
 .box-plan:hover {
+    /* cursor: pointer ; */
     -webkit-box-shadow: 0 18px 12px 12px black;
 	   -moz-box-shadow: 0 18px 12px 12px black;
             box-shadow: 0 18px 12px 12px black;
+}
+/*  */
+.box-plan div {
+    width: 100% ;
+    border: 0.5px solid grey ;
+    height: 80px ;
+    text-align: left ;
+}
+.box-plan i {
+    padding-left: 15% ;
+    font-weight: 800 ;
+    color: green ;
+}
+.box-plan span {
+    padding-left: 10px ;
+    font-size: 24px ;
+}
+.box-plan .box-plan-item-important {
+    padding-left: 0 ;
+    font-weight: 900 ;
+    width: 100% ;
+    text-align: center ;
+    font-size: 34px ;
 }

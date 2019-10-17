@@ -15,27 +15,24 @@ export class CuerpoPrices extends React.Component {
     //
     render(){
         return(
-            <div style={{paddingTop:'120px'}}>
+            <div style={{paddingTop:'120px',minHeight:'110vh'}} className="bg-prices" >
                 <Row>
                     <Col xs={2} md={2} lg={2} xl={2} xxl={2} ></Col>
                     <Col xs={16} md={16} lg={18} xl={18} xxl={18} >
-                        <Title style={{width:'100%',textAlign:'center'}}>Planes</Title>
-                        <Title level={4}>{this.props.translate.betaPlanLeyend}</Title>
+                        <Title style={{width:'100%',textAlign:'center'}}><u>Planes</u></Title>
                     </Col>
                 </Row>
                 <Row style={{paddingTop:'50px'}}>
-                    <Col xs={2} md={2} lg={8} xl={8} xxl={8} ></Col>
-                    <Col xs={18} md={18} lg={8} xl={8} xxl={8} >
+                    <Col xs={3}  md={3}  lg={3} xl={3} xxl={3} ></Col>
+                    <Col xs={20} md={20} lg={8} xl={8} xxl={8} >
                         <div className="box-plan">
-                            <div className="title" >
-                                <Title level={2}>Beta</Title>
-                            </div>
-                            <div>
-                                <a>Crear cuenta</a>
+                            <div className="box-plan-item-important" >Beta</div>
+                            <div className="box-plan-item-important" >
+                                {this.props.translate.plan.free}
                             </div>
                             <div>
                                 <Icon type="check" />
-                                <Text>100 Mensajes x Mes</Text>
+                                <Text><b>600</b> {this.props.translate.plan.messagesXmonth}</Text>
                             </div>
                             <div>
                                 <Icon type="check" />
@@ -43,10 +40,34 @@ export class CuerpoPrices extends React.Component {
                             </div>
                             <div>
                                 <Icon type="check" />
-                                <Text>Metrics</Text>
+                                <Text>{this.props.translate.plan.metrics}</Text>
                             </div>
-                            <div className="price" >
-                                <Text>Free</Text>
+                            <div className="box-plan-item-important" >
+                                <a>{this.props.translate.plan.createAccount}</a>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col xs={3}  md={3}  lg={3} xl={1} xxl={1} ></Col>
+                    <Col xs={20} md={20} lg={8} xl={8} xxl={8} >
+                        <div className="box-plan">
+                            <div className="box-plan-item-important" >Custom</div>
+                            <div className="box-plan-item-important" >
+                                {this.props.translate.plan.customMsg}
+                            </div>
+                            <div>
+                                <Icon type="check" />
+                                <Text><b>Custom</b></Text>
+                            </div>
+                            <div>
+                                <Icon type="check" />
+                                <Text>Dashboard</Text>
+                            </div>
+                            <div>
+                                <Icon type="check" />
+                                <Text>{this.props.translate.plan.metrics}</Text>
+                            </div>
+                            <div className="box-plan-item-important" >
+                                <a href="/contact">{this.props.translate.contactUs}</a>
                             </div>
                         </div>
                     </Col>

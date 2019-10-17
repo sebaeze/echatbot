@@ -1,6 +1,7 @@
 {
     "EN":{
         "contact":"Contact",
+        "contactUs":"Contact Us",
         "about":"About us",
         "services":"Services",
         "prices":"Prices",
@@ -9,6 +10,14 @@
         "chatbot":"Chatbot",
         "help":"Help",
         "cognitiveAnalytics":"Cognitive Analytics",
+        "plan":{
+            "beta":"100 Mensajes gratis x Mes",
+            "customMsg":"Plan based on your needs",
+            "messagesXmonth":"Messages x month",
+            "free":"Free",
+            "metrics":"Metrics",
+            "createAccount":"Create Account"
+        },
         "home":[
             "Improve the time to response to your customers",
             "Don't lose sells",
@@ -18,6 +27,7 @@
     },
     "ES":{
         "contact":"Contacto",
+        "contactUs":"Enviar Consulta",
         "about":"A cerca de nosotros",
         "services":"Servicios",
         "prices":"Precios",
@@ -26,9 +36,14 @@
         "chatbot":"Chatbot",
         "help":"Ayuda",
         "cognitiveAnalytics":"Analisis Cognitivo",
-        "betaPlanLeyend":"Por ahora solo contamos con el plan Beta, el cual consiste en 100 mensajes gratis x mes.\n Si te interesa el servicio, ponete en contacto a travez del formulario de contacto",
+        "betaPlanLeyend":"Por el momento, solo contamos con el plan Beta, el cual consiste en 600 mensajes gratis x mes.\n Si te interesa el servicio, ponete en contacto a travez del formulario de contacto",
         "plan":{
-            "beta":"100 Mensajes gratis x Mes"
+            "beta":"100 Mensajes gratis x Mes",
+            "customMsg":"Plan a medida",
+            "messagesXmonth":"Mensajes x Mes",
+            "free":"Gratis",
+            "metrics":"Metricas",
+            "createAccount":"Crear Cuenta"
         },
         "homeAbout":[
             {
@@ -80,6 +95,7 @@
     },
     "PT":{
         "contact":"Contato",
+        "contactUs":"Contate Nos",
         "about":"Sobre nós",
         "services":"Serviços",
         "prices":"Preços",
@@ -87,6 +103,13 @@
         "cognitiveAnalytics":"Análise Cognitiva",
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
-        "help":"Ajuda"
+        "help":"Ajuda",
+        "plan":{
+            "messagesXmonth":"Mensagens x mês",
+            "customMsg":"Plano elaborado para atender às suas necessidades",
+            "free":"Gratuito",
+            "metrics":"Metricas",
+            "createAccount":"Criar Conta"
+        }
     }
 }

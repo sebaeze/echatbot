@@ -57,7 +57,7 @@ module.exports.strategies = (argConfig) => {
                     }
                 }
                 //
-                emisorEventos.emit( eventos.LOGIN ,profile) ;
+                // emisorEventos.emit( eventos.LOGIN ,profile) ;
                 /*
                 console.log('\n\n accediiiiii: ');
                 console.dir(profile) ;

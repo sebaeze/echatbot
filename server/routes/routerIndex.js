@@ -7,9 +7,6 @@ const utilitario        = require('../lib/utiles').Utilitarios() ;
 const fnEmail           = require('../lib/emailEnviar').email ;
 const fs                = require('fs') ;
 const path              = require('path') ;
-const routerProductos   = require('./routerProductos')   ;
-const routerSuscripcion = require('./routerSuscripcion').suscripcion ;
-//const mercadolibre      = require( path.join( __dirname,'../mercadolibreSincronizacion/mercadolibreIndex') ).mercadolibre ;
 const React             = require("react") ;
 //
 if ( !process.env.AMBIENTE ){ process.env.AMBIENTE="dev"; }
@@ -56,13 +53,15 @@ module.exports = (argConfig,argDb,argCatalogoMarcas) => {
     console.log('....error compilando REACT') ;
   }
   //
-  router.get(['/','/contact','/about','/services','/prices'], function(req, res) {
+  router.get(['/','/404','/about','/error','/contact','/services','/prices','/login'], function(req, res) {
     res.set('access-Control-Allow-Origin', '*');
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);
     //
     res.render( 'app.html', defaultMetatags ) ;
-    let tempEstadisticaVisita = { _id: 'inicio'/* req.baseUrl */, tipo: 'pagina', titulo: '', http:{...req.headers,...{query:req.query}} } ;
+    console.log('....: req.url: '+req.url+' baseUrl: '+req.baseUrl+' originalUrl: '+req.originalUrl+' path: '+req.path+';');
+    let tempUrl = req.url || req.baseUrl || 'inicio' ;
+    let tempEstadisticaVisita = { _id: tempUrl, tipo: 'pagina', titulo: '', http:{...req.headers,...{query:req.query}} } ;
     argDb.estadisticas.addEstadistica( tempEstadisticaVisita )
         .then(function(respDb){ /* no hago nada */  })
         .catch(function(errDb){ console.log('....ERROR cargando estadistica: URL: '+req.baseUrl);console.dir(errDb);  })
@@ -74,89 +73,9 @@ module.exports = (argConfig,argDb,argCatalogoMarcas) => {
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);
     //
-    res.render( 'app.html', defaultMetatags ) ;
+    res.render( 'admin.html', {...defaultMetatags} ) ;
     //
   });
-  //
-  router.get('/catalogo', function(req, res) {
-    res.set('access-Control-Allow-Origin', '*');
-    res.set('access-Control-Allow-Methods', '*');
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    //
-    res.render( 'app.html', defaultMetatags ) ;
-    //
-    let tempEstadisticaVisita = { _id: 'catalogo', tipo: 'pagina', titulo: '', http:{...req.headers,...{query:req.query}} } ;
-    argDb.estadisticas.addEstadistica( tempEstadisticaVisita )
-        .then(function(respDb){ /* no hago nada */  })
-        .catch(function(errDb){ console.log('....ERROR cargando estadistica: URL: '+req.baseUrl);console.dir(errDb);  })
-    //
-  });
-  //
-  router.get('/sindoh', function(req, res) {
-
-    res.set('access-Control-Allow-Origin', '*');
-    res.set('access-Control-Allow-Methods', '*');
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    //
-    const metatagsSindoh  = argConfig.metaTags.sindoh || {} ;
-    let tempMetatags      = Object.assign({...defaultMetatags},metatagsSindoh) ;
-    res.render( 'app.html', tempMetatags ) ;
-    //
-    let tempEstadisticaVisita = { _id: 'sindoh', tipo: 'pagina', titulo: '', http:{...req.headers,...{query:req.query}} } ;
-    argDb.estadisticas.addEstadistica( tempEstadisticaVisita )
-        .then(function(respDb){ /* no hago nada */  })
-        .catch(function(errDb){ console.log('....ERROR cargando estadistica: URL: '+req.baseUrl);console.dir(errDb);  })
-    //
-  });
-  //
-  //router.use('/suscripcion', routerSuscripcion(argDb) ) ;
-  //
-  router.use('/productos', routerProductos(utilitario,argDb,argConfig) ) ;
-  //
-  router.get('/404', function(req, res) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    //
-    res.render( 'app.html', Object.assign({...defaultMetatags},{title:'404 | Pagina No Encontrada'}) ) ;
-    //
-  });
-  //
-  /*
-  router.post('/sincronizacionMercadolibre',function(req,res){
-    try{
-      let tempTsSincro = new Date().toISOString() ;
-      console.log(new Date().toISOString()+'/sincronizacionMercadolibre:: sincronizar....') ;
-      mercadolibreDatos.products.iniciarSincronizacionSellerId( argConfig.mercadolibre.sellerId, tempTsSincro )
-          .then(respSincro => {
-              return argDb.productos.add( Object.values(respSincro) ) ;
-          })
-          .then(respProds => {
-             argDb.productos.get( {ts_sincronizacion:{"$ne":tempTsSincro}} )
-                  .then((prodNoActivos)=>{
-                    console.log('......productos no sincronizados: ') ;
-                    console.log('....\n len: '+Object.values(prodNoActivos).length) ;
-                    for(let keyNo in prodNoActivos ){
-                      prodNoActivos[keyNo].estadoProducto = 'NO_ACTIVO' ;
-                    }
-                    return argDb.productos.add( Object.values(prodNoActivos) ) ;
-                  })
-            return respProds ;
-          })
-          .then(respDb     => {
-              console.log(new Date().toISOString()+'.......se sincronizaron: '+Object.keys(respDb).length+' productos.') ;
-              res.json( {cantidad:Object.keys(respDb).length,ids:Object.keys(respDb)||[]} ) ;
-          })
-          .catch(respErr   => {
-              console.dir(respErr) ;
-              res.status(500) ;
-              res.json({error:respErr}) ;
-          }) ;
-    } catch(errPostSinc){
-      res.status(500) ;
-      res.json({error:errPostSinc}) ;
-    }
-  }) ;
-  */
   //
   router.post('/consulta', function(req, res) {
     //

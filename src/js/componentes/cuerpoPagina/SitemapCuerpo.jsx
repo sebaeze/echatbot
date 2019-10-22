@@ -2,7 +2,7 @@
 *
 */
 import React, {Component}    from 'react' ;
-import '../../css/estilosSitemap.css'   ;
+import '../../../css/estilosSitemap.css'   ;
 //
 class SitemapCuerpo extends Component {
     constructor(props){

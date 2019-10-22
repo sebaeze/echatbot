@@ -2,6 +2,7 @@
 *
 */
 import { PARAMETROS, opcionesPOST }     from '../utils/parametros' ;
+import { account }                      from './apiAccount'        ;
 import { productos }                    from './apiProductos'      ;
 import { distribuidores }               from './apiDistribuidores' ;
 //
@@ -56,6 +57,7 @@ export const enviarConsulta = (argForm) => {
 } ;
 //
 export const api = {
+    account:account,
     productos: productos,
     distribuidores: distribuidores
 }

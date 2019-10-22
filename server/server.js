@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({ name:'mlsess',secret: 'wsx22wsx',cookie: {path: '/',httpOnly: true,maxAge: 6000000 },proxy: true, resave: true,saveUninitialized: true, store: new MemoryStore() }));
 //
-const passportConfigured = configPassport(  configuracionApp.passport[process.env.AMBIENTE||'dev'] , app )  ;
+const passportConfigured = configPassport(  configuracionApp.passport[process.env.AMBIENTE||'dev'] , app, db )  ;
 //
 app.disable('x-powered-by');
 app.disable('etag');

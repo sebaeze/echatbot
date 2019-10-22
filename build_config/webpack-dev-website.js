@@ -7,13 +7,11 @@ const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 //
-const pathNodes = path.join(__dirname,'./node_modules') ;
-//
 module.exports = {
   entry: './src/mainApp.js',
   output: {
     filename: 'mainApp.js',
-    path: path.join(__dirname, 'dist')
+    path: path.join(__dirname, '../dist')
   },
   module:{
 	   rules: [
@@ -45,7 +43,6 @@ module.exports = {
               progressive: true,
               quality: 65
             },
-            // optipng.enabled: false will disable optipng
             optipng: {
               enabled: false,
             },
@@ -56,7 +53,6 @@ module.exports = {
             gifsicle: {
               interlaced: false,
             },
-            // the webp option will enable WEBP
             webp: {
               quality: 75
             }
@@ -68,10 +64,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx','.css'],
-    modules: [ path.join(__dirname,'./node_modules') ]
+    modules: [ path.join(__dirname,'../node_modules') ]
   },
   resolveLoader: {
-    modules: [ path.join(__dirname,'./node_modules') ]
+    modules: [ path.join(__dirname,'../node_modules') ]
   },
   devServer: {
     port: 9000,
@@ -86,17 +82,8 @@ module.exports = {
     }
   },
   plugins: [
-      new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        'window.jQuery': 'jquery'
-      }),
-      new CopyWebpackPlugin([
-        {from: 'src/img',to: 'img'},
-        {from: 'src/css',to: 'css'},
-        //{from: 'src/lib',to: 'lib'},
-        {from: 'src/xls'}
-      ]),
+      new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery", 'window.jQuery': 'jquery' }),
+      new CopyWebpackPlugin([ {from: 'src/img',to: 'img'}, {from: 'src/css',to: 'css'}, {from: 'src/xls'} ]),
       new HtmlWebpackPlugin({
         filename: "app.html",
         template: "./src/app.html",
@@ -114,9 +101,7 @@ module.exports = {
         hash:true
       }),
       new HtmlWebpackPrefixPlugin(),
-      new webpack.DefinePlugin({
-        "BACKEND_URL":"http://localhost:3000"
-      })
+      new webpack.DefinePlugin({ "BACKEND_URL":"http://localhost:3000" })
     ]
 };
 //

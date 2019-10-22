@@ -34,13 +34,33 @@ footer div.ant-spin.ant-spin-lg.ant-spin-spinning {
     margin-left: 50px !important ;
 }
 /*   */
-footer button[type="button"] span {
-    text-align: left !important ;
-    font-size: 24px !important ;
-    padding: 0 !important ;
-    margin: 0 !important  ;
+footer button[type="submit"] {
+    padding: 0 ;
+    margin: 0 ;
+    vertical-align: top !important ;
 }
-footer button[type="button"] span:hover {
-    text-decoration: underline !important;
+footer button[type="submit"]:hover {
+    position: absolute !important ;
+    width: 105%  ;
+    border: 2px solid white ;
+    padding: 0 ;
+    margin: 0 ;
+    text-decoration: underline !important ;
+    color: black !important ;
+    font-weight: 600 !important ;
+}
+footer button[type="submit"] span {
+    text-align: center !important ;
+    font-size: 22px !important ;
+    font-weight: 500 !important ;
+    height: 100% ;
+    width: 100%  ;
+}
+footer button[type="submit"] span:hover {
+    text-decoration: underline !important ;
+    color: black !important ;
+    font-weight: 600 !important ;
+    padding: 0 !important ;
+    margin: 0 !important ;
 }
 /*   */

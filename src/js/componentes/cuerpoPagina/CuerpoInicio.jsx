@@ -3,11 +3,11 @@
 */
 import React, { Component }               from 'react'  ;
 import { Carousel, Button }               from 'antd'   ;
-import AnimacionInicial                   from './animacion/AnimacionInicial' ;
-import { AnimacionCarousel }              from './animacion/AnimacionCarousel' ;
-import AnimacionLogo                      from './animacion/AnimacionLogo'    ;
-import { InicioEncabezado }               from  './inicio/InicioEncabezado'   ;
-import { InicioPorque  }                  from  './inicio/InicioPorque'       ;
+import AnimacionInicial                   from '../animacion/AnimacionInicial' ;
+import { AnimacionCarousel }              from '../animacion/AnimacionCarousel' ;
+import AnimacionLogo                      from '../animacion/AnimacionLogo'    ;
+import { InicioEncabezado }               from  '../inicio/InicioEncabezado'   ;
+import { InicioPorque  }                  from  '../inicio/InicioPorque'       ;
 //
 class CuerpoInicio extends Component {
   constructor(props) {

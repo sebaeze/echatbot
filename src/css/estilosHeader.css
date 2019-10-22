@@ -24,6 +24,15 @@ header ul.ant-menu {
 	   -ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
 	    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
+.btn-shadow-login {
+    transition: all 1s;
+}
+.btn-shadow-login:hover {
+    margin-bottom:10px;
+	-webkit-box-shadow: 0 8px 8px -2px black;
+	   -moz-box-shadow: 0 8px 8px -2px black;
+	        box-shadow: 0 8px 8px -2px black;
+}
 /*  */
 .ant-carousel .slick-slide {
     text-align: center;
@@ -67,5 +76,13 @@ header ul.ant-menu {
 /*   */
 #main .ant-carousel .slick-slide {
     background-color: #fff !important ;
+}
+/*  */
+.a-no-hover:hover {
+    text-decoration: none !important ;
+    border-bottom: none !important ;
+}
+.ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected > .li-no-hover:hover {
+    text-decoration: none !important ;
 }
 /*   */

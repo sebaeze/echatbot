@@ -33,9 +33,11 @@ module.exports.autenticado = (argDb) => {
                 res.json( {error:"no-logoneado",mensaje:"debe autenticarse a traves de la url /auth"} ) ;
             } else {
                 req.session['urlRedirect'] = req.originalUrl ;
-                res.redirect('/auth?urlRedirect='+req.originalUrl);
+                res.redirect('/login?urlRedirect='+req.originalUrl);
             }
         }
     } );
 }
+//
+export const autenticadoFn = module.exports.autenticado ;
 //

@@ -9,14 +9,6 @@
         "passwordEmailGateway":"!ZXCasdqwe123",
         "nombreMuestraEmailGateway":"eChatbot backend"
     },
-    "mercadolibre":{
-        "sincronizacion":{
-            "activado":"false",
-            "crosSchedule":"0 30 4 * * *"
-        },
-        "appId":"xxxxx",
-        "sellerId":"xxxxxx"
-    },
     "database":{
         "dev":{
             "type":"mongodb",

@@ -58,32 +58,6 @@ class dbUsuarios extends Db {
         }.bind(this))
     }
     //
-    BORRAR_merge(argObjUser){
-        return new Promise(function(respData,respRej){
-            try {
-                //
-                if ( !argObjUser._id && argObjUser.email ){ argObjUser._id = argObjUser.email; }
-                // Solo controla primer usuario si existieran varios
-                if ( !argObjUser._id ){
-                    respRej( {error: 'No existe campo _id en objeto',elemento:argObjUser} ) ;
-                }
-                //
-                this.conectarBase( this.dbName )
-                    .then(function(argDb){
-                        return this.coneccion.collection( this.collectionNombre )
-                                             .updateOne({_id:argObjUser._id}, {$set: {...argObjUser}}, {upsert: true} ) ;
-                    }.bind(this))
-                    .then(function(argArrayUsrInserted){
-                        respData( argObjUser ) ;
-                    }.bind(this))
-                    .catch(respRej) ;
-                //
-            } catch(errAddUrl){
-                respRej(errAddUrl) ;
-            }
-        }.bind(this))
-    }
-    //
     get(argObjBusqueda){
         return new Promise(function(respData,respRej){
             try {
@@ -103,6 +77,58 @@ class dbUsuarios extends Db {
                 respRej(errGetCli) ;
             }
         }.bind(this)) ;
+    }
+    //
+    mergeLoginUser(argUsr){
+        return new Promise(function(respOk,respRej){
+            try {
+                //
+                this.get( {email:argUsr.email} )
+                    .then(function(respGet){
+                        if ( respGet.length>0 ){
+                            respGet=respGet[0];
+                        } else {
+                            respGet={
+                                _id:argUsr.email,
+                                ts_insert: this.fechaPais()
+                            };
+                        }
+                        if ( !respGet.accesos    ){ respGet.accesos=[]; }
+                        if ( !respGet.seguridad  ){ respGet.seguridad={}; }
+                        /*  */
+                        if ( !respGet.provider   ){ respGet.provider={}; }
+                        if ( respGet.provider && typeof respGet.provider=="string" ){ respGet.provider={}; }
+                        if ( argUsr.provider && respGet.provider[argUsr.provider] && typeof respGet.provider[argUsr.provider]=="string" ){
+                            delete respGet.provider[argUsr.provider] ;
+                        }
+                        if ( argUsr.provider && !respGet.provider[argUsr.provider] ){
+                            respGet.provider[argUsr.provider]={};
+                            respGet.provider[argUsr.provider]={
+                                tipo: argUsr.provider,
+                                ...(argUsr._json ? argUsr._json : argUsr )
+                            } ;
+                            delete argUsr.provider ;
+                            delete argUsr._raw ;
+                            delete argUsr._json ;
+                        }
+                        respGet.accesos.push({ tipo:'login',timestamp:this.fechaPais() }) ;
+                        let tempUserMerge    = Object.assign(respGet,argUsr) ;
+                        return this.add( tempUserMerge )
+                    }.bind(this))
+                    .then((resuMerge)=>{
+                        console.log('.....mergeLoginUser:: Termine merge de usuario -> OK') ;
+                        respOk(resuMerge) ;
+                    })
+                    .catch(function(respErr){
+                        console.log('....ERROR:: mergeLoginUser: En merge usuario / login:: ') ;
+                        console.dir(respErr) ;
+                        respRej(respErr) ;
+                    }.bind(this)) ;
+                //
+            } catch(errAddUrl){
+                respRej(errAddUrl) ;
+            }
+        }.bind(this))
     }
     //
     accesos(argEmail){

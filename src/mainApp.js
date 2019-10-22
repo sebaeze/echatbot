@@ -8,11 +8,12 @@ import { Layout  }                         from 'antd';
 //
 import Encabezado                         from "./js/componentes/Encabezado" ;
 import PiePagina                          from "./js/componentes/PiePagina"  ;
-import NoEncontrado404                    from "./js/componentes/NoEncontrado404"  ;
-import SitemapCuerpo                      from "./js/componentes/SitemapCuerpo"    ;
-import CuerpoInicio                       from "./js/componentes/CuerpoInicio" ;
-import { CuerpoAbout  }                   from "./js/componentes/CuerpoAbout"  ;
-import { CuerpoPrices }                   from "./js/componentes/CuerpoPrices"  ;
+import NoEncontrado404                    from "./js/componentes/cuerpoPagina/NoEncontrado404"  ;
+import SitemapCuerpo                      from "./js/componentes/cuerpoPagina/SitemapCuerpo"    ;
+import CuerpoInicio                       from "./js/componentes/cuerpoPagina/CuerpoInicio"  ;
+import { CuerpoAbout  }                   from "./js/componentes/cuerpoPagina/CuerpoAbout"   ;
+import { CuerpoPrices }                   from "./js/componentes/cuerpoPagina/CuerpoPrices"  ;
+import { CuerpoLogin  }                   from "./js/componentes/cuerpoPagina/CuerpoLogin"  ;
 import FormContacto                       from "./js/componentes/formularios/FormContacto" ;
 //
 import { languageLocale }                 from "./js/utils/utiles" ;
@@ -52,10 +53,12 @@ export class App extends React.Component {
           <Router>
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
               <Route exact path="/"                      component={() =>        <CuerpoInicio  translate={{...languageLocale()}} configuracion={configApp}   />}  />
-              <Route exact path="/contact"               component={(argMach) => <FormContacto  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/about"                 component={(argMach) => <CuerpoAbout   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/contact"               component={(argMach) => <FormContacto  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/error"                 component={(argMach) => <CuerpoAbout   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/services"              component={(argMach) => <CuerpoAbout   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/prices"                component={(argMach) => <CuerpoPrices  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/login"                 component={(argMach) => <CuerpoLogin   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
             </Content>
           </Router>
           <PiePagina translate={{...languageLocale()}} configuracion={configApp} />

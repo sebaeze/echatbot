@@ -6,9 +6,14 @@
         "services":"Services",
         "prices":"Prices",
         "news":"News",
+        "login":"Login in",
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
         "help":"Help",
+        "menuAdmin":{
+            "userInfo":"User Information",
+            "botsConfiguration":"Configuration of Chatbots"
+        },
         "cognitiveAnalytics":"Cognitive Analytics",
         "plan":{
             "beta":"100 Mensajes gratis x Mes",
@@ -32,9 +37,14 @@
         "services":"Servicios",
         "prices":"Precios",
         "news":"Novedades",
+        "login":"Iniciar Session",
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
         "help":"Ayuda",
+        "menuAdmin":{
+            "userInfo":"Información de usuario",
+            "botsConfiguration":"Configuracion de Chatbots"
+        },
         "cognitiveAnalytics":"Analisis Cognitivo",
         "betaPlanLeyend":"Por el momento, solo contamos con el plan Beta, el cual consiste en 600 mensajes gratis x mes.\n Si te interesa el servicio, ponete en contacto a travez del formulario de contacto",
         "plan":{
@@ -100,10 +110,15 @@
         "services":"Serviços",
         "prices":"Preços",
         "news":"Novidades",
+        "login":"Iniciar sessão",
         "cognitiveAnalytics":"Análise Cognitiva",
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
         "help":"Ajuda",
+        "menuAdmin":{
+            "userInfo":"Informações do Usuário",
+            "botsConfiguration":"Configuração de Chatbots"
+        },
         "plan":{
             "messagesXmonth":"Mensagens x mês",
             "customMsg":"Plano elaborado para atender às suas necessidades",

@@ -4,7 +4,6 @@
 const routerAdmin     = require( './routerAdmin' )     ;
 const routerAPI       = require( './routerAPI'   )     ;
 const routerIndex     = require( './routerIndex' )     ;
-const routerArticulos = require( './routerArticulos' ) ;
 const routerErrores   = require( './routerErrores'   ) ;
 const routerSitemap   = require( './routerSitemap'   ) ;
 //
@@ -13,7 +12,7 @@ export const routesApp = (argApp,argConfig,argDb,argPassport) => {
       try {
          //
          argApp.use('/'      , routerIndex({...argConfig},argDb) ) ;
-         argApp.use('/admin/', routerAdmin({...argConfig},argDb) ) ;
+         argApp.use('/'      , routerAdmin({...argConfig},argDb) ) ;
          argApp.use('/api/'  , routerAPI({...argConfig}  ,argDb)   ) ;
          argApp.use('/auth/' , argPassport.routes ) ;
          //
@@ -22,8 +21,7 @@ export const routesApp = (argApp,argConfig,argDb,argPassport) => {
             rutaAPI: routerAPI,
             rutaIndex: routerIndex,
             rutaErrores: routerErrores,
-            rutaSitemap: routerSitemap,
-            rutaProductos: routerArticulos
+            rutaSitemap: routerSitemap
          }) ;
          //
       } catch(errRoutes){

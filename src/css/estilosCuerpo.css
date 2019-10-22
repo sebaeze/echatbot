@@ -17,6 +17,17 @@ div {
     background-repeat: repeat, repeat, repeat ;
     background-repeat: no-repeat ;
 }
+.bg-login {
+    background-color: yellow ;
+    width: 100% !important ;
+    height: 100% !important ;
+    overflow: hidden ;
+    background:
+        linear-gradient(to bottom right,transparent 55.8%,#EBF2FE 50%) top /100% 120%,
+        linear-gradient(to top right,transparent 15%,#EBF2FE 15%) bottom/110% 72% ;
+    background-repeat: repeat, repeat, repeat ;
+    background-repeat: no-repeat ;
+}
 /*  */
 .box-plan {
     width: 80% ;
@@ -53,3 +64,20 @@ div {
     text-align: center ;
     font-size: 34px ;
 }
+/*  Login */
+.img-login-oauth {
+    border-radius: 25px ;
+    transition: all 1s;
+    border: 0.2px dotted grey !important ;
+    width: auto !important ;
+    height: auto !important ;
+    max-width: 160px !important ;
+    max-height: 130px !important ;
+    transition: all 0.5s;
+}
+.img-login-oauth:hover {
+    max-width: 180px !important ;
+    max-height: 150px !important ;
+    border: 0.5px solid grey !important ;
+}
+/*  */

@@ -4,7 +4,7 @@
 import React                            from 'react' ;
 import { Typography, Row, Col, Icon }   from 'antd'  ;
 //
-import '../../css/estilosPrices.css' ;
+import '../../../css/estilosCuerpo.css' ;
 //
 const { Title, Text }   = Typography ;
 //

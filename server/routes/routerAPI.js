@@ -8,6 +8,27 @@ const moment            = require('moment-timezone')     ;
 module.exports = (argConfig,argDb) => {
   const autenticado  = require( path.join(__dirname,'../auth/autenticado')  ).autenticado(argDb) ;
   //
+  router.get('/user',autenticado,function(req,res,next){
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    //
+    try {
+      if ( req.user ){
+        res.status(200) ;
+        res.json(req.user) ;
+      } else {
+        res.status(401) ;
+        res.json({error:'Unauthorized',description:'USer should be authenticated'}) ;
+      }
+    } catch(errGetUser){
+      res.status(500) ;
+      res.json(errGetUser) ;
+    }
+    //
+  }) ;
+  //
   router.post('/consultas', function(req, res) {
     res.set('Access-Control-Allow-Headers','*');
     res.set('Access-Control-Allow-Origin', '*');
@@ -115,37 +136,6 @@ module.exports = (argConfig,argDb) => {
             .catch(function(respErr){
                 //
                 console.log('.....error get productos: ') ;
-                console.dir(respErr) ;
-                //
-              res.status(500) ;
-              res.json(respErr) ;
-            }.bind(this)) ;
-      //
-    } catch(errRe){
-      res.status(500) ;
-      res.json(errRe) ;
-    }
-  });
-  // /distribuidores
-  router.get('/distribuidores', function(req, res) {
-    res.set('Access-Control-Allow-Headers','*');
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Methods', '*');
-    res.set("Access-Control-Allow-Credentials", true);
-    //
-    try{
-      //
-      console.log('......qry_distribuidores: ');
-      console.dir(req.query) ;
-      //
-      argDb.distribuidores.get( req.query )
-            .then(function(respUpdate){
-              console.log('....respuesta de qry distribuidores:: ')  ;
-              res.json( (respUpdate._doc||respUpdate) );
-            }.bind(this))
-            .catch(function(respErr){
-                //
-                console.log('.....error get distribuidores: ') ;
                 console.dir(respErr) ;
                 //
               res.status(500) ;

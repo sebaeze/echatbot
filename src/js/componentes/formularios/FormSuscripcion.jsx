@@ -103,7 +103,7 @@ export class FormSuscripcion extends React.Component {
                                             },
                                             ],
                                         })(<Input placeholder="email@com.ar" />)}
-                                        <Button htmlType="submit">Suscribirme</Button>
+                                        <Button htmlType="submit" style={{backgroundColor:'#49B6F9'}}>Suscribirme</Button>
                                 </Form.Item>
                             </Form>
                 }

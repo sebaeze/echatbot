@@ -36,19 +36,32 @@ const configPassportApp = (argConfigPassport,argApp, argDb) => {
           if (err) {
             console.log('err: '+err+';') ;
           } else {
+            /*
             console.log('user: ') ;
             console.dir(user) ;
+            */
           }
           //
-          if (!user) { return res.redirect( urlRedirect ); }
-          req.logIn(user, function(err) {
-            if (err) { return next(err); }
-            req.session.user = user ;
-            return res.redirect( urlRedirect );
-          });
+          if (!user) { console.log('....(A) voy a hcer redirect antesssssss ') ;return res.redirect( urlRedirect ); }
+          /*  */
+          argDb.usuarios.mergeLoginUser(user)
+                .then((respMerge)=>{
+                  respMerge = Array.isArray(respMerge) ? respMerge[0] : respMerge ;
+                  delete respMerge.provider ;
+                  delete respMerge._v ;
+                  req.logIn(respMerge, function(err) {
+                    if (err) { return next(err); }
+                    req.session.user = respMerge ;
+                    return res.redirect( urlRedirect );
+                  });
+                })
+                .catch((respErrMerge)=>{
+                  console.log('..(3) db__merge:: catch') ;
+                  throw respErrMerge ;
+                }) ;
           //
-        })(req, res, next);
-      });
+        }.bind(argDb))(req, res, next);
+      }.bind(argDb));
     }
     //
     passport.use( objStrategy.strategy ) ;

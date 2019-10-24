@@ -7,6 +7,7 @@ import { Row, Col, Popover }                         from 'antd';
 //
 import NavMenu                             from './menu/NavMenu' ;
 import {LogoEmpresa}                       from './link/LogoEmpresa'  ;
+import { api }                             from '../api/api' ;
 import {BotonMenuResponsive}               from './botones/BotonMenuResponsive'  ;
 //
 const { Header } = Layout;
@@ -18,7 +19,7 @@ import 'antd/lib/popover/style/css'  ;
 class Encabezado extends Component {
   constructor(props) {
     super(props) ;
-    this.state       = { flagScroll:false, menuNavVisible: false, isMobile: (window.innerWidth<796) } ;
+    this.state       = { flagScroll:false, menuNavVisible: false, isMobile: (window.innerWidth<796), userInfo: false } ;
     this.onClickMenu = this.onClickMenu.bind(this) ;
   }
   //
@@ -29,6 +30,15 @@ class Encabezado extends Component {
         window.addEventListener("scroll",function(argEventSCR){
           this.setState({flagScroll: (window.scrollY==0 ? false : true) }) ;
         }.bind(this)) ;
+        //
+        api.account.getUserInfo()
+          .then((resDataUsr)=>{
+              this.setState({userInfo: resDataUsr}) ;
+          })
+          .catch((errResDM)=>{
+              console.dir(errResDM) ;
+          }) ;
+        //
       } catch(errDM){
           console.dir(errDM) ;
       }
@@ -60,11 +70,13 @@ class Encabezado extends Component {
             </Col>
             <Col span={13}>
                 {this.state.isMobile ?
-                    <Popover placement="bottomRight" title={false} content={ <NavMenu translate={this.props.translate} isMobile={this.state.isMobile} /> } trigger="click">
+                    <Popover placement="bottomRight" title={false}
+                             content={ <NavMenu userInfo={this.state.userInfo} translate={this.props.translate} isMobile={this.state.isMobile} /> } trigger="click"
+                    >
                         <BotonMenuResponsive onClick={this.onClickMenu.bind(this)} />
                     </Popover>
                     :
-                    <NavMenu translate={this.props.translate} isMobile={this.state.isMobile} />
+                    <NavMenu userInfo={this.state.userInfo} translate={this.props.translate} isMobile={this.state.isMobile} />
                 }
            </Col>
           </Row>

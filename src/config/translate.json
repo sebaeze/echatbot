@@ -14,6 +14,18 @@
             "userInfo":"User Information",
             "botsConfiguration":"Configuration of Chatbots"
         },
+        "form":{
+            "country":"Country",
+            "name":"Name",
+            "address":"Address",
+            "city":"City",
+            "state":"State",
+            "zipCode":"Zip Code",
+            "phone":"Phone",
+            "savechanges":"Save Changes",
+            "lastName":"Last Name",
+            "description":"Aditional Comments"
+        },
         "cognitiveAnalytics":"Cognitive Analytics",
         "plan":{
             "beta":"100 Mensajes gratis x Mes",
@@ -41,6 +53,18 @@
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
         "help":"Ayuda",
+        "form":{
+            "country":"País",
+            "name":"Nombre",
+            "address":"Dirección",
+            "city":"Ciudad",
+            "state":"Provincia / Estado",
+            "zipCode":"Codigo Postal",
+            "phone":"Telefono",
+            "savechanges":"Guardar Cambios",
+            "lastName":"Apellido",
+            "description":"Comentario / Nota adicional"
+        },
         "menuAdmin":{
             "userInfo":"Información de usuario",
             "botsConfiguration":"Configuracion de Chatbots"
@@ -118,6 +142,18 @@
         "menuAdmin":{
             "userInfo":"Informações do Usuário",
             "botsConfiguration":"Configuração de Chatbots"
+        },
+        "form":{
+            "country":"País",
+            "name":"Nome",
+            "address":"Endereço",
+            "city":"Cidade",
+            "state":"Estado",
+            "zipCode":"Código Postal",
+            "phone":"Telefone",
+            "savechanges":"Salvar alterações",
+            "lastName":"Sobrenome",
+            "description":"Comentaários"
         },
         "plan":{
             "messagesXmonth":"Mensagens x mês",

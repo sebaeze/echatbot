@@ -1,0 +1,13 @@
+/*
+*
+*/
+#idAccount .ant-menu-item .anticon + span {
+    font-weight: 500 !important ;
+    font-size: 18px !important ;
+}
+#idAccount .ant-menu-item-selected {
+    background-color: inherit !important ;
+}
+#idAccount .ant-menu-item-selected span:hover {
+    text-decoration: underline !important ;
+}

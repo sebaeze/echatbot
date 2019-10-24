@@ -83,25 +83,42 @@ class dbUsuarios extends Db {
         return new Promise(function(respOk,respRej){
             try {
                 //
+                console.log('.....mergeLoginUser:: argUsr: ') ;
+                console.dir(argUsr) ;
+                //
                 this.get( {email:argUsr.email} )
                     .then(function(respGet){
+                        let tempUserMerge = {} ;
                         if ( respGet.length>0 ){
-                            respGet=respGet[0];
+                            tempUserMerge=respGet[0];
                         } else {
-                            respGet={
+                            /* respGet={
                                 _id:argUsr.email,
                                 ts_insert: this.fechaPais()
-                            };
+                            }; */
+                            tempUserMerge = this.mergeUserInfoProvider( argUsr ) ;
+                            tempUserMerge.accesos = [] ;
                         }
+                        /*
                         if ( !respGet.accesos    ){ respGet.accesos=[]; }
                         if ( !respGet.seguridad  ){ respGet.seguridad={}; }
-                        /*  */
                         if ( !respGet.provider   ){ respGet.provider={}; }
                         if ( respGet.provider && typeof respGet.provider=="string" ){ respGet.provider={}; }
                         if ( argUsr.provider && respGet.provider[argUsr.provider] && typeof respGet.provider[argUsr.provider]=="string" ){
                             delete respGet.provider[argUsr.provider] ;
                         }
                         if ( argUsr.provider && !respGet.provider[argUsr.provider] ){
+                            let userMergeProvider = {...respGet} ;
+                            switch(argUsr.provider){
+                                case 'google': mergeGoogleUserInfo({...respGet},)
+                                break ;
+                                case 'facebook':
+                                break ;
+                                case 'mercadolibre':
+                                break ;
+                                default:
+                                break ;
+                            } ;
                             respGet.provider[argUsr.provider]={};
                             respGet.provider[argUsr.provider]={
                                 tipo: argUsr.provider,
@@ -111,9 +128,13 @@ class dbUsuarios extends Db {
                             delete argUsr._raw ;
                             delete argUsr._json ;
                         }
-                        respGet.accesos.push({ tipo:'login',timestamp:this.fechaPais() }) ;
-                        let tempUserMerge    = Object.assign(respGet,argUsr) ;
-                        return this.add( tempUserMerge )
+                        */
+                       //tempUserMerge               = Object.assign(respGet,argUsr) ;
+                        tempUserMerge.accesos.push({ tipo:'login',timestamp:this.fechaPais() }) ;
+                        tempUserMerge.ts_last_login = this.fechaPais() ;
+                        //
+                        return this.add( tempUserMerge ) ;
+                        //
                     }.bind(this))
                     .then((resuMerge)=>{
                         console.log('.....mergeLoginUser:: Termine merge de usuario -> OK') ;
@@ -129,6 +150,52 @@ class dbUsuarios extends Db {
                 respRej(errAddUrl) ;
             }
         }.bind(this))
+    }
+    //
+    mergeUserInfoProvider(argInfoUserLogin){
+        let outInfo = {} ;
+        try {
+            outInfo._id  = argInfoUserLogin.email || argInfoUserLogin.mail || argInfoUserLogin.id || argInfoUserLogin.name || "*** ERROR *** " ;
+            //outInfo.name = (typeof argInfoUserLogin.name=="string") ? argInfoUserLogin.name :
+            /*
+            if ( !outInfo.accesos    ){ outInfo.accesos=[]; }
+            if ( !outInfo.seguridad  ){ outInfo.seguridad={}; }
+            if ( !outInfo.provider   ){ outInfo.provider={}; }
+            //
+            if ( respGet.provider && typeof respGet.provider=="string" ){ respGet.provider={}; }
+            if ( argUsr.provider && respGet.provider[argUsr.provider] && typeof respGet.provider[argUsr.provider]=="string" ){
+                delete respGet.provider[argUsr.provider] ;
+            }
+            */
+            if ( argInfoUserLogin.provider ){
+                switch(argInfoUserLogin.provider){
+                    case 'google':
+                        outInfo.email    = Array.isArray(argInfoUserLogin.emails) ? argInfoUserLogin.emails[0].value : '' ;
+                        outInfo._id      = outInfo.email ;
+                        outInfo.name     = argInfoUserLogin.name.givenName || '' ;
+                        outInfo.lastName = argInfoUserLogin.name.familyName || '' ;
+                        outInfo.fullName = argInfoUserLogin.displayName || '' ;
+                        outInfo.fotos    = [] ;
+                        argInfoUserLogin.photos.forEach(function(eleFF,eleIDX){
+                            outInfo.fotos.push({ id: eleIDX , url: eleFF.value }) ;
+                        }.bind(outInfo)) ;
+                        //
+                    break ;
+                    case 'facebook':
+                    break ;
+                    case 'mercadolibre':
+                    break ;
+                    default:
+                    break ;
+                } ;
+                outInfo.provider = {} ;
+                outInfo.provider[argInfoUserLogin.provider] = {...argInfoUserLogin} ;
+                //
+            }
+        } catch(errMU){
+            console.dir(errMU) ;
+        }
+        return outInfo ;
     }
     //
     accesos(argEmail){

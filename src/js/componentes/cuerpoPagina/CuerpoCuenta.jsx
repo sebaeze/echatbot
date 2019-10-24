@@ -3,7 +3,11 @@
 */
 import { Layout, Menu, DatePicker, Icon, Typography, Row, Col, Button, Spin, Tooltip } from 'antd'   ;
 import React                             from 'react' ;
+import FormUserInfo                      from '../formularios/FormUserInfo' ;
 import { api }                           from '../../api/api' ;
+import { PARAMETROS }                    from '../../utils/parametros' ;
+//
+import '../../../css/estilosAccount.css' ;
 //
 const { Header, Content, Footer, Sider } = Layout ;
 const { SubMenu }                        = Menu   ;
@@ -14,7 +18,8 @@ export class CuerpoCuenta extends React.Component {
         super(props) ;
         this.state = {
             userInfo: false,
-            filtroColapsado: false
+            filtroColapsado: false,
+            formType: PARAMETROS.FORM.USER_INFO
         } ;
         this.onCollapse = this.onCollapse.bind(this) ;
     }
@@ -45,29 +50,52 @@ export class CuerpoCuenta extends React.Component {
     //
     render(){
         return(
-            <Layout id="idMainTasas" style={{ paddingTop:'120px',minHeight: '100vh'}}>
+            <Layout id="idAccount" style={{ paddingTop:'120px',minHeight: '100vh'}}>
                 <Sider collapsible
-                    width={310}
+                    width={250}
                     collapsed={this.state.filtroColapsado}
                     onCollapse={this.onCollapse}
                 >
-                    <Menu defaultSelectedKeys={['1']} mode="inline" defaultOpenKeys={['sub1']}>
+                    <Menu defaultSelectedKeys={['1']} mode="inline"
+                          defaultOpenKeys={['sub1']}
+                          style={{backgroundColor:'#001529',color:'white',fontWeight:'500',fontSize:'22px'}}
+                    >
                         <Menu.Item key="1">
                             <Icon type="user" style={{color:'#EBF2FE'}} />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.userInfo} >
-                                <span >{this.props.translate.menuAdmin.userInfo}</span>
+                                <span onClick={(argEV)=>{argEV.preventDefault();
+                                            if ( this.state.formType!=PARAMETROS.FORM.USER_INFO ){
+                                                this.setState({formType: PARAMETROS.FORM.USER_INFO}) ;
+                                            } else{
+                                                console.log('....ya estoy en user info') ;
+                                            }
+                                        }}
+                                >
+                                {this.props.translate.menuAdmin.userInfo}</span>
                             </Tooltip>
                         </Menu.Item>
                         <Menu.Item key="2">
                             <Icon type="robot" style={{color:'#EBF2FE'}} />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.botsConfiguration} >
-                                <span >Chatbots</span>
+                                <span onClick={(argEV)=>{argEV.preventDefault();
+                                            if ( this.state.formType!=PARAMETROS.FORM.CHATBOTS ){
+                                                this.setState({formType: PARAMETROS.FORM.CHATBOTS}) ;
+                                            } else{
+                                                console.log('....ya estoy en CHATBOTS') ;
+                                            }
+                                        }}
+                                >Chatbots</span>
                             </Tooltip>
                         </Menu.Item>
                     </Menu>
                 </Sider>
                 <Content>
                     <Row>
+                        {
+                            this.state.formType==PARAMETROS.FORM.USER_INFO ?
+                            <FormUserInfo translate={this.props.translate} userInfo={this.state.userInfo} />
+                            : null
+                        }
                     </Row>
                 </Content>
             </Layout>

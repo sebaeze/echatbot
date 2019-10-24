@@ -20,13 +20,11 @@ export class LogoEmpresa extends Component {
     }
     //
     render(){
-        /*
-        *  <img src={ this.state.isMobile==true ? "/img/logo-sindoh-xs.png" : "/img/logo-sindoh-ok.png" } alt="logo" />
-        */
+        //
         return(
-            <a href="/" className="logo a-no-hover" style={{margin:'0',padding:'0',width:'100px',height:'auto'}}>
+            <a href="/" className="logo a-no-hover" style={{margin:'0',padding:'0'}}>
                 <img src={ this.state.isMobile==true ? "/img/logo.echatai.transparent.png" : "/img/logo.echatai.transparent.png" }
-                    style={ this.state.isMobile==true ? {width:'150px',height:'auto',marginLeft:'40px',marginTop:'30px'} : {width:'270px',height:'auto',marginLeft:'40px'} }
+                    style={ this.state.isMobile==true ? {width:'150px',height:'auto',marginLeft:'40px',marginTop:'30px'} : {width:'200px',height:'auto',marginLeft:'40px'} }
                     alt="logo"
                 />
             </a>

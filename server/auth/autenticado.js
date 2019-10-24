@@ -4,7 +4,7 @@
 module.exports.autenticado = (argDb) => {
     return ( (req,res,next) => {
         if ( req.user ){
-            console.log('...email: '+req.user.email+' baseUrl: '+String(req.baseUrl).toUpperCase()) ;
+            // console.log('...email: '+req.user.email+' baseUrl: '+String(req.baseUrl).toUpperCase()) ;
             if ( String(req.baseUrl).toUpperCase().indexOf("/ADMIN")!=-1  ){
                 argDb.usuarios.get( {email:req.user.email} )
                      .then(function(respUsr){

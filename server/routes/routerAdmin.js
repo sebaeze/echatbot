@@ -12,7 +12,6 @@ module.exports = (argConfig,argDb) => {
     res.set('access-Control-Allow-Origin', '*');
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);
-    console.log('.....estoy en auth//nose') ;
     //
     const metatagsAdmin   = argConfig.metaTags.admin || {} ;
     let tempMetatags      = Object.assign({...defaultMetatags},{...metatagsAdmin}) ;

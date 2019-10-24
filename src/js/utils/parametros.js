@@ -3,6 +3,7 @@
 */
 export const PARAMETROS = {
     SESSION:{
+        USUARIO:'USER_SESSION',
         CATEGORIAS_MARCAS: 'categoriasMarcas',
         TIEMPO_SINCRONIZACION_MINUTOS: 30,
         CARRITO: 'carrito',
@@ -15,6 +16,10 @@ export const PARAMETROS = {
         API_CONSULTAS: '/api/consultas',
         API_SUSCRIPCION: '/api/suscripcion',
         API_DISTRIBUIDORES: '/api/distribuidores'
+    },
+    FORM:{
+        USER_INFO: 'USER_INFO',
+        CHATBOTS: 'CHATBOTS'
     }
 } ;
 //

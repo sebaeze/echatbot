@@ -46,28 +46,34 @@ const getUserInfo = () => {
     return new Promise(function(respOk,respRech){
         try {
             //
-            let opcionesFetch = {...opcionesPOST} ;
-            opcionesFetch.method = 'GET' ;
+            let outUserSession = ls( PARAMETROS.SESSION.USUARIO ) || false ;
+            if ( outUserSession==false ){
+                let opcionesFetch = {...opcionesPOST} ;
+                opcionesFetch.method = 'GET' ;
+                fetch('/api/user',opcionesFetch)
+                    .then((respFetch)=>{
+                        if ( respFetch.status>=200 && respFetch.status<=400 ){
+                            return respFetch.json() ;
+                        } else {
+                            respFetch.text().then((respErrHttp)=>{
+                                respRech(respErrHttp);
+                                throw new Error(respErrHttp) ;
+                            }) ;
+                            //return false ;
+                        }
+                    })
+                    .then((respDatos)=>{
+                        ls( PARAMETROS.SESSION.USUARIO, respDatos ) ;
+                        respOk(respDatos) ;
+                    })
+                    .catch((respErr)=>{
+                        console.dir(respErr) ;
+                        respRech(respErr) ;
+                    }) ;
+            } else {
+                respOk( outUserSession) ;
+            }
             //
-            fetch('/api/user',opcionesFetch)
-                .then((respFetch)=>{
-                    if ( respFetch.status>=200 && respFetch<=400 ){
-                        return respFetch.json() ;
-                    } else {
-                        respFetch.text().then((respErrHttp)=>{
-                            respRech(respErrHttp);
-                        }) ;
-                        return false ;
-                    }
-                })
-                .then((respDatos)=>{
-                    respOk(respDatos) ;
-                })
-                .catch((respErr)=>{
-                    console.dir(respErr) ;
-                    respRech(respErr) ;
-                }) ;
-                //
         } catch(errGACC){
             respRech(errGACC) ;
         }

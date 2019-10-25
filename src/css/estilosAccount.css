@@ -11,3 +11,9 @@
 #idAccount .ant-menu-item-selected span:hover {
     text-decoration: underline !important ;
 }
+/*   */
+#idFormContacto .ant-form-item-label label {
+    font-size: 20px !important ;
+    font-weight: 600 !important ;
+}
+/*   */

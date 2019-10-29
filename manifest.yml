@@ -1,8 +1,8 @@
 ---
 applications:
-- name: webpage-sindoh
-  command: npm run startCloud
-  host: webpage-sindoh
+- name: echatbot
+  command: npm run start
+  host: echatbot
   domain: mybluemix.net
   memory: 1024M
   timeout: 180

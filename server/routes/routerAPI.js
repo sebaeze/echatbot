@@ -29,6 +29,30 @@ module.exports = (argConfig,argDb) => {
     //
   }) ;
   //
+  router.post('/user', function(req, res) {
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    //
+    try{
+      argDb.usuarios.add( {...req.body} )
+            .then(function(respUpdate){
+              res.json( (respUpdate._doc||respUpdate) );
+            }.bind(this))
+            .catch(function(respErr){
+                console.log('.....ERROR: POST_USER: -> ') ;
+                console.dir(respErr) ;
+              res.status(500) ;
+              res.json(respErr) ;
+            }.bind(this)) ;
+      //
+    } catch(errRe){
+      res.status(500) ;
+      res.json(errRe) ;
+    }
+  });
+  //
   router.post('/consultas', function(req, res) {
     res.set('Access-Control-Allow-Headers','*');
     res.set('Access-Control-Allow-Origin', '*');

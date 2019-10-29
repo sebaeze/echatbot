@@ -1,8 +1,8 @@
 /*
 *
 */
-import React           from 'react' ;
-import { Select }      from 'antd'  ;
+import React                 from 'react' ;
+import { Select, Form }      from 'antd'  ;
 //
 const { Option } = Select;
 //
@@ -27,7 +27,7 @@ export class FiltroPais extends React.Component {
         try {
             //
             this.setState({ seleccionados:selectedItems });
-            this.props.seleccion(selectedItems) ;
+            // this.props.seleccion(selectedItems) ;
             //
         } catch(errOC){
             console.dir(errOC) ;
@@ -44,22 +44,33 @@ export class FiltroPais extends React.Component {
         ) ;
         //
         let tempStyle = this.props.style ? this.props.style : {} ;
+        const {getFieldDecorator} = this.props.form ;
         //
         return (
-                <Select
-                    id={this.props.id}
-                    showSearch
-                    placeholder="Seleccionar País"
-                    onChange={this.onChange}
-                    size={"large"}
-                    //
-                    style={{ ...tempStyle }}
-                    getPopupContainer={(trigger) => {
-                        return trigger.parentNode ;
-                    }}
-                >
-                    {arrayOptions}
-                </Select>
+            <div>
+                <Form.Item>
+                    {getFieldDecorator('country', {
+                        rules: [{ required: true, message: 'Please, choose your country' }],
+                    })
+                    (
+                        <Select
+                            id={this.props.id}
+                            showSearch
+                            placeholder="Seleccionar País"
+                            onChange={this.onChange}
+                            size={"large"}
+                            //
+                            style={{ ...tempStyle }}
+                            getPopupContainer={(trigger) => {
+                                return trigger.parentNode ;
+                            }}
+                        >
+                            {arrayOptions}
+                        </Select>
+                    )
+                    }
+                </Form.Item>
+            </div>
         )
         //
     }

@@ -289,17 +289,6 @@ class dbUsuarios extends Db {
         }
         return Object.keys(objClientes) ;
     }
-    //
-    update(argArrayUsuarios){
-        return new Promise(function(respData,respRej){
-            try {
-                if ( !Array.isArray(argArrayUsuarios) ){ respRej( {error:'dbUsuarios::update:: Argumento debe ser array.'} ); }
-            } catch(errUpd){
-                respRej(errUpd) ;
-            }
-        }.bind(this)) ;
-    }
-    //
 }
 //
 module.exports.classDb       = dbUsuarios ;

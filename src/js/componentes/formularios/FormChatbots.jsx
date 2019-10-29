@@ -5,14 +5,13 @@
 *
 */
 import React                   from 'react' ;
-import { FiltroPais }          from '../filtros/FiltroPais' ;
 import { api        }          from '../../api/api' ;
 import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon }   from 'antd'  ;
 //
-class FormUserInfo extends React.Component {
+class FormChatbots extends React.Component {
     constructor(props){
         super(props) ;
-        this.state            = {flagSpinner:false, userInfo: this.props.userInfo, enviadoOk:false,errorMsg:[] } ;
+        this.state            = {flagSpinner:false, listaBots: this.props.listaBots, enviadoOk:false,errorMsg:[] } ;
         this.handleKeyboard   = this.handleKeyboard.bind(this)   ;
         this.formSubmit       = this.formSubmit.bind(this) ;
     }
@@ -21,7 +20,7 @@ class FormUserInfo extends React.Component {
     //
     //
     static getDerivedStateFromProps(newProps, state) {
-        return { userInfo: newProps.userInfo } ;
+        return { listaBots: newProps.listaBots } ;
     }
     //
     handleKeyboard(event){
@@ -55,7 +54,7 @@ class FormUserInfo extends React.Component {
                         this.setState({flagSpinner:false,enviadoOk:false,errorMsg: Object.values(error) }) ;
                     }, 700 ) ;
               } else {
-                api.account.update(this.props.form.getFieldsValue() )
+                api.chatbot.update(this.props.form.getFieldsValue() )
                     .then((respUpd)=>{
                         setTimeout(() => {
                             this.setState({flagSpinner:false,enviadoOk:true}) ;
@@ -149,11 +148,6 @@ class FormUserInfo extends React.Component {
                         <Row style={{marginTop:'5px'}}>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={10} xl={10} xxl={10}>
-                                <Form.Item  label={ <span className="ant-form-item-required">{this.props.translate.form.country}</span> } >
-                                    <FiltroPais  id={"idFiltroPais"} style={{width:'100%'}}
-                                                form={this.props.form}
-                                    />
-                                </Form.Item>
                             </Col>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={10} xl={10} xxl={10}>
@@ -235,7 +229,7 @@ class FormUserInfo extends React.Component {
     //
 } ;
 //
-const WrappedFormUserInfo = Form.create({ name: '',
+const WrappedFormChatbots = Form.create({ name: '',
     mapPropsToFields(props) {
         return {
             email: Form.createFormField({ value: props.userInfo.email }),
@@ -251,7 +245,7 @@ const WrappedFormUserInfo = Form.create({ name: '',
             description: Form.createFormField({ value: props.userInfo.description })
         };
     }
-})(FormUserInfo);
+})(FormChatbots);
 //
-export default WrappedFormUserInfo ;
+export default WrappedFormChatbots ;
 //

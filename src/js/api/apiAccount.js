@@ -5,28 +5,33 @@ import moment                             from 'moment-timezone'  ;
 import ls                                 from 'local-storage'    ;
 import {PARAMETROS,opcionesPOST}          from '../utils/parametros'  ;
 //
-const updateAccount = (argProducto) => {
+const updateAccount = (argAccount) => {
     return new Promise(function(respOk,respRech){
         try {
-            let tempTs = moment( new Date().toISOString() ) ;
-            let tempCarrito = ls( PARAMETROS.SESSION.CARRITO ) || {_id:'',estadoOrden: PARAMETROS.SESSION.CARRITO_ESTADO_INICIAL ,productos:{},email:'',direccion:'',numero:'',piso:'',puerta:'',ciudad:'',pais:'',codigoPostal:'',celular:'',telefonoFijo:'',telefonoTrabajo:'',comentario:'',ts_creacion:tempTs,ts_sincronizacion:null,} ;
             //
-            if ( !tempCarrito.productos[argProducto._id] ){ tempCarrito.productos[argProducto._id] = {...argProducto,ts_carrito_iniciado:tempTs, cantidad:0}; }
-            tempCarrito.productos[argProducto._id].cantidad++ ;
-            tempCarrito.productos[argProducto._id].ts_carrito_ultima_modificacion = tempTs ;
-            tempCarrito.productos[argProducto._id].estadoSincronizacion = PARAMETROS.SESSION.CARRITO_PENDIENTE_SINCRONIZACION ;
-            ls( PARAMETROS.SESSION.CARRITO, tempCarrito ) ;
+            ls( PARAMETROS.SESSION.USUARIO, argAccount ) ;
             //
-            respOk( tempCarrito ) ;
+            let tempOptPost = opcionesPOST ;
+            tempOptPost.body = JSON.stringify(argAccount)  ;
             //
-            sincronizarOrdenes()
-                .then((respSincrOrd)=>{
-                    console.log('....termine de sincronizar orden/carrito ') ;
-                    console.dir(respSincrOrd) ;
-                    let tempCarritoASincronizar = ls( PARAMETROS.SESSION.CARRITO ) ;
-                    tempCarritoASincronizar._id = respSincrOrd._id ;
-                    //tempCarritoASincronizar.estadoOrden = respSincrOrd.estadoOrden ;
-                }) ;
+            fetch('/api/user',tempOptPost)
+                    .then((respFetch)=>{
+                        if ( respFetch.status>=200 && respFetch.status<=400 ){
+                            return respFetch.json() ;
+                        } else {
+                            respFetch.text().then((respErrHttp)=>{
+                                respRech(respErrHttp);
+                                throw new Error(respErrHttp) ;
+                            }) ;
+                        }
+                    })
+                    .then((respDatos)=>{
+                        respOk(respDatos) ;
+                    })
+                    .catch((respErr)=>{
+                        console.dir(respErr) ;
+                        respRech(respErr) ;
+                    }) ;
             //
         } catch(errAdd){ console.dir(errAdd); respRech(errAdd); }
     }.bind(this)) ;

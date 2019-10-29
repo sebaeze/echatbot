@@ -4,6 +4,7 @@
 import { Layout, Menu, DatePicker, Icon, Typography, Row, Col, Button, Spin, Tooltip } from 'antd'   ;
 import React                             from 'react' ;
 import FormUserInfo                      from '../formularios/FormUserInfo' ;
+import FormChatbots                      from '../formularios/FormChatbots' ;
 import { api }                           from '../../api/api' ;
 import { PARAMETROS }                    from '../../utils/parametros' ;
 //
@@ -91,11 +92,12 @@ export class CuerpoCuenta extends React.Component {
                 </Sider>
                 <Content>
                     <Row>
-                        {
-                            this.state.formType==PARAMETROS.FORM.USER_INFO ?
+                        <Col xs={24} md={24} lg={26} xl={26} xxl={26} style={ this.state.formType==PARAMETROS.FORM.USER_INFO ? {} : {display:'none'} } >
                             <FormUserInfo translate={this.props.translate} userInfo={this.state.userInfo} />
-                            : null
-                        }
+                        </Col>
+                        <Col xs={24} md={24} lg={26} xl={26} xxl={26} style={ this.state.formType==PARAMETROS.FORM.CHATBOTS ? {} : {display:'none'} } >
+                            <FormChatbots translate={this.props.translate} userInfo={this.state.userInfo} />
+                        </Col>
                     </Row>
                 </Content>
             </Layout>

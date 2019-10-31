@@ -1,0 +1,9 @@
+/*
+*
+*/
+.ul-con-bullet {
+    list-style-type: disc !important;
+    padding-left:1em !important;
+    margin-left:1em;
+    font-size: 18px ;
+}

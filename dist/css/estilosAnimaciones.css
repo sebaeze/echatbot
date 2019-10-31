@@ -1,0 +1,184 @@
+/*   */
+.code-box-shape {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 5px;
+    height: 5px;
+    border-radius: 4px;
+  }
+.demo-bezier-shape {
+    width: 5px;
+    height: 5px;
+    background: #7569ff;
+    position: absolute;
+    top: 0;
+}
+/*   */
+.logo-gather-demo-edit-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #f1f1f1;
+  padding: 0 5%;
+  line-height: 45px;
+}
+
+.logo-gather-demo-edit-wrapper ul {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+
+.logo-gather-demo-edit-wrapper ul li:first-child {
+  margin-left: 0;
+}
+
+.logo-gather-demo-edit-wrapper ul li {
+  float: left;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+.logo-gather-demo-wrapper {
+  position: relative;
+  /* background: #019BF0; */
+  background: #75BFE5 ;
+  overflow: hidden;
+  height: 700px;
+}
+
+.logo-gather-demo-wrapper .point-wrapper {
+  position: absolute;
+}
+
+.logo-gather-demo-wrapper .point {
+  border-radius: 100%;
+}
+
+.logo-gather-demo-wrapper .right-side {
+  width: 300px;
+  height: 360px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+.logo-gather-demo-wrapper .right-side * {
+  pointer-events: none;
+}
+
+@media screen and (max-width: 414px) {
+  .exhibition-details-demo {
+    overflow: hidden;
+  }
+
+  .logo-gather-demo-edit-wrapper {
+    transform: translateY(100%);
+    transition: transform .45s ease-in-out;
+  }
+
+  .logo-gather-demo-edit-wrapper.open{
+    transform: translateY(0);
+  }
+
+  .logo-gather-demo-edit-wrapper .anticon-down{
+    transition: transform .45s ease-in-out;
+  }
+
+  .logo-gather-demo-edit-wrapper.open .anticon-down{
+    transform: rotate(180deg);
+  }
+
+  .logo-gather-demo-edit-wrapper > div {
+    width: 90%;
+    line-height: 24px !important;
+    margin-bottom: 5px;
+  }
+
+  .exhibition-details-demo .edit-button{
+    position: absolute;
+    top: -20px;
+    width: 30px;
+    height: 20px;
+    border-radius: 30px 30px 0 0;
+    background: #f1f1f1;
+    text-align: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.15);
+  }
+
+  .logo-gather-demo-edit-wrapper ul {
+    margin: 5px auto;
+  }
+
+  .phone-float-none {
+    clear: both;
+    margin-left: 0 !important;
+  }
+
+  .none {
+    display: none;
+  }
+
+}
+/*   */
+@media (max-width: 700px) {
+  div.texty.top {
+    display: inline-block ;
+  }
+  div.texty.top span {
+    position: relative;
+    float: left;
+  }
+  h1 div.texty.top span {
+    font-size: 30px !important ;
+  }
+  h2 div.texty.top span {
+    font-size: 20px !important ;
+  }
+}
+.text-logo-principal {
+  font-size: 4rem ;
+  font-weight: 600 ;
+  line-height: 6rem ;
+}
+@media (max-width: 700px) {
+  .text-logo-principal {
+    font-size: 24px ;
+    line-height: 2rem ;
+  }
+}
+.div-continuar {
+  position: absolute ;
+  z-index: 9999 !important ;
+  pointer-events: auto;
+}
+.btn-continuar {
+  border: 1px dashed grey ;
+  border-radius: 25px ;
+  color: black ;
+  width: 200px ;
+  font-size:  24px ;
+  line-height: 32px ;
+  position: absolute ;
+  z-index: 9999 !important ;
+  padding: 10px 20px 10px 20px ;
+  pointer-events: auto;
+}
+.btn-continuar:hover, .btn-continuar div:hover, .btn-continuar span:hover,
+.btn-continuar:focus, .btn-continuar div:focus, .btn-continuar span:focus
+{
+  z-index: 9999 !important;
+  cursor: pointer !important ;
+  border-bottom: 0.5px dotted grey !important ;
+  pointer-events: auto;
+}

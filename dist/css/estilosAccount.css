@@ -1,0 +1,19 @@
+/*
+*
+*/
+#idAccount .ant-menu-item .anticon + span {
+    font-weight: 500 !important ;
+    font-size: 18px !important ;
+}
+#idAccount .ant-menu-item-selected {
+    background-color: inherit !important ;
+}
+#idAccount .ant-menu-item-selected span:hover {
+    text-decoration: underline !important ;
+}
+/*   */
+#idFormContacto .ant-form-item-label label {
+    font-size: 20px !important ;
+    font-weight: 600 !important ;
+}
+/*   */

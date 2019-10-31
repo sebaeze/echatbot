@@ -11,6 +11,10 @@ const dbClass          = require('./db/dbIndex').bases ;
 const utiles           = require('./lib/utiles').Utilitarios() ;
 const mustacheExpress  = require('mustache-express') ;
 //
+const https            = require('https') ;
+const path             = require('path')  ;
+const fs               = require('fs')    ;
+//
 import { routesApp }        from './routes/routerServer' ;
 import configuracionApp     from './config/general.json'  ;
 if ( process.env.GLOBAL_GOOGLE_ANALYTICS ){
@@ -81,10 +85,22 @@ try {
       })
       .then((finEngine)=>{
         app.use( finEngine.rutaErrores ) ;
-        const puerto          = process.env.PORT || 3000  ;
+        const puerto          = process.env.PORT || 443  ;
+        /*
         app.listen(puerto,function(){
           console.log('....listen server on http://localhost:'+puerto) ;
         }) ;
+        */
+        //
+        var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.privkey.pem') );
+        var certificate = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.cert.pem') );
+        https.createServer({
+            key: privateKey,
+            cert: certificate
+        }, app).listen(puerto,function(){
+          console.log('....listen server on http://localhost:'+puerto) ;
+        });
+        //
       })
       .catch((finErr)=>{
         console.dir(finErr) ;

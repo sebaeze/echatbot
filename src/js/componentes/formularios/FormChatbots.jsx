@@ -11,16 +11,42 @@ import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon }   from 'antd'  ;
 class FormChatbots extends React.Component {
     constructor(props){
         super(props) ;
-        this.state            = {flagSpinner:false, listaBots: this.props.listaBots, enviadoOk:false,errorMsg:[] } ;
+        this.state            = {flagSpinner:false, chatbots: [], enviadoOk:false,errorMsg:[], userInfo: this.props.userInfo } ;
         this.handleKeyboard   = this.handleKeyboard.bind(this)   ;
         this.formSubmit       = this.formSubmit.bind(this) ;
     }
     //
-    componentDidMount(){}
-    //
+    componentDidMount(){
+        try {
+            //
+            if ( this.state.userInfo ){
+                api.chatbot.qry({idUser: this.state.userInfo._id})
+                    .then((respQry)=>{
+                        console.dir(respQry) ;
+                    })
+                    .catch((respErr)=>{
+                        console.dir(respErr) ;
+                    }) ;
+            }
+            //this.setState({chatbotsId: this.props.userInfo.chatbotsId }) ;
+        } catch(errDM){
+            console.dir(errDM) ;
+        }
+    }
     //
     static getDerivedStateFromProps(newProps, state) {
-        return { listaBots: newProps.listaBots } ;
+        console.log('....formChatbot:: getDerivedStateFromProps:: userinfo: ') ;
+        console.dir(newProps.userInfo) ;
+        if ( newProps.userInfo && newProps.userInfo._id ){
+            api.chatbot.qry({idUser: newProps.userInfo._id})
+                    .then((respQry)=>{
+                        console.dir(respQry) ;
+                    })
+                    .catch((respErr)=>{
+                        console.dir(respErr) ;
+                    }) ;
+        }
+        return { userInfo: newProps.userInfo } ;
     }
     //
     handleKeyboard(event){

@@ -1,7 +1,7 @@
 /*
 *
 */
-import { Layout, Menu, DatePicker, Icon, Typography, Row, Col, Button, Spin, Tooltip } from 'antd'   ;
+import { Layout, Menu, Icon, Typography, Row, Col, Tooltip } from 'antd'   ;
 import React                             from 'react' ;
 import FormUserInfo                      from '../formularios/FormUserInfo' ;
 import FormChatbots                      from '../formularios/FormChatbots' ;
@@ -20,14 +20,18 @@ export class CuerpoCuenta extends React.Component {
         this.state = {
             userInfo: false,
             filtroColapsado: false,
-            formType: PARAMETROS.FORM.USER_INFO
+            formType: (this.props.match.params && this.props.match.params.seccion && this.props.match.params.seccion.length>0 ) ? this.props.match.params.seccion.toUpperCase() : PARAMETROS.FORM.USER_INFO
         } ;
+        console.log('....CuerpoCuenta:: Constructor:: match:: formType: '+this.state.formType+';') ;
+        console.dir(this.props.match) ;
         this.onCollapse = this.onCollapse.bind(this) ;
     }
     //
     componentDidMount(){
         try {
             //
+            console.log('....CuerpoCuenta:: componentDidMount:: match:: formType: '+this.state.formType+';') ;
+            console.dir(this.props.match) ;
             api.account.getUserInfo()
                 .then((resDataUsr)=>{
                     this.setState({userInfo: resDataUsr}) ;
@@ -40,6 +44,12 @@ export class CuerpoCuenta extends React.Component {
             console.dir(errCDM) ;
         }
     }
+    //
+    /*
+    static getDerivedStateFromProps(newProps, state) {
+        return { listaBots: newProps.listaBots } ;
+    }
+    */
     //
     onCollapse(argCollapse){
         try {
@@ -65,7 +75,7 @@ export class CuerpoCuenta extends React.Component {
                             <Icon type="user" style={{color:'#EBF2FE'}} />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.userInfo} >
                                 <span onClick={(argEV)=>{argEV.preventDefault();
-                                            if ( this.state.formType!=PARAMETROS.FORM.USER_INFO ){
+                                            if ( this.state.formType!=PARAMETROS.FORM.USER_INFO.toUpperCase() ){
                                                 this.setState({formType: PARAMETROS.FORM.USER_INFO}) ;
                                             } else{
                                                 console.log('....ya estoy en user info') ;
@@ -79,7 +89,7 @@ export class CuerpoCuenta extends React.Component {
                             <Icon type="robot" style={{color:'#EBF2FE'}} />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.botsConfiguration} >
                                 <span onClick={(argEV)=>{argEV.preventDefault();
-                                            if ( this.state.formType!=PARAMETROS.FORM.CHATBOTS ){
+                                            if ( this.state.formType!=PARAMETROS.FORM.CHATBOTS.toUpperCase() ){
                                                 this.setState({formType: PARAMETROS.FORM.CHATBOTS}) ;
                                             } else{
                                                 console.log('....ya estoy en CHATBOTS') ;
@@ -92,11 +102,15 @@ export class CuerpoCuenta extends React.Component {
                 </Sider>
                 <Content>
                     <Row>
-                        <Col xs={24} md={24} lg={26} xl={26} xxl={26} style={ this.state.formType==PARAMETROS.FORM.USER_INFO ? {} : {display:'none'} } >
-                            <FormUserInfo translate={this.props.translate} userInfo={this.state.userInfo} />
-                        </Col>
-                        <Col xs={24} md={24} lg={26} xl={26} xxl={26} style={ this.state.formType==PARAMETROS.FORM.CHATBOTS ? {} : {display:'none'} } >
-                            <FormChatbots translate={this.props.translate} userInfo={this.state.userInfo} />
+                        <Col xs={24} md={24} lg={26} xl={26} xxl={26} style={ this.state.formType==PARAMETROS.FORM.USER_INFO.toUpperCase() ? {} : {display:'none'} } >
+                            {
+                                this.state.formType==PARAMETROS.FORM.USER_INFO.toUpperCase() ?
+                                    <FormUserInfo translate={this.props.translate} userInfo={this.state.userInfo} />
+                                    :
+                                    this.state.formType==PARAMETROS.FORM.CHATBOTS.toUpperCase() ?
+                                        <FormChatbots translate={this.props.translate} userInfo={this.state.userInfo} />
+                                        : null
+                            }
                         </Col>
                     </Row>
                 </Content>

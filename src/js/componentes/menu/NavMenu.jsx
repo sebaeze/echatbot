@@ -1,10 +1,13 @@
 /*
 *
 */
-import React, { Component }           from 'react' ;
-import { Menu, Button, Row, Col }     from 'antd' ;
+import React                             from 'react' ;
+import { Menu, Button, Icon }            from 'antd'  ;
+import { PARAMETROS }                    from '../../utils/parametros' ;
 //
-class NavMenu extends Component {
+const { SubMenu } = Menu ;
+//
+class NavMenu extends React.Component {
     constructor(props){
         super(props) ;
     }
@@ -13,9 +16,6 @@ class NavMenu extends Component {
     //
     render(){
         //
-        console.log('....navMenu:: this.props.userInfo: ') ;
-        console.dir(this.props.userInfo) ;
-        //
         return(
             <div>
                 <Menu
@@ -23,13 +23,30 @@ class NavMenu extends Component {
                     mode={ this.props.isMobile ? "vertical" : "horizontal" }
                     style={ this.props.isMobile ? {} : { width: '100%',lineHeight: '100px', fontSize: '24px', float:'right', marginRight: '1%' }}
                 >
-                    <Menu.Item key="1"><a rel="noopener noreferrer" href="/contact"       >{this.props.translate.contact}</a> </Menu.Item>
-                    <Menu.Item key="2"><a rel="noopener noreferrer" href="/about"         >{this.props.translate.about}</a></Menu.Item>
-                    <Menu.Item key="3"><a rel="noopener noreferrer" href="/services"      >{this.props.translate.services}</a></Menu.Item>
-                    <Menu.Item key="4"><a rel="noopener noreferrer" href="/prices"        >{this.props.translate.prices}</a></Menu.Item>
                     {
                         this.props.userInfo==false ?
-                            <Menu.Item key="5" className="li-no-hover">
+                            null :
+                            <SubMenu
+                                style={{fontWeight:'600'}}
+                                key="sub1"
+                                title={
+                                <span>
+                                    <Icon type="appstore" />
+                                    <span>{this.props.userInfo.name+' '+this.props.userInfo.lastName}</span>
+                                </span>
+                                }
+                            >
+                                <Menu.Item key="5"><a href={"/account/"+PARAMETROS.FORM.CHATBOTS} >Chatbots</a></Menu.Item>
+                                <Menu.Item key="6"><a href={"/account/"+PARAMETROS.FORM.USER_INFO}>{this.props.translate.myProfile}</a></Menu.Item>
+                            </SubMenu>
+                    }
+                    <Menu.Item key="2"><a rel="noopener noreferrer" href="/contact"       >{this.props.translate.contact}</a> </Menu.Item>
+                    <Menu.Item key="3"><a rel="noopener noreferrer" href="/about"         >{this.props.translate.about}</a></Menu.Item>
+                    <Menu.Item key="4"><a rel="noopener noreferrer" href="/services"      >{this.props.translate.services}</a></Menu.Item>
+                    <Menu.Item key="5"><a rel="noopener noreferrer" href="/prices"        >{this.props.translate.prices}</a></Menu.Item>
+                    {
+                        this.props.userInfo==false ?
+                            <Menu.Item key="7" className="li-no-hover">
                                 <Button  type="primary" block
                                         className="btn-shadow-login"
                                         onClick={(argEV)=>{argEV.preventDefault();location.href="/account";}}

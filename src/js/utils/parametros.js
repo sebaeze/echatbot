@@ -18,8 +18,8 @@ export const PARAMETROS = {
         API_DISTRIBUIDORES: '/api/distribuidores'
     },
     FORM:{
-        USER_INFO: 'USER_INFO',
-        CHATBOTS: 'CHATBOTS'
+        USER_INFO: 'profile',
+        CHATBOTS: 'chatbots'
     }
 } ;
 //
@@ -51,12 +51,18 @@ export const obj2qryString = (argJsObject) =>{
 				arrayQry.push(  tempArrayObjUrl.join('&') ) ;
 			}
 		} else {
-            if ( isNaN(datoKey) ){
-                if ( datoKey.length>0 ){
+            console.log('....type::key: '+typeof datoKey+';') ;
+            if ( datoKey ){
+                if ( isNaN(datoKey) ){
+                    if ( datoKey.length>0 ){
+                        arrayQry.push( keyObj+'='+datoKey ) ;
+                    }
+                } else {
                     arrayQry.push( keyObj+'='+datoKey ) ;
                 }
             } else {
-                arrayQry.push( keyObj+'='+datoKey ) ;
+                console.log('.....se pierde la key ?? ') ;
+                console.dir(argJsObject) ;
             }
 		}
 	}

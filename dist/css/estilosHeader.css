@@ -85,4 +85,7 @@ header ul.ant-menu {
 .ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected > .li-no-hover:hover {
     text-decoration: none !important ;
 }
+header .ant-menu  > li {
+    float: right;
+}
 /*   */

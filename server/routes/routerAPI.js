@@ -8,6 +8,35 @@ const moment            = require('moment-timezone')     ;
 module.exports = (argConfig,argDb) => {
   const autenticado  = require( path.join(__dirname,'../auth/autenticado')  ).autenticado(argDb) ;
   //
+  router.get('/chatbot',autenticado,function(req,res,next){
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    //
+    try {
+      console.log('..../chatbot:: query: ') ;
+      console.dir(req.query) ;
+      //
+      argDb.chatbot.qry( {...req.query} )
+            .then(function(respUpdate){
+              res.json( (respUpdate._doc||respUpdate) );
+            }.bind(this))
+            .catch(function(respErr){
+                console.log('.....ERROR: GET_CHATBOT: -> ') ;
+                console.dir(respErr) ;
+              res.status(500) ;
+              res.json(respErr) ;
+            }.bind(this)) ;
+        //
+    } catch(errGetBots){
+      console.dir(errGetBots) ;
+      res.status(500) ;
+      res.json(errGetBots) ;
+    }
+    //
+  }) ;
+  //
   router.get('/user',autenticado,function(req,res,next){
     res.set('Access-Control-Allow-Headers','*');
     res.set('Access-Control-Allow-Origin', '*');

@@ -10,6 +10,8 @@
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
         "help":"Help",
+        "account":"Account",
+        "myProfile":"My Profile",
         "menuAdmin":{
             "userInfo":"User Information",
             "botsConfiguration":"Configuration of Chatbots"
@@ -45,7 +47,7 @@
     "ES":{
         "contact":"Contacto",
         "contactUs":"Enviar Consulta",
-        "about":"A cerca de nosotros",
+        "about":"Sobre de nosotros",
         "services":"Servicios",
         "prices":"Precios",
         "news":"Novedades",
@@ -53,6 +55,8 @@
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
         "help":"Ayuda",
+        "account":"Cuenta Personal",
+        "myProfile":"Mi Perfil",
         "form":{
             "country":"País",
             "name":"Nombre",
@@ -139,6 +143,8 @@
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
         "help":"Ajuda",
+        "account":"Conta pessoal",
+        "myProfile":"Meu Perfil",
         "menuAdmin":{
             "userInfo":"Informações do Usuário",
             "botsConfiguration":"Configuração de Chatbots"

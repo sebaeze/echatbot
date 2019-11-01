@@ -65,10 +65,10 @@ class Encabezado extends Component {
                 style={{ minHeight:'120px', backgroundColor: '#fff' ,position: 'fixed', zIndex: 9999, width: '100%' }}
         >
           <Row>
-            <Col span={10}>
+            <Col xs={10} md={10} lg={6} xl={4} xxl={4}  >
               <LogoEmpresa />
             </Col>
-            <Col span={13}>
+            <Col  xs={13} md={13} lg={16} xl={20} xxl={20} >
                 {this.state.isMobile ?
                     <Popover placement="bottomRight" title={false}
                              content={ <NavMenu userInfo={this.state.userInfo} translate={this.props.translate} isMobile={this.state.isMobile} /> } trigger="click"

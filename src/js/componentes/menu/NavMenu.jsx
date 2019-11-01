@@ -12,6 +12,10 @@ class NavMenu extends Component {
     componentDidMount(){}
     //
     render(){
+        //
+        console.log('....navMenu:: this.props.userInfo: ') ;
+        console.dir(this.props.userInfo) ;
+        //
         return(
             <div>
                 <Menu
@@ -28,7 +32,7 @@ class NavMenu extends Component {
                             <Menu.Item key="5" className="li-no-hover">
                                 <Button  type="primary" block
                                         className="btn-shadow-login"
-                                        onClick={(argEV)=>{argEV.preventDefault();location.href="/admin/account";}}
+                                        onClick={(argEV)=>{argEV.preventDefault();location.href="/account";}}
                                         style={{marginBottom:'20%',height:'60px',backgroundColor:'#E0E6E5',verticalAlign:'bottom',color:'black',fontWeight:'500',fontSize:'20px',padding:'8px 8px 8px 8px' }}
                                 >
                                     {this.props.translate.login}

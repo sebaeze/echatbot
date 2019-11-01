@@ -3,11 +3,8 @@
 */
 const express           = require('express') ;
 const router            = require('express').Router()   ;
-const utilitario        = require('../lib/utiles').Utilitarios() ;
 const fnEmail           = require('../lib/emailEnviar').email ;
-const fs                = require('fs') ;
 const path              = require('path') ;
-const React             = require("react") ;
 //
 if ( !process.env.AMBIENTE ){ process.env.AMBIENTE="dev"; }
 //
@@ -29,51 +26,32 @@ module.exports = (argConfig,argDb,argCatalogoMarcas) => {
   //
   router.use('/', express.static( path.join(__dirname,'../../dist') , opciones ) );
   //
-  try {
-    //
-    //let theHtml       = fs.readFileSync( path.join(__dirname,'../../dist/app.html') ) ;
-    /*
-    const hbsTemplate = hbs.compile(theHtml);
-    const reactComp   = renderToString(<App />);
-    const htmlToSend  = hbsTemplate({ reactele: reactComp });
-    console.dir(htmlToSend) ;
-    */
-    //
-    /*
-    const App = require( path.join(__dirname,'../../dist/mainApp') ).App ;
-    theHtml = theHtml.replace(
-      '<div id="app"></div>',
-      `<div id="app">${ReactDOMServer.renderToString( App() )}</div>`
-    ) ;
-    console.dir(theHtml) ;
-    */
-    //
-  } catch(errComp){
-    console.dir(errComp) ;
-    console.log('....error compilando REACT') ;
-  }
-  //
-  router.get(['/','/404','/about','/error','/contact','/services','/prices','/login'], function(req, res) {
+  router.get(['/','/404','/about','/error','/contact','/services','/prices'], function(req, res) {
     res.set('access-Control-Allow-Origin', '*');
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);
     //
     res.render( 'app.html', defaultMetatags ) ;
-    console.log('....: req.url: '+req.url+' baseUrl: '+req.baseUrl+' originalUrl: '+req.originalUrl+' path: '+req.path+';');
+    /*
     let tempUrl = req.url || req.baseUrl || 'inicio' ;
     let tempEstadisticaVisita = { _id: tempUrl, tipo: 'pagina', titulo: '', http:{...req.headers,...{query:req.query}} } ;
     argDb.estadisticas.addEstadistica( tempEstadisticaVisita )
-        .then(function(respDb){ /* no hago nada */  })
+        .then(function(respDb){   })
         .catch(function(errDb){ console.log('....ERROR cargando estadistica: URL: '+req.baseUrl);console.dir(errDb);  })
     //
+    */
   });
-  //
-  router.get('/auth', function(req, res) {
+   // Login no requiere autenticar, sino entra en Loop
+   router.get('/login', function(req, res) {
     res.set('access-Control-Allow-Origin', '*');
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);
+    console.log('...estoy en /login') ;
     //
-    res.render( 'admin.html', {...defaultMetatags} ) ;
+    const metatagsAdmin   = argConfig.metaTags.admin || {} ;
+    let tempMetatags      = Object.assign({...defaultMetatags},{...metatagsAdmin}) ;
+    tempMetatags.globalTituloPagina = "Account" ;
+    res.render( 'admin.html', tempMetatags ) ;
     //
   });
   //

@@ -13,7 +13,6 @@ import SitemapCuerpo                      from "./js/componentes/cuerpoPagina/Si
 import CuerpoInicio                       from "./js/componentes/cuerpoPagina/CuerpoInicio"  ;
 import { CuerpoAbout  }                   from "./js/componentes/cuerpoPagina/CuerpoAbout"   ;
 import { CuerpoPrices }                   from "./js/componentes/cuerpoPagina/CuerpoPrices"  ;
-import { CuerpoLogin  }                   from "./js/componentes/cuerpoPagina/CuerpoLogin"  ;
 import FormContacto                       from "./js/componentes/formularios/FormContacto" ;
 //
 import { languageLocale }                 from "./js/utils/utiles" ;

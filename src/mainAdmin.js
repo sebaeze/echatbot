@@ -6,13 +6,14 @@ import ReactDOM                            from "react-dom"  ;
 import { BrowserRouter as Router, Route }  from 'react-router-dom'   ;
 import { Layout  }                         from 'antd';
 //
-import Encabezado                         from "./js/componentes/Encabezado" ;
-import PiePagina                          from "./js/componentes/PiePagina"  ;
+import Encabezado                          from "./js/componentes/Encabezado" ;
+import PiePagina                           from "./js/componentes/PiePagina"  ;
+import { CuerpoLogin  }                    from "./js/componentes/cuerpoPagina/CuerpoLogin"  ;
 import { CuerpoCuenta  }                   from "./js/componentes/cuerpoPagina/CuerpoCuenta"    ;
 //
-import { languageLocale }                 from "./js/utils/utiles" ;
+import { languageLocale }                  from "./js/utils/utiles" ;
 //
-import configApp                         from "./config/configApp.json" ;
+import configApp                           from "./config/configApp.json" ;
 //
 const  { Content }   = Layout ;
 //

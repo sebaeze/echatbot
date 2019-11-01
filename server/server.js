@@ -85,21 +85,21 @@ try {
       })
       .then((finEngine)=>{
         app.use( finEngine.rutaErrores ) ;
-        const puerto          = process.env.PORT || 443  ;
-        /*
-        app.listen(puerto,function(){
-          console.log('....listen server on http://localhost:'+puerto) ;
-        }) ;
-        */
-        //
-        var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.privkey.pem') );
-        var certificate = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.cert.pem') );
-        https.createServer({
-            key: privateKey,
-            cert: certificate
-        }, app).listen(puerto,function(){
-          console.log('....listen server on http://localhost:'+puerto) ;
-        });
+        if ( process.env.AMBIENTE=='produccion' ){
+            var puerto      = process.env.PORT || 443  ;
+            var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.privkey.pem') );
+            var certificate = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.cert.pem') );
+            https.createServer({
+                key: privateKey,
+                cert: certificate
+            }, app).listen(puerto,function(){
+              console.log('....listen server on http://localhost:'+puerto) ;
+            });
+        } else {
+          app.listen(3000,function(){
+            console.log('....listen server on http://localhost:3000') ;
+          }) ;
+        }
         //
       })
       .catch((finErr)=>{

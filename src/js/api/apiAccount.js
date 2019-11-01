@@ -9,6 +9,9 @@ const updateAccount = (argAccount) => {
     return new Promise(function(respOk,respRech){
         try {
             //
+            console.log('....estoy en updateAccount:: ') ;
+            console.dir(argAccount) ;
+            //
             ls( PARAMETROS.SESSION.USUARIO, argAccount ) ;
             //
             let tempOptPost = opcionesPOST ;
@@ -57,10 +60,14 @@ const getUserInfo = () => {
                 opcionesFetch.method = 'GET' ;
                 fetch('/api/user',opcionesFetch)
                     .then((respFetch)=>{
-                        if ( respFetch.status>=200 && respFetch.status<=400 ){
-                            return respFetch.json() ;
+                        if ( respFetch.status>=200 && respFetch.status<=401 ){
+                            if ( respFetch.status==401 ){
+                                return false ;
+                            } else {
+                                return respFetch.json() ;
+                            }
                         } else {
-                            respFetch.text().then((respErrHttp)=>{
+                            return respFetch.text().then((respErrHttp)=>{
                                 respRech(respErrHttp);
                                 throw new Error(respErrHttp) ;
                             }) ;

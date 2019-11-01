@@ -21,9 +21,11 @@ export class LogoEmpresa extends Component {
     //
     render(){
         //
+        // <img src={ this.state.isMobile==true ? "/img/logo.echatai.transparent.png" : "/img/logo.echatai.transparent.png" }
+        //
         return(
             <a href="/" className="logo a-no-hover" style={{margin:'0',padding:'0'}}>
-                <img src={ this.state.isMobile==true ? "/img/logo.echatai.transparent.png" : "/img/logo.echatai.transparent.png" }
+                <img src={ "/img/logo.waiboc.transparent.png" }
                     style={ this.state.isMobile==true ? {width:'150px',height:'auto',marginLeft:'40px',marginTop:'30px'} : {width:'200px',height:'auto',marginLeft:'40px'} }
                     alt="logo"
                 />

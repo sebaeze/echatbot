@@ -58,7 +58,6 @@ export class App extends React.Component {
               <Route exact path="/error"                 component={(argMach) => <CuerpoAbout   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/services"              component={(argMach) => <CuerpoAbout   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/prices"                component={(argMach) => <CuerpoPrices  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/login"                 component={(argMach) => <CuerpoLogin   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
             </Content>
           </Router>
           <PiePagina translate={{...languageLocale()}} configuracion={configApp} />

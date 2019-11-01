@@ -1,24 +1,24 @@
 {
-    "nombre":"eChatbot",
-    "descripcion":"eChatbot provee de asistentes virtuales ( chatbot ) a ecommercer",
-    "urlEmpresa":"https://www.echatbot.com.ar",
+    "nombre":"Waiboc",
+    "descripcion":"Waiboc servicios digitales y asistentes virtuales / chatbots",
+    "urlEmpresa":"https://www.Waiboc.com",
     "email":{
         "emailEmpresa":"sebaeze@gmail.com",
         "emailSoporte":"sebaeze@gmail.com",
         "emailGateway":"jym.all.graphics.email@gmail.com",
         "passwordEmailGateway":"!ZXCasdqwe123",
-        "nombreMuestraEmailGateway":"eChatbot backend"
+        "nombreMuestraEmailGateway":"Waiboc backend"
     },
     "database":{
         "dev":{
             "type":"mongodb",
             "url":"mongodb://localhost:27017",
-            "database":"echatbotdev"
+            "database":"Waibocdev"
         },
         "produccion":{
             "type":"mongodb",
             "url":"mongodb://sebaeze:qaz11qaz@66.97.39.81:20017",
-            "database":"echatbot"
+            "database":"Waiboc"
         }
     },
     "passport":{
@@ -77,15 +77,15 @@
     },
     "metaTags":{
         "default":{
-            "title":"eChatbot | Chatbot",
-            "copyright": "www.echatai.com.ar",
+            "title":"Waiboc | Chatbot",
+            "copyright": "www.waiboc.com",
             "keywords": "chatbot, virtual assistan, ai, watson, ibm",
-            "orgTitle":"eChatbot | Chatbot",
-            "orgDescripcion":"Chatbot / Virtual Assistant with Artificial Intelligence for ecommerce, using IBM Watson AI",
-            "descripcion":"Chatbot / Virtual Assistant with Artificial Intelligence for ecommerce, using IBM Watson AI",
-            "canonical":"https://www.echatai.com.ar",
-            "orgUrl": "https://www.echatai.com.ar",
-            "headerEmpresa":"echatai ecommerce ai",
+            "orgTitle":"Waiboc | Chatbot",
+            "orgDescripcion":"Chatbot / Virtual Assistant with Artificial Intelligence for ecommerce, using AI",
+            "descripcion":"Chatbot / Virtual Assistant with Artificial Intelligence for ecommerce, using AI",
+            "canonical":"https://www.waiboc.com",
+            "orgUrl": "https://www.waiboc.com",
+            "headerEmpresa":"Waiboc chatbot digital services",
             "headerLinksPrincipales":[
                 {"url":"/prices"  ,"id":"prices"  },
                 {"url":"/contact" ,"id":"contact" },

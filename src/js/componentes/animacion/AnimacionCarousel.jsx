@@ -50,7 +50,7 @@ export class AnimacionCarousel extends React.Component {
                             }}
                         />
                         <TweenOne style={{marginLeft:(this.state.isMobile==true ? '20px':'70px'),marginTop:(this.state.isMobile==true ? '10px':'80px')}} animation={{ x:450,y: sumaY, opacity: 0, type: 'from', delay: 300, repeat: -1,repeatDelay: 15500 }} name="TweenOne">
-                            <Title level={1} style={{marginBottom:(this.state.isMobile==true ? '0': false)}}>eChatAI</Title>
+                            <Title level={1} style={{marginBottom:(this.state.isMobile==true ? '0': false)}}>Waiboc</Title>
                         </TweenOne>
                         {
                             this.props.translate.home.map((elemText,elemIdx)=>{

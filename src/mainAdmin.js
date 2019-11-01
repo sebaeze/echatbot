@@ -48,6 +48,7 @@ export class App extends React.Component {
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
               <Route exact path="/account"               component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/bots"                  component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/login"                 component={(argMach) => <CuerpoLogin   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/users"                 component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
             </Content>
           </Router>

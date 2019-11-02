@@ -1278,4 +1278,15 @@ div.react-bootstrap-table tbody tr:hover {
     background-size: cover;
     background-position: center;
   }
+  .btn-edit-menu {
+	height: 50px !important ;
+	font-size: 18px !important ;
+	font-weight: 600 !important ;
+	background-color: #4178BE !important ;
+    margin-left: 10px !important ;
+    transition: all 0.3s ease-in-out;
+  }
+  .btn-edit-menu:hover {
+    box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
 /*  */

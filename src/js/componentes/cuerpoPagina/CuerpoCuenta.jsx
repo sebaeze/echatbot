@@ -5,6 +5,7 @@ import { Layout, Menu, Icon, Typography, Row, Col, Tooltip } from 'antd'   ;
 import React                             from 'react' ;
 import FormUserInfo                      from '../formularios/FormUserInfo' ;
 import FormChatbots                      from '../formularios/FormChatbots' ;
+import { TablaChatbots }                 from '../tablas/TablaChatbots'     ;
 import { api }                           from '../../api/api' ;
 import { PARAMETROS }                    from '../../utils/parametros' ;
 //
@@ -20,21 +21,18 @@ export class CuerpoCuenta extends React.Component {
         this.state = {
             userInfo: false,
             filtroColapsado: false,
-            formType: (this.props.match.params && this.props.match.params.seccion && this.props.match.params.seccion.length>0 ) ? this.props.match.params.seccion.toUpperCase() : PARAMETROS.FORM.USER_INFO
+            formType: (this.props.match.params && this.props.match.params.seccion && this.props.match.params.seccion.length>0 ) ? this.props.match.params.seccion : PARAMETROS.FORM.USER_INFO
         } ;
-        console.log('....CuerpoCuenta:: Constructor:: match:: formType: '+this.state.formType+';') ;
-        console.dir(this.props.match) ;
         this.onCollapse = this.onCollapse.bind(this) ;
     }
     //
     componentDidMount(){
         try {
             //
-            console.log('....CuerpoCuenta:: componentDidMount:: match:: formType: '+this.state.formType+';') ;
-            console.dir(this.props.match) ;
             api.account.getUserInfo()
                 .then((resDataUsr)=>{
-                    this.setState({userInfo: resDataUsr}) ;
+                    let tempFormType = this.state.formType ; /* Obliga a re.render */
+                    this.setState({formType: tempFormType, userInfo: resDataUsr}) ;
                 })
                 .catch((errResDM)=>{
                     console.dir(errResDM) ;
@@ -47,7 +45,9 @@ export class CuerpoCuenta extends React.Component {
     //
     /*
     static getDerivedStateFromProps(newProps, state) {
-        return { listaBots: newProps.listaBots } ;
+        console.log('......Cuerpocuenta:: getDerivedStateFromProps: ') ;
+        console.dir(state) ;
+        return false ; // { listaBots: newProps.listaBots } ;
     }
     */
     //
@@ -60,6 +60,7 @@ export class CuerpoCuenta extends React.Component {
     }
     //
     render(){
+        //
         return(
             <Layout id="idAccount" style={{ paddingTop:'120px',minHeight: '100vh'}}>
                 <Sider collapsible
@@ -102,13 +103,13 @@ export class CuerpoCuenta extends React.Component {
                 </Sider>
                 <Content>
                     <Row>
-                        <Col xs={24} md={24} lg={26} xl={26} xxl={26} style={ this.state.formType==PARAMETROS.FORM.USER_INFO.toUpperCase() ? {} : {display:'none'} } >
+                        <Col xs={24} md={24} lg={26} xl={26} xxl={26}>
                             {
-                                this.state.formType==PARAMETROS.FORM.USER_INFO.toUpperCase() ?
+                                this.state.formType.toUpperCase()==PARAMETROS.FORM.USER_INFO.toUpperCase() ?
                                     <FormUserInfo translate={this.props.translate} userInfo={this.state.userInfo} />
                                     :
-                                    this.state.formType==PARAMETROS.FORM.CHATBOTS.toUpperCase() ?
-                                        <FormChatbots translate={this.props.translate} userInfo={this.state.userInfo} />
+                                    this.state.formType.toUpperCase()==PARAMETROS.FORM.CHATBOTS.toUpperCase() ?
+                                        <TablaChatbots translate={this.props.translate} userInfo={this.state.userInfo} />
                                         : null
                             }
                         </Col>

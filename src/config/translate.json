@@ -12,6 +12,8 @@
         "help":"Help",
         "account":"Account",
         "myProfile":"My Profile",
+        "emptyText":"No Data",
+        "newChatbot":"New Chatbot",
         "menuAdmin":{
             "userInfo":"User Information",
             "botsConfiguration":"Configuration of Chatbots"
@@ -57,6 +59,8 @@
         "help":"Ayuda",
         "account":"Cuenta Personal",
         "myProfile":"Mi Perfil",
+        "emptyText":"Nada por aqui",
+        "newChatbot":"Nuevo Chatbot",
         "form":{
             "country":"País",
             "name":"Nombre",
@@ -145,6 +149,8 @@
         "help":"Ajuda",
         "account":"Conta pessoal",
         "myProfile":"Meu Perfil",
+        "emptyText":"Sem dados",
+        "newChatbot":"Novo Chatbot",
         "menuAdmin":{
             "userInfo":"Informações do Usuário",
             "botsConfiguration":"Configuração de Chatbots"

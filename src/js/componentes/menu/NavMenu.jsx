@@ -32,7 +32,7 @@ class NavMenu extends React.Component {
                                 title={
                                 <span>
                                     <Icon type="appstore" />
-                                    <span>{this.props.userInfo.name+' '+this.props.userInfo.lastName}</span>
+                                    <span><u>{this.props.userInfo.name+' '+this.props.userInfo.lastName}</u></span>
                                 </span>
                                 }
                             >

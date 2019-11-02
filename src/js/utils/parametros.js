@@ -51,7 +51,6 @@ export const obj2qryString = (argJsObject) =>{
 				arrayQry.push(  tempArrayObjUrl.join('&') ) ;
 			}
 		} else {
-            console.log('....type::key: '+typeof datoKey+';') ;
             if ( datoKey ){
                 if ( isNaN(datoKey) ){
                     if ( datoKey.length>0 ){

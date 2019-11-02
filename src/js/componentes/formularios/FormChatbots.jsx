@@ -107,7 +107,7 @@ class FormChatbots extends React.Component {
         //
         return(
             //
-            <Row id="idFormContacto" onKeyDown={this.handleKeyboard}>
+            <Row id="idFormChatbot" onKeyDown={this.handleKeyboard}>
                 <Col xs={3}  md={3}  lg={5} xl={5} xxl={5}></Col>
                 <Col xs={16} md={16} lg={14} xl={14} xxl={14}>
                     <Form onSubmit={(argEV)=>{argEV.preventDefault();this.formSubmit();}} style={ {...estiloForm} } >
@@ -258,17 +258,14 @@ class FormChatbots extends React.Component {
 const WrappedFormChatbots = Form.create({ name: '',
     mapPropsToFields(props) {
         return {
-            email: Form.createFormField({ value: props.userInfo.email }),
-            name: Form.createFormField({ value: props.userInfo.name }),
-            lastName: Form.createFormField({ value: props.userInfo.lastName }),
-            country: Form.createFormField({ value: props.userInfo.country }),
-            state: Form.createFormField({ value: props.userInfo.state }),
-            city: Form.createFormField({ value: props.userInfo.city }),
-            zipCode: Form.createFormField({ value: props.userInfo.zipCode }),
-            address: Form.createFormField({ value: props.userInfo.address }),
-            phone: Form.createFormField({ value: props.userInfo.phone }),
-            whatsapp: Form.createFormField({ value: props.userInfo.whatsapp }),
-            description: Form.createFormField({ value: props.userInfo.description })
+            id: Form.createFormField({ value: props.userInfo.id }),
+            idUser: Form.createFormField({ value: props.userInfo.idUser }),
+            description: Form.createFormField({ value: props.userInfo.description }),
+            plan: Form.createFormField({ value: props.userInfo.plan }),
+            qtyMessages: Form.createFormField({ value: props.userInfo.qtyMessages }),
+            language: Form.createFormField({ value: props.userInfo.language }),
+            botName: Form.createFormField({ value: props.userInfo.botName }),
+            botSubtitle: Form.createFormField({ value: props.userInfo.botSubtitle })
         };
     }
 })(FormChatbots);

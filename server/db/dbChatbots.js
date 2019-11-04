@@ -18,6 +18,7 @@ class dbChatbots extends Db {
                 //
                 if ( !Array.isArray(argObjBot) ){ argObjBot=new Array(argObjBot);  } ;
                 if ( Array.isArray(argObjBot) && argObjBot.length==0 ){ return([]); } ;
+                /*
                 let flagUsrSinID = false ;
                 for( let posUsr=0;posUsr<argObjBot.length;posUsr++){
                     if ( !argObjBot[posUsr]._id ){
@@ -28,9 +29,7 @@ class dbChatbots extends Db {
                         }
                     }
                 }
-                if ( flagUsrSinID==true ){
-                    respRej( {error: 'No existe campo _id en objeto',elemento:argObjBot} ) ;
-                } else {
+                */
                 //
                 this.conectarBase( this.dbName )
                     .then(function(argDb){
@@ -47,10 +46,9 @@ class dbChatbots extends Db {
                         //
                     }.bind(this))
                     .then(function(argArrayUsrInserted){
-                        respData( argObjBot ) ;
+                        respData( argArrayUsrInserted ) ;
                     }.bind(this))
                     .catch(respRej) ;
-                }
                 //
             } catch(errAddUrl){
                 respRej(errAddUrl) ;

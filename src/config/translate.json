@@ -19,6 +19,8 @@
             "botsConfiguration":"Configuration of Chatbots"
         },
         "form":{
+            "language":"English",
+            "selectLanguage":"Select the language",
             "country":"Country",
             "name":"Name",
             "address":"Address",
@@ -62,6 +64,8 @@
         "emptyText":"Nada por aqui",
         "newChatbot":"Nuevo Chatbot",
         "form":{
+            "language":"Español",
+            "selectLanguage":"Seleccionar Idioma",
             "country":"País",
             "name":"Nombre",
             "address":"Dirección",
@@ -156,6 +160,8 @@
             "botsConfiguration":"Configuração de Chatbots"
         },
         "form":{
+            "language":"Português",
+            "selectLanguage":"Selecione o idioma",
             "country":"País",
             "name":"Nome",
             "address":"Endereço",

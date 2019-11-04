@@ -2,7 +2,9 @@
 *
 */
 import React                                        from 'react' ;
-import { Table, Typography, Input, Button }         from 'antd'  ;
+import { Table, Typography, Input, Button, Spin }   from 'antd'  ;
+import { api }                                      from '../../api/api' ;
+import { FormNewChatbot }                           from '../formularios/FormNewChatbot' ;
 //
 const { Title } = Typography ;
 //
@@ -10,17 +12,22 @@ export class TablaChatbots extends React.Component {
     constructor(props){
         super(props) ;
         this.rowSelection   = this.rowSelection.bind(this) ;
+        this.onCancelModal  = this.onCancelModal.bind(this) ;
         this.onChange       = this.onChange.bind(this)     ;
         this.onChangeSearch = this.onChangeSearch.bind(this) ;
         this.parseColumns   = this.parseColumns.bind(this) ;
+        this.addNewChatbot  = this.addNewChatbot.bind(this) ;
         this.onClickCreateNewChatbot = this.onClickCreateNewChatbot.bind(this) ;
         let tempColumn      = this.parseColumns() ;
         this.state          = {
+            userInfo: this.props.userInfo,
+            modalVisible: false,
             arrayChatbots: [],
             arrayChatbotsMuestra: [] ,
             textBusqueda: '',
             arraySeleccionados:[],
-            columnas: tempColumn
+            columnas: tempColumn,
+            flagSpinner: true
         } ;
         //
     }
@@ -28,17 +35,41 @@ export class TablaChatbots extends React.Component {
     componentDidMount(){
         try {
             if ( this.state.userInfo ){
+                console.log('....estoy por llamar a api chatbot...nose como !!') ;
                 api.chatbot.qry({idUser: this.state.userInfo._id})
                     .then((respQry)=>{
                         console.dir(respQry) ;
-                        this.setState({arrayChatbots: respQry, arrayChatbotsMuestra: respQry}) ;
+                        this.setState({arrayChatbots: respQry, arrayChatbotsMuestra: respQry, flagSpinner: false}) ;
                     })
                     .catch((respErr)=>{
                         console.dir(respErr) ;
                     }) ;
+            } else {
+                this.setState({flagSpinner: false}) ;
             }
         } catch(errDM){
             console.dir(errDM) ;
+        }
+    }
+    //
+    addNewChatbot(argObjChatbot){
+        try {
+            this.setState({flagSpinner: true}) ;
+            api.chatbot.add(argObjChatbot)
+                .then((respADD)=>{
+                    if ( respADD.length>0 ){ respADD=respADD[0]; }
+                    console.dir(respADD) ;
+                    let tempArrayBots = this.state.arrayChatbots ;
+                    tempArrayBots.push(respADD) ;
+                    this.setState({arrayChatbots: tempArrayBots, flagSpinner: false}) ;
+                })
+                .catch((respErr)=>{
+                    console.dir(respErr) ;
+                    this.setState({flagSpinner: false}) ;
+                }) ;
+                //
+        } catch(errAddNC){
+            console.dir(errAddNC) ;
         }
     }
     /*
@@ -50,7 +81,12 @@ export class TablaChatbots extends React.Component {
     */
     onClickCreateNewChatbot(argEE){
         try {
+            //
             argEE.preventDefault() ;
+            if ( !this.state.modalVisible ){
+                this.setState({modalVisible: true}) ;
+            }
+            //
         } catch(errOCNC){
             console.dir(errOCNC) ;
         }
@@ -65,17 +101,17 @@ export class TablaChatbots extends React.Component {
                         width: 200,dataIndex:'_id', key:'_id',
                         render: text => <span style={{fontWeight:'700',color:'#497EC0'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a._id.localeCompare(b._id) } ,
+                {title:'Bot Nombre'      ,dataIndex:'botName', key:'botName' , defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
                 {title:'Descripcion'     ,width: 150,dataIndex:'description',key:'description',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.description.localeCompare(b.description) } ,
                 {title:'Plan'     ,width: 150,dataIndex:'plan',key:'plan',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.plan.localeCompare(b.plan) } ,
-                {title:'Mensajes Consumidos'             ,width: 200,dataIndex:'tasa', key:'tasa',
+                {title:'Mensajes Consumidos'             ,width: 200,dataIndex:'qtyMessages', key:'qtyMessages',
                         render: text => <span style={{fontWeight:'700'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.qtyMessages - b.qtyMessages } ,
                 {title:'Lenguaje'    ,width: 200,dataIndex:'language', key:'language',
                         render: text => <span style={{fontWeight:'700'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.language - b.language },
-                {title:'Bot Nombre'          ,dataIndex:'botName', key:'botName' , defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
                 {title:'Bot Sub-leyenda'     ,dataIndex:'botSubtitle', key:'botSubtitle' , defaultSortOrder: 'descend', sorter: (a, b) => a.botSubtitle.localeCompare(b.botSubtitle) }
             ] ;
             //
@@ -118,6 +154,16 @@ export class TablaChatbots extends React.Component {
         this.setState({ pagination: pagination });
     }
     //
+    onCancelModal(argEC){
+        try {
+            console.log('.....onCancelModal: ') ;
+            argEC.preventDefault() ;
+            this.setState({modalVisible: false}) ;
+        } catch(errOCM){
+            console.dir(errOCM) ;
+        }
+    }
+    //
     render(){
         //
         let arrayDatos = [] ;
@@ -145,12 +191,41 @@ export class TablaChatbots extends React.Component {
                 <Table
                     style={{padding:'10px 10px 10px 10px '}}
                     rowSelection={{...this.rowSelection()}}
+                    loading={this.state.flagSpinner}
                     columns={this.state.columnas}
                     pagination={{position:'top'}}
                     dataSource={ arrayDatos }
                     onChange={this.onChange.bind(this)}
                     bordered
                     locale={this.props.translate}
+                />
+                <FormNewChatbot
+                    modalVisible={this.state.modalVisible}
+                    translate={this.props.translate}
+                    onCancelModal={this.onCancelModal}
+                    sel={
+                        (argSel)=>{
+                            this.setState({modalVisible: false }) ;
+                            let tempNewCBot = {
+                                ...argSel,
+                                idUser: this.state.userInfo.email
+                            } ;
+                            console.log('.....tempNewCBot: ') ;
+                            console.dir(tempNewCBot) ;
+                            this.addNewChatbot(tempNewCBot) ;
+                            /*
+                            let tempArrayBots = this.state.arrayChatbots ;
+                            tempArrayBots.push({
+                                ...argSel,
+                                plan: 'FREE',
+                                qtyMessages: 0,
+                                botSubtitle: 'test bot',
+                                key: (this.state.arrayChatbots.length+1)
+                            }) ;
+                            this.setState({arrayChatbots: tempArrayBots}) ;
+                            */
+                        }
+                    }
                 />
             </div>
         )

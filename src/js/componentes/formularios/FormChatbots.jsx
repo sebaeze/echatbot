@@ -6,7 +6,7 @@
 */
 import React                   from 'react' ;
 import { api        }          from '../../api/api' ;
-import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon }   from 'antd'  ;
+import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon, Modal }   from 'antd'  ;
 //
 class FormChatbots extends React.Component {
     constructor(props){

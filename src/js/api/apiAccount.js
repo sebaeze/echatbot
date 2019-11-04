@@ -54,6 +54,8 @@ const getUserInfo = () => {
     return new Promise(function(respOk,respRech){
         try {
             //
+            let tempTs = moment().format() ;
+            console.log('tempTs: '+tempTs) ;
             let outUserSession = ls( PARAMETROS.SESSION.USUARIO ) || false ;
             if ( outUserSession==false ){
                 let opcionesFetch = {...opcionesPOST} ;
@@ -75,7 +77,9 @@ const getUserInfo = () => {
                         }
                     })
                     .then((respDatos)=>{
-                        ls( PARAMETROS.SESSION.USUARIO, respDatos ) ;
+                        if ( respDatos ){
+                            ls( PARAMETROS.SESSION.USUARIO , { ...respDatos, timestamp_session: tempTs } ) ;
+                        }
                         respOk(respDatos) ;
                     })
                     .catch((respErr)=>{

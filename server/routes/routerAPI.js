@@ -15,9 +15,6 @@ module.exports = (argConfig,argDb) => {
     res.set("Access-Control-Allow-Credentials", true);
     //
     try {
-      console.log('..../chatbot:: query: ') ;
-      console.dir(req.query) ;
-      //
       argDb.chatbot.qry( {...req.query} )
             .then(function(respUpdate){
               res.json( (respUpdate._doc||respUpdate) );
@@ -28,7 +25,31 @@ module.exports = (argConfig,argDb) => {
               res.status(500) ;
               res.json(respErr) ;
             }.bind(this)) ;
-        //
+    } catch(errGetBots){
+      console.dir(errGetBots) ;
+      res.status(500) ;
+      res.json(errGetBots) ;
+    }
+    //
+  }) ;
+  //
+  router.post('/chatbot',autenticado,function(req,res,next){
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    //
+    try {
+      argDb.chatbot.add( {...req.body} )
+            .then(function(respUpdate){
+              res.json( (respUpdate._doc||respUpdate) );
+            }.bind(this))
+            .catch(function(respErr){
+                console.log('.....ERROR: ADD_CHATBOT: -> ') ;
+                console.dir(respErr) ;
+              res.status(500) ;
+              res.json(respErr) ;
+            }.bind(this)) ;
     } catch(errGetBots){
       console.dir(errGetBots) ;
       res.status(500) ;

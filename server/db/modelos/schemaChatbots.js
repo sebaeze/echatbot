@@ -18,6 +18,7 @@ module.exports = new Schema({
     botName: {type: String,default: 'Ayuda' },
     botSubtitle: {type: String,default: 'En Linea' },
     language: {type: String,default: 'es' },
+    description: {type: String,default: '' },
     ts_creation: { type: Date, default: moment( new Date() ).tz("America/Argentina/Buenos_Aires") } ,
     ts_last_update: { type: Date, default: moment( new Date() ).tz("America/Argentina/Buenos_Aires") } ,
     ts_last_login: { type: Date, default: moment( new Date() ).tz("America/Argentina/Buenos_Aires") } ,

@@ -50,7 +50,7 @@ const promiseFindUpdate = (docModel,docElem,argArrayBorrar=['ts_ingreso','ts_baj
                   }.bind(this));
             } else {
                 console.dir(docElem);
-                doc = new docModel(docElem) ;
+                var doc = new docModel(docElem) ;
                 doc.save(function(errSave,docSave){
                     if ( errSave ){ respRech(errSave); }
                     else{

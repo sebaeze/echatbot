@@ -1,5 +1,6 @@
 {
     "EN":{
+        "search":"Search",
         "contact":"Contact",
         "contactUs":"Contact Us",
         "about":"About us",
@@ -49,6 +50,7 @@
         ]
     },
     "ES":{
+        "search":"Buscar",
         "contact":"Contacto",
         "contactUs":"Enviar Consulta",
         "about":"Sobre de nosotros",
@@ -140,6 +142,7 @@
         ]
     },
     "PT":{
+        "search":"Procurar",
         "contact":"Contato",
         "contactUs":"Contate Nos",
         "about":"Sobre nós",

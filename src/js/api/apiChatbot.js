@@ -46,7 +46,6 @@ const qryChatbots = (argQry) => {
                 let opcionesFetch = {...opcionesPOST} ;
                 opcionesFetch.method = 'GET' ;
                 let tempUrl = '/api/chatbot' + obj2qryString(argQry) ;
-                console.log('....tempUrl: '+tempUrl) ;
                 //
                 fetch(tempUrl ,opcionesFetch )
                     .then((respFetch)=>{

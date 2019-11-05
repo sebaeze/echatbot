@@ -23,7 +23,6 @@ export class TablaChatbots extends React.Component {
             userInfo: this.props.userInfo,
             modalVisible: false,
             arrayChatbots: [],
-            arrayChatbotsMuestra: [] ,
             textBusqueda: '',
             arraySeleccionados:[],
             columnas: tempColumn,
@@ -32,25 +31,50 @@ export class TablaChatbots extends React.Component {
         //
     }
     //
-    componentDidMount(){
+    componentDidUpdate(prevProps){
         try {
-            if ( this.state.userInfo ){
-                console.log('....estoy por llamar a api chatbot...nose como !!') ;
-                api.chatbot.qry({idUser: this.state.userInfo._id})
+            if ( this.props.userInfo.email!=prevProps.userInfo.email ){
+                this.setState({flagSpinner: true}) ;
+                api.chatbot.qry({idUser: this.props.userInfo.email})
                     .then((respQry)=>{
-                        console.dir(respQry) ;
-                        this.setState({arrayChatbots: respQry, arrayChatbotsMuestra: respQry, flagSpinner: false}) ;
+                        respQry.forEach((elemCbot,elemIdx)=>{ elemCbot.key = elemIdx ; }) ;
+                        this.setState({arrayChatbots: respQry, flagSpinner: false}) ;
                     })
                     .catch((respErr)=>{
                         console.dir(respErr) ;
+                        this.setState({flagSpinner: false}) ;
                     }) ;
-            } else {
-                this.setState({flagSpinner: false}) ;
             }
         } catch(errDM){
             console.dir(errDM) ;
         }
     }
+    //
+    static getDerivedStateFromProps(newProps, state) {
+        return { userInfo: newProps.userInfo } ;
+    }
+    /*
+    static getDerivedStateFromProps(newProps, state) {
+        //
+        console.log('....getDerivedStateFromProps:: (A) email: '+newProps.userInfo.email+';') ;
+        if ( newProps.userInfo ){
+            api.chatbot.qry({idUser: newProps.userInfo.email}) ;
+                .then((respQry)=>{
+                    console.log('....getDerivedStateFromProps:: resuQry:') ;
+                    console.dir(respQry) ;
+                    return { userInfo: newProps.userInfo, arrayChatbots: respQry } ;
+                })
+                .catch((respErr)=>{
+                    console.log('....getDerivedStateFromProps:: error:') ;
+                    console.dir(respErr) ;
+                    return { userInfo: newProps.userInfo } ;
+                }) ;
+        } else {
+            return { userInfo: newProps.userInfo } ;
+        }
+        //
+    }
+    */
     //
     addNewChatbot(argObjChatbot){
         try {
@@ -58,9 +82,11 @@ export class TablaChatbots extends React.Component {
             api.chatbot.add(argObjChatbot)
                 .then((respADD)=>{
                     if ( respADD.length>0 ){ respADD=respADD[0]; }
-                    console.dir(respADD) ;
                     let tempArrayBots = this.state.arrayChatbots ;
-                    tempArrayBots.push(respADD) ;
+                    tempArrayBots.push({
+                        key:(tempArrayBots.length+1),
+                        ...respADD
+                    }) ;
                     this.setState({arrayChatbots: tempArrayBots, flagSpinner: false}) ;
                 })
                 .catch((respErr)=>{
@@ -72,13 +98,7 @@ export class TablaChatbots extends React.Component {
             console.dir(errAddNC) ;
         }
     }
-    /*
-    static getDerivedStateFromProps(newProps, state) {
-        let tempArrayTasas = parseTasas( newProps.tasas ) ;
-        //let tempColumn     = this.parseColumns() ;
-        return { arrayTasas: tempArrayTasas, arrayTasasMuestra: tempArrayTasas  } ;
-    }
-    */
+    //
     onClickCreateNewChatbot(argEE){
         try {
             //
@@ -98,7 +118,7 @@ export class TablaChatbots extends React.Component {
             //
             outCols = [
                 {title: 'Id',
-                        width: 200,dataIndex:'_id', key:'_id',
+                        width: 200,dataIndex:'_id', key:'_id',fixed: 'left',
                         render: text => <span style={{fontWeight:'700',color:'#497EC0'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a._id.localeCompare(b._id) } ,
                 {title:'Bot Nombre'      ,dataIndex:'botName', key:'botName' , defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
@@ -156,7 +176,6 @@ export class TablaChatbots extends React.Component {
     //
     onCancelModal(argEC){
         try {
-            console.log('.....onCancelModal: ') ;
             argEC.preventDefault() ;
             this.setState({modalVisible: false}) ;
         } catch(errOCM){
@@ -189,7 +208,6 @@ export class TablaChatbots extends React.Component {
                     </Button>
                 </div>
                 <Table
-                    style={{padding:'10px 10px 10px 10px '}}
                     rowSelection={{...this.rowSelection()}}
                     loading={this.state.flagSpinner}
                     columns={this.state.columnas}
@@ -198,6 +216,7 @@ export class TablaChatbots extends React.Component {
                     onChange={this.onChange.bind(this)}
                     bordered
                     locale={this.props.translate}
+                    scroll={{ x: 1500 }}
                 />
                 <FormNewChatbot
                     modalVisible={this.state.modalVisible}
@@ -210,20 +229,7 @@ export class TablaChatbots extends React.Component {
                                 ...argSel,
                                 idUser: this.state.userInfo.email
                             } ;
-                            console.log('.....tempNewCBot: ') ;
-                            console.dir(tempNewCBot) ;
                             this.addNewChatbot(tempNewCBot) ;
-                            /*
-                            let tempArrayBots = this.state.arrayChatbots ;
-                            tempArrayBots.push({
-                                ...argSel,
-                                plan: 'FREE',
-                                qtyMessages: 0,
-                                botSubtitle: 'test bot',
-                                key: (this.state.arrayChatbots.length+1)
-                            }) ;
-                            this.setState({arrayChatbots: tempArrayBots}) ;
-                            */
                         }
                     }
                 />

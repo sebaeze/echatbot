@@ -55,7 +55,6 @@ const getUserInfo = () => {
         try {
             //
             let tempTs = moment().format() ;
-            console.log('tempTs: '+tempTs) ;
             let outUserSession = ls( PARAMETROS.SESSION.USUARIO ) || false ;
             if ( outUserSession==false ){
                 let opcionesFetch = {...opcionesPOST} ;

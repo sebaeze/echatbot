@@ -31,8 +31,31 @@ export class TablaChatbots extends React.Component {
         //
     }
     //
+    componentDidMount(){
+        console.log('....componentDidMount:: actual: '+this.props.userInfo.email) ;
+        try {
+            if ( this.props.userInfo && this.props.userInfo.email.length>0 ){
+                this.setState({flagSpinner: true}) ;
+                api.chatbot.qry({idUser: this.props.userInfo.email})
+                    .then((respQry)=>{
+                        respQry.forEach((elemCbot,elemIdx)=>{ elemCbot.key = elemIdx ; }) ;
+                        this.setState({arrayChatbots: respQry, flagSpinner: false}) ;
+                    })
+                    .catch((respErr)=>{
+                        console.dir(respErr) ;
+                        this.setState({flagSpinner: false}) ;
+                    }) ;
+            } else {
+                this.setState({flagSpinner: false}) ;
+            }
+        } catch(errDM){
+            console.dir(errDM) ;
+        }
+    }
+    //
     componentDidUpdate(prevProps){
         try {
+            console.log('....componentDidUpdate:: actual: '+this.props.userInfo.email+' previo: '+prevProps.userInfo.email) ;
             if ( this.props.userInfo.email!=prevProps.userInfo.email ){
                 this.setState({flagSpinner: true}) ;
                 api.chatbot.qry({idUser: this.props.userInfo.email})

@@ -10,12 +10,12 @@ node_modules/*.*
 */dev/*.json
 
 # production
-# /build
-# /dist
-# dist/*.html
-# dist/*.js
-# dist/*.css
-# dist/*.map
+/build
+/dist
+dist/*.html
+dist/*.js
+dist/*.css
+dist/*.map
 server/mercadolibre/json/*.json
 .cache
 # misc

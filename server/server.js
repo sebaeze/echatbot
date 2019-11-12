@@ -22,6 +22,7 @@ if ( process.env.GLOBAL_GOOGLE_ANALYTICS ){
 }
 //
 if ( !process.env.AMBIENTE ){ process.env.AMBIENTE='dev'; }
+process.env.AMBIENTE = String(process.env.AMBIENTE).trim() ;
 console.log('\n *** AMBIENTE: "'+process.env.AMBIENTE+'" \n') ;
 //
 let configDb = configuracionApp.database[process.env.AMBIENTE ||'dev'] ;

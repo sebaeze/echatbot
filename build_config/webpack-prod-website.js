@@ -8,7 +8,7 @@ const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 //
 let tempURLbackend = process.env.AMBIENTE=="produccion" ? "https://www.waiboc.com:3001" : "http://localhost:3001" ;
-let tempIDwidget   = process.env.AMBIENTE=="produccion" ? "5dc1e10a0038b92890d5b851"    : "5dc0d60400935d306ebd489d"    ;
+let tempIDwidget   = process.env.AMBIENTE=="produccion" ? "5dcc085c93a15e2554de10d9"    : "5dc0d60400935d306ebd489d"    ;
 console.log('tempURLbackend: '+tempURLbackend+'. tempIDwidget: '+tempIDwidget+' \n\n') ;
 //
 module.exports = {

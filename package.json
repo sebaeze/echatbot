@@ -64,6 +64,7 @@
   "scripts": {
     "build": "webpack  --mode production --config ./build_config/webpack-prod-website.js",
     "buildAdmin": "webpack  --mode production --config ./build_config/webpack-prod-admin.js",
+    "buildProd":"./build.sh",
     "start": "babel-node ./server/server.js",
     "startCloud": "export AMBIENTE=produccion && babel-node ./server/server.js",
     "start:node": "nodemon --exec babel-node ./server/server.js",

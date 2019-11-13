@@ -1,3 +1,4 @@
 #!/bin/bash
 export AMBIENTE=produccion
-npm start
+npm build
+npm buildAdmin

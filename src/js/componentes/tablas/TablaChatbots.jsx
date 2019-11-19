@@ -144,18 +144,18 @@ export class TablaChatbots extends React.Component {
                         width: 200,dataIndex:'_id', key:'_id',fixed: 'left',
                         render: text => <span style={{fontWeight:'700',color:'#497EC0'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a._id.localeCompare(b._id) } ,
-                {title:'Bot Nombre'      ,dataIndex:'botName', key:'botName' , defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
-                {title:'Descripcion'     ,width: 150,dataIndex:'description',key:'description',
+                {title: this.props.translate.table.chatbotName ,dataIndex:'botName', key:'botName' , defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
+                {title: this.props.translate.table.description       ,width: 150,dataIndex:'description',key:'description',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.description.localeCompare(b.description) } ,
-                {title:'Plan'     ,width: 150,dataIndex:'plan',key:'plan',
+                {title: this.props.translate.table.plan  ,width: 150,dataIndex:'plan',key:'plan',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.plan.localeCompare(b.plan) } ,
-                {title:'Mensajes Consumidos'             ,width: 200,dataIndex:'qtyMessages', key:'qtyMessages',
+                {title: this.props.translate.table.messagesConsumed ,width: 200,dataIndex:'qtyMessages', key:'qtyMessages',
                         render: text => <span style={{fontWeight:'700'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.qtyMessages - b.qtyMessages } ,
-                {title:'Lenguaje'    ,width: 200,dataIndex:'language', key:'language',
+                {title: this.props.translate.table.language ,width: 200,dataIndex:'language', key:'language',
                         render: text => <span style={{fontWeight:'700'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.language - b.language },
-                {title:'Bot Sub-leyenda'     ,dataIndex:'botSubtitle', key:'botSubtitle' , defaultSortOrder: 'descend', sorter: (a, b) => a.botSubtitle.localeCompare(b.botSubtitle) }
+                {title: this.props.translate.table.ChatbotStatusDisplay ,dataIndex:'botSubtitle', key:'botSubtitle' , defaultSortOrder: 'descend', sorter: (a, b) => a.botSubtitle.localeCompare(b.botSubtitle) }
             ] ;
             //
         } catch(errPC){

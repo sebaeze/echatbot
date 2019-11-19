@@ -19,6 +19,14 @@
             "userInfo":"User Information",
             "botsConfiguration":"Configuration of Chatbots"
         },
+        "table":{
+            "description":"Description",
+            "messagesConsumed":"Messages Consumed",
+            "language":"Language",
+            "ChatbotStatusDisplay":"Chatbot status",
+            "chatbotName":"Chatbot Name",
+            "plan":"Plan"
+        },
         "form":{
             "language":"English",
             "selectLanguage":"Select the language",
@@ -65,6 +73,14 @@
         "myProfile":"Mi Perfil",
         "emptyText":"Nada por aqui",
         "newChatbot":"Nuevo Chatbot",
+        "table":{
+            "description":"Descripción",
+            "messagesConsumed":"Mensajes consumidos",
+            "language":"Lenguaje",
+            "ChatbotStatusDisplay":"Chatbot estado",
+            "chatbotName":"Nombre Chatbot",
+            "plan":"Plan"
+        },
         "form":{
             "language":"Español",
             "selectLanguage":"Seleccionar Idioma",
@@ -175,6 +191,14 @@
             "savechanges":"Salvar alterações",
             "lastName":"Sobrenome",
             "description":"Comentaários"
+        },
+        "table":{
+            "description":"Descrição",
+            "messagesConsumed":"Mensagens Consumidas",
+            "language":"Idioma",
+            "ChatbotStatusDisplay":"Status do Chatbot",
+            "chatbotName":"Nome do Chatbot",
+            "plan":"Plan"
         },
         "plan":{
             "messagesXmonth":"Mensagens x mês",

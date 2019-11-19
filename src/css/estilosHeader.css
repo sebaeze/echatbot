@@ -15,6 +15,25 @@ header .logo {
 header ul.ant-menu {
     background-color: transparent !important ;
 }
+header .ant-menu  > li {
+    float: right;
+}
+.submenu-header {
+    font-weight: 600 !important ;
+    margin: 0 !important ;
+    padding: 0 !important ;
+    z-index: 9991 !important ;
+}
+/*   */
+.ant-menu-item > a, .ant-menu-item > span {
+    font-size: 20px !important ;
+    font-weight: 600 !important ;
+}
+.ant-menu-item > a i {
+    font-size: 22px !important ;
+    color: #1ab038 !important ;
+    font-weight: 600 !important ;
+}
 /*  */
 .shadow-below {
     margin-bottom:10px;
@@ -85,7 +104,8 @@ header ul.ant-menu {
 .ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected > .li-no-hover:hover {
     text-decoration: none !important ;
 }
-header .ant-menu  > li {
-    float: right;
+.ant-table-column-title {
+    font-size: 18px !important ;
+    font-weight: 600 !important ;
 }
 /*   */

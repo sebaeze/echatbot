@@ -16,18 +16,20 @@ class NavMenu extends React.Component {
     //
     render(){
         //
+        let styleMenu = this.props.isMobile ? {} : { width: '100%',zIndex:'9991',lineHeight: '100px', fontSize: '24px', float:'right', marginRight: '1%' } ;
         return(
             <div>
                 <Menu
+                    id="idHeaerSubmenu"
                     theme="light"
                     mode={ this.props.isMobile ? "vertical" : "horizontal" }
-                    style={ this.props.isMobile ? {} : { width: '100%',lineHeight: '100px', fontSize: '24px', float:'right', marginRight: '1%' }}
+                    style={{...styleMenu}}
                 >
                     {
                         this.props.userInfo==false ?
                             null :
                             <SubMenu
-                                style={{fontWeight:'600'}}
+                                popupClassName="submenu-header"
                                 key="sub1"
                                 title={
                                 <span>
@@ -36,8 +38,8 @@ class NavMenu extends React.Component {
                                 </span>
                                 }
                             >
-                                <Menu.Item key="5"><a href={"/account/"+PARAMETROS.FORM.CHATBOTS} >Chatbots</a></Menu.Item>
-                                <Menu.Item key="6"><a href={"/account/"+PARAMETROS.FORM.USER_INFO}>{this.props.translate.myProfile}</a></Menu.Item>
+                                <Menu.Item key="5"><a href={"/account/"+PARAMETROS.FORM.CHATBOTS} ><Icon type="robot" />Chatbots</a></Menu.Item>
+                                <Menu.Item key="6"><a href={"/account/"+PARAMETROS.FORM.USER_INFO}><Icon type="profile" />{this.props.translate.myProfile}</a></Menu.Item>
                             </SubMenu>
                     }
                     <Menu.Item key="2"><a rel="noopener noreferrer" href="/contact"       >{this.props.translate.contact}</a> </Menu.Item>

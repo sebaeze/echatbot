@@ -3,7 +3,7 @@
 */
 const path                        = require('path');
 const webpack                     = require("webpack");
-const CopyWebpackPlugin           = require('copy-webpack-plugin');
+// const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 //
@@ -69,7 +69,7 @@ module.exports = {
   },
   plugins: [
       new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery", 'window.jQuery': 'jquery' }),
-      new CopyWebpackPlugin([ {from: 'src/img',to: 'img'}, {from: 'src/css',to: 'css'}, {from: 'src/xls'} ]),
+      //new CopyWebpackPlugin([ {from: 'src/img',to: 'img'}, {from: 'src/css',to: 'css'}]),
       new HtmlWebpackPlugin({
         filename: "admin.html",
         template: "./src/admin.html",

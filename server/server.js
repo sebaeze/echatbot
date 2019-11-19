@@ -51,13 +51,20 @@ app.disable('etag');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //
-app.enable('trust proxy');
+// app.enable('trust proxy');
 //
 if ( process.env.AMBIENTE=='produccion' ){
-  app.use(require('express-naked-redirect')({
-    subDomain: 'www',
-    protocol: 'https'
-  })) ;
+  app.use(
+    function(req,res){
+      console.log('.....estoy antes de redirect...base: '+req.baseUrl+ 'url: '+req.url+';') ;
+      return(
+        require('express-naked-redirect')({
+          subDomain: 'www',
+          protocol: 'https'
+        })
+      )
+    }
+  ) ;
 }
 /*
 *   Rutas

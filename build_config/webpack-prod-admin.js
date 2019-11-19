@@ -67,6 +67,17 @@ module.exports = {
   resolveLoader: {
     modules: [ path.join(__dirname,'../node_modules') ]
   },
+  optimization: {
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendors',
+					chunks: 'all'
+				}
+			}
+		}
+  },
   plugins: [
       new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery", 'window.jQuery': 'jquery' }),
       //new CopyWebpackPlugin([ {from: 'src/img',to: 'img'}, {from: 'src/css',to: 'css'}]),

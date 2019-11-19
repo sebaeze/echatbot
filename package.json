@@ -62,7 +62,7 @@
     "webpack": "^4.30.0"
   },
   "scripts": {
-    "build": "webpack  --mode production --config ./build_config/webpack-prod-website.js",
+    "build": "webpack       --mode production --config ./build_config/webpack-prod-website.js",
     "buildAdmin": "webpack  --mode production --config ./build_config/webpack-prod-admin.js",
     "start": "babel-node ./server/server.js",
     "buildProd":"export AMBIENTE=produccion && run build && run buildAdmin",

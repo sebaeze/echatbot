@@ -71,6 +71,9 @@ try {
       res.header('Access-Control-Allow-Methods', '*');
       res.header("Access-Control-Allow-Credentials", true);
       res.header("credentials","same-origin") ;
+      if ( process.env.DEBUG_APP='TODO' ){
+        console.log('...APP.ALL:: req.protocol: '+req.protocol+' h: '+req.get('host')+' originalUrl: '+req.originalUrl+' url: '+req.url+';');
+      }
       next() ;
     }) ;
     //

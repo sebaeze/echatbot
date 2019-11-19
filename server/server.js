@@ -55,15 +55,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //
 if ( process.env.AMBIENTE=='produccion' ){
   app.use(
-    function(req,res){
-      console.log('.....estoy antes de redirect...base: '+req.baseUrl+ 'url: '+req.url+';') ;
-      return(
         require('express-naked-redirect')({
           subDomain: 'www',
           protocol: 'https'
         })
-      )
-    }
   ) ;
 }
 /*

@@ -22,8 +22,6 @@ const promiseFindUpdate = (docModel,docElem,argArrayBorrar=['ts_ingreso','ts_baj
                             argArrayUpdExiste.forEach(function(keyNew){
                                 tempCamposUpdate[keyNew]=tempDoc[keyNew] ;
                             }.bind(this)) ;
-                            console.log('.....actualizo solo estos campos: ') ;
-                            console.dir(tempCamposUpdate) ;
                             doc = Object.assign(doc,tempCamposUpdate) ;
                         } else {
                             doc = Object.assign(doc,tempDoc) ;
@@ -49,7 +47,6 @@ const promiseFindUpdate = (docModel,docElem,argArrayBorrar=['ts_ingreso','ts_baj
                     //
                   }.bind(this));
             } else {
-                console.dir(docElem);
                 var doc = new docModel(docElem) ;
                 doc.save(function(errSave,docSave){
                     if ( errSave ){ respRech(errSave); }

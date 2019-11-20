@@ -17,13 +17,15 @@ class NavMenu extends React.Component {
     render(){
         //
         let styleMenu = this.props.isMobile ? {} : { width: '100%',zIndex:'9991',lineHeight: '100px', fontSize: '24px', float:'right', marginRight: '1%' } ;
+        //
         return(
             <div>
                 <Menu
                     id="idHeaerSubmenu"
                     theme="light"
+                    className="menu-header-mobile"
                     mode={ this.props.isMobile ? "vertical" : "horizontal" }
-                    style={{...styleMenu}}
+                    style={styleMenu}
                 >
                     {
                         this.props.userInfo==false ?
@@ -34,7 +36,7 @@ class NavMenu extends React.Component {
                                 title={
                                 <span>
                                     <Icon type="appstore" />
-                                    <span><u>{this.props.userInfo.name+' '+this.props.userInfo.lastName}</u></span>
+                                    <span style={{fontSize:'21px',fontWeight:'700'}}><u>{this.props.userInfo.name+' '+this.props.userInfo.lastName}</u></span>
                                 </span>
                                 }
                             >
@@ -48,7 +50,7 @@ class NavMenu extends React.Component {
                     <Menu.Item key="5"><a rel="noopener noreferrer" href="/prices"        >{this.props.translate.prices}</a></Menu.Item>
                     {
                         this.props.userInfo==false ?
-                            <Menu.Item key="7" className="li-no-hover">
+                            <Menu.Item key="7" className="li-no-hover" style={{height:'60px'}}>
                                 <Button  type="primary" block
                                         className="btn-shadow-login"
                                         onClick={(argEV)=>{argEV.preventDefault();location.href="/account";}}

@@ -40,12 +40,39 @@ module.exports = (argConfig,argDb) => {
     res.set("Access-Control-Allow-Credentials", true);
     //
     try {
-      argDb.chatbot.add( {...req.body} )
+      //
+      argDb.chatbot.add( {...req.body}, req.user.email )
             .then(function(respUpdate){
               res.json( (respUpdate._doc||respUpdate) );
             }.bind(this))
             .catch(function(respErr){
                 console.log('.....ERROR: ADD_CHATBOT: -> ') ;
+                console.dir(respErr) ;
+              res.status(500) ;
+              res.json(respErr) ;
+            }.bind(this)) ;
+        //
+    } catch(errGetBots){
+      console.dir(errGetBots) ;
+      res.status(500) ;
+      res.json(errGetBots) ;
+    }
+    //
+  }) ;
+  //
+  router.delete('/chatbot',autenticado,function(req,res,next){
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    //
+    try {
+      argDb.chatbot.inactiveChatbot( {...req.body}, req.user.email )
+            .then(function(respUpdate){
+              res.json( respUpdate ) ;
+            }.bind(this))
+            .catch(function(respErr){
+                console.log('.....ERROR: DELETE_CHATBOT: -> ') ;
                 console.dir(respErr) ;
               res.status(500) ;
               res.json(respErr) ;

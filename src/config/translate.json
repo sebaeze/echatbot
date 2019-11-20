@@ -4,6 +4,10 @@
         "contact":"Contact",
         "contactUs":"Contact Us",
         "about":"About us",
+        "danger":"Danger",
+        "delete":"Delete",
+        "edit":"Edit",
+        "cancel":"Cancel",
         "services":"Services",
         "prices":"Prices",
         "news":"News",
@@ -15,6 +19,7 @@
         "myProfile":"My Profile",
         "emptyText":"No Data",
         "newChatbot":"New Chatbot",
+        "status":"Status",
         "menuAdmin":{
             "userInfo":"User Information",
             "botsConfiguration":"Configuration of Chatbots"
@@ -25,9 +30,11 @@
             "language":"Language",
             "ChatbotStatusDisplay":"Chatbot status",
             "chatbotName":"Chatbot Name",
-            "plan":"Plan"
+            "plan":"Plan",
+            "action":"Action"
         },
         "form":{
+            "accessList":"Access List by Email",
             "language":"English",
             "selectLanguage":"Select the language",
             "country":"Country",
@@ -62,6 +69,10 @@
         "contact":"Contacto",
         "contactUs":"Enviar Consulta",
         "about":"Sobre de nosotros",
+        "danger":"Peligro",
+        "delete":"Borrar",
+        "edit":"Modificar",
+        "cancel":"Cancelar",
         "services":"Servicios",
         "prices":"Precios",
         "news":"Novedades",
@@ -73,15 +84,18 @@
         "myProfile":"Mi Perfil",
         "emptyText":"Nada por aqui",
         "newChatbot":"Nuevo Chatbot",
+        "status":"Estado",
         "table":{
             "description":"Descripción",
             "messagesConsumed":"Mensajes consumidos",
             "language":"Lenguaje",
             "ChatbotStatusDisplay":"Chatbot estado",
             "chatbotName":"Nombre Chatbot",
-            "plan":"Plan"
+            "plan":"Plan",
+            "action":"Acción"
         },
         "form":{
+            "accessList":"Lista de acceos por Email",
             "language":"Español",
             "selectLanguage":"Seleccionar Idioma",
             "country":"País",
@@ -162,6 +176,10 @@
         "contact":"Contato",
         "contactUs":"Contate Nos",
         "about":"Sobre nós",
+        "danger":"Perigo",
+        "delete":"Deletar",
+        "edit":"Editar",
+        "cancel":"Cancelar",
         "services":"Serviços",
         "prices":"Preços",
         "news":"Novidades",
@@ -174,11 +192,13 @@
         "myProfile":"Meu Perfil",
         "emptyText":"Sem dados",
         "newChatbot":"Novo Chatbot",
+        "status":"Estado",
         "menuAdmin":{
             "userInfo":"Informações do Usuário",
             "botsConfiguration":"Configuração de Chatbots"
         },
         "form":{
+            "accessList":"Lista de acesso por e-mails",
             "language":"Português",
             "selectLanguage":"Selecione o idioma",
             "country":"País",
@@ -198,7 +218,8 @@
             "language":"Idioma",
             "ChatbotStatusDisplay":"Status do Chatbot",
             "chatbotName":"Nome do Chatbot",
-            "plan":"Plan"
+            "plan":"Plan",
+            "action":"Ação"
         },
         "plan":{
             "messagesXmonth":"Mensagens x mês",

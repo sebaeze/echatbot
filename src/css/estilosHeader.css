@@ -22,7 +22,7 @@ header .ant-menu  > li {
     font-weight: 600 !important ;
     margin: 0 !important ;
     padding: 0 !important ;
-    z-index: 9991 !important ;
+    z-index: 9992 !important ;
 }
 /*   */
 .ant-menu-item > a, .ant-menu-item > span {
@@ -107,5 +107,8 @@ header .ant-menu  > li {
 .ant-table-column-title {
     font-size: 18px !important ;
     font-weight: 600 !important ;
+}
+.ant-popover, .ant-modal-wrap {
+    z-index: 9991 !important ;
 }
 /*   */

@@ -20,7 +20,7 @@ export class CuerpoCuenta extends React.Component {
         super(props) ;
         this.state = {
             userInfo: false,
-            filtroColapsado: false,
+            filtroColapsado: this.props.configuracion.isMobile==true ? true : false,
             formType: (this.props.match.params && this.props.match.params.seccion && this.props.match.params.seccion.length>0 ) ? this.props.match.params.seccion : PARAMETROS.FORM.USER_INFO
         } ;
         this.onCollapse = this.onCollapse.bind(this) ;

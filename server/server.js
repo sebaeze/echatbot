@@ -96,16 +96,17 @@ try {
                 iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
             */
             console.log('.....(A) create server http') ;
-            const http = express() ;
+            var httpPort = 80 ;
+            const http   = express() ;
             console.log('.....(B) HTTP: define *') ;
             http.get('*', function(req, res) {
                 var hhost = req.headers.host.indexOf(':')!=-1 ? req.headers.host.split(":")[0] : req.headers.host ;
                 console.log('....voy a redirect --> '+ hhost + req.url+';') ;
-                res.redirect('https://' + req.headers.host + req.url) ;
+                res.redirect('https://' + hhost + req.url ) ;
             }) ;
             console.log('.....(C) HTTP: listen') ;
-            http.listen( 8080, function(){
-              console.log('....http server listening in port 8080') ;
+            http.listen( httpPort , function(){
+              console.log('....http server listening in port '+httpPort+'.') ;
             });
             //
             var puerto      = process.env.PORT || 443  ;

@@ -89,7 +89,12 @@ try {
       .then((finEngine)=>{
         app.use( finEngine.rutaErrores ) ;
         if ( process.env.AMBIENTE=='produccion' ){
-            //
+            /*
+            En Ubuntu requiere abrir puertos y redirect ==>
+                iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
+                iptables -A INPUT -i eth0 -p tcp --dport 8080 -j ACCEPT
+                iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+            */
             console.log('.....(A) create server http') ;
             const http = express() ;
             console.log('.....(B) HTTP: define *') ;
@@ -98,7 +103,7 @@ try {
                 res.redirect('https://' + req.headers.host + req.url) ;
             }) ;
             console.log('.....(C) HTTP: listen') ;
-            http.listen( 80 );
+            http.listen( 8080 );
             //
             var puerto      = process.env.PORT || 443  ;
             var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.privkey.pem') );

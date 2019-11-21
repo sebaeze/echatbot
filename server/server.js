@@ -91,8 +91,8 @@ try {
         if ( process.env.AMBIENTE=='produccion' ){
             //
             console.log('.....(A) create server http') ;
-            const http = require('http').createServer() ;
-            console.log('.....(B)HTTP: define *') ;
+            const http = express() ;
+            console.log('.....(B) HTTP: define *') ;
             http.get('*', function(req, res) {
                 console.log('....voy a redirect --> '+ req.headers.host + req.url+';') ;
                 res.redirect('https://' + req.headers.host + req.url) ;

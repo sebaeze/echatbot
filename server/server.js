@@ -90,23 +90,28 @@ try {
         app.use( finEngine.rutaErrores ) ;
         if ( process.env.AMBIENTE=='produccion' ){
             //
+            console.log('.....(A) create server http') ;
             const http = express.createServer() ;
+            console.log('.....(B)HTTP: define *') ;
             http.get('*', function(req, res) {
                 console.log('....voy a redirect --> '+ req.headers.host + req.url+';') ;
                 res.redirect('https://' + req.headers.host + req.url) ;
             }) ;
+            console.log('.....(C) HTTP: listen') ;
             http.listen( 80 );
             //
             var puerto      = process.env.PORT || 443  ;
             var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.privkey.pem') );
             var certificate = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.cert.pem') );
             //
+            console.log('.....(D) HTTPSS: listen') ;
             https.createServer({
                 key: privateKey,
                 cert: certificate
             }, app).listen(puerto,function(){
               console.log('....listen server on http://localhost:'+puerto) ;
             }) ;
+            console.log('.....(E) HTTPSS: FINNNN') ;
             //
         } else {
           app.listen(3000,function(){

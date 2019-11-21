@@ -11,7 +11,7 @@ class FormNewChatbotWithModal extends React.Component {
     constructor(props){
         super(props) ;
         this.firstNode          = false ;
-        this.state              = {flagSpinner:false, modalVisible: this.props.modalVisible, enviadoOk:false,errorMsg:[], accessList:{} } ;
+        this.state              = {flagSpinner:false, modalVisible: this.props.modalVisible, enviadoOk:false, accessList:{} } ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
         this.onAcceptNewChatbot = this.onAcceptNewChatbot.bind(this) ;
     }
@@ -35,13 +35,13 @@ class FormNewChatbotWithModal extends React.Component {
         try {
             //
             argEE.preventDefault() ;
-            this.setState({flagSpinner:true,enviadoOk:false,errorMsg:[]}) ;
+            this.setState({flagSpinner:true,enviadoOk:false}) ;
             this.props.form.validateFields({ force: true }, (error) => {
               if (error) {
                   console.log('.....valid:: error: ') ;
                   console.dir(error) ;
                   setTimeout(() => {
-                        this.setState({flagSpinner:false,enviadoOk:false,errorMsg: Object.values(error) }) ;
+                        this.setState({flagSpinner:false,enviadoOk:false }) ;
                     }, 700 ) ;
               } else {
                   let tempValues = this.props.form.getFieldsValue() ;
@@ -76,7 +76,8 @@ class FormNewChatbotWithModal extends React.Component {
                 <Form id="idFormNewChatbot" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
                         <Row >
                             <Form.Item
-                                label={ <span>Chatbot {this.props.translate.form.name}<Tooltip  placement="bottomRight" title="¿ Cuál es su nombre o cómo le gusta que lo llamen ?"> <Icon type="question-circle-o" /> </Tooltip> </span> }
+                                hasFeedback
+                                label={ <span>Chatbot {this.props.translate.form.name}<Tooltip  placement="bottomRight" title={this.props.translate.tooltip.chatbotName} > <Icon type="question-circle-o" /> </Tooltip> </span> }
                             >
                                 {getFieldDecorator('botName', { rules: [{ required: true, message: 'Please, write a name for the Bot', whitespace: true }], })
                                 (<Input allowClear size="large" ref={(argRef)=>{ argRef.focus(); }} />)}
@@ -106,7 +107,7 @@ class FormNewChatbotWithModal extends React.Component {
                         <Row style={{marginTop:'5px'}}>
                             <Form.Item
                                 label={ <span>{this.props.translate.form.accessList}
-                                            <Tooltip  placement="topRight" title="Grant access to the chatbot by adding the email address">
+                                            <Tooltip  placement="topRight" title={this.props.translate.tooltip.chatbotAccesslist}>
                                                 <Icon type="question-circle-o" />
                                             </Tooltip>
                                         </span>
@@ -122,24 +123,13 @@ class FormNewChatbotWithModal extends React.Component {
                             </Form.Item>
                         </Row>
                         <Row >
-                            <Form.Item  label={ <span>{this.props.translate.form.description}</span> } >
+                            <Form.Item  label={ <span>{this.props.translate.form.description}</span> } hasFeedback >
                                 {getFieldDecorator('description', { rules: [{ required: true, message: 'Please, add a brief description of the Bot', whitespace: true }], })
                                 (<Input.TextArea />)}
                             </Form.Item>
                             <Form.Item>
                                 {
                                     this.state.enviadoOk==true    ? <Icon type="smile" style={{fontSize:'35px',marginLeft:'25px'}} theme="twoTone" twoToneColor="#52c41a" /> : null
-                                }
-                                {
-                                    this.state.errorMsg.length>0  ?
-                                        this.state.errorMsg.map((elemErr,idxMsg)=>{
-                                            let tempErrorMsg = "" ;
-                                            elemErr.errors.forEach((elemMsg)=>{ tempErrorMsg += elemMsg.message ; }) ;
-                                            return(
-                                                <span key={idxMsg} style={{color:'red',marginLeft:'20px'}}>{tempErrorMsg};</span>
-                                            )
-                                        })
-                                        : null
                                 }
                             </Form.Item>
                         </Row>

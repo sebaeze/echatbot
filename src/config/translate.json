@@ -20,15 +20,20 @@
         "emptyText":"No Data",
         "newChatbot":"New Chatbot",
         "status":"Status",
+        "trainChatbot":"Train Chatbot",
         "menuAdmin":{
             "userInfo":"User Information",
             "botsConfiguration":"Configuration of Chatbots"
+        },
+        "tooltip":{
+            "chatbotName":"Choose a name for your chatbot",
+            "chatbotAccesslist":"Grant access to the chatbot by adding the email address"
         },
         "table":{
             "description":"Description",
             "messagesConsumed":"Messages Consumed",
             "language":"Language",
-            "ChatbotStatusDisplay":"Chatbot status",
+            "ChatbotStatusDisplay":"Status to display",
             "chatbotName":"Chatbot Name",
             "plan":"Plan",
             "action":"Action"
@@ -85,17 +90,22 @@
         "emptyText":"Nada por aqui",
         "newChatbot":"Nuevo Chatbot",
         "status":"Estado",
+        "trainChatbot":"Entrenar Chatbot",
+        "tooltip":{
+            "chatbotName":"Elija un nombre para su chatbot",
+            "chatbotAccesslist":"Otorgue acceso para editar su chatbot agregando el email"
+        },
         "table":{
             "description":"Descripción",
             "messagesConsumed":"Mensajes consumidos",
             "language":"Lenguaje",
-            "ChatbotStatusDisplay":"Chatbot estado",
+            "ChatbotStatusDisplay":"Estado a mostrar",
             "chatbotName":"Nombre Chatbot",
             "plan":"Plan",
             "action":"Acción"
         },
         "form":{
-            "accessList":"Lista de acceos por Email",
+            "accessList":"Otorgue accesos a su chatbot, agregue emails:",
             "language":"Español",
             "selectLanguage":"Seleccionar Idioma",
             "country":"País",
@@ -193,9 +203,14 @@
         "emptyText":"Sem dados",
         "newChatbot":"Novo Chatbot",
         "status":"Estado",
+        "trainChatbot":"Treine seu chatbot",
         "menuAdmin":{
             "userInfo":"Informações do Usuário",
             "botsConfiguration":"Configuração de Chatbots"
+        },
+        "tooltip":{
+            "chatbotName":"Escolha um nome para o seu chatbot",
+            "chatbotAccesslist":"Conceda acesso ao chatbot adicionando o endereço de email"
         },
         "form":{
             "accessList":"Lista de acesso por e-mails",
@@ -216,7 +231,7 @@
             "description":"Descrição",
             "messagesConsumed":"Mensagens Consumidas",
             "language":"Idioma",
-            "ChatbotStatusDisplay":"Status do Chatbot",
+            "ChatbotStatusDisplay":"Status do widget",
             "chatbotName":"Nome do Chatbot",
             "plan":"Plan",
             "action":"Ação"

@@ -108,7 +108,7 @@ header .ant-menu  > li {
     font-size: 18px !important ;
     font-weight: 600 !important ;
 }
-.ant-popover, .ant-modal-wrap {
+.ant-popover, .ant-modal-wrap, .ant-tooltip {
     z-index: 9991 !important ;
 }
 /*   */

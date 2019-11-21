@@ -17,10 +17,12 @@ export class TablaChatbots extends React.Component {
         this.onChangeSearch = this.onChangeSearch.bind(this) ;
         this.parseColumns   = this.parseColumns.bind(this) ;
         this.addNewChatbot  = this.addNewChatbot.bind(this) ;
+        this.onClickTrainChatbot     = this.onClickTrainChatbot.bind(this)     ;
         this.onClickEditChatbot      = this.onClickEditChatbot.bind(this)      ;
         this.onClickDeleteChatbot    = this.onClickDeleteChatbot.bind(this)    ;
         this.onClickCreateNewChatbot = this.onClickCreateNewChatbot.bind(this) ;
         let tempColumn      = this.parseColumns() ;
+        this.flagMounted    = false ;
         this.state          = {
             userInfo: this.props.userInfo,
             modalVisible: false,
@@ -37,6 +39,7 @@ export class TablaChatbots extends React.Component {
     //
     componentDidMount(){
         try {
+            this.flagMounted = true ;
             if ( this.props.userInfo && this.props.userInfo.email.length>0 ){
                 this.setState({flagSpinner: true}) ;
                 api.chatbot.qry({idUser: this.props.userInfo.email})
@@ -58,7 +61,8 @@ export class TablaChatbots extends React.Component {
     //
     componentDidUpdate(prevProps){
         try {
-            if ( this.props.userInfo.email!=prevProps.userInfo.email ){
+            //console.log('.....didupdate:: this.flagMounted: '+this.flagMounted+';') ;
+            if ( this.flagMounted==true && this.props.userInfo.email!=prevProps.userInfo.email ){
                 this.setState({flagSpinner: true}) ;
                 api.chatbot.qry({idUser: this.props.userInfo.email})
                     .then((respQry)=>{
@@ -114,6 +118,17 @@ export class TablaChatbots extends React.Component {
         }
     }
     //
+    onClickTrainChatbot(argChatbot){
+        try {
+            console.log('....onClickTrainChatbot:: argChatbot: ') ;
+            console.dir(argChatbot) ;
+            window.location.href = '/train/'+argChatbot._id ;
+            //
+        } catch(errDelChatbot){
+            console.dir(errEditChatbot) ;
+        }
+    }
+    //
     onClickEditChatbot(argChatbot){
         try {
             console.log('....onClickEditChatbot:: argChatbot: ') ;
@@ -164,10 +179,13 @@ export class TablaChatbots extends React.Component {
         try {
             //
             outCols = [
-                {title: this.props.translate.table.action,dataIndex: '',key: 'x',fixed: 'left',
+                {title: this.props.translate.table.action,dataIndex: '',width:200,key: 'x',fixed: 'left',
                        render: (argRecord) => {
                             return (
                                 <div  style={{width:'100%'}}>
+                                    <p style={{padding:'0',fontWeight:'600'}}>
+                                        <a  onClick={()=>this.onClickTrainChatbot(argRecord)}>{this.props.translate.trainChatbot}</a>
+                                    </p>
                                     <p style={{padding:'0',fontWeight:'600'}}>
                                         <a  onClick={()=>this.onClickEditChatbot(argRecord)}>{this.props.translate.edit}</a>
                                     </p>
@@ -182,7 +200,9 @@ export class TablaChatbots extends React.Component {
                         //render: text => <span style={{fontWeight:'700',color:'#497EC0'}}>{text}</span>,
                         render: (text,objReg) => <a style={{fontWeight:'700',color:'#497EC0'}} onClick={()=>{this.onClickEditChatbot(objReg)}}>{text}</a>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a._id.localeCompare(b._id) } ,
-                {title: this.props.translate.table.chatbotName ,dataIndex:'botName', key:'botName',defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
+                {title: this.props.translate.table.chatbotName,width: 200,
+                        dataIndex:'botName', key:'botName',
+                        defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
                 {title: this.props.translate.status       ,width: 100,dataIndex:'status',key:'status',
                         render: (text) => <a style={{fontWeight:'700',color:'#497EC0'}} >{text}</a>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.status.localeCompare(b.status) } ,
@@ -196,7 +216,9 @@ export class TablaChatbots extends React.Component {
                 {title: this.props.translate.table.language ,width: 200,dataIndex:'language', key:'language',
                         render: text => <span style={{fontWeight:'700'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.language - b.language },
-                {title: this.props.translate.table.ChatbotStatusDisplay ,dataIndex:'botSubtitle', key:'botSubtitle' , defaultSortOrder: 'descend', sorter: (a, b) => a.botSubtitle.localeCompare(b.botSubtitle) }
+                {title: this.props.translate.table.ChatbotStatusDisplay ,
+                        dataIndex:'botSubtitle', key:'botSubtitle' , defaultSortOrder: 'descend',
+                        sorter: (a, b) => a.botSubtitle.localeCompare(b.botSubtitle) }
             ] ;
             //
         } catch(errPC){
@@ -293,9 +315,10 @@ export class TablaChatbots extends React.Component {
                     </Button>
                 </div>
                 <Table
-                    rowSelection={{...this.rowSelection()}}
+                    //rowSelection={{...this.rowSelection()}}
                     loading={this.state.flagSpinner}
                     columns={this.state.columnas}
+                    style={{marginLeft:'10px'}}
                     pagination={{position:'top'}}
                     dataSource={ arrayDatos }
                     onChange={this.onChange.bind(this)}

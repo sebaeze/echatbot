@@ -8,7 +8,7 @@ module.exports = (argConfig,argDb) => {
   const defaultMetatags   = argConfig.metaTags.default ;
   const autenticado   = autenticadoFn( argDb ) ;
   //
-  router.get(['/','/account','/account/:seccion','/auth','/bots','/users'], autenticado, function(req, res) {
+  router.get(['/','/account','/account/:seccion','/auth','/bots','/train','/train/:idChatbot','/users'], autenticado, function(req, res) {
     res.set('access-Control-Allow-Origin', '*');
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);

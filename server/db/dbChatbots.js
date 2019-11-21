@@ -81,12 +81,12 @@ class dbChatbots extends Db {
                     }.bind(this))
                     .then(function(argQryBot){
                         //
+                        if ( Array.isArray(argQryBot) && argQryBot.length>0 ){ argQryBot=argQryBot[0]; }
                         if ( this.userHasAccess(argEmailReq,argQryBot)==true ){
                             argQryBot.status      = chatbotStatus.INACTIVE ;
                             argQryBot.ts_inactive = moment( new Date() ).tz("America/Argentina/Buenos_Aires") ;
-                            // delete argQryBot._v ;
-                            console.log('....voy para hacer updae de inactive:: argQryBot: ') ;
-                            console.dir(argQryBot) ;
+                            delete argQryBot._v  ;
+                            delete argQryBot.__v ;
                             return this.add( argQryBot ) ;
                         } else {
                             return argQryBot ;
@@ -94,8 +94,6 @@ class dbChatbots extends Db {
                         //
                     }.bind(this))
                     .then(function(argRespDeleted){
-                        console.log('....then___33 ') ;
-                        console.dir(argRespDeleted) ;
                         if ( this.userHasAccess(argEmailReq,(argRespDeleted._doc ? argRespDeleted._doc : argRespDeleted))==true ){
                             respData( {
                                 resultCode: 0,

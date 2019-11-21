@@ -16,6 +16,7 @@ const promiseFindUpdate = (docModel,docElem,argArrayBorrar=['ts_ingreso','ts_baj
                         }.bind(tempDoc)) ;
                     }
                     //
+                    let fnUpdate = 'save' ;
                     if ( doc ){
                         if ( argArrayUpdExiste.length>0 ){
                             let tempCamposUpdate = {} ;
@@ -26,18 +27,17 @@ const promiseFindUpdate = (docModel,docElem,argArrayBorrar=['ts_ingreso','ts_baj
                         } else {
                             doc = Object.assign(doc,tempDoc) ;
                         }
+                        fnUpdate = 'update' ;
                     } else {
                         doc = new docModel(tempDoc) ;
                         doc = Object.assign(doc,tempDoc) ;
+                        fnUpdate = 'save' ;
                     }
                     //
-                    /*
-                    if ( !doc ){ doc=new docModel(docElem); }
-                    doc = Object.assign(doc,tempDoc) ;
-                    */
-                    if ( !doc.contador ){ doc.contador=0; }
-                    doc.contador++ ;
-                    //
+                    // let fnMongoUpdate = doc[fnUpdate] ;
+                    // console.dir(fnMongoUpdate) ;
+                    // doc.save(function(errSave,docSave){
+                    // doc[fnUpdate](function(errSave,docSave){
                     doc.save(function(errSave,docSave){
                         if ( errSave ){ respRech(errSave); }
                         else{

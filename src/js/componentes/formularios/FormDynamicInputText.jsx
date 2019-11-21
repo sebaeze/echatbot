@@ -51,6 +51,7 @@ export class FormDynamicInputText extends React.Component {
                         {...formItemLayout}
                         required={false}
                         key={k}
+                        hasFeedback
                     >
                         {
                             getFieldDecorator(`${this.props.fieldName}[${k}]`, {
@@ -59,8 +60,8 @@ export class FormDynamicInputText extends React.Component {
                                 validateTrigger: ['onChange', 'onBlur'],
                                 rules: [ { whitespace: true, message: this.props.description }, ],
                             })
-                            (<Input placeholder="Email" size="large" style={{ width: '90%' }} ref={(argRef)=>{ argRef.focus(); }} />)}
-                        { keys.length > 1 ? ( <Icon className="dynamic-delete-button" type="minus-circle-o" onClick={() => this.remove(k)} /> ) : null}
+                            (<Input placeholder="email@dominio.com" size="large" style={{ width: '90%' }} ref={(argRef)=>{ argRef.focus(); }} />)}
+                        { keys.length > 1 ? ( <Icon style={{marginLeft:'10px'}} className="dynamic-delete-button" type="minus-circle-o" onClick={() => this.remove(k)} /> ) : null}
                     </Form.Item>
                 )
             });

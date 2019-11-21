@@ -9,7 +9,8 @@ import { Layout  }                         from 'antd';
 import Encabezado                          from "./js/componentes/Encabezado" ;
 import PiePagina                           from "./js/componentes/PiePagina"  ;
 import { CuerpoLogin  }                    from "./js/componentes/cuerpoPagina/CuerpoLogin"  ;
-import { CuerpoCuenta  }                   from "./js/componentes/cuerpoPagina/CuerpoCuenta"    ;
+import { CuerpoCuenta }                    from "./js/componentes/cuerpoPagina/CuerpoCuenta" ;
+import { CuerpoTrain  }                    from "./js/componentes/cuerpoPagina/CuerpoTrain" ;
 //
 import { languageLocale }                  from "./js/utils/utiles" ;
 //
@@ -52,6 +53,7 @@ export class App extends React.Component {
               <Route exact path="/bots"                  component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/login"                 component={(argMach) => <CuerpoLogin   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/users"                 component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/train/:idChatbot"      component={(argMach) => <CuerpoTrain   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
             </Content>
           </Router>
           <PiePagina translate={{...languageLocale()}} configuracion={configApp} />

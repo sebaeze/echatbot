@@ -103,7 +103,9 @@ try {
                 res.redirect('https://' + req.headers.host + req.url) ;
             }) ;
             console.log('.....(C) HTTP: listen') ;
-            http.listen( 8080 );
+            http.listen( 8080, function(){
+              console.log('....http server listening in port 8080') ;
+            });
             //
             var puerto      = process.env.PORT || 443  ;
             var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.privkey.pem') );

@@ -89,15 +89,25 @@ try {
       .then((finEngine)=>{
         app.use( finEngine.rutaErrores ) ;
         if ( process.env.AMBIENTE=='produccion' ){
+            //
+            const http = express.createServer() ;
+            http.get('*', function(req, res) {
+                console.log('....voy a redirect --> '+ req.headers.host + req.url+';') ;
+                res.redirect('https://' + req.headers.host + req.url) ;
+            }) ;
+            http.listen( 80 );
+            //
             var puerto      = process.env.PORT || 443  ;
             var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.privkey.pem') );
             var certificate = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.cert.pem') );
+            //
             https.createServer({
                 key: privateKey,
                 cert: certificate
             }, app).listen(puerto,function(){
               console.log('....listen server on http://localhost:'+puerto) ;
-            });
+            }) ;
+            //
         } else {
           app.listen(3000,function(){
             console.log('....listen server on http://localhost:3000') ;

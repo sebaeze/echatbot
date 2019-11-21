@@ -94,7 +94,7 @@ try {
             const http   = express() ;
             console.log('.....(B) HTTP: define *') ;
             http.get('*', function(req, res) {
-                var hhost = req.headers.host.indexOf(':')!=-1 ? req.headers.host.split(":")[0] : req.headers.host ;
+                var hhost = String(req.headers.host).indexOf(':')!=-1 ? req.headers.host.split(":")[0] : req.headers.host ;
                 console.log('....voy a redirect --> '+ hhost + req.url+';') ;
                 res.redirect('https://' + hhost + req.url ) ;
             }) ;

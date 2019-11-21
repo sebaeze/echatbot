@@ -104,6 +104,9 @@ header .ant-menu  > li {
 .ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected > .li-no-hover:hover {
     text-decoration: none !important ;
 }
+.ant-menu-horizontal > li.ant-menu-item .no-hover:hover {
+    border-bottom: none !important ;
+}
 .ant-table-column-title {
     font-size: 18px !important ;
     font-weight: 600 !important ;

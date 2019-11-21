@@ -21,6 +21,7 @@
         "newChatbot":"New Chatbot",
         "status":"Status",
         "trainChatbot":"Train Chatbot",
+        "logout":"Logout",
         "menuAdmin":{
             "userInfo":"User Information",
             "botsConfiguration":"Configuration of Chatbots"
@@ -91,6 +92,7 @@
         "newChatbot":"Nuevo Chatbot",
         "status":"Estado",
         "trainChatbot":"Entrenar Chatbot",
+        "logout":"Finalizar sesion",
         "tooltip":{
             "chatbotName":"Elija un nombre para su chatbot",
             "chatbotAccesslist":"Otorgue acceso para editar su chatbot agregando el email"
@@ -204,6 +206,7 @@
         "newChatbot":"Novo Chatbot",
         "status":"Estado",
         "trainChatbot":"Treine seu chatbot",
+        "logout":"Finalizar sessão",
         "menuAdmin":{
             "userInfo":"Informações do Usuário",
             "botsConfiguration":"Configuração de Chatbots"

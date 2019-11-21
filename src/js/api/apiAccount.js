@@ -95,9 +95,23 @@ const getUserInfo = () => {
     }) ;
 } ;
 //
+const logoutAccount = () => {
+        try {
+            //
+            if ( ls( PARAMETROS.SESSION.USUARIO ) ){
+                console.log('....voy a removerrrr') ;
+                ls.remove( PARAMETROS.SESSION.USUARIO ) ;
+            }
+            //
+        } catch(errGACC){
+            console.dir(errGACC) ;
+        }
+} ;
+//
 export const account = {
     update: updateAccount,
     getAccount: getAccount,
-    getUserInfo: getUserInfo
+    getUserInfo: getUserInfo,
+    logout: logoutAccount
 } ;
 //

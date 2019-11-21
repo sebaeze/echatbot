@@ -26,6 +26,23 @@ module.exports = (argConfig,argDb,argCatalogoMarcas) => {
   //
   router.use('/', express.static( path.join(__dirname,'../../dist') , opciones ) );
   //
+  router.get('/logout',function(req,res,next){
+    res.set('access-Control-Allow-Origin', '*');
+    res.set('access-Control-Allow-Methods', '*');
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    //
+    if ( req.user ){
+      req.session.destroy(function (err) {
+        console.log('....../logout:: err: ');
+        console.dir(err) ;
+        res.redirect('/') ;
+      });
+    } else {
+      res.redirect('/') ;
+    }
+    //
+  }) ;
+  //
   router.get(['/','/404','/about','/error','/contact','/services','/prices'], function(req, res) {
     res.set('access-Control-Allow-Origin', '*');
     res.set('access-Control-Allow-Methods', '*');

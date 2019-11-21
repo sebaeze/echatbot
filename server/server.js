@@ -89,12 +89,6 @@ try {
       .then((finEngine)=>{
         app.use( finEngine.rutaErrores ) ;
         if ( process.env.AMBIENTE=='produccion' ){
-            /*
-            En Ubuntu requiere abrir puertos y redirect ==>
-                iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
-                iptables -A INPUT -i eth0 -p tcp --dport 8080 -j ACCEPT
-                iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
-            */
             console.log('.....(A) create server http') ;
             var httpPort = 80 ;
             const http   = express() ;

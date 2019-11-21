@@ -3,6 +3,7 @@
 */
 import React                             from 'react' ;
 import { Menu, Button, Icon }            from 'antd'  ;
+import { api        }                    from '../../api/api' ;
 import { PARAMETROS }                    from '../../utils/parametros' ;
 //
 const { SubMenu } = Menu ;
@@ -42,6 +43,16 @@ class NavMenu extends React.Component {
                             >
                                 <Menu.Item key="5"><a href={"/account/"+PARAMETROS.FORM.CHATBOTS} ><Icon type="robot" />Chatbots</a></Menu.Item>
                                 <Menu.Item key="6"><a href={"/account/"+PARAMETROS.FORM.USER_INFO}><Icon type="profile" />{this.props.translate.myProfile}</a></Menu.Item>
+                                <Menu.Item key="7">
+                                    <a  onClick={(argEVC)=>{
+                                        argEVC.preventDefault() ;
+                                        api.account.logout() ;
+                                        window.location.href = "/logout" ;
+                                    }}
+                                    >
+                                        <Icon type="logout" />{this.props.translate.logout}
+                                    </a>
+                                </Menu.Item>
                             </SubMenu>
                     }
                     <Menu.Item key="2"><a rel="noopener noreferrer" href="/contact"       >{this.props.translate.contact}</a> </Menu.Item>

@@ -152,6 +152,26 @@ class FormChatbots extends React.Component {
                         <Row style={{marginTop:'5px'}}>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={21} xl={21} xxl={21}>
+                                <Form.Item label="Website">
+                                    {getFieldDecorator('webiteDomains', {
+                                        rules: [
+                                        {
+                                            type: 'url',
+                                            message: 'Invalid Url.',
+                                        },
+                                        {
+                                            required: true,
+                                            message: 'Por favor, ingrese una URL correcta.',
+                                        },
+                                        ],
+                                    }
+                                    )(<Input allowClear size="large" />)}
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row style={{marginTop:'5px'}}>
+                            <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
+                            <Col xs={23} md={23} lg={21} xl={21} xxl={21}>
                                 <Form.Item  label={ <span>{this.props.translate.form.address}</span> } >
                                     {getFieldDecorator('address', {})(<Input allowClear size="large" />)}
                                 </Form.Item>

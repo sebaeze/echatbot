@@ -49,14 +49,17 @@ module.exports = (argConfig,argDb,argCatalogoMarcas) => {
     res.setHeader("Access-Control-Allow-Credentials", true);
     //
     res.render( 'app.html', defaultMetatags ) ;
-    /*
-    let tempUrl = req.url || req.baseUrl || 'inicio' ;
-    let tempEstadisticaVisita = { _id: tempUrl, tipo: 'pagina', titulo: '', http:{...req.headers,...{query:req.query}} } ;
-    argDb.estadisticas.addEstadistica( tempEstadisticaVisita )
-        .then(function(respDb){   })
-        .catch(function(errDb){ console.log('....ERROR cargando estadistica: URL: '+req.baseUrl);console.dir(errDb);  })
     //
-    */
+  });
+  //
+  router.get('/test', function(req, res) {
+    res.set('access-Control-Allow-Origin', '*');
+    res.set('access-Control-Allow-Methods', '*');
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    console.log('....estoy en /test ') ;
+    // res.render( 'test.html', defaultMetatags ) ;
+    res.sendFile(path.join(__dirname, '../../dist/test.html'))
+    //
   });
    // Login no requiere autenticar, sino entra en Loop
    router.get('/login', function(req, res) {

@@ -28,7 +28,8 @@
         },
         "tooltip":{
             "chatbotName":"Choose a name for your chatbot",
-            "chatbotAccesslist":"Grant access to the chatbot by adding the email address"
+            "chatbotAccesslist":"Grant access to the chatbot by adding the email address",
+            "webiteDomains":"Input the url of your website / s, for example: https://www.mywebsite.com"
         },
         "table":{
             "description":"Description",
@@ -40,7 +41,12 @@
             "action":"Action"
         },
         "form":{
+            "webiteDomains":"Enter the website (s) to use the chatbot, example: https://www.mywebsite.com",
+            "nonValidWebiteDomains":"Input  valid domain address",
             "accessList":"Access List by Email",
+            "nonValidAccessList":"Input  valid email",
+            "textAddEmail":"Add Email",
+            "textAddWebsite":"Add website",
             "language":"English",
             "selectLanguage":"Select the language",
             "country":"Country",
@@ -95,7 +101,8 @@
         "logout":"Finalizar sesion",
         "tooltip":{
             "chatbotName":"Elija un nombre para su chatbot",
-            "chatbotAccesslist":"Otorgue acceso para editar su chatbot agregando el email"
+            "chatbotAccesslist":"Otorgue acceso para editar su chatbot agregando el email",
+            "webiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: https://www.mipagina.com"
         },
         "table":{
             "description":"Descripción",
@@ -107,7 +114,12 @@
             "action":"Acción"
         },
         "form":{
+            "webiteDomains":"Ingrese el/los website a utilizar el chatbot, ejemplo: https://www.mipagina.com",
+            "nonValidWebiteDomains":"Ingrese un dominio valido",
             "accessList":"Otorgue accesos a su chatbot, agregue emails:",
+            "nonValidAccessList":"Ingrese un email valido",
+            "textAddEmail":"Agregar Email",
+            "textAddWebsite":"Agregar website",
             "language":"Español",
             "selectLanguage":"Seleccionar Idioma",
             "country":"País",
@@ -213,10 +225,16 @@
         },
         "tooltip":{
             "chatbotName":"Escolha um nome para o seu chatbot",
-            "chatbotAccesslist":"Conceda acesso ao chatbot adicionando o endereço de email"
+            "chatbotAccesslist":"Conceda acesso ao chatbot adicionando o endereço de email",
+            "webiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "webiteDomains":"Digite o (s) site (s) para usar o chatbot, por exemplo: https://www.mywebsite.com",
+            "nonValidWebiteDomains":"Introduzir endereço de domínio válido",
             "accessList":"Lista de acesso por e-mails",
+            "nonValidAccessList":"Inserir email válido",
+            "textAddEmail":"Adicionar Email",
+            "textAddWebsite":"Adicionar website",
             "language":"Português",
             "selectLanguage":"Selecione o idioma",
             "country":"País",

@@ -45,6 +45,24 @@ class FormNewChatbotWithModal extends React.Component {
                     }, 700 ) ;
               } else {
                   let tempValues = this.props.form.getFieldsValue() ;
+                  if ( tempValues.webiteDomains.length>0 ){
+                      for ( let ixws=0; ixws<tempValues.webiteDomains.length; ixws++ ){
+                          let tempUrl = tempValues.webiteDomains[ixws] ;
+                          let posBus  = tempUrl.toUpperCase().indexOf('WWW.') ;
+                          if ( posBus!=-1 ){
+                            tempUrl = tempUrl.substr(posBus) ;
+                          }
+                          posBus  = tempUrl.indexOf('/') ;
+                          if ( posBus!=-1 ){
+                            let arrayDiv = tempUrl.split('/') ;
+                            if ( arrayDiv[0]=="/" ){
+                                tempUrl = arrayDiv[1] ;
+                            } else {
+                                tempUrl = arrayDiv[0] ;
+                            }
+                          }
+                      }
+                  }
                   this.props.sel( tempValues ) ;
                   //
               }
@@ -77,7 +95,10 @@ class FormNewChatbotWithModal extends React.Component {
                         <Row >
                             <Form.Item
                                 hasFeedback
-                                label={ <span>Chatbot {this.props.translate.form.name}<Tooltip  placement="bottomRight" title={this.props.translate.tooltip.chatbotName} > <Icon type="question-circle-o" /> </Tooltip> </span> }
+                                label={ <span>
+                                            Chatbot {this.props.translate.form.name}
+                                            <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.chatbotName} ><Icon type="question-circle-o" /> </Tooltip>
+                                        </span>}
                             >
                                 {getFieldDecorator('botName', { rules: [{ required: true, message: 'Please, write a name for the Bot', whitespace: true }], })
                                 (<Input allowClear size="large" ref={(argRef)=>{ argRef.focus(); }} />)}
@@ -116,8 +137,35 @@ class FormNewChatbotWithModal extends React.Component {
                                 {
                                     <FormDynamicInputText
                                         form={this.props.form}
-                                        fieldName="accessList" type="email"
-                                        description={this.props.translate.form.accessList}
+                                        textPlaceholder="email@mywebsite.com"
+                                        fieldName="accessList"
+                                        type="array"
+                                        defaultTypefield="email"
+                                        textAdd={this.props.translate.form.textAddEmail}
+                                        description={this.props.translate.form.nonValidAccessList}
+                                    />
+                                }
+                            </Form.Item>
+                        </Row>
+                        <Row style={{marginTop:'5px'}}>
+                            <Form.Item
+                                label={ <span>
+                                            {this.props.translate.form.webiteDomains}
+                                            <Tooltip  placement="topRight" title={this.props.translate.tooltip.webiteDomains}>
+                                                <Icon type="question-circle-o" />
+                                            </Tooltip>
+                                        </span>
+                                    }
+                            >
+                                {
+                                    <FormDynamicInputText
+                                        form={this.props.form}
+                                        textPlaceholder="www.mywebsite.com"
+                                        fieldName="webiteDomains"
+                                        type="array"
+                                        defaultTypefield="string"
+                                        textAdd={this.props.translate.form.textAddWebsite}
+                                        description={this.props.translate.form.nonValidWebiteDomains}
                                     />
                                 }
                             </Form.Item>
@@ -150,7 +198,8 @@ export const FormNewChatbot = Form.create({ name: '',
             plan:        Form.createFormField({ value: 'FREE' }),
             botIcon:     Form.createFormField({ value: '' }),
             botSubtitle: Form.createFormField({ value: '' }),
-            description: Form.createFormField({ value: '' })
+            description: Form.createFormField({ value: '' }),
+            webiteDomains: Form.createFormField({ value: [] })
         };
     }
 })(FormNewChatbotWithModal);

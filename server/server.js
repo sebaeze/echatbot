@@ -7,7 +7,7 @@ const bodyParser       = require('body-parser') ;
 const cookieParser     = require('cookie-parser')   ;
 const session          = require('express-session') ;
 const MemoryStore      = require('session-memory-store')(session);
-const dbClass          = require('./db/dbIndex').bases ;
+// const dbClass          = require('./db/dbIndex').bases ;
 const utiles           = require('./lib/utiles').Utilitarios() ;
 const mustacheExpress  = require('mustache-express') ;
 //
@@ -15,8 +15,10 @@ const https            = require('https') ;
 const path             = require('path')  ;
 const fs               = require('fs')    ;
 //
-import { routesApp }        from './routes/routerServer' ;
-import configuracionApp     from './config/general.json'  ;
+import { bases as dbClass }    from 'echatbot-mongodb' ;
+import { routesApp }           from './routes/routerServer' ;
+import configuracionApp        from './config/general.json'  ;
+//
 if ( process.env.GLOBAL_GOOGLE_ANALYTICS ){
   configuracionApp.metaTags.default.GLOBAL_GOOGLE_ANALYTICS = process.env.GLOBAL_GOOGLE_ANALYTICS ;
 }
@@ -94,7 +96,7 @@ try {
             const http   = express() ;
             console.log('.....(B) HTTP: define *') ;
             http.get('*', function(req, res) {
-                var hhost = String(req.headers.host).indexOf(':')!=-1 ? req.headers.host.split(":")[0] : req.headers.host ;
+                var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
                 console.log('....voy a redirect --> '+ hhost + req.url+';') ;
                 res.redirect('https://' + hhost + req.url ) ;
             }) ;

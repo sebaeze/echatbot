@@ -1290,8 +1290,18 @@ div.react-bootstrap-table tbody tr:hover {
     box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 /*  */
-#idFormNewChatbot .ant-form-item-label span {
+#idFormNewChatbot .ant-form-item-label span, #idFormNewChatbot .ant-form-item-label div {
     font-size: 20px !important ;
-    font-weight: 500 ;
+    font-weight: 500 !important ;
+    white-space: normal !important ;
+    text-align: left !important ;
+    display: inline-block !important ;
+}
+/*  */
+#idFormNewChatbot .ant-btn-dashed {
+    border-width: 2px !important ;
+}
+#idFormNewChatbot .ant-row .ant-form-item{
+    margin-bottom: 5px !important ;
 }
 /*  */

@@ -153,7 +153,7 @@ class FormChatbots extends React.Component {
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={21} xl={21} xxl={21}>
                                 <Form.Item label="Website">
-                                    {getFieldDecorator('webiteDomains', {
+                                    {getFieldDecorator('websiteDomains', {
                                         rules: [
                                         {
                                             type: 'url',

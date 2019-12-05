@@ -45,9 +45,9 @@ class FormNewChatbotWithModal extends React.Component {
                     }, 700 ) ;
               } else {
                   let tempValues = this.props.form.getFieldsValue() ;
-                  if ( tempValues.webiteDomains.length>0 ){
-                      for ( let ixws=0; ixws<tempValues.webiteDomains.length; ixws++ ){
-                          let tempUrl = tempValues.webiteDomains[ixws] ;
+                  if ( tempValues.websiteDomains.length>0 ){
+                      for ( let ixws=0; ixws<tempValues.websiteDomains.length; ixws++ ){
+                          let tempUrl = tempValues.websiteDomains[ixws] ;
                           let posBus  = tempUrl.toUpperCase().indexOf('WWW.') ;
                           if ( posBus!=-1 ){
                             tempUrl = tempUrl.substr(posBus) ;
@@ -150,8 +150,8 @@ class FormNewChatbotWithModal extends React.Component {
                         <Row style={{marginTop:'5px'}}>
                             <Form.Item
                                 label={ <span>
-                                            {this.props.translate.form.webiteDomains}
-                                            <Tooltip  placement="topRight" title={this.props.translate.tooltip.webiteDomains}>
+                                            {this.props.translate.form.websiteDomains}
+                                            <Tooltip  placement="topRight" title={this.props.translate.tooltip.websiteDomains}>
                                                 <Icon type="question-circle-o" />
                                             </Tooltip>
                                         </span>
@@ -161,11 +161,11 @@ class FormNewChatbotWithModal extends React.Component {
                                     <FormDynamicInputText
                                         form={this.props.form}
                                         textPlaceholder="www.mywebsite.com"
-                                        fieldName="webiteDomains"
+                                        fieldName="websiteDomains"
                                         type="array"
                                         defaultTypefield="string"
                                         textAdd={this.props.translate.form.textAddWebsite}
-                                        description={this.props.translate.form.nonValidWebiteDomains}
+                                        description={this.props.translate.form.nonValidwebsiteDomains}
                                     />
                                 }
                             </Form.Item>
@@ -199,7 +199,7 @@ export const FormNewChatbot = Form.create({ name: '',
             botIcon:     Form.createFormField({ value: '' }),
             botSubtitle: Form.createFormField({ value: '' }),
             description: Form.createFormField({ value: '' }),
-            webiteDomains: Form.createFormField({ value: [] })
+            websiteDomains: Form.createFormField({ value: [] })
         };
     }
 })(FormNewChatbotWithModal);

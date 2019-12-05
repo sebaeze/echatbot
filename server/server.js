@@ -38,8 +38,6 @@ const Eventos          = require( './eventos/EventosApp'  ) ;
 //
 Eventos(db,configuracionApp) ;
 //
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
-//
 app.use(cookieParser()) ;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

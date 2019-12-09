@@ -58,7 +58,10 @@
             "phone":"Phone",
             "savechanges":"Save Changes",
             "lastName":"Last Name",
-            "description":"Aditional Comments"
+            "description":"Aditional Comments",
+            "training":"Training",
+            "conversations":"Conversations",
+            "changesSaved":"The changes were saved"
         },
         "cognitiveAnalytics":"Cognitive Analytics",
         "plan":{
@@ -131,7 +134,10 @@
             "phone":"Telefono",
             "savechanges":"Guardar Cambios",
             "lastName":"Apellido",
-            "description":"Comentario / Nota adicional"
+            "description":"Comentario / Nota adicional",
+            "training":"Entrenar",
+            "conversations":"Conversaciones",
+            "changesSaved":"Los cambios fueron guardados"
         },
         "menuAdmin":{
             "userInfo":"Información de usuario",
@@ -246,7 +252,10 @@
             "phone":"Telefone",
             "savechanges":"Salvar alterações",
             "lastName":"Sobrenome",
-            "description":"Comentaários"
+            "description":"Comentaários",
+            "training":"Treinamento",
+            "conversations":"Conversas",
+            "changesSaved":"As alterações foram salvas"
         },
         "table":{
             "description":"Descrição",

@@ -133,6 +133,7 @@ export class TablaChatbots extends React.Component {
         try {
             console.log('....onClickEditChatbot:: argChatbot: ') ;
             console.dir(argChatbot) ;
+            window.location.href = '/edit/'+argChatbot._id ;
         } catch(errDelChatbot){
             console.dir(errEditChatbot) ;
         }
@@ -184,13 +185,7 @@ export class TablaChatbots extends React.Component {
                             return (
                                 <div  style={{width:'100%'}}>
                                     <p style={{padding:'0',fontWeight:'600'}}>
-                                        <a  onClick={()=>this.onClickTrainChatbot(argRecord)}>{this.props.translate.trainChatbot}</a>
-                                    </p>
-                                    <p style={{padding:'0',fontWeight:'600'}}>
                                         <a  onClick={()=>this.onClickEditChatbot(argRecord)}>{this.props.translate.edit}</a>
-                                    </p>
-                                    <p style={{padding:'0',fontWeight:'600'}}>
-                                        <a onClick={()=>this.setState({chatbotBorrar: argRecord, modalDeleteChatbot: true})}>{this.props.translate.delete}</a>
                                     </p>
                                 </div>
                             )}

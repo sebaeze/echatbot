@@ -28,7 +28,7 @@
         },
         "tooltip":{
             "chatbotName":"Choose a name for your chatbot",
-            "chatbotAccesslist":"Grant access to the chatbot by adding the email address",
+            "chatbotAccesslist":"Access list by email address",
             "websiteDomains":"Input the url of your website / s, for example: https://www.mywebsite.com"
         },
         "table":{
@@ -119,7 +119,7 @@
         "form":{
             "websiteDomains":"Ingrese el/los website a utilizar el chatbot, ejemplo: https://www.mipagina.com",
             "nonValidwebsiteDomains":"Ingrese un dominio valido",
-            "accessList":"Otorgue accesos a su chatbot, agregue emails:",
+            "accessList":"Accesos para editar chatbot ( por email ):",
             "nonValidAccessList":"Ingrese un email valido",
             "textAddEmail":"Agregar Email",
             "textAddWebsite":"Agregar website",

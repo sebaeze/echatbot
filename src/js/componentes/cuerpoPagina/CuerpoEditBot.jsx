@@ -2,7 +2,7 @@
 *
 */
 import React                                   from 'react' ;
-import { Tabs, Icon, Spin, Row, Col, Button }   from 'antd'  ;
+import { Tabs, Icon, Spin, Row, Col, BackTop, notification }   from 'antd'  ;
 import { api }                                 from '../../api/api' ;
 import { FormEditChatbotInfo }                 from '../formularios/FormEditChatbotInfo' ;
 //
@@ -11,14 +11,13 @@ const { TabPane } = Tabs ;
 export class CuerpoEditBot extends React.Component {
     constructor(props){
         super(props) ;
-        this.handleKeyboard      = this.handleKeyboard.bind(this)   ;
         this.updateChatbotConfig = this.updateChatbotConfig.bind(this) ;
         this.state = {
             idChatbot: this.props.match.params.idChatbot||false,
             userInfo: false,
-            flagSaved: false,
             flagSpinner: false,
-            chatbotConfig:false
+            chatbotConfig:false,
+            chatbotConfigPendingSave: false
         } ;
     }
     //
@@ -47,46 +46,23 @@ export class CuerpoEditBot extends React.Component {
         }
     }
     //
-    handleKeyboard(event){
-        try {
-            //
-            let charCode = String.fromCharCode(event.which).toLowerCase();
-            if(event.ctrlKey && charCode === 's') {
-                event.preventDefault();
-                //this.formSubmit() ;
-                this.updateChatbotConfig() ;
-            }
-            // For MAC we can use metaKey to detect cmd key
-            if(event.metaKey && charCode === 's') {
-                event.preventDefault();
-                //this.formSubmit() ;
-                this.updateChatbotConfig() ;
-            }
-        } catch(errHK){
-            console.dir(errHK) ;
-            throw errHK ;
-        }
-    } ;
-    //
-    updateChatbotConfig(){
+    updateChatbotConfig(argChatbotConfigUpdate){
         try {
             this.setState({flagSpinner: true}) ;
-            console.log('....updateChatbotConfig:: config: ') ;
-                    console.dir(this.state.chatbotConfig) ;
-            api.chatbot.add( this.state.chatbotConfig )
+            let tempUpdateBot = Object.assign({...this.state.chatbotConfig},argChatbotConfigUpdate) ;
+            //
+            const openNotificationWithIcon = (type,argText) => {
+                notification[type]({
+                    //message: <h1>putooo</h1>,
+                    description: <h2>{argText}</h2>
+                });
+            } ;
+            //
+            api.chatbot.add( tempUpdateBot )
                 .then((respADD)=>{
                     if ( respADD.length>0 ){ respADD=respADD[0]; }
-                    console.log('....termine de modificar el chatbot:: ') ;
-                    console.dir(respADD) ;
-                    /*
-                    let tempArrayBots = this.state.arrayChatbots ;
-                    tempArrayBots.push({
-                        key:(tempArrayBots.length+1),
-                        ...respADD
-                    }) ;
-                    this.setState({arrayChatbots: tempArrayBots, flagSpinner: false}) ;
-                    */
-                    this.setState({flagSpinner: false, flagSaved: true}) ;
+                    openNotificationWithIcon('success', this.props.translate.form.changesSaved ) ;
+                    this.setState({chatbotConfig: tempUpdateBot, flagSpinner: false}) ;
                 })
                 .catch((respErr)=>{
                     console.dir(respErr) ;
@@ -108,9 +84,14 @@ export class CuerpoEditBot extends React.Component {
     //
     render(){
         //
+        let tempChatbotConfig = this.state.chatbotConfig ;
+        //
         return(
-            <div id="waiboc-id-edit-chatbot" style={{paddingTop:'145px',minHeight:'110vh',backgroundColor:'#F4F4F4'}}>
-                    <Tabs>
+            <div id="waiboc-id-edit-chatbot" ref={(argRef)=>{ this.refContainer=argRef; }} style={{paddingTop:'145px',minHeight:'110vh',backgroundColor:'#F4F4F4'}}>
+                    <BackTop>
+                        <div className="ant-back-top-inner">UP</div>
+                    </BackTop>
+                    <Tabs style={{width:'95%',marginLeft:'2%'}}>
                         <TabPane key="1"
                             tab={<span>
                                 <Icon type="edit" theme="twoTone" />
@@ -123,15 +104,8 @@ export class CuerpoEditBot extends React.Component {
                                         this.state.flagSpinner==true ?
                                             <Spin size="large" />
                                             :
-                                            <Button type="primary" size={"large"} style={{marginLeft:'10%', width:'80%'}} className="btn-edit-menu"
-                                                onClick={ (argEEV)=>{argEEV.preventDefault(); this.updateChatbotConfig(); } }
-                                            >
-                                                {this.props.translate.form.savechanges}
-                                            </Button>
+                                            null
                                     }
-                                    <span style={this.state.flagSaved==true ? {display:'block'} : {display:'none'}}>
-                                        {this.props.translate.form.changesSaved}
-                                    </span>
                                 </Col>
                                 <Col xs={24}  md={24}  lg={0}  xl={0}  xxl={0}>
                                     <div style={{marginTop:'15px'}}></div>
@@ -144,13 +118,9 @@ export class CuerpoEditBot extends React.Component {
                                         :
                                         <FormEditChatbotInfo
                                             translate={this.props.translate}
-                                            chatbotConfig={this.state.chatbotConfig}
-                                            formChange={
-                                                (argNewValues)=>{
-                                                    let tempNewValuesChatbot = Object.assign(this.state.chatbotConfig,argNewValues) ;
-                                                    this.setState({chatbotConfig: tempNewValuesChatbot, flagSaved: false }) ;
-                                                }
-                                            }
+                                            chatbotConfig={{...tempChatbotConfig}}
+                                            onSubmitChanges={this.updateChatbotConfig.bind(this)}
+                                            container={this.refContainer}
                                         />
                                     }
                                 </Col>

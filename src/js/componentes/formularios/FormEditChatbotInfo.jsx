@@ -3,7 +3,7 @@
 */
 import React                     from 'react' ;
 import { FormDynamicInputText }  from  './FormDynamicInputText' ;
-import { Row, Col, Tag , Form, Input, Button, Tooltip, Icon, Modal, Select, Typography }   from 'antd'  ;
+import { Row, Col, Tag , Form, Input, Button, Tooltip, Icon, Select, Typography  }   from 'antd'  ;
 //
 const { Title } = Typography ;
 //
@@ -12,11 +12,12 @@ class FormEditChatbotInfoBase extends React.Component {
         super(props) ;
         this.firstNode          = false ;
         this.state              = {flagSpinner:false, modalVisible: this.props.modalVisible, enviadoOk:false, accessList:{} } ;
+        this.handleKeyboard     = this.handleKeyboard.bind(this)   ;
+        this.submitFormChanges  = this.submitFormChanges.bind(this)  ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
     }
     //
     componentDidMount(){
-        const { resetFields } = this.props.form ;
         // resetFields({names:['botSubtitle','botIcon','botSubtitle','description']}) ;
     }
     //
@@ -30,6 +31,33 @@ class FormEditChatbotInfoBase extends React.Component {
         });
     };
     //
+    handleKeyboard(event){
+        try {
+            //
+            let charCode = String.fromCharCode(event.which).toLowerCase();
+            if(event.ctrlKey && charCode === 's') {
+                event.preventDefault();
+                this.submitFormChanges() ;
+            }
+            // For MAC we can use metaKey to detect cmd key
+            if(event.metaKey && charCode === 's') {
+                event.preventDefault();
+                this.submitFormChanges() ;
+            }
+        } catch(errHK){
+            console.dir(errHK) ;
+            throw errHK ;
+        }
+    } ;
+    //
+    submitFormChanges(){
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+            this.props.onSubmitChanges( values ) ;
+            }
+        }) ;
+    }
+    //
     render(){
         //
         const { getFieldDecorator, resetFields, getFieldsError, getFieldError } = this.props.form ;
@@ -37,6 +65,7 @@ class FormEditChatbotInfoBase extends React.Component {
         //
         return(
             //
+            <div onKeyDown={this.handleKeyboard} >
             <Form id="waiboc-id-form-editChatbot" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
                 <Row >
                     <Form.Item
@@ -130,7 +159,18 @@ class FormEditChatbotInfoBase extends React.Component {
                             }
                         </Form.Item>
                     </Row>
+                    <Row style={{marginTop:'5px'}}>
+                    <Button type="primary" size={"large"} style={{marginLeft:'10%', width:'30%'}} className="btn-edit-menu"
+                            onClick={ (argEEV)=>{
+                                argEEV.preventDefault() ;
+                                this.submitFormChanges() ;
+                            } }
+                    >
+                        {this.props.translate.form.savechanges}
+                    </Button>
+                </Row>
             </Form>
+            </div>
             //
         ) ;
     }
@@ -154,15 +194,25 @@ export const FormEditChatbotInfo = Form.create({ name: '',
     onValuesChange(propsForm, newValues, fields) {
         let outNewValues = false ;
         console.log('......onValuesChange:: newValues: ') ;
-        console.dir(newValues) ;
-        console.dir(fields) ;
-    },
+        propsForm.form.validateFields((err, values) => {
+            console.log('....(A) no errores:: flagErr: '+err+'values: ') ;
+            console.dir(values) ;
+            propsForm.formChange( values, err ) ;
+            if (!err) {
+              const { keys, names } = values;
+              console.log('Received values of form: ', values);
+              console.log('Merged values:', keys.map(key => names[key]));
+              propsForm.formChange( values ) ;
+            }
+        }) ;
+        // propsForm.formChange( outNewValues ) ;
+    }
     */
+   /*
    onFieldsChange(propsForm, fields) {
         let outNewValues = false ;
         console.log('......onFieldsChange:: fields: ') ;
         console.dir(fields) ;
-        /*
         for ( let keyField in fields ){
             let fieldModified = fields[keyField] ;
             if ( Array.isArray(fieldModified) ){
@@ -188,13 +238,13 @@ export const FormEditChatbotInfo = Form.create({ name: '',
                 }
             }
         }
-        */
         if ( outNewValues!=false ){
             console.log('...voy a guardar::: outNewValues: ') ;
             console.dir(outNewValues) ;
             propsForm.formChange( outNewValues ) ;
         }
     }
+    */
 })(FormEditChatbotInfoBase);
 //
 //export default WrappedFormNewChatbot ;

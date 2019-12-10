@@ -15,7 +15,7 @@ export class FormDynamicInputText extends React.Component {
         this.remove       = this.remove.bind(this) ;
         //this.id           = 0 ;
         //this.state.keys         = [] ;
-        this.state        = { keys:[] } ;
+        this.state        = { keys:[], flagFocusInput: false } ;
     }
     //
     componentDidMount(){
@@ -50,8 +50,8 @@ export class FormDynamicInputText extends React.Component {
         //
         // let tempId   = this.state.ids++ ;
         //let tempKeys = this.state.keys.concat( tempId );
-        let tempKeys = this.state.keys.concat( (this.state.keys.length++) );
-        this.setState({keys: tempKeys })  ;
+        let tempKeys = this.state.keys.concat( this.state.keys.length );
+        this.setState({keys: tempKeys, flagFocusInput: true })  ;
         // this.forceUpdate() ;
         //  this.setState({keys: tempKeys }) ;
       };
@@ -110,7 +110,7 @@ export class FormDynamicInputText extends React.Component {
                                 }, ],
                             })
                             (<Input placeholder={this.props.textPlaceholder} size="large" style={{ width: '90%' }}
-                                ref={(argRef)=>{ argRef.focus(); }}
+                                ref={(argRef)=>{ if ( this.state.flagFocusInput==true ){ argRef.focus();} }}
                             />)}
                         { this.state.keys.length > 0 ? ( <Icon style={{marginLeft:'10px'}} className="dynamic-delete-button" type="minus-circle-o" onClick={() => this.remove(k)} /> ) : null}
                     </Form.Item>

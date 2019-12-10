@@ -1305,7 +1305,34 @@ div.react-bootstrap-table tbody tr:hover {
     margin-bottom: 5px !important ;
 }
 /*  */
+.ant-notification {
+    z-index: 9999 !important ;
+}
 #waiboc-id-edit-chatbot span{
     font-size: 18px !important ;
+}
+#waiboc-id-edit-chatbot form div.ant-form-item-label span {
+    font-size: 22px !important ;
+    font-weight: 600 !important ;
+}
+#waiboc-id-edit-chatbot .ant-back-top {
+    z-index: 9995 !important ;
+    bottom: 100px;
+}
+
+#waiboc-id-edit-chatbot .ant-back-top-inner {
+    z-index: 9995 !important ;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    background-color: #1088e9;
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+}
+/*  */
+#waiboc-id-edit-chatbot .has-success.has-feedback .ant-form-item-children-icon svg, .has-warning.has-feedback .ant-form-item-children-icon svg, .has-error.has-feedback .ant-form-item-children-icon svg, .is-validating.has-feedback .ant-form-item-children-icon svg {
+    margin-left: 35px !important ;
 }
 /*  */

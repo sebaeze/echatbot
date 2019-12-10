@@ -41,6 +41,9 @@ module.exports = (argConfig,argDb) => {
     //
     try {
       //
+      delete req.body._v ;
+      delete req.body.__v ;
+      //
       argDb.chatbot.add( {...req.body}, req.user.email )
             .then(function(respUpdate){
               res.json( (respUpdate._doc||respUpdate) );

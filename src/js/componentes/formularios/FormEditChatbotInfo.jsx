@@ -149,25 +149,27 @@ class FormEditChatbotInfoBase extends React.Component {
                     </Form.Item>
                 </Row>
                 <Row >
-                        <Form.Item  label={ <span>{this.props.translate.form.description}</span> } hasFeedback >
-                            {getFieldDecorator('description', { rules: [{ required: true, message: 'Please, add a brief description of the Bot', whitespace: true }], })
-                            (<Input.TextArea />)}
-                        </Form.Item>
-                        <Form.Item>
-                            {
-                                this.state.enviadoOk==true    ? <Icon type="smile" style={{fontSize:'35px',marginLeft:'25px'}} theme="twoTone" twoToneColor="#52c41a" /> : null
-                            }
-                        </Form.Item>
-                    </Row>
-                    <Row style={{marginTop:'5px'}}>
-                    <Button type="primary" size={"large"} style={{marginLeft:'10%', width:'30%'}} className="btn-edit-menu"
-                            onClick={ (argEEV)=>{
-                                argEEV.preventDefault() ;
-                                this.submitFormChanges() ;
-                            } }
-                    >
-                        {this.props.translate.form.savechanges}
-                    </Button>
+                    <Form.Item  label={ <span>{this.props.translate.form.description}</span> } hasFeedback >
+                        {getFieldDecorator('description', { rules: [{ required: true, message: 'Please, add a brief description of the Bot', whitespace: true }], })
+                        (<Input.TextArea />)}
+                    </Form.Item>
+                    <Form.Item>
+                        {
+                            this.state.enviadoOk==true    ? <Icon type="smile" style={{fontSize:'35px',marginLeft:'25px'}} theme="twoTone" twoToneColor="#52c41a" /> : null
+                        }
+                    </Form.Item>
+                </Row>
+                <Row style={{marginTop:'5px'}}>
+                    <Col xs={18} md={18} lg={10} xl={8} xll={8} >
+                        <Button type="primary" size={"large"} style={{marginLeft:'10%'}} className="btn-edit-menu"
+                                onClick={ (argEEV)=>{
+                                    argEEV.preventDefault() ;
+                                    this.submitFormChanges() ;
+                                } }
+                        >
+                            {this.props.translate.form.savechanges}
+                        </Button>
+                    </Col>
                 </Row>
             </Form>
             </div>

@@ -5,6 +5,7 @@ import React                                   from 'react' ;
 import { Tabs, Icon, Spin, Row, Col, BackTop, notification }   from 'antd'  ;
 import { api }                                 from '../../api/api' ;
 import { FormEditChatbotInfo }                 from '../formularios/FormEditChatbotInfo' ;
+import { TablaTraining       }                 from '../tablas/TablaTraining'            ;
 //
 const { TabPane } = Tabs ;
 //
@@ -89,7 +90,7 @@ export class CuerpoEditBot extends React.Component {
         return(
             <div id="waiboc-id-edit-chatbot" ref={(argRef)=>{ this.refContainer=argRef; }} style={{paddingTop:'145px',minHeight:'110vh',backgroundColor:'#F4F4F4'}}>
                     <BackTop>
-                        <div className="ant-back-top-inner">UP</div>
+                        <div className="ant-back-top-inner"><Icon type="arrow-up" /></div>
                     </BackTop>
                     <Tabs style={{width:'95%',marginLeft:'2%'}}>
                         <TabPane key="1"
@@ -132,7 +133,22 @@ export class CuerpoEditBot extends React.Component {
                                 {this.props.translate.form.training}
                             </span>}
                         >
-                            tab 2
+                            <Row>
+                                <Col xs={1}  md={1}  lg={1}  xl={1}  xxl={1}></Col>
+                                <Col xs={22} md={22} lg={24} xl={24} xxl={24}>
+                                    {
+                                        this.state.chatbotConfig==false ?
+                                        <Spin size="large" />
+                                        :
+                                        <TablaTraining
+                                            translate={this.props.translate}
+                                            chatbotConfig={{...tempChatbotConfig}}
+                                            onSubmitChanges={this.updateChatbotConfig.bind(this)}
+                                            container={this.refContainer}
+                                        />
+                                    }
+                                </Col>
+                            </Row>
                         </TabPane>
                         <TabPane key="3"
                             tab={<span>

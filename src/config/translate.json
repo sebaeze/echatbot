@@ -41,6 +41,7 @@
             "action":"Action"
         },
         "form":{
+            "newIntent":"New intent",
             "websiteDomains":"Enter the website (s) to use the chatbot, example: https://www.mywebsite.com",
             "nonValidwebsiteDomains":"Input  valid domain address",
             "accessList":"Access List by Email",
@@ -97,7 +98,7 @@
         "help":"Ayuda",
         "account":"Cuenta Personal",
         "myProfile":"Mi Perfil",
-        "emptyText":"Nada por aqui",
+        "emptyText":"No hay datos",
         "newChatbot":"Nuevo Chatbot",
         "status":"Estado",
         "trainChatbot":"Entrenar Chatbot",
@@ -117,9 +118,10 @@
             "action":"Acción"
         },
         "form":{
+            "newIntent":"Nueva intención",
             "websiteDomains":"Ingrese el/los website a utilizar el chatbot, ejemplo: https://www.mipagina.com",
             "nonValidwebsiteDomains":"Ingrese un dominio valido",
-            "accessList":"Accesos para editar chatbot ( por email ):",
+            "accessList":"Lista de accesos por email:",
             "nonValidAccessList":"Ingrese un email valido",
             "textAddEmail":"Agregar Email",
             "textAddWebsite":"Agregar website",
@@ -235,6 +237,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "newIntent":"Nova intenção",
             "websiteDomains":"Digite o (s) site (s) para usar o chatbot, por exemplo: https://www.mywebsite.com",
             "nonValidwebsiteDomains":"Introduzir endereço de domínio válido",
             "accessList":"Lista de acesso por e-mails",

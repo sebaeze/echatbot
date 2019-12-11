@@ -40,6 +40,42 @@ const addNewChatbot = (argNewBot) => {
     }) ;
 }
 //
+const trainChatbot  = (argTrainChatbot) => {
+    return new Promise(function(respOk,respRech){
+        try {
+            let opcionesAdd = {...opcionesPOST} ;
+            opcionesAdd.method = 'POST' ;
+            opcionesAdd.body    = JSON.stringify(argTrainChatbot) ;
+            //
+            fetch( '/api/train'  , opcionesAdd )
+                .then((respFetch)=>{
+                    if ( respFetch.status>=200 && respFetch.status<=401 ){
+                        if ( respFetch.status==401 ){
+                            return false ;
+                        } else {
+                            return respFetch.json() ;
+                        }
+                    } else {
+                        return respFetch.text().then((respErrHttp)=>{
+                            respRech(respErrHttp);
+                            throw new Error(respErrHttp) ;
+                        }) ;
+                    }
+                })
+                .then((respDatos)=>{
+                    respOk(respDatos) ;
+                })
+                .catch((respErr)=>{
+                    console.dir(respErr) ;
+                    respRech(respErr) ;
+                }) ;
+                //
+        } catch(errANC){
+            respRech(errANC) ;
+        }
+    }) ;
+}
+//
 const deleteChatbot = (argBot) => {
     return new Promise(function(respOk,respRech){
         try {
@@ -119,6 +155,7 @@ const qryChatbots = (argQry) => {
 export const chatbot = {
     add: addNewChatbot,
     delete: deleteChatbot,
-    qry: qryChatbots
+    qry: qryChatbots,
+    train: trainChatbot
 } ;
 //

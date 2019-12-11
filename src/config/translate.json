@@ -41,6 +41,7 @@
             "action":"Action"
         },
         "form":{
+            "userNotAuthorized":"User is not authorized to modify this chatbot",
             "newIntent":"New intent",
             "websiteDomains":"Enter the website (s) to use the chatbot, example: https://www.mywebsite.com",
             "nonValidwebsiteDomains":"Input  valid domain address",
@@ -118,6 +119,7 @@
             "action":"Acción"
         },
         "form":{
+            "userNotAuthorized":"Usuario no esta autorizado a modificar este chatbot",
             "newIntent":"Nueva intención",
             "websiteDomains":"Ingrese el/los website a utilizar el chatbot, ejemplo: https://www.mipagina.com",
             "nonValidwebsiteDomains":"Ingrese un dominio valido",
@@ -237,6 +239,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "userNotAuthorized":"Usuário não autorizado a modificar este chatbot",
             "newIntent":"Nova intenção",
             "websiteDomains":"Digite o (s) site (s) para usar o chatbot, por exemplo: https://www.mywebsite.com",
             "nonValidwebsiteDomains":"Introduzir endereço de domínio válido",

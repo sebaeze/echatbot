@@ -2,7 +2,8 @@
 * TablaTraining
 */
 import React                                               from 'react' ;
-import { Table, Form, Input, Button, Popconfirm }          from 'antd'  ;
+import { Table, Form, Input, Button, notification }        from 'antd'  ;
+import { api }                                             from '../../api/api' ;
 //
 const EditableContext = React.createContext();
 //
@@ -282,7 +283,41 @@ export class TablaTraining extends React.Component {
     //
     saveChangesToTrainning(){
         try {
-            
+          /*
+          chatbotConfig: this.props.chatbotConfig,
+          arrayTraining: Object.values(this.props.chatbotConfig.trainning),
+          */
+            let chatbotTrain = {
+              _id: this.state.chatbotConfig._id,
+              train: {}
+            } ;
+            for ( let idTrain=0; idTrain<this.state.arrayTraining.length; idTrain++ ){
+              let objIntent = {...this.state.arrayTraining[ idTrain ]} ;
+              delete objIntent.key ;
+              let idIntent  = objIntent.entity ;
+              chatbotTrain[ idIntent ] = objIntent ;
+            }
+            console.dir(chatbotTrain) ;
+            //
+            const openNotificationWithIcon = (type,argText) => {
+              notification[type]({
+                  //message: <h1>putooo</h1>,
+                  description: <h2>{argText}</h2>
+              });
+            } ;
+            //
+            api.chatbot.train( chatbotTrain )
+                .then((respTrain)=>{
+                  if ( respTrain==false ){
+                    openNotificationWithIcon('error',this.props.translate.form.userNotAuthorized) ;
+                  } else {
+                    openNotificationWithIcon('success',this.props.translate.form.changesSaved) ;
+                  }
+                })
+                .catch((respErr)=>{
+                  console.dir(respErr) ;
+                }) ;
+            //
         } catch(errSC){
             console.dir(errSC) ;
         }
@@ -323,6 +358,7 @@ export class TablaTraining extends React.Component {
                 }
             }) ;
         }
+        console.dir(arrayDatos) ;
         //
         return(
             <div>

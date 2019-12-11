@@ -63,6 +63,78 @@ module.exports = (argConfig,argDb) => {
     //
   }) ;
   //
+  router.post('/train',autenticado,function(req,res,next){
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    //
+    try {
+      //
+      console.log('....../train:: body: ') ;
+      console.dir(req.body) ;
+      //
+      let objResultado = { code: 0, result: {} } ;
+      const updateTraining = (argBotTrained) => {
+        return new Promise(function(respData,respRech){
+          try {
+            argDb.chatbot.add( {...argBotTrained}, req.user.email )
+              .then((respUpd)=>{
+                if ( respUpd.length && respUpd.length>0 ){ respUpd=respUpd[0]; }
+                respUpd = respUpd._doc ? respUpd._doc : respUpd ;
+                objResultado.code   = 0 ;
+                objResultado.result = respUpd.trainning ;
+                respData(objResultado) ;
+              })
+              .catch((errUT)=>{
+                objResultado.code   = 500 ;
+                objResultado.result = {error: errUT, message: errUT} ;
+                respRech(objResultado) ;
+              }) ;
+          } catch(errUT){
+            respRech(errUT) ;
+          }
+        }) ;
+      }
+      //
+      argDb.chatbot.qry( {_id: req.body._id} )
+          .then(function(chatbotInfo){
+            if ( chatbotInfo.length && chatbotInfo.length>0 ){ chatbotInfo=chatbotInfo[0]; }
+            let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });
+            console.dir(userConAcceso) ;
+            if ( userConAcceso ){
+              chatbotInfo.trainning = req.body.train ;
+              delete chatbotInfo._v ; delete chatbotInfo.__v ;
+              //objResultado.result   = req.body.train ;
+              return updateTraining( chatbotInfo ) ;
+            } else {
+              objResultado.code = 401 ;
+              objResultado.result = {error: `User ${req.user.email} doesn't have access to the chatbot ${req.body._id}`}
+              return objResultado ;
+            }
+            //
+          }.bind(this))
+          .then(function(chatbotTrained){
+            console.log('.....(B) then:: chatbotTrained: ') ;
+            console.dir(chatbotTrained) ;
+            res.status( (chatbotTrained.code==0 ?  200 : chatbotTrained.code) );
+            res.json( chatbotTrained ) ;
+          }.bind(this))
+          .catch(function(respErr){
+            console.log('.....ERROR: ADD_CHATBOT: -> ') ;
+            console.dir(respErr) ;
+            res.status(500) ;
+            res.json(respErr) ;
+          }.bind(this)) ;
+      //
+    } catch(errGetBots){
+      console.dir(errGetBots) ;
+      res.status(500) ;
+      res.json(errGetBots) ;
+    }
+    //
+  }) ;
+  //
   router.delete('/chatbot',autenticado,function(req,res,next){
     res.set('Access-Control-Allow-Headers','*');
     res.set('Access-Control-Allow-Origin', '*');

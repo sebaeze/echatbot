@@ -4,6 +4,7 @@
 import React                                               from 'react' ;
 import { Table, Form, Input, Button, notification }        from 'antd'  ;
 import { api }                                             from '../../api/api' ;
+import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
 //
 const EditableContext = React.createContext();
 //
@@ -104,8 +105,10 @@ export class TablaTraining extends React.Component {
         this.onChangeSearch = this.onChangeSearch.bind(this) ;
         this.addNewIntent   = this.addNewIntent.bind(this)   ;
         this.handleSave     = this.handleSave.bind(this) ;
+        this.onAcceptNewIntent      = this.onAcceptNewIntent.bind(this) ;
         this.saveChangesToTrainning = this.saveChangesToTrainning.bind(this) ;
         this.state = {
+            modalNewIntent: false,
             flagCachedProps: false,
             flagSpinner: false,
             textBusqueda: '',
@@ -241,8 +244,18 @@ export class TablaTraining extends React.Component {
         this.setState({ pagination: pagination });
     }
     //
+    onAcceptNewIntent(argNewIntent){
+      try {
+        console.log('...onAccept:: argNewIntent: ') ;
+        console.dir(argNewIntent) ;
+      } catch(errNI){
+        console.dir(errNI) ;
+      }
+    }
+    //
     addNewIntent(){
         try {
+           /*
             let tempArrayTraining = this.state.arrayTraining ;
             tempArrayTraining.push({
                 key: this.state.arrayTraining.length,
@@ -255,6 +268,7 @@ export class TablaTraining extends React.Component {
                 }
             });
             this.setState({arrayTraining:tempArrayTraining}) ;
+            */
         } catch(errNI){
             console.dir(errNI) ;
         }
@@ -362,12 +376,13 @@ export class TablaTraining extends React.Component {
         //
         return(
             <div>
+                <FormNewIntent  onAccept={this.onAcceptNewIntent} data={{}} modalVisible={this.state.modalNewIntent} onCancelModal={(argEE)=>{argEE.preventDefault();this.setState({modalNewIntent:false})}} translate={this.props.translate} />
                 <div style={{width:'100%',marginTop:'20px',marginBottom:'15px'}}>
                     <Input placeholder={this.props.translate.search}
                            onChange={this.onChangeSearch}
                            style={{height:'42px',marginLeft:'10px', width:'20%'}}
                     />
-                    <Button onClick={this.addNewIntent} type="primary" size="large" style={{ marginLeft: '15px' }}>
+                    <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({modalNewIntent: true});}} type="primary" size="large" style={{ marginLeft: '15px' }}>
                     {this.props.translate.form.newIntent}
                     </Button>
                     <Button onClick={this.saveChangesToTrainning} type="primary" size="large" style={{ marginLeft: '15px' }}>

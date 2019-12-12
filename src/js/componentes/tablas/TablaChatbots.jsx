@@ -281,6 +281,7 @@ export class TablaChatbots extends React.Component {
             <div>
                 <Modal
                     title=""
+                    maskClosable={false}
                     visible={this.state.modalDeleteChatbot}
                     style={{top:'150px',zIndex:'9992'}}
                     // onOk={this.onClickOkModal.bind(this)}

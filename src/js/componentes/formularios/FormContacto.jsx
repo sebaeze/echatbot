@@ -86,6 +86,7 @@ class FormContacto extends React.Component {
                 <Col xs={16} md={16} lg={12} xl={12}>
                     <Modal
                         title=""
+                        maskClosable={false}
                         visible={this.state.flagEnviada}
                         onOk={this.onClickOkModal.bind(this)}
                         onCancel={()=>{this.setState({flagEnviada:false});}}

@@ -19,6 +19,7 @@
         "myProfile":"My Profile",
         "emptyText":"No Data",
         "newChatbot":"New Chatbot",
+        "newIntent":"New Intent",
         "status":"Status",
         "trainChatbot":"Train Chatbot",
         "logout":"Logout",
@@ -41,6 +42,8 @@
             "action":"Action"
         },
         "form":{
+            "textAddIntentExample":"Add an example for the intent",
+            "nonValidIntentExample":"Example for intent should not be empty",
             "userNotAuthorized":"User is not authorized to modify this chatbot",
             "newIntent":"New intent",
             "websiteDomains":"Enter the website (s) to use the chatbot, example: https://www.mywebsite.com",
@@ -101,6 +104,7 @@
         "myProfile":"Mi Perfil",
         "emptyText":"No hay datos",
         "newChatbot":"Nuevo Chatbot",
+        "newIntent":"Nueva Intención",
         "status":"Estado",
         "trainChatbot":"Entrenar Chatbot",
         "logout":"Finalizar sesion",
@@ -119,6 +123,8 @@
             "action":"Acción"
         },
         "form":{
+            "textAddIntentExample":"Agregar un ejemplo",
+            "nonValidIntentExample":"Ejemplo de intención no puede ser un string en blanco",
             "userNotAuthorized":"Usuario no esta autorizado a modificar este chatbot",
             "newIntent":"Nueva intención",
             "websiteDomains":"Ingrese el/los website a utilizar el chatbot, ejemplo: https://www.mipagina.com",
@@ -226,6 +232,7 @@
         "myProfile":"Meu Perfil",
         "emptyText":"Sem dados",
         "newChatbot":"Novo Chatbot",
+        "newIntent":"Novo Intenção",
         "status":"Estado",
         "trainChatbot":"Treine seu chatbot",
         "logout":"Finalizar sessão",
@@ -239,6 +246,8 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "textAddIntentExample":"Adicione um exemplo para a intenção",
+            "nonValidIntentExample":"Exemplo para intenção não deve estar vazio",
             "userNotAuthorized":"Usuário não autorizado a modificar este chatbot",
             "newIntent":"Nova intenção",
             "websiteDomains":"Digite o (s) site (s) para usar o chatbot, por exemplo: https://www.mywebsite.com",

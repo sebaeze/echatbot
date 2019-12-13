@@ -92,7 +92,7 @@ class FormNewChatbotWithModal extends React.Component {
                 //okButtonProps={!hasErrors(getFieldsError())}
                 cancelButtonProps={{ disabled: false }}
             >
-                <Form id="idFormNewChatbot" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
+                <Form  className="waiboc-cl-form" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
                         <Row >
                             <Form.Item
                                 hasFeedback

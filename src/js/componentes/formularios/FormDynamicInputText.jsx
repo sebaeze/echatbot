@@ -85,28 +85,6 @@ export class FormDynamicInputText extends React.Component {
                                 validateTrigger: ['onChange', 'onBlur'],
                                 suppressWarning: true,
                                 rules: [ {suppressWarning: true, type:  this.props.defaultTypefield, required: true, message: this.props.description,
-                                    /*
-                                   transform(value) {
-                                        console.log('...estoy en transform:: value: '+value) ;
-                                        if ( this.props.defaultTypefield=='url' ){
-
-                                        } else {
-                                            return String(value).trim();
-                                        }
-                                  },
-                                  */
-                                 /*
-                                  validator(rule,value,callback){
-                                      console.log('....validator:: value: '+value) ;
-                                      console.dir(rule) ;
-                                      if ( rule.type=="email" ){
-                                        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                                        return re.test(String(value).toLowerCase());
-                                      } else {
-
-                                      }
-                                  }
-                                  */
                                 }, ],
                             })
                             (<Input placeholder={this.props.textPlaceholder} size="large" style={{ width: '90%' }}

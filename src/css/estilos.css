@@ -1289,38 +1289,25 @@ div.react-bootstrap-table tbody tr:hover {
   .btn-edit-menu:hover {
     box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-/*  */
-#idFormNewChatbot .ant-form-item-label span, #idFormNewChatbot .ant-form-item-label div {
-    font-size: 20px !important ;
-    font-weight: 500 !important ;
-    white-space: normal !important ;
-    text-align: left !important ;
-    display: inline-block !important ;
-}
-/*  */
-#idFormNewChatbot .ant-btn-dashed {
-    border-width: 2px !important ;
-}
-#idFormNewChatbot .ant-row .ant-form-item{
-    margin-bottom: 5px !important ;
-}
-/*  */
 .ant-notification {
     z-index: 9999 !important ;
 }
-#waiboc-id-edit-chatbot span{
+/*  */
+#waiboc-id-app .ant-tabs-nav-container .ant-tabs-tab span {
+    font-size: 22px !important ;
+}
+#waiboc-id-app span{
     font-size: 18px !important ;
 }
-#waiboc-id-edit-chatbot form div.ant-form-item-label span {
+#waiboc-id-app form div.ant-form-item-label span {
     font-size: 22px !important ;
     font-weight: 600 !important ;
 }
-#waiboc-id-edit-chatbot .ant-back-top {
+#waiboc-id-app .ant-back-top {
     z-index: 9995 !important ;
     bottom: 100px;
 }
-
-#waiboc-id-edit-chatbot .ant-back-top-inner {
+#waiboc-id-app .ant-back-top-inner {
     z-index: 9995 !important ;
     height: 40px;
     width: 40px;
@@ -1332,7 +1319,25 @@ div.react-bootstrap-table tbody tr:hover {
     font-size: 20px;
 }
 /*  */
-#waiboc-id-edit-chatbot .has-success.has-feedback .ant-form-item-children-icon svg, .has-warning.has-feedback .ant-form-item-children-icon svg, .has-error.has-feedback .ant-form-item-children-icon svg, .is-validating.has-feedback .ant-form-item-children-icon svg {
+#waiboc-id-app .has-success.has-feedback .ant-form-item-children-icon svg, .has-warning.has-feedback .ant-form-item-children-icon svg, .has-error.has-feedback .ant-form-item-children-icon svg, .is-validating.has-feedback .ant-form-item-children-icon svg {
     margin-left: 35px !important ;
+}
+/*  */
+#waiboc-id-app i.anticon, .waiboc-cl-form i.anticon{
+    margin-left: 8px !important ;
+}
+#waiboc-id-app .ant-form-item-label span,.waiboc-cl-form .ant-form-item-label > label, #waiboc-id-app .ant-form-item-label div {
+    font-size: 20px !important ;
+    font-weight: 500 !important ;
+    white-space: normal !important ;
+    text-align: left !important ;
+    display: inline-block !important ;
+}
+/*  */
+#waiboc-id-app .ant-btn-dashed {
+    border-width: 2px !important ;
+}
+#waiboc-id-app .ant-row .ant-form-item, .waiboc-cl-form .ant-row .ant-form-item{
+    margin-bottom: 5px !important ;
 }
 /*  */

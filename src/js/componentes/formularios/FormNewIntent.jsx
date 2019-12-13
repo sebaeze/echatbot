@@ -63,16 +63,18 @@ class FormNewIntentWithModal extends React.Component {
             //
             <Modal
                 title={
-                    <Title level={2} style={{textAlign:'center'}}>{this.props.translate.newIntent}</Title>
+                    <Title level={3} style={{textAlign:'center',padding:'5px 5px 5px 5px'}}>{this.props.translate.newIntent}</Title>
                 }
                 maskClosable={false}
                 style={{border:'0.5px dotted gray',marginTop:'25px',zIndex:'9992'}}
+                bodyStyle={{paddingTop:'0'}}
+                headerStyle={{padding:'5px 5px 5px 5px'}}
                 visible={this.state.modalVisible}
                 onOk={this.onAcceptNewChatbot}
                 onCancel={(argEC)=>{resetFields(); this.props.onCancelModal(argEC);}}
                 cancelButtonProps={{ disabled: false }}
             >
-                <Form id="idFormNewChatbot" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
+                <Form className="waiboc-cl-form" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
                         <Row >
                             <Form.Item
                                 hasFeedback
@@ -108,7 +110,7 @@ class FormNewIntentWithModal extends React.Component {
                         </Row>
                         <Row style={{marginTop:'5px'}}>
                             <Form.Item
-                                label={ <span>{this.props.translate.form.accessList}
+                                label={ <span>{this.props.translate.form.intentExamples}
                                             <Tooltip  placement="topRight" title={this.props.translate.tooltip.chatbotAccesslist}>
                                                 <Icon type="question-circle-o" />
                                             </Tooltip>
@@ -131,23 +133,23 @@ class FormNewIntentWithModal extends React.Component {
                         <Row style={{marginTop:'5px'}}>
                             <Form.Item
                                 label={ <span>
-                                            {this.props.translate.form.websiteDomains}
-                                            <Tooltip  placement="topRight" title={this.props.translate.tooltip.websiteDomains}>
+                                            {this.props.translate.form.intentExamples}
+                                            <Tooltip  placement="topRight" title={this.props.translate.tooltip.intentAnswer}>
                                                 <Icon type="question-circle-o" />
                                             </Tooltip>
                                         </span>
                                     }
                             >
                                 {
-                                    <FormDynamicInputText
-                                        form={this.props.form}
-                                        textPlaceholder="www.mywebsite.com"
-                                        fieldName="websiteDomains"
-                                        type="array"
-                                        defaultTypefield="string"
-                                        textAdd={this.props.translate.form.textAddWebsite}
-                                        description={this.props.translate.form.nonValidwebsiteDomains}
-                                    />
+                                <FormDynamicInputText
+                                    form={this.props.form}
+                                    textPlaceholder="hello!, This is an answer !"
+                                    fieldName="intentAnswer"
+                                    type="array"
+                                    defaultTypefield="string"
+                                    textAdd={this.props.translate.form.intentAnswer}
+                                    description={this.props.translate.form.intentAnswer}
+                                />
                                 }
                             </Form.Item>
                         </Row>

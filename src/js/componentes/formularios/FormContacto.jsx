@@ -81,7 +81,7 @@ class FormContacto extends React.Component {
         //
         return(
             //
-            <Row id="idFormContacto">
+            <Row  className="waiboc-cl-form" >
                 <Col xs={3}  md={3}  lg={6} xl={6}></Col>
                 <Col xs={16} md={16} lg={12} xl={12}>
                     <Modal

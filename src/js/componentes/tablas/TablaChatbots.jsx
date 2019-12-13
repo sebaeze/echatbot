@@ -278,7 +278,7 @@ export class TablaChatbots extends React.Component {
         }
         //
         return(
-            <div>
+            <div  className="waiboc-cl-form">
                 <Modal
                     title=""
                     maskClosable={false}

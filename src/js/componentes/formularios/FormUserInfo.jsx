@@ -7,8 +7,8 @@
 import React                   from 'react' ;
 import { FiltroPais }          from '../filtros/FiltroPais' ;
 import { api        }          from '../../api/api' ;
-import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon }   from 'antd'  ;
-// import Icon from 'antd/lib/icon';
+import { Row, Col, Spin, Form, Input, Button, Tooltip }   from 'antd'  ;
+import Icon from 'antd/lib/icon';
 // import Icon from '@ant-design/icons';
 //
 class FormUserInfo extends React.Component {

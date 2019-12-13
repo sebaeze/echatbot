@@ -2,7 +2,8 @@
 *
 */
 import React, { Component }                          from 'react' ;
-import { Layout, Menu, Breadcrumb, Icon, Dropdown }  from 'antd' ;
+import { Layout, Menu, Breadcrumb, Dropdown }  from 'antd' ;
+import Icon from '@ant-design/icons';
 import { Row, Col, Popover }                         from 'antd';
 //
 import NavMenu                             from './menu/NavMenu' ;

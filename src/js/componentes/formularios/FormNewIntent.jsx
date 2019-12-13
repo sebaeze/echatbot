@@ -3,25 +3,32 @@
 */
 import React                     from 'react' ;
 import { FormDynamicInputText }  from  './FormDynamicInputText' ;
-import { Row, Col, Tag , Form, Input, Button, Tooltip, Icon, Modal, Select, Typography }   from 'antd'  ;
+import { Row, Col, Tag , Form, Input, Button, Tooltip, Modal, Select, Typography }   from 'antd'  ;
+import Icon from '@ant-design/icons';
 //
 const { Title } = Typography ;
 //
-class FormNewIntentWithModal extends React.Component {
+//class FormNewIntentWithModal extends React.Component {
+export class FormNewIntent extends React.Component {
     constructor(props){
         super(props) ;
         this.firstNode          = false ;
         this.state              = {flagSpinner:false, modalVisible: this.props.modalVisible, enviadoOk:false, accessList:{} } ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
         this.onAcceptNewChatbot = this.onAcceptNewChatbot.bind(this) ;
+        // console.log('....FormNewIntentWithModal:: constructor: ') ;
     }
     //
     componentDidMount(){
         const { resetFields } = this.props.form ;
-        resetFields({names:['botSubtitle','botIcon','botSubtitle','description']}) ;
+        // resetFields({names:['intentLanguage','intentName','intentExamples','intentDomain','intentAnswer']}) ;
     }
     //
     static getDerivedStateFromProps(newProps, state) {
+        /*
+        console.log('....FormNewIntentWithModal:: getDerivedStateFromProps: ') ;
+        console.dir(newProps) ;
+        */
         return { modalVisible: newProps.modalVisible } ;
     }
     //
@@ -58,27 +65,31 @@ class FormNewIntentWithModal extends React.Component {
         //
         const { getFieldDecorator, resetFields } = this.props.form ;
         let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'140px'} : {} ;
+//        console.log('....FormNewIntentWithModal:: render: ') ;
         //
         return(
             //
-            <Modal
+            <div id="waiboc-id-new-intent">
+                <Modal
                 title={
-                    <Title level={2} style={{textAlign:'center'}}>{this.props.translate.newIntent}</Title>
+                    <Title level={3} style={{textAlign:'center', padding:'5px 5px 5px 5px'}}>{this.props.translate.newIntent}</Title>
                 }
                 maskClosable={false}
                 style={{border:'0.5px dotted gray',marginTop:'25px',zIndex:'9992'}}
+                bodyStyle={{paddingTop:'0'}}
                 visible={this.state.modalVisible}
                 onOk={this.onAcceptNewChatbot}
                 onCancel={(argEC)=>{resetFields(); this.props.onCancelModal(argEC);}}
                 cancelButtonProps={{ disabled: false }}
             >
-                <Form id="idFormNewChatbot" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
+                <Form className="waiboc-form-modal" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
                         <Row >
                             <Form.Item
                                 hasFeedback
                                 label={ <span>
-                                            Intent
-                                            <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.chatbotName} ><Icon type="question-circle-o" /> </Tooltip>
+                                            Intent {this.props.translate.form.name}
+                                            <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.intentName} >
+                                            <Icon type="question-circle-o" /> </Tooltip>
                                         </span>}
                             >
                                 {getFieldDecorator('intentName', { rules: [{ required: true, message: 'Please, write a name that identify the intent', whitespace: true }], })
@@ -108,7 +119,7 @@ class FormNewIntentWithModal extends React.Component {
                         </Row>
                         <Row style={{marginTop:'5px'}}>
                             <Form.Item
-                                label={ <span>{this.props.translate.form.accessList}
+                                label={ <span>{this.props.translate.form.intentExamples}
                                             <Tooltip  placement="topRight" title={this.props.translate.tooltip.chatbotAccesslist}>
                                                 <Icon type="question-circle-o" />
                                             </Tooltip>
@@ -130,9 +141,8 @@ class FormNewIntentWithModal extends React.Component {
                         </Row>
                         <Row style={{marginTop:'5px'}}>
                             <Form.Item
-                                label={ <span>
-                                            {this.props.translate.form.websiteDomains}
-                                            <Tooltip  placement="topRight" title={this.props.translate.tooltip.websiteDomains}>
+                                label={ <span>{this.props.translate.form.intentExamples}
+                                            <Tooltip  placement="topRight" title={this.props.translate.tooltip.intentAnswer}>
                                                 <Icon type="question-circle-o" />
                                             </Tooltip>
                                         </span>
@@ -141,35 +151,25 @@ class FormNewIntentWithModal extends React.Component {
                                 {
                                     <FormDynamicInputText
                                         form={this.props.form}
-                                        textPlaceholder="www.mywebsite.com"
-                                        fieldName="websiteDomains"
+                                        textPlaceholder="hello!, This is an answer !"
+                                        fieldName="intentAnswer"
                                         type="array"
-                                        defaultTypefield="string"
-                                        textAdd={this.props.translate.form.textAddWebsite}
-                                        description={this.props.translate.form.nonValidwebsiteDomains}
+                                        defaultTypefield="intentAnswer"
+                                        textAdd={this.props.translate.form.intentAnswer}
+                                        description={this.props.translate.form.intentAnswer}
                                     />
-                                }
-                            </Form.Item>
-                        </Row>
-                        <Row >
-                            <Form.Item  label={ <span>{this.props.translate.form.description}</span> } hasFeedback >
-                                {getFieldDecorator('intentAnswer', { rules: [{ required: true, message: 'Please, add a brief description of the Bot', whitespace: true }], })
-                                (<Input.TextArea />)}
-                            </Form.Item>
-                            <Form.Item>
-                                {
-                                    this.state.enviadoOk==true    ? <Icon type="smile" style={{fontSize:'35px',marginLeft:'25px'}} theme="twoTone" twoToneColor="#52c41a" /> : null
                                 }
                             </Form.Item>
                         </Row>
                 </Form>
             </Modal>
+            </div>
             //
         ) ;
     }
     //
 } ;
-//
+/*
 export const FormNewIntent = Form.create({ name: '',
     mapPropsToFields(props) {
         return {
@@ -177,8 +177,9 @@ export const FormNewIntent = Form.create({ name: '',
             intentName:     Form.createFormField({ value: props.data.intentName     ||''  }),
             intentExamples: Form.createFormField({ value: props.data.intentExamples ||[]  }),
             intentDomain:   Form.createFormField({ value: props.data.intentDomain   ||''  }),
-            intentAnswer:   Form.createFormField({ value: props.data.intentAnswer   ||''  })
+            intentAnswer:   Form.createFormField({ value: props.data.intentAnswer   ||[]  })
         };
     }
 })(FormNewIntentWithModal);
+*/
 //

@@ -2,7 +2,8 @@
 *
 */
 import React                                               from 'react' ;
-import { Table, Typography, Input, Button, Icon, Modal }   from 'antd'  ;
+import { Table, Typography, Input, Button, Modal }   from 'antd'  ;
+import Icon from '@ant-design/icons';
 import { api }                                      from '../../api/api' ;
 import { FormNewChatbot }                           from '../formularios/FormNewChatbot' ;
 //

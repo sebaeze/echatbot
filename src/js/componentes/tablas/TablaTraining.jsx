@@ -8,13 +8,14 @@ import { FormNewIntent }                                   from '../formularios/
 //
 const EditableContext = React.createContext();
 //
-const EditableRow = ({ form, index, ...props }) => (
+//const EditableRow = ({ form, index, ...props }) => (
+const EditableFormRow = ({ form, index, ...props }) => (
   <EditableContext.Provider value={form}>
     <tr {...props} />
   </EditableContext.Provider>
 );
 //
-const EditableFormRow = Form.create()(EditableRow);
+//const EditableFormRow = Form.create()(EditableRow);
 //
 class EditableCell extends React.Component {
     constructor(props){
@@ -116,9 +117,11 @@ export class TablaTraining extends React.Component {
             arrayTraining: Object.values(this.props.chatbotConfig.trainning),
             columnas: this.parseColumns()
         } ;
+        // console.log('.....TablaTraining:: construtor:: ') ;
     }
     //
     static getDerivedStateFromProps(newProps, state) {
+        // console.log('.....TablaTraining:: getDerivedStateFromProps:: state.flagCachedProps: '+state.flagCachedProps) ;
         if ( state.flagCachedProps==false ){
             let tempArrayTraining = Object.values(newProps.chatbotConfig.trainning) ;
             if ( tempArrayTraining.length==0 ){
@@ -339,6 +342,7 @@ export class TablaTraining extends React.Component {
     //
     render(){
         //
+        // console.log('.....TablaTraining:: render:: ') ;
         const components = {
             body: {
               row: EditableFormRow,
@@ -372,7 +376,7 @@ export class TablaTraining extends React.Component {
                 }
             }) ;
         }
-        console.dir(arrayDatos) ;
+        // console.dir(arrayDatos) ;
         //
         return(
             <div>

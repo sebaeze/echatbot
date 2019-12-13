@@ -47,7 +47,7 @@ export class App extends React.Component {
     configApp.isMobile = this.state.isMobile ;
     //
     return (
-      <Layout style={{ background: '#fff',padding: '0' }}>
+      <Layout id="waiboc-id-app" style={{ background: '#fff',padding: '0' }}>
           <Encabezado translate={{...languageLocale()}} />
           <Router>
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>

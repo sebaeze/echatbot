@@ -2,7 +2,8 @@
 *
 */
 import React                                                    from 'react' ;
-import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon, Modal }   from 'antd'  ;
+import { Row, Col, Spin, Form, Input, Button, Tooltip, Modal }   from 'antd'  ;
+import Icon from '@ant-design/icons';
 import { enviarConsulta }                                       from '../../api/api' ;
 //
 import '../../../css/estilosContacto.css' ;
@@ -177,7 +178,9 @@ class FormContacto extends React.Component {
     }
     //
 } ;
-//
+/*
 const WrappedFormContacto = Form.create({ name: '' })(FormContacto);
 export default WrappedFormContacto ;
+*/
+export default FormContacto ;
 //

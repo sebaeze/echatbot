@@ -44,7 +44,7 @@ export class App extends React.Component {
     console.log('.....APP:: Render ') ;
     //
     return (
-      <Layout style={{ background: '#fff',padding: '0' }}>
+      <Layout id="waiboc-id-app"  style={{ background: '#fff',padding: '0' }}>
           <Router>
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
               <Route exact path="/test"               component={(argMach) => <CuerpoTrain    translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />

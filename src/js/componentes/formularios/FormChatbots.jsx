@@ -6,7 +6,8 @@
 */
 import React                   from 'react' ;
 import { api        }          from '../../api/api' ;
-import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon, Modal }   from 'antd'  ;
+import { Row, Col, Spin, Form, Input, Button, Tooltip,  Modal }   from 'antd'  ;
+import Icon from '@ant-design/icons';
 //
 class FormChatbots extends React.Component {
     constructor(props){
@@ -274,7 +275,7 @@ class FormChatbots extends React.Component {
     }
     //
 } ;
-//
+/*
 const WrappedFormChatbots = Form.create({ name: '',
     mapPropsToFields(props) {
         return {
@@ -289,6 +290,7 @@ const WrappedFormChatbots = Form.create({ name: '',
         };
     }
 })(FormChatbots);
-//
 export default WrappedFormChatbots ;
+*/
+export default FormChatbots ;
 //

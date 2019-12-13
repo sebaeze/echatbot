@@ -28,6 +28,8 @@
             "botsConfiguration":"Configuration of Chatbots"
         },
         "tooltip":{
+            "intentAnswer":"Add at least 1 answer to the intent",
+            "intentName":"Define a unique name to identify the Intent",
             "chatbotName":"Choose a name for your chatbot",
             "chatbotAccesslist":"Access list by email address",
             "websiteDomains":"Input the url of your website / s, for example: https://www.mywebsite.com"
@@ -42,6 +44,8 @@
             "action":"Action"
         },
         "form":{
+            "intentExamples":"Add examples for the intent",
+            "intentAnswer":"Add examples of text associated to the intent",
             "textAddIntentExample":"Add an example for the intent",
             "nonValidIntentExample":"Example for intent should not be empty",
             "userNotAuthorized":"User is not authorized to modify this chatbot",
@@ -109,6 +113,7 @@
         "trainChatbot":"Entrenar Chatbot",
         "logout":"Finalizar sesion",
         "tooltip":{
+            "intentName":"Defina un nombre unico para identificar la Intención",
             "chatbotName":"Elija un nombre para su chatbot",
             "chatbotAccesslist":"Otorgue acceso para editar su chatbot agregando el email",
             "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: https://www.mipagina.com"
@@ -123,6 +128,8 @@
             "action":"Acción"
         },
         "form":{
+            "intentExamples":"Agregar ejemplos de la intención",
+            "intentAnswer":"Agregar ejemplos de texto para asociar a la intención del usuario",
             "textAddIntentExample":"Agregar un ejemplo",
             "nonValidIntentExample":"Ejemplo de intención no puede ser un string en blanco",
             "userNotAuthorized":"Usuario no esta autorizado a modificar este chatbot",
@@ -241,11 +248,14 @@
             "botsConfiguration":"Configuração de Chatbots"
         },
         "tooltip":{
+            "intentName":"Defina um nome exclusivo para identificar a intenção",
             "chatbotName":"Escolha um nome para o seu chatbot",
             "chatbotAccesslist":"Conceda acesso ao chatbot adicionando o endereço de email",
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "intentExamples":"Adicione exemplos para a intenção",
+            "intentAnswer":"Adicione exemplos de texto associados à intenção",
             "textAddIntentExample":"Adicione um exemplo para a intenção",
             "nonValidIntentExample":"Exemplo para intenção não deve estar vazio",
             "userNotAuthorized":"Usuário não autorizado a modificar este chatbot",

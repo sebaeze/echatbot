@@ -1,7 +1,8 @@
 /*
 *
 */
-import { Layout, Menu, Icon, Typography, Row, Col, Tooltip } from 'antd'   ;
+import { Layout, Menu, Typography, Row, Col, Tooltip } from 'antd'   ;
+import Icon from '@ant-design/icons';
 import React                             from 'react' ;
 import FormUserInfo                      from '../formularios/FormUserInfo' ;
 import FormChatbots                      from '../formularios/FormChatbots' ;

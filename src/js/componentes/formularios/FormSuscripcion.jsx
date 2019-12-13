@@ -112,7 +112,9 @@ export class FormSuscripcion extends React.Component {
     }
     //
 } ;
-//
+/*
 const WrappedFormSuscripcion = Form.create({ name: '' })(FormSuscripcion);
 export default WrappedFormSuscripcion ;
+*/
+export default FormSuscripcion ;
 //

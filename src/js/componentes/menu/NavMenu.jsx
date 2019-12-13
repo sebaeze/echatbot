@@ -2,7 +2,8 @@
 *
 */
 import React                             from 'react' ;
-import { Menu, Button, Icon }            from 'antd'  ;
+import { Menu, Button }            from 'antd'  ;
+import Icon from '@ant-design/icons';
 import { api        }                    from '../../api/api' ;
 import { PARAMETROS }                    from '../../utils/parametros' ;
 //

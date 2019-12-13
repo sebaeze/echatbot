@@ -2,7 +2,8 @@
 *
 */
 import React                                   from 'react' ;
-import { Tabs, Icon, Spin, Row, Col, BackTop, notification }   from 'antd'  ;
+import { Tabs, Spin, Row, Col, BackTop, notification }   from 'antd'  ;
+import Icon from '@ant-design/icons';
 import { api }                                 from '../../api/api' ;
 import { FormEditChatbotInfo }                 from '../formularios/FormEditChatbotInfo' ;
 import { TablaTraining       }                 from '../tablas/TablaTraining'            ;

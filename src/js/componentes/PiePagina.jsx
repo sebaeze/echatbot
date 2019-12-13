@@ -65,7 +65,9 @@ class PiePagina extends Component {
     )
   }
 }
-/* */
+/*
 const WrappedPiePagina = Form.create({ name: 'suscripcion' })(PiePagina);
 export default WrappedPiePagina ;
+*/
+export default PiePagina ;
 /* */

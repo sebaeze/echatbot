@@ -3,11 +3,13 @@
 */
 import React                     from 'react' ;
 import { FormDynamicInputText }  from  './FormDynamicInputText' ;
-import { Row, Col, Tag , Form, Input, Button, Tooltip, Icon, Modal, Select, Typography }   from 'antd'  ;
+import { Row, Col, Tag , Form, Input, Button, Tooltip, Modal, Select, Typography }   from 'antd'  ;
+import Icon from '@ant-design/icons';
 //
 const { Title } = Typography ;
 //
-class FormNewChatbotWithModal extends React.Component {
+//class FormNewChatbotWithModal extends React.Component {
+export class FormNewChatbot extends React.Component {
     constructor(props){
         super(props) ;
         this.firstNode          = false ;
@@ -92,7 +94,7 @@ class FormNewChatbotWithModal extends React.Component {
                 //okButtonProps={!hasErrors(getFieldsError())}
                 cancelButtonProps={{ disabled: false }}
             >
-                <Form id="idFormNewChatbot" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
+                <Form className="waiboc-form-modal" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
                         <Row >
                             <Form.Item
                                 hasFeedback
@@ -189,7 +191,7 @@ class FormNewChatbotWithModal extends React.Component {
     }
     //
 } ;
-//
+/*
 export const FormNewChatbot = Form.create({ name: '',
     mapPropsToFields(props) {
         return {
@@ -204,6 +206,6 @@ export const FormNewChatbot = Form.create({ name: '',
         };
     }
 })(FormNewChatbotWithModal);
-//
+*/
 //export default WrappedFormNewChatbot ;
 //

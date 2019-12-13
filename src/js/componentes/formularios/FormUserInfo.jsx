@@ -7,7 +7,8 @@
 import React                   from 'react' ;
 import { FiltroPais }          from '../filtros/FiltroPais' ;
 import { api        }          from '../../api/api' ;
-import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon }   from 'antd'  ;
+import { Row, Col, Spin, Form, Input, Button, Tooltip }   from 'antd'  ;
+import Icon from '@ant-design/icons';
 //
 class FormUserInfo extends React.Component {
     constructor(props){
@@ -234,7 +235,7 @@ class FormUserInfo extends React.Component {
     }
     //
 } ;
-//
+/*
 const WrappedFormUserInfo = Form.create({ name: '',
     mapPropsToFields(props) {
         return {
@@ -252,6 +253,7 @@ const WrappedFormUserInfo = Form.create({ name: '',
         };
     }
 })(FormUserInfo);
-//
 export default WrappedFormUserInfo ;
+*/
+export default FormUserInfo ;
 //

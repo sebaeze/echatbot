@@ -2,7 +2,8 @@
 *
 */
 import React                            from 'react' ;
-import { Typography, Row, Col, Icon }   from 'antd'  ;
+import { Typography, Row, Col }   from 'antd'  ;
+import Icon from '@ant-design/icons';
 //
 import '../../../css/estilosCuerpo.css' ;
 //

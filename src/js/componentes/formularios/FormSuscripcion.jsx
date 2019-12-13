@@ -37,7 +37,6 @@ export class FormSuscripcion extends React.Component {
     //
     render(){
         //
-        const { getFieldDecorator } = this.props.form;
         const EmailAdicional        = () => {
         return(
             <div>
@@ -90,20 +89,9 @@ export class FormSuscripcion extends React.Component {
                             <EmailAdicional />
                             :
                             <Form onSubmit={onSubmitSuscripcion} >
-                                <Form.Item>
-                                    {getFieldDecorator('email', {
-                                            rules: [
-                                            {
-                                                type: 'email',
-                                                message: 'E-mail invalido!',
-                                            },
-                                            {
-                                                required: true,
-                                                message: 'Por favor, introduzca un email valido',
-                                            },
-                                            ],
-                                        })(<Input placeholder="email@com.ar" />)}
-                                        <Button htmlType="submit" style={{backgroundColor:'#49B6F9'}}>Suscribirme</Button>
+                                <Form.Item name='email' rules={[{type: 'email',message: 'E-mail invalido!',},{required: true,message: 'Por favor, introduzca un email valido', }]} >
+                                    <Input placeholder="email@com.ar" />
+                                    <Button htmlType="submit" style={{backgroundColor:'#49B6F9'}}>Suscribirme</Button>
                                 </Form.Item>
                             </Form>
                 }

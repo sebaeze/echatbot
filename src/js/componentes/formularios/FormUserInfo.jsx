@@ -7,8 +7,9 @@
 import React                   from 'react' ;
 import { FiltroPais }          from '../filtros/FiltroPais' ;
 import { api        }          from '../../api/api' ;
-import { Row, Col, Spin, Form, Input, Button, Tooltip }   from 'antd'  ;
-import Icon from '@ant-design/icons';
+import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon }   from 'antd'  ;
+// import Icon from 'antd/lib/icon';
+// import Icon from '@ant-design/icons';
 //
 class FormUserInfo extends React.Component {
     constructor(props){
@@ -78,9 +79,7 @@ class FormUserInfo extends React.Component {
     //
     render(){
         //
-        const { getFieldDecorator, getFieldError } = this.props.form ;
         let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'140px'} : {} ;
-        //
         return(
             //
             <Row id="idFormContacto" onKeyDown={this.handleKeyboard}>
@@ -90,60 +89,49 @@ class FormUserInfo extends React.Component {
                         <Row style={{marginTop:'20px'}}>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={10} xl={10} xxl={10}>
-                                <Form.Item
-                                    label={ <span>{this.props.translate.form.name}<Tooltip  placement="bottomRight" title="¿ Cuál es su nombre o cómo le gusta que lo llamen ?"> <Icon type="question-circle-o" /> </Tooltip> </span> }
+                                <Form.Item name='name' rules={[{ required: true, message: 'Por favor, escriba su nombre', whitespace: true }]}
+                                    label={ <span>{this.props.translate.form.name}<Tooltip  placement="bottomRight" title="¿ Cuál es su nombre o cómo le gusta que lo llamen ?"> 
+                                    <Icon type="question-circle-o" /> </Tooltip> </span> }
                                 >
-                                    {getFieldDecorator('name', { rules: [{ required: true, message: 'Por favor, escriba su nombre', whitespace: true }], })(<Input allowClear size="large" />)}
+                                    <Input allowClear size="large" />
                                 </Form.Item>
                             </Col>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={10} xl={10} xxl={10}>
-                                <Form.Item
+                                <Form.Item name='lastName' rules={ [{ required: true, message: 'Por favor, escriba su apellido', whitespace: true }]}
                                     label={ <span>{this.props.translate.form.lastName}</span> }
                                 >
-                                    {getFieldDecorator('lastName', { rules: [{ required: true, message: 'Por favor, escriba su apellido', whitespace: true }], })(<Input allowClear size="large" />)}
+                                    <Input allowClear size="large" />
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Row style={{marginTop:'5px'}}>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={21} xl={21} xxl={21}>
-                                <Form.Item label="E-mail">
-                                    {getFieldDecorator('email', {
-                                        rules: [
-                                        {
-                                            type: 'email',
-                                            message: 'Email incorrecto.',
-                                        },
-                                        {
-                                            required: true,
-                                            message: 'Por favor, ponga un email correcto.',
-                                        },
-                                        ],
-                                    }
-                                    )(<Input allowClear size="large" />)}
+                                <Form.Item label="E-mail" name='email' rules={[{type: 'email',message: 'Email incorrecto.',},{required: true,message: 'Por favor, ponga un email correcto.',}]} >
+                                    <Input allowClear size="large" />
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Row style={{marginTop:'5px'}}>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={21} xl={21} xxl={21}>
-                                <Form.Item  label={ <span>{this.props.translate.form.address}</span> } >
-                                    {getFieldDecorator('address', {})(<Input allowClear size="large" />)}
+                                <Form.Item name='address' label={ <span>{this.props.translate.form.address}</span> } >
+                                    <Input allowClear size="large" />
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Row style={{marginTop:'5px'}}>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={10} xl={10} xxl={10}>
-                                <Form.Item  label={ <span>{this.props.translate.form.city}</span> } >
-                                    {getFieldDecorator('city', {})(<Input allowClear size="large" />)}
+                                <Form.Item  name='city' label={ <span>{this.props.translate.form.city}</span> } >
+                                    <Input allowClear size="large" />
                                 </Form.Item>
                             </Col>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={10} xl={10} xxl={10}>
-                                <Form.Item  label={ <span>{this.props.translate.form.state}</span> } >
-                                    {getFieldDecorator('state', { rules: [{ message: 'Por favor, escriba su apellido', whitespace: true }], })(<Input allowClear size="large" />)}
+                                <Form.Item  name='state' label={ <span>{this.props.translate.form.state}</span> } rules={[{ message: 'Por favor, escriba su apellido', whitespace: true }]} >
+                                    <Input allowClear size="large" />
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -158,15 +146,15 @@ class FormUserInfo extends React.Component {
                             </Col>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={10} xl={10} xxl={10}>
-                                <Form.Item  label={ <span>{this.props.translate.form.zipCode}</span> } >
-                                    {getFieldDecorator('zipCode', { rules: [{ message: 'Por favor, escriba su apellido', whitespace: true }], })(<Input allowClear size="large" />)}
+                                <Form.Item  name='zipCode' label={ <span>{this.props.translate.form.zipCode}</span> } rules={[{ message: 'Por favor, escriba su apellido', whitespace: true }]} >
+                                    <Input allowClear size="large" />
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Row style={{marginTop:'5px'}}>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={10} xl={10} xxl={10}>
-                                <Form.Item
+                                <Form.Item name='phone' rules={[{ required: false, message: 'Ingrese su número de Whatsapp / teléfono si desea recibir respuesta por Whatsapp / Teléfono ' }]}
                                     label={
                                         <span>{this.props.translate.form.phone}:
                                         <Tooltip  placement="bottomRight" title="Ingrese su número de Whatsapp / teléfono si desea recibir respuesta por Whatsapp / Teléfono ">
@@ -175,14 +163,12 @@ class FormUserInfo extends React.Component {
                                         </span>
                                     }
                                 >
-                                {getFieldDecorator('phone', {
-                                    rules: [{ required: false, message: 'Ingrese su número de Whatsapp / teléfono si desea recibir respuesta por Whatsapp / Teléfono ' }],
-                                })(<Input allowClear size="large" style={{ width: '100%' }} />)}
+                                    <Input allowClear size="large" style={{ width: '100%' }} />
                                 </Form.Item>
                             </Col>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={10} xl={10} xxl={10}>
-                                <Form.Item
+                                <Form.Item name='whatsapp' rules={[{ required: false, message: 'Ingrese su número de Whatsapp si desea recibir respuesta por Whatsapp' }]}
                                     label={<span>Whatsapp:
                                         <Tooltip  placement="bottomRight" title="Ingrese su número de Whatsapp / teléfono si desea recibir respuesta por Whatsapp / Teléfono ">
                                             <Icon type="question-circle-o" />
@@ -190,17 +176,15 @@ class FormUserInfo extends React.Component {
                                         </span>
                                     }
                                 >
-                                    {getFieldDecorator('whatsapp', { rules: [{ required: false, message: 'Ingrese su número de Whatsapp si desea recibir respuesta por Whatsapp' }], })
-                                    (<Input allowClear size="large" style={{ width: '100%' }} />)}
+                                    <Input allowClear size="large" style={{ width: '100%' }} />
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Row style={{marginTop:'5px'}}>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>
                             <Col xs={23} md={23} lg={21} xl={21} xxl={21}>
-                                <Form.Item  label={ <span>{this.props.translate.form.description}</span> } >
-                                    {getFieldDecorator('description', { rules: [{ required: false, message: 'Comentarios adicionales', whitespace: true }], })
-                                    (<Input.TextArea />)}
+                                <Form.Item name='description' label={ <span>{this.props.translate.form.description}</span> } rules={ [{ required: false, message: 'Comentarios adicionales', whitespace: true }]} >
+                                    <Input.TextArea />
                                 </Form.Item>
                                 <Form.Item>
                                     {

@@ -3,7 +3,8 @@
 */
 import React                             from 'react' ;
 import { Menu, Button }            from 'antd'  ;
-import Icon from '@ant-design/icons';
+import Icon from 'antd/lib/icon';
+//import Icon from '@ant-design/icons';
 import { api        }                    from '../../api/api' ;
 import { PARAMETROS }                    from '../../utils/parametros' ;
 //

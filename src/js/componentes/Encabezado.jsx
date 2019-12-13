@@ -2,9 +2,7 @@
 *
 */
 import React, { Component }                          from 'react' ;
-import { Layout, Menu, Breadcrumb, Dropdown }  from 'antd' ;
-import Icon from '@ant-design/icons';
-import { Row, Col, Popover }                         from 'antd';
+import { Layout, Row, Col, Popover }                 from 'antd' ;
 //
 import NavMenu                             from './menu/NavMenu' ;
 import {LogoEmpresa}                       from './link/LogoEmpresa'  ;

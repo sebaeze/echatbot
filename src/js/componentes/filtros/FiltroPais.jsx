@@ -44,15 +44,11 @@ export class FiltroPais extends React.Component {
         ) ;
         //
         let tempStyle = this.props.style ? this.props.style : {} ;
-        const {getFieldDecorator} = this.props.form ;
+        // const {getFieldDecorator} = this.props.form ;
         //
         return (
             <div>
-                <Form.Item>
-                    {getFieldDecorator('country', {
-                        rules: [{ required: true, message: 'Please, choose your country' }],
-                    })
-                    (
+                <Form.Item name='country' rules={ [{ required: true, message: 'Please, choose your country' }]} >
                         <Select
                             id={this.props.id}
                             showSearch
@@ -67,8 +63,6 @@ export class FiltroPais extends React.Component {
                         >
                             {arrayOptions}
                         </Select>
-                    )
-                    }
                 </Form.Item>
             </div>
         )

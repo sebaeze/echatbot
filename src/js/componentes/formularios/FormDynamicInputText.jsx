@@ -74,7 +74,6 @@ export class FormDynamicInputText extends React.Component {
                         required={true}
                         key={"this.props.fieldName_"+k}
                         hasFeedback
-                        //validateStatus="error"
                     >
                         {
                             getFieldDecorator(`${this.props.fieldName}[${k}]`,
@@ -87,9 +86,11 @@ export class FormDynamicInputText extends React.Component {
                                 rules: [ {suppressWarning: true, type:  this.props.defaultTypefield, required: true, message: this.props.description,
                                 }, ],
                             })
-                            (<Input placeholder={this.props.textPlaceholder} size="large" style={{ width: '90%' }}
-                                ref={(argRef)=>{ if ( this.state.flagFocusInput==true ){ argRef.focus();} }}
-                            />)}
+                            (
+                                <Input placeholder={this.props.textPlaceholder} size="large" style={{ width: '90%' }}
+                                    ref={(argRef)=>{ if ( this.state.flagFocusInput==true ){ argRef.focus();} }}
+                                />
+                            )}
                         { this.state.keys.length > 0 ? ( <Icon style={{marginLeft:'10px'}} className="dynamic-delete-button" type="minus-circle-o" onClick={() => this.remove(k)} /> ) : null}
                     </Form.Item>
                 )
@@ -99,7 +100,7 @@ export class FormDynamicInputText extends React.Component {
             <div>
                 {formItems}
                 <Form.Item {...formItemLayout}>
-                    <Button type="dashed" onClick={this.add} size="large" style={{ width: '60%' }}>
+                    <Button type="dashed" onClick={this.add} size="large" style={{ width: '80%' }}>
                         <Icon type="plus" /> <span style={{fontWeight:'600'}}>{this.props.textAdd} </span>
                     </Button>
                 </Form.Item>

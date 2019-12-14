@@ -28,6 +28,7 @@
             "botsConfiguration":"Configuration of Chatbots"
         },
         "tooltip":{
+            "intentExamples":"Add examples of user's queries",
             "intentAnswer":"Add at least 1 answer to the intent",
             "intentName":"Define a unique name to identify the Intent",
             "chatbotName":"Choose a name for your chatbot",
@@ -44,6 +45,8 @@
             "action":"Action"
         },
         "form":{
+            "answerType":"Type of answer to the user",
+            "selectTypeOfAnswer":"Choose the type of answer to the user",
             "intentExamples":"Add answer to intent",
             "intentAnswer":"Add examples of text associated to the intent",
             "textAddIntentExample":"Add an example for the intent",
@@ -113,6 +116,7 @@
         "trainChatbot":"Entrenar Chatbot",
         "logout":"Finalizar sesion",
         "tooltip":{
+            "intentExamples":"Agregue ejemplos de consultas de usuarios",
             "intentName":"Defina un nombre unico para identificar la Intención",
             "chatbotName":"Elija un nombre para su chatbot",
             "chatbotAccesslist":"Otorgue acceso para editar su chatbot agregando el email",
@@ -248,6 +252,7 @@
             "botsConfiguration":"Configuração de Chatbots"
         },
         "tooltip":{
+            "intentExamples":"Adicione exemplos de intenção",
             "intentName":"Defina um nome exclusivo para identificar a intenção",
             "chatbotName":"Escolha um nome para o seu chatbot",
             "chatbotAccesslist":"Conceda acesso ao chatbot adicionando o endereço de email",

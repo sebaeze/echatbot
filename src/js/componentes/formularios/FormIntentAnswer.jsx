@@ -1,22 +1,46 @@
 /*
 * FormIntentAnswer
 */
-import React                                          from 'react' ;
-import { Row, Form, Input, Tooltip, Icon,  Select }   from 'antd'  ;
+import React                                             from 'react' ;
+import { Button, Form, Input, Tooltip, Icon,  Select }   from 'antd'  ;
 //
-export class FormIntentAnswer extends React.Component {
+export class FormIntentAnswerBase extends React.Component {
     constructor(props){
         super(props) ;
         this.firstNode          = false ;
-        this.state              = {flagSpinner:false, modalVisible: this.props.modalVisible, enviadoOk:false, accessList:{} } ;
+        this.state              = {flagSpinner:false} ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
-        console.log('....FormAnswer:: props: ') ;
-        console.dir(props) ;
     }
     //
     componentDidMount(){
         const { resetFields } = this.props.form ;
-        resetFields({names:['answerType','answerTitle','answerApi','answerText','answerOptions' ]}) ;
+        resetFields({names:['type','title','api','text','options' ]}) ;
+    }
+    //
+    onSubmitForm(){
+        try {
+            //
+            this.setState({flagSpinner:true}) ;
+            this.props.form.validateFields({ force: true }, (error) => {
+              if (error) {
+                  console.log('.....error: ') ;
+                  console.dir(error) ;
+                  setTimeout(() => {
+                        this.setState({flagSpinner:false }) ;
+                    }, 700 ) ;
+              } else {
+                  let tempFields    = this.props.form.getFieldsValue() ;
+                  let tempOutAnswer = {} ;
+                  for ( let keyF in tempFields ){
+                      let valField = tempFields[keyF] ;
+                      tempOutAnswer[keyF] = valField ;
+                  }
+                this.props.onSubmitOk( {intentAnswer: tempOutAnswer} ) ;
+              }
+            });
+        } catch(errFS){
+            console.dir(errFS) ;
+        }
     }
     //
     handleSelectChange(value){
@@ -28,16 +52,17 @@ export class FormIntentAnswer extends React.Component {
     render(){
         //
         const { getFieldDecorator } = this.props.form ;
-        let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'140px'} : {} ;
         //
         return(
             //
-            <div>
-                <Row >
+                <Form >
                     <Form.Item
                         label={ <span>{this.props.translate.form.answerType}</span> }
                     >
-                        {getFieldDecorator('answerType', { initialValue:'text', rules: [{ required: true, message: 'Please, choose the language', whitespace: true }], })
+                        {getFieldDecorator('type', {
+                            initialValue: this.props.data.intentAnswer.answerType||'text',
+                            rules: [{ required: true, message: 'Please, choose the language', whitespace: true }]
+                        })
                         (
                             <Select
                                 placeholder={this.props.form.selectTypeOfAnswer}
@@ -55,20 +80,19 @@ export class FormIntentAnswer extends React.Component {
                         )
                         }
                     </Form.Item>
-                </Row>
-                <Row >
                     <Form.Item
                         hasFeedback
                         label={ <span>
-                                    title
+                                    Title
                                     <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
                                 </span>}
                     >
-                        {getFieldDecorator('answerTitle', { rules: [{ required: true, message: 'Please, write a name that identify the intent', whitespace: true }], })
+                        {getFieldDecorator('title', {
+                            initialValue: this.props.data.intentAnswer.answerTitle||'',
+                            rules: [{ required: true, message: 'Please, write a name that identify the intent', whitespace: true }]
+                        })
                         (<Input allowClear size="large" />)}
                     </Form.Item>
-                </Row>
-                <Row >
                     <Form.Item
                         hasFeedback
                         label={ <span>
@@ -76,11 +100,12 @@ export class FormIntentAnswer extends React.Component {
                                     <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
                                 </span>}
                     >
-                        {getFieldDecorator('answerText', { rules: [{ required: true, message: 'Please, write a name that identify the intent', whitespace: true }], })
+                        {getFieldDecorator('text', {
+                            initialValue: this.props.data.intentAnswer.text||'',
+                            rules: [{ required: true, message: 'Please, write a name that identify the intent', whitespace: true }]
+                        })
                         (<Input allowClear size="large" />)}
                     </Form.Item>
-                </Row>
-                <Row >
                     <Form.Item
                         hasFeedback
                         label={ <span>
@@ -88,13 +113,29 @@ export class FormIntentAnswer extends React.Component {
                                     <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
                                 </span>}
                     >
-                        {getFieldDecorator('answerApi', { rules: [{ required: false, message: 'Please, write a name that identify the intent', whitespace: true }], })
+                        {getFieldDecorator('api', {
+                            initialValue: this.props.data.intentAnswer.answerApi||'',
+                            rules: [{ required: false, message: 'Please, write a name that identify the intent', whitespace: true }]
+                        })
                         (<Input allowClear size="large" />)}
                     </Form.Item>
-                </Row>
-            </div>
+                    <Form.Item>
+                    <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
+                            {this.props.translate.form.submit}
+                        </Button>
+                    </Form.Item>
+                </Form>
         ) ;
     }
     //
 } ;
+
+//
+export const FormIntentAnswer = Form.create({ name: '',
+    mapPropsToFields(props) {
+        return {
+            intentAnswer: Form.createFormField({ value: props.data.intentAnswer || {} })
+        };
+    }
+})(FormIntentAnswerBase);
 //

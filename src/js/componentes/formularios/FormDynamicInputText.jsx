@@ -15,7 +15,7 @@ export class FormDynamicInputText extends React.Component {
         this.remove       = this.remove.bind(this) ;
         //this.id           = 0 ;
         //this.state.keys         = [] ;
-        this.state        = { keys:[], flagFocusInput: false } ;
+        this.state        = { keys:[], flagFocusInput: false, focus: this.props.focus ? this.props.focus : false } ;
     }
     //
     componentDidMount(){
@@ -101,7 +101,9 @@ export class FormDynamicInputText extends React.Component {
                 {formItems}
                 <Form.Item {...formItemLayout}>
                     <Button type="dashed" onClick={this.add} size="large" style={{ width: '80%' }}>
-                        <Icon type="plus" /> <span style={{fontWeight:'600'}}>{this.props.textAdd} </span>
+                        <div ref={(argRef)=>{ if ( this.state.focus==true ){ argRef.focus(); this.setState({focus:false}); } }}>
+                            <Icon type="plus" /> <span style={{fontWeight:'600'}}>{this.props.textAdd} </span>
+                        </div>
                     </Button>
                 </Form.Item>
                 <Form.Item {...formItemLayout}></Form.Item>

@@ -997,9 +997,14 @@ div.react-bootstrap-table tbody tr:hover {
 #waiboc-id-app .has-success.has-feedback .ant-form-item-children-icon svg, .has-warning.has-feedback .ant-form-item-children-icon svg, .has-error.has-feedback .ant-form-item-children-icon svg, .is-validating.has-feedback .ant-form-item-children-icon svg {
     margin-left: 35px !important ;
 }
-/*  */
+/*
 #waiboc-id-app i.anticon, .waiboc-cl-form i.anticon{
     margin-left: 15px !important ;
+    font-size: 18px !important ;
+}
+*/
+.waiboc-cl-form .ant-form-item-label i.anticon.anticon-question-circle-o {
+    margin-left: 8px !important ;
     font-size: 18px !important ;
 }
 #waiboc-id-app i.anticon.anticon-check-circle, .waiboc-cl-form i.anticon.anticon-check-circle {

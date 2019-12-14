@@ -2,8 +2,9 @@
 * FormNewIntent
 */
 import React                     from 'react' ;
-import { FormDynamicInputText }  from  './FormDynamicInputText' ;
-import { FormIntentAnswer }      from './FormIntentAnswer' ;
+import { FormIntentName   }      from './FormIntentName'     ;
+import { FormIntentExamples }    from './FormIntentExamples' ;
+import { FormIntentAnswer }      from './FormIntentAnswer'   ;
 import { Row, Form, Input, Tooltip, Icon, Modal, Select, Typography, Steps  }   from 'antd'  ;
 //
 const { Step  } = Steps      ;
@@ -12,39 +13,35 @@ const { Title } = Typography ;
 class FormNewIntentWithModal extends React.Component {
     constructor(props){
         super(props) ;
-        this.firstNode          = false ;
         this.state              = {
             flagSpinner:false,
             modalVisible: this.props.modalVisible,
             enviadoOk:false,
-            formStep: 1,
+            dataNewIntent:{intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}},
+            formStep: 0,
         } ;
-        this.handleSelectChange = this.handleSelectChange.bind(this) ;
         this.onAcceptNewIntent  = this.onAcceptNewIntent.bind(this) ;
         this.onNextStep         = this.onNextStep.bind(this) ;
     }
     //
     componentDidMount(){
         const { resetFields } = this.props.form ;
-        resetFields({names:['botSubtitle','botIcon','botSubtitle','description']}) ;
-        if ( this.firstNode ){
-            this.firstNode.focus() ;
-        }
+        // resetFields({names:['botSubtitle','botIcon','botSubtitle','description']}) ;
     }
     //
     static getDerivedStateFromProps(newProps, state) {
         return { modalVisible: newProps.modalVisible } ;
     }
     //
-    handleSelectChange(value){
-        this.props.form.setFieldsValue({
-            intentLanguage: value
-        });
-    };
-    //
     onNextStep(argNextStep){
         try {
-
+            console.log('....onNextStep:: current Form: '+this.state.formStep) ;
+            let newState = {
+                dataNewIntent: Object.assign({...this.state.dataNewIntent},argNextStep),
+                formStep: this.state.formStep<2 ? (this.state.formStep+1) : this.state.formStep
+            }
+            console.dir(newState) ;
+            this.setState(newState) ;
         } catch(errNS){
             console.dir(errNS) ;
         }
@@ -88,116 +85,16 @@ class FormNewIntentWithModal extends React.Component {
     //
     render(){
         //
-        const { getFieldDecorator, resetFields } = this.props.form ;
-        let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'140px'} : {} ;
-        //
-        const FormNewIntentName = (props) => {
+        const { resetFields } = this.props.form ;
+        const NextStepForm    = (props) => {
             return(
-                <Form onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
-                    <Row >
-                        <Form.Item
-                            hasFeedback
-                            label={ <span>
-                                        Intent
-                                        <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.chatbotName} ><Icon type="question-circle-o" /> </Tooltip>
-                                    </span>}
-                        >
-                            {getFieldDecorator('intentName', { rules: [{ required: true, message: 'Please, write a name that identify the intent', whitespace: true }], })
-                            (<Input allowClear size="large" ref={(argRef)=>{ /*this.firstNode=argRef; */argRef.focus(); }} />)}
-                        </Form.Item>
-                    </Row>
-                    <Row >
-                        <Form.Item
-                            label={ <span>{this.props.translate.form.selectLanguage}</span> }
-                        >
-                            {getFieldDecorator('intentLanguage', { rules: [{ required: true, message: 'Please, choose the language', whitespace: true }], })
-                            (
-                                <Select
-                                    placeholder={this.props.form.selectLanguage}
-                                    onChange={this.handleSelectChange}
-                                    getPopupContainer={(trigger) => {
-                                        return trigger.parentNode ;
-                                    }}
-                                >
-                                    <Select.Option value="es" key="1">Español</Select.Option>
-                                    <Select.Option value="en" key="2">English</Select.Option>
-                                    <Select.Option value="pt" key="3">Português</Select.Option>
-                                </Select>
-                            )
-                            }
-                        </Form.Item>
-                    </Row>
-                </Form>
-            )
-        }
-        //
-        const FormNewIntentExamples = (props) => {
-            return(
-                <Form onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
-                    <Row style={{marginTop:'5px'}}>
-                        <Form.Item
-                            label={ <span>{this.props.translate.form.intentExamples}
-                                        <Tooltip  placement="topRight" title={this.props.translate.tooltip.intentExamples}>
-                                            <Icon type="question-circle-o" />
-                                        </Tooltip>
-                                    </span>
-                                }
-                        >
-                            {
-                                <FormDynamicInputText
-                                    form={this.props.form}
-                                    textPlaceholder="hello!, I need info !"
-                                    fieldName="intentExamples"
-                                    type="array"
-                                    defaultTypefield="string"
-                                    textAdd={this.props.translate.form.textAddIntentExample}
-                                    description={this.props.translate.form.nonValidIntentExample}
-                                    translate={this.props.translate}
-                                />
-                            }
-                        </Form.Item>
-                    </Row>
-                </Form>
-            )
-        }
-        //
-        const FormNewIntentAnswer = (props) => {
-            return(
-                <Form onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
-                    <Row style={{marginTop:'5px'}}>
-                        <Form.Item
-                            label={ <span>
-                                        {this.props.translate.form.intentAnswer}
-                                        <Tooltip  placement="topRight" title={this.props.translate.tooltip.intentAnswer}>
-                                            <Icon type="question-circle-o" />
-                                        </Tooltip>
-                                    </span>
-                                }
-                        >
-                            {
-                            <FormIntentAnswer
-                                form={this.props.form}
-                                data={{}}
-                                translate={this.props.translate}
-                                textAdd={this.props.translate.form.intentAnswer}
-                                description={this.props.translate.form.intentAnswer}
-                            />
-                            }
-                        </Form.Item>
-                    </Row>
-                </Form>
-            )
-        }
-        //
-        const NextStepForm = (props) => {
-            return(
-                this.state.formStep==1 ?
-                    <FormNewIntentName />
+                this.state.formStep==0 ?
+                    <FormIntentName translate={this.props.translate} data={{}} onSubmitOk={this.onNextStep} />
                     :
-                    this.state.formStep==2 ?
-                        <FormNewIntentExamples />
+                    this.state.formStep==1 ?
+                        <FormIntentExamples translate={this.props.translate} data={{}} onSubmitOk={this.onNextStep} />
                         :
-                        <FormNewIntentAnswer />
+                        <FormIntentAnswer translate={this.props.translate} data={{intentAnswer:{}}} onSubmitOk={this.onNextStep} />
             )
         }
         //
@@ -214,11 +111,11 @@ class FormNewIntentWithModal extends React.Component {
                 visible={this.state.modalVisible}
                 onOk={this.onAcceptNewIntent}
                 onCancel={(argEC)=>{resetFields(); this.props.onCancelModal(argEC);}}
-                cancelButtonProps={{ disabled: false }}
+                footer={null}
             >
                 <div className="waiboc-cl-form" >
                     <div style={{marginTop:'10px',marginBottom:'10px'}}>
-                        <Steps size="small" current={1}>
+                        <Steps size="small" current={this.state.formStep}>
                             <Step title="Nombre" />
                             <Step title="Examples" />
                             <Step title="Answer" />

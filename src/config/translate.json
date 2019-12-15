@@ -24,6 +24,12 @@
         "status":"Status",
         "trainChatbot":"Train Chatbot",
         "logout":"Logout",
+        "answertType":{
+            "text":"Text",
+            "carousel":"Carousel",
+            "image":"Image",
+            "options":"Options"
+        },
         "menuAdmin":{
             "userInfo":"User Information",
             "botsConfiguration":"Configuration of Chatbots"
@@ -46,9 +52,15 @@
             "action":"Action"
         },
         "form":{
-            "answerType":"Type of answer to the user",
+            "examples":"Examples",
+            "answer":"Answer",
+            "answerType":"Type of answer",
             "errorIntentName":"Write a name for the intent",
             "errorLanguage":"Please, choose the language",
+            "errorAnswerType":"Please, choose a type of response",
+            "errorAnswerText":"Please, write a response associated to the intent",
+            "errorAnswerTitle":"Please, write a title or description for the options",
+            "errorAnswerApi":"Please, write the url of the REST API",
             "selectTypeOfAnswer":"Choose the type of answer to the user",
             "intentExamples":"Add answer to intent",
             "intentAnswer":"Add examples of text associated to the intent",
@@ -120,6 +132,12 @@
         "status":"Estado",
         "trainChatbot":"Entrenar Chatbot",
         "logout":"Finalizar sesion",
+        "answertType":{
+            "text":"Texto",
+            "carousel":"Carousel",
+            "image":"Imagen",
+            "options":"Lista de opciones"
+        },
         "tooltip":{
             "intentExamples":"Agregue ejemplos de consultas de usuarios",
             "intentName":"Defina un nombre unico para identificar la Intención",
@@ -137,10 +155,17 @@
             "action":"Acción"
         },
         "form":{
+            "examples":"Ejemplos",
+            "answer":"Respuesta",
+            "answerType":"Tipo de respuesta",
             "intentExamples":"Agregar ejemplos de intención",
             "intentAnswer":"Agregar respuesta a intención",
             "errorIntentName":"Escriba un nombre para identificar la intención",
             "errorLanguage":"Seleccione el idioma",
+            "errorAnswerType":"Por favor, elija el tipo de respuesta",
+            "errorAnswerText":"Por favor, escriba una respuesta asociada a la intencion",
+            "errorAnswerTitle":"Por favor, escriba un titulo o descripción para las opciones",
+            "errorAnswerApi":"Please, write the url of the REST API",
             "textAddIntentExample":"Agregar un ejemplo",
             "nonValidIntentExample":"Ejemplo de intención no puede ser un string en blanco",
             "userNotAuthorized":"Usuario no esta autorizado a modificar este chatbot",
@@ -256,6 +281,12 @@
         "status":"Estado",
         "trainChatbot":"Treine seu chatbot",
         "logout":"Finalizar sessão",
+        "answertType":{
+            "text":"Texto",
+            "carousel":"Carrossel",
+            "image":"Imagem",
+            "options":"Opções"
+        },
         "menuAdmin":{
             "userInfo":"Informações do Usuário",
             "botsConfiguration":"Configuração de Chatbots"
@@ -268,10 +299,17 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "examples":"Exemplos",
+            "answer":"Resposta",
+            "answerType":"Tipo de resposta",
             "intentExamples":"Adicione exemplos de intenção",
             "intentAnswer":"Adicione resposta à intenção",
             "errorIntentName":"Escreva um nome para a intenção",
             "errorLanguage":"Por favor, escolha o idioma",
+            "errorAnswerType":"Por favor, escolha um tipo de resposta",
+            "errorAnswerText":"Por favor, escreva uma resposta associada à intenção",
+            "errorAnswerTitle":"Por favor, escreva um título ou descrição para as opções",
+            "errorAnswerApi":"Por favor, escreva o URL da API REST",
             "textAddIntentExample":"Adicione um exemplo para a intenção",
             "nonValidIntentExample":"Exemplo para intenção não deve estar vazio",
             "userNotAuthorized":"Usuário não autorizado a modificar este chatbot",

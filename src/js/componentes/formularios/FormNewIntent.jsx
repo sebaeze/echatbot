@@ -116,9 +116,9 @@ class FormNewIntentWithModal extends React.Component {
                 <div className="waiboc-cl-form" >
                     <div style={{marginTop:'10px',marginBottom:'10px'}}>
                         <Steps size="small" current={this.state.formStep}>
-                            <Step title="Nombre" />
-                            <Step title="Examples" />
-                            <Step title="Answer" />
+                            <Step title={this.props.translate.form.name} />
+                            <Step title={this.props.translate.form.examples} />
+                            <Step title={this.props.translate.form.answer} />
                         </Steps>
                     </div>
                     <NextStepForm />

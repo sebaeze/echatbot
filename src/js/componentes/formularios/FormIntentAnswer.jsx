@@ -8,8 +8,15 @@ export class FormIntentAnswerBase extends React.Component {
     constructor(props){
         super(props) ;
         this.firstNode          = false ;
-        this.state              = {flagSpinner:false} ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
+        this.answerTypes        = {
+            API:'api',
+            TEXT:'text',
+            CAROUSEL:'carousel',
+            OPTIONS:'options',
+            IMAGE:'image'
+        } ;
+        this.state              = {flagSpinner:false, fieldPanel: this.answerTypes.TEXT } ;
     }
     //
     componentDidMount(){
@@ -47,6 +54,9 @@ export class FormIntentAnswerBase extends React.Component {
         this.props.form.setFieldsValue({
             type: value
         });
+        if ( value ){
+            this.setState({fieldPanel: value})
+        }
     };
     //
     render(){
@@ -61,66 +71,82 @@ export class FormIntentAnswerBase extends React.Component {
                     >
                         {getFieldDecorator('type', {
                             initialValue: this.props.data.intentAnswer.answerType||'text',
-                            rules: [{ required: true, message: 'Please, choose the language', whitespace: true }]
+                            rules: [{ required: true, message: this.props.translate.form.errorLanguage, whitespace: true }]
                         })
                         (
                             <Select
-                                placeholder={this.props.form.selectTypeOfAnswer}
+                                placeholder={this.props.translate.form.selectTypeOfAnswer}
                                 onChange={this.handleSelectChange}
                                 getPopupContainer={(trigger) => {
                                     return trigger.parentNode ;
                                 }}
                                 size="large"
                             >
-                                <Select.Option value="text"      key="1">Text</Select.Option>
-                                <Select.Option value="carousel"  key="2">Carousel</Select.Option>
-                                <Select.Option value="option"    key="3">Option</Select.Option>
-                                <Select.Option value="image"     key="4">Picture</Select.Option>
+                                {
+                                    Object.values(this.answerTypes).map((elemType,idxType)=>{
+                                    return(
+                                            <Select.Option value={elemType}
+                                                key={idxType}>{this.props.translate.answertType[elemType]||elemType}</Select.Option>
+                                        )
+                                    })
+                                }
                             </Select>
                         )
                         }
                     </Form.Item>
-                    <Form.Item
-                        hasFeedback
-                        label={ <span>
-                                    Title
-                                    <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
-                                </span>}
-                    >
-                        {getFieldDecorator('title', {
-                            initialValue: this.props.data.intentAnswer.answerTitle||'',
-                            rules: [{ required: true, message: 'Please, write a name that identify the intent', whitespace: true }]
-                        })
-                        (<Input allowClear size="large" />)}
-                    </Form.Item>
-                    <Form.Item
-                        hasFeedback
-                        label={ <span>
-                                    Text
-                                    <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
-                                </span>}
-                    >
-                        {getFieldDecorator('text', {
-                            initialValue: this.props.data.intentAnswer.text||'',
-                            rules: [{ required: true, message: 'Please, write a name that identify the intent', whitespace: true }]
-                        })
-                        (<Input allowClear size="large" />)}
-                    </Form.Item>
-                    <Form.Item
-                        hasFeedback
-                        label={ <span>
-                                    API
-                                    <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
-                                </span>}
-                    >
-                        {getFieldDecorator('api', {
-                            initialValue: this.props.data.intentAnswer.answerApi||'',
-                            rules: [{ required: false, message: 'Please, write a name that identify the intent', whitespace: true }]
-                        })
-                        (<Input allowClear size="large" />)}
-                    </Form.Item>
+                    {
+                        this.state.fieldPanel==this.answerTypes.TEXT ?
+                            <Form.Item
+                                hasFeedback
+                                label={ <span>
+                                            Text
+                                            <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                        </span>}
+                            >
+                                {getFieldDecorator('text', {
+                                    initialValue: this.props.data.intentAnswer.text||'',
+                                    rules: [{ required: true, message: this.props.translate.form.errorAnswerText, whitespace: true }]
+                                })
+                                (<Input allowClear size="large" />)}
+                            </Form.Item>
+                            : null
+                    }
+                    {
+                        (this.state.fieldPanel==this.answerTypes.IMAGE || this.state.fieldPanel==this.answerTypes.OPTIONS) ?
+                            <Form.Item
+                                hasFeedback
+                                label={ <span>
+                                            Title
+                                            <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                        </span>}
+                            >
+                                {getFieldDecorator('title', {
+                                    initialValue: this.props.data.intentAnswer.answerTitle||'',
+                                    rules: [{ required: true, message: this.props.translate.form.errorAnswerTitle, whitespace: true }]
+                                })
+                                (<Input allowClear size="large" />)}
+                            </Form.Item>
+                            : null
+                    }
+                    {
+                        this.state.fieldPanel==this.answerTypes.API ?
+                            <Form.Item
+                                hasFeedback
+                                label={ <span>
+                                            REST API Url
+                                            <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                        </span>}
+                            >
+                                {getFieldDecorator('api', {
+                                    initialValue: this.props.data.intentAnswer.answerApi||'',
+                                    rules: [{ required: true, message: this.props.translate.form.errorAnswerApi, whitespace: true }]
+                                })
+                                (<Input allowClear size="large" />)}
+                            </Form.Item>
+                            : null
+                    }
                     <Form.Item>
-                    <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
+                        <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
                             {this.props.translate.form.submit}
                         </Button>
                     </Form.Item>

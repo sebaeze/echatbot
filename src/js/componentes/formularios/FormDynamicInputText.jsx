@@ -100,10 +100,8 @@ export class FormDynamicInputText extends React.Component {
             <div>
                 {formItems}
                 <Form.Item {...formItemLayout}>
-                    <Button type="dashed" onClick={this.add} size="large" style={{ width: '80%' }}>
-                        <div ref={(argRef)=>{ if ( this.state.focus==true ){ argRef.focus(); this.setState({focus:false}); } }}>
-                            <Icon type="plus" /> <span style={{fontWeight:'600'}}>{this.props.textAdd} </span>
-                        </div>
+                    <Button type="dashed" onClick={this.add} size="large" style={{ width: '80%' }} >
+                        <Icon type="plus" /> <span style={{fontWeight:'600'}}>{this.props.textAdd} </span>
                     </Button>
                 </Form.Item>
                 <Form.Item {...formItemLayout}></Form.Item>

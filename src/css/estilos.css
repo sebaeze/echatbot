@@ -1007,6 +1007,10 @@ div.react-bootstrap-table tbody tr:hover {
     margin-left: 8px !important ;
     font-size: 18px !important ;
 }
+#waiboc-id-app .ant-select-selection-selected-value ,.waiboc-cl-form .ant-select-selection-selected-value {
+    font-size: 18px !important ;
+    font-weight: 600 !important ;
+}
 #waiboc-id-app i.anticon.anticon-check-circle, .waiboc-cl-form i.anticon.anticon-check-circle {
     margin-left: 5px !important ;
 }

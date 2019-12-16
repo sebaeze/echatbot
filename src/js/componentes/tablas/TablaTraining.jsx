@@ -103,7 +103,6 @@ export class TablaTraining extends React.Component {
         this.onChange       = this.onChange.bind(this) ;
         this.parseColumns   = this.parseColumns.bind(this)   ;
         this.onChangeSearch = this.onChangeSearch.bind(this) ;
-        this.addNewIntent   = this.addNewIntent.bind(this)   ;
         this.handleSave     = this.handleSave.bind(this) ;
         this.onAcceptNewIntent      = this.onAcceptNewIntent.bind(this) ;
         this.saveChangesToTrainning = this.saveChangesToTrainning.bind(this) ;
@@ -246,32 +245,20 @@ export class TablaTraining extends React.Component {
     //
     onAcceptNewIntent(argNewIntent){
       try {
-        console.log('...onAccept:: argNewIntent: ') ;
-        console.dir(argNewIntent) ;
+        //
+        let tempArrayTraining = this.state.arrayTraining ;
+        tempArrayTraining.push({
+          key: tempArrayTraining.length,
+          answer: argNewIntent.intentAnswer,
+          domain: argNewIntent.domain||'default',
+          examples: argNewIntent.intentExamples||argNewIntent.examples||[],
+          entity: argNewIntent.intentName
+        });
+        this.setState({arrayTraining:tempArrayTraining,modalNewIntent: false}) ;
+        //
       } catch(errNI){
         console.dir(errNI) ;
       }
-    }
-    //
-    addNewIntent(){
-        try {
-           /*
-            let tempArrayTraining = this.state.arrayTraining ;
-            tempArrayTraining.push({
-                key: this.state.arrayTraining.length,
-                domain: "new",
-                entity:"new",
-                examples:[],
-                answer:{
-                    type:'text',
-                    answer:'new'
-                }
-            });
-            this.setState({arrayTraining:tempArrayTraining}) ;
-            */
-        } catch(errNI){
-            console.dir(errNI) ;
-        }
     }
     //
     onChangeSearch(argEventSearch){
@@ -297,10 +284,7 @@ export class TablaTraining extends React.Component {
     //
     saveChangesToTrainning(){
         try {
-          /*
-          chatbotConfig: this.props.chatbotConfig,
-          arrayTraining: Object.values(this.props.chatbotConfig.trainning),
-          */
+            //
             let chatbotTrain = {
               _id: this.state.chatbotConfig._id,
               train: {}
@@ -311,7 +295,6 @@ export class TablaTraining extends React.Component {
               let idIntent  = objIntent.entity ;
               chatbotTrain[ idIntent ] = objIntent ;
             }
-            console.dir(chatbotTrain) ;
             //
             const openNotificationWithIcon = (type,argText) => {
               notification[type]({
@@ -372,21 +355,25 @@ export class TablaTraining extends React.Component {
                 }
             }) ;
         }
-        console.dir(arrayDatos) ;
         //
         return(
             <div>
-                <FormNewIntent  onAccept={this.onAcceptNewIntent} data={{}} modalVisible={this.state.modalNewIntent} onCancelModal={(argEE)=>{argEE.preventDefault();this.setState({modalNewIntent:false})}} translate={this.props.translate} />
+                <FormNewIntent  onAccept={this.onAcceptNewIntent}
+                                data={false}
+                                modalVisible={this.state.modalNewIntent}
+                                onCancelModal={(argEE)=>{argEE.preventDefault();this.setState({modalNewIntent:false})}}
+                                translate={this.props.translate}
+                />
                 <div style={{width:'100%',marginTop:'20px',marginBottom:'15px'}}>
                     <Input placeholder={this.props.translate.search}
                            onChange={this.onChangeSearch}
                            style={{height:'42px',marginLeft:'10px', width:'20%'}}
                     />
                     <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({modalNewIntent: true});}} type="primary" size="large" style={{ marginLeft: '15px' }}>
-                    {this.props.translate.form.newIntent}
+                      {this.props.translate.form.newIntent}
                     </Button>
                     <Button onClick={this.saveChangesToTrainning} type="primary" size="large" style={{ marginLeft: '15px' }}>
-                    {this.props.translate.form.savechanges}
+                      {this.props.translate.form.savechanges}
                     </Button>
                 </div>
                 <Table
@@ -396,7 +383,7 @@ export class TablaTraining extends React.Component {
                     //columns={this.state.columnas}
                     dataSource={ arrayDatos }
                     columns={columns}
-                    components={components}
+                    //components={components}
                     //
                     style={{marginLeft:'10px'}}
                     pagination={{position:'bottom'}}

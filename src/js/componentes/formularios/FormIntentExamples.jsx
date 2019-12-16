@@ -4,9 +4,9 @@ FormIntentExamples
 /*
 *
 */
-import React                             from 'react' ;
-import { Form, Button, Tooltip, Icon }   from 'antd'  ;
-import { FormDynamicInputText }          from  './FormDynamicInputText' ;
+import React                                   from 'react' ;
+import { Form, Button, Tooltip, Icon, Spin }   from 'antd'  ;
+import { FormDynamicInputText }                from  './FormDynamicInputText' ;
 //
 class FormIntentExamplesBase extends React.Component {
     constructor(props){
@@ -72,9 +72,22 @@ class FormIntentExamplesBase extends React.Component {
                     }
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
-                        {this.props.translate.next}
-                    </Button>
+                    {
+                        this.state.flagSpinner==true ?
+                            <Spin size="large" />
+                            :
+                            <div>
+                                <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
+                                    {this.props.translate.next}
+                                </Button>
+                                <Button
+                                    style={{marginLeft:'10px'}}
+                                    onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
+                                >
+                                    {this.props.translate.previous}
+                                </Button>
+                            </div>
+                    }
                 </Form.Item>
             </Form>
         ) ;
@@ -85,7 +98,7 @@ class FormIntentExamplesBase extends React.Component {
 export const FormIntentExamples = Form.create({ name: '',
     mapPropsToFields(props) {
         return {
-            intentExamples:     Form.createFormField({ value: props.data.intentName || [] })
+            intentExamples:     Form.createFormField({ value: props.data.intentExamples || [] })
         };
     }
 })(FormIntentExamplesBase);

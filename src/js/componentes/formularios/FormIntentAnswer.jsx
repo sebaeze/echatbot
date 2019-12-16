@@ -149,6 +149,12 @@ export class FormIntentAnswerBase extends React.Component {
                         <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
                             {this.props.translate.form.submit}
                         </Button>
+                        <Button
+                            style={{marginLeft:'10px'}}
+                            onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
+                        >
+                            {this.props.translate.previous}
+                        </Button>
                     </Form.Item>
                 </Form>
         ) ;

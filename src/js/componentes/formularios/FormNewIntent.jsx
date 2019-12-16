@@ -1,33 +1,31 @@
 /*
 * FormNewIntent
 */
-import React                     from 'react' ;
-import { FormIntentName   }      from './FormIntentName'     ;
-import { FormIntentExamples }    from './FormIntentExamples' ;
-import { FormIntentAnswer }      from './FormIntentAnswer'   ;
-import { Row, Form, Input, Tooltip, Icon, Modal, Select, Typography, Steps  }   from 'antd'  ;
+import React                           from 'react' ;
+import { FormIntentName   }            from './FormIntentName'     ;
+import { FormIntentExamples }          from './FormIntentExamples' ;
+import { FormIntentAnswer }            from './FormIntentAnswer'   ;
+import { Modal, Typography, Steps, Spin }   from 'antd'  ;
 //
 const { Step  } = Steps      ;
 const { Title } = Typography ;
 //
-class FormNewIntentWithModal extends React.Component {
+export class FormNewIntent extends React.Component {
     constructor(props){
         super(props) ;
         this.state              = {
             flagSpinner:false,
             modalVisible: this.props.modalVisible,
             enviadoOk:false,
-            dataNewIntent:{intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}},
+            dataNewIntent: this.props.data!=false ? {...this.props.data} : {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}},
             formStep: 0,
         } ;
         this.onAcceptNewIntent  = this.onAcceptNewIntent.bind(this) ;
         this.onNextStep         = this.onNextStep.bind(this) ;
+        this.onPrevStep         = this.onPrevStep.bind(this) ;
     }
     //
-    componentDidMount(){
-        const { resetFields } = this.props.form ;
-        // resetFields({names:['botSubtitle','botIcon','botSubtitle','description']}) ;
-    }
+    componentDidMount(){}
     //
     static getDerivedStateFromProps(newProps, state) {
         return { modalVisible: newProps.modalVisible } ;
@@ -35,48 +33,36 @@ class FormNewIntentWithModal extends React.Component {
     //
     onNextStep(argNextStep){
         try {
-            console.log('....onNextStep:: current Form: '+this.state.formStep) ;
             let newState = {
                 dataNewIntent: Object.assign({...this.state.dataNewIntent},argNextStep),
-                formStep: this.state.formStep<2 ? (this.state.formStep+1) : this.state.formStep
+                formStep: this.state.formStep+1
             }
             console.dir(newState) ;
+            if ( newState.formStep>2 ){
+                this.onAcceptNewIntent( newState.dataNewIntent ) ;
+                newState.dataNewIntent = {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}} ;
+                newState.formStep = 0 ;
+            }
+            //
             this.setState(newState) ;
+            //
         } catch(errNS){
             console.dir(errNS) ;
         }
     }
     //
-    onAcceptNewIntent(argEE){
+    onPrevStep(){
+        let newState = {
+            formStep: this.state.formStep-1
+        } ;
+        this.setState(newState) ;
+    }
+    //
+    onAcceptNewIntent(argNewIntent){
         try {
             //
-            argEE.preventDefault() ;
-            this.setState({flagSpinner:true,enviadoOk:false}) ;
-            this.props.form.validateFields({ force: true }, (error) => {
-              if (error) {
-                  console.log('.....valid:: error: ') ;
-                  console.dir(error) ;
-                  setTimeout(() => {
-                        this.setState({flagSpinner:false,enviadoOk:false }) ;
-                    }, 700 ) ;
-              } else {
-                  let tempValuesForm = this.props.form.getFieldsValue() ;
-                  let tempValuesAcce = {
-                    intentAnswer:{
-                        type: tempValuesForm['answerType'] ,
-                        title: tempValuesForm['answerTitle'] ,
-                        text: tempValuesForm['answerText'] || '',
-                        api: tempValuesForm['answerApi'] || '',
-                        options: tempValuesForm['answerOptions'] ||''
-                    } ,
-                    intentLanguage: tempValuesForm.intentLanguage,
-                    intentName: tempValuesForm.intentName,
-                    intentExamples: tempValuesForm.intentExamples,
-                    intentDomain: tempValuesForm.intentDomain
-                  } ;
-                  this.props.onAccept( tempValuesAcce ) ;
-              }
-            });
+            this.props.onAccept( argNewIntent ) ;
+            this.setState({formStep: 0}) ;
             //
         } catch(errNC){
             console.dir(errNC) ;
@@ -85,16 +71,15 @@ class FormNewIntentWithModal extends React.Component {
     //
     render(){
         //
-        const { resetFields } = this.props.form ;
         const NextStepForm    = (props) => {
             return(
                 this.state.formStep==0 ?
-                    <FormIntentName translate={this.props.translate} data={{}} onSubmitOk={this.onNextStep} />
+                    <FormIntentName translate={this.props.translate} data={{...this.state.dataNewIntent}} onSubmitOk={this.onNextStep} prev={this.onPrevStep} />
                     :
                     this.state.formStep==1 ?
-                        <FormIntentExamples translate={this.props.translate} data={{}} onSubmitOk={this.onNextStep} />
+                        <FormIntentExamples translate={this.props.translate} data={{...this.state.dataNewIntent}} onSubmitOk={this.onNextStep} prev={this.onPrevStep}  />
                         :
-                        <FormIntentAnswer translate={this.props.translate} data={{intentAnswer:{}}} onSubmitOk={this.onNextStep} />
+                        <FormIntentAnswer translate={this.props.translate} data={{...this.state.dataNewIntent}} onSubmitOk={this.onNextStep} prev={this.onPrevStep}  />
             )
         }
         //
@@ -109,8 +94,7 @@ class FormNewIntentWithModal extends React.Component {
                 bodyStyle={{paddingTop:'0'}}
                 headerStyle={{padding:'5px 5px 5px 5px'}}
                 visible={this.state.modalVisible}
-                onOk={this.onAcceptNewIntent}
-                onCancel={(argEC)=>{resetFields(); this.props.onCancelModal(argEC);}}
+                onCancel={(argEC)=>{this.props.onCancelModal(argEC);}}
                 footer={null}
             >
                 <div className="waiboc-cl-form" >
@@ -129,16 +113,4 @@ class FormNewIntentWithModal extends React.Component {
     }
     //
 } ;
-//
-export const FormNewIntent = Form.create({ name: '',
-    mapPropsToFields(props) {
-        return {
-            intentLanguage: Form.createFormField({ value: props.data.intentLanguage ||'es'}),
-            intentName:     Form.createFormField({ value: props.data.intentName     ||''  }),
-            intentExamples: Form.createFormField({ value: props.data.intentExamples ||[]  }),
-            intentDomain:   Form.createFormField({ value: props.data.intentDomain   ||''  }),
-            intentAnswer:   Form.createFormField({ value: props.data.intentAnswer   ||''  })
-        };
-    }
-})(FormNewIntentWithModal);
 //

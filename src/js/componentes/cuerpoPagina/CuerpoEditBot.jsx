@@ -17,6 +17,7 @@ export class CuerpoEditBot extends React.Component {
             idChatbot: this.props.match.params.idChatbot||false,
             userInfo: false,
             flagSpinner: false,
+            flagCachedProps: false,
             chatbotConfig:false,
             chatbotConfigPendingSave: false
         } ;
@@ -24,28 +25,41 @@ export class CuerpoEditBot extends React.Component {
     //
     componentDidMount(){
         try {
-            let tempUserInfo = false ;
-            this.setState({flagSpinner: true}) ;
-            api.account.getUserInfo()
-                .then((respUserInfo)=>{
-                    if ( respUserInfo.length>0 ){respUserInfo=respUserInfo[0]; }
-                    tempUserInfo = respUserInfo ;
-                    return api.chatbot.qry({_id: this.state.idChatbot, idUser: tempUserInfo.email}) ;
-                })
-                .then((respQry)=>{
-                    //
-                    if ( respQry.length>0 ){ respQry=respQry[0]; }
-                    this.setState({ chatbotConfig: respQry, userInfo: tempUserInfo, flagSpinner: false}) ;
-                })
-                .catch((respErr)=>{
-                    console.dir(respErr) ;
-                    this.setState({flagSpinner: false}) ;
-                }) ;
+            console.log('....CuerpoEditBot:: componentDidMount:: flagCachedProps: '+this.state.flagCachedProps) ;
+            if ( this.state.flagCachedProps==false ){
+                let tempUserInfo = false ;
+                this.setState({flagSpinner: true}) ;
+                api.account.getUserInfo()
+                    .then((respUserInfo)=>{
+                        if ( respUserInfo.length>0 ){respUserInfo=respUserInfo[0]; }
+                        tempUserInfo = respUserInfo ;
+                        return api.chatbot.qry({_id: this.state.idChatbot, idUser: tempUserInfo.email}) ;
+                    })
+                    .then((respQry)=>{
+                        if ( respQry.length>0 ){ respQry=respQry[0]; }
+                        this.setState({ chatbotConfig: respQry, userInfo: tempUserInfo,flagCachedProps:true,flagSpinner: false}) ;
+                    })
+                    .catch((respErr)=>{
+                        console.dir(respErr) ;
+                        this.setState({flagCachedProps:true,flagSpinner: false}) ;
+                    }) ;
+            }
             //
         } catch(errDM){
             console.dir(errDM) ;
         }
     }
+    //
+    /*
+    static getDerivedStateFromProps(newProps, state) {
+        console.log('.....not-cached:: getDerivedStateFromProps:: state: ',state) ;
+        if ( state.flagCachedProps==false ){
+            return { flagCachedProps: true } ;
+        } else {
+            return false ;
+        }
+    }
+    */
     //
     updateChatbotConfig(argChatbotConfigUpdate){
         try {
@@ -76,10 +90,15 @@ export class CuerpoEditBot extends React.Component {
     }
     //
     /*
-    static getDerivedStateFromProps(newProps, state) {
-        console.log('......Cuerpocuenta:: getDerivedStateFromProps: ') ;
-        console.dir(state) ;
-        return false ; // { listaBots: newProps.listaBots } ;
+    componentDidUpdate(prevProps, prevState) {
+        Object.entries(this.props).forEach(([key, val]) =>
+          prevProps[key] !== val && console.log(`Prop '${key}' changed:: val: `+val+';')
+        );
+        if (this.state) {
+          Object.entries(this.state).forEach(([key, val]) =>
+            prevState[key] !== val && console.log(`State '${key}' changed:: val: `+val+';')
+          );
+        }
     }
     */
     //

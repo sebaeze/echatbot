@@ -35,7 +35,7 @@ export class App extends React.Component {
   componentDidMount(){
     try {
       window.addEventListener("resize",function(argEventSCR){
-        this.setState({isMobile: (window.innerWidth<797)});
+        // this.setState({isMobile: (window.innerWidth<797)});   <---- Esto genera re-render sarpado
       }.bind(this)) ;
     } catch(errCDM){
       console.dir(errCDM) ;

@@ -46,7 +46,6 @@ class Encabezado extends Component {
   //
   resize() {
     this.setState({isMobile: (window.innerWidth<796)});
-    console.log('(A) ....window.innerWidth: '+window.innerWidth+' isMobile: '+this.state.isMobile+';') ;
    }
   //
   onClickMenu(){

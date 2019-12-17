@@ -57,6 +57,7 @@
             "action":"Action"
         },
         "form":{
+            "appearance":"Appearance",
             "examples":"Examples",
             "answer":"Answer",
             "answerType":"Type of answer",
@@ -165,6 +166,7 @@
             "action":"Acción"
         },
         "form":{
+            "appearance":"Apariencia",
             "examples":"Ejemplos",
             "answer":"Respuesta",
             "answerType":"Tipo de respuesta",
@@ -310,6 +312,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "appearance":"Aparência",
             "examples":"Exemplos",
             "answer":"Resposta",
             "answerType":"Tipo de resposta",

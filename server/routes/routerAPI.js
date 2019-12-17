@@ -83,7 +83,7 @@ module.exports = (argConfig,argDb) => {
                 if ( respUpd.length && respUpd.length>0 ){ respUpd=respUpd[0]; }
                 respUpd = respUpd._doc ? respUpd._doc : respUpd ;
                 objResultado.code   = 0 ;
-                objResultado.result = respUpd.trainning ;
+                objResultado.result = respUpd.training ;
                 respData(objResultado) ;
               })
               .catch((errUT)=>{
@@ -101,13 +101,12 @@ module.exports = (argConfig,argDb) => {
           .then(function(chatbotInfo){
             if ( chatbotInfo.length && chatbotInfo.length>0 ){ chatbotInfo=chatbotInfo[0]; }
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });
-            console.dir(userConAcceso) ;
             if ( userConAcceso ){
-              chatbotInfo.trainning = req.body.train ;
+              chatbotInfo.training = {...req.body.train} ;
               delete chatbotInfo._v ; delete chatbotInfo.__v ;
-              //objResultado.result   = req.body.train ;
               return updateTraining( chatbotInfo ) ;
             } else {
+              console.log('...*** NO POSEE ACCESO AL CHATBOT:: ',userConAcceso) ;
               objResultado.code = 401 ;
               objResultado.result = {error: `User ${req.user.email} doesn't have access to the chatbot ${req.body._id}`}
               return objResultado ;
@@ -115,8 +114,6 @@ module.exports = (argConfig,argDb) => {
             //
           }.bind(this))
           .then(function(chatbotTrained){
-            console.log('.....(B) then:: chatbotTrained: ') ;
-            console.dir(chatbotTrained) ;
             res.status( (chatbotTrained.code==0 ?  200 : chatbotTrained.code) );
             res.json( chatbotTrained ) ;
           }.bind(this))

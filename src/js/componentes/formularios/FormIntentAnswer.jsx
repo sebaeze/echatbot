@@ -175,7 +175,6 @@ export class FormIntentAnswerBase extends React.Component {
 //
 export const FormIntentAnswer = Form.create({ name: '',
     mapPropsToFields(props) {
-        console.log('....FormIntentAnswer:: props: ',props.data.intentAnswer) ;
         return {
             intentAnswer: Form.createFormField({ value: props.data.intentAnswer || {} })
         };

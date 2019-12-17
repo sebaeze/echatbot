@@ -25,7 +25,6 @@ export class CuerpoEditBot extends React.Component {
     //
     componentDidMount(){
         try {
-            console.log('....CuerpoEditBot:: componentDidMount:: flagCachedProps: '+this.state.flagCachedProps) ;
             if ( this.state.flagCachedProps==false ){
                 let tempUserInfo = false ;
                 this.setState({flagSpinner: true}) ;
@@ -149,6 +148,14 @@ export class CuerpoEditBot extends React.Component {
                         <TabPane key="2"
                             tab={<span>
                                 <Icon type="message" theme="twoTone" />
+                                {this.props.translate.form.appearance}
+                            </span>}
+                        >
+                            tab 3
+                        </TabPane>
+                        <TabPane key="3"
+                            tab={<span>
+                                <Icon type="message" theme="twoTone" />
                                 {this.props.translate.form.training}
                             </span>}
                         >
@@ -169,7 +176,7 @@ export class CuerpoEditBot extends React.Component {
                                 </Col>
                             </Row>
                         </TabPane>
-                        <TabPane key="3"
+                        <TabPane key="4"
                             tab={<span>
                                 <Icon type="message" theme="twoTone" />
                                 {this.props.translate.form.conversations}

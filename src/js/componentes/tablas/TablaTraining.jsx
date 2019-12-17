@@ -15,7 +15,7 @@ export class TablaTraining extends React.Component {
         this.onChangeSearch = this.onChangeSearch.bind(this) ;
         this.onAcceptNewIntent      = this.onAcceptNewIntent.bind(this) ;
         this.onClickEditIntent      = this.onClickEditIntent.bind(this) ;
-        this.saveChangesToTrainning = this.saveChangesToTrainning.bind(this) ;
+        this.saveChangesTotraining = this.saveChangesTotraining.bind(this) ;
         this.state = {
             modalNewIntent: false,
             flagCachedProps: false,
@@ -23,88 +23,17 @@ export class TablaTraining extends React.Component {
             intentNewModify: false,
             textBusqueda: '',
             chatbotConfig: this.props.chatbotConfig,
-            arrayTraining: Object.values(this.props.chatbotConfig.trainning),
+            arrayTraining: Object.values(this.props.chatbotConfig.training),
             columnas: this.parseColumns()
         } ;
     }
     //
     static getDerivedStateFromProps(newProps, state) {
         if ( state.flagCachedProps==false ){
-            let tempArrayTraining = Object.values(newProps.chatbotConfig.trainning) ;
-            if ( tempArrayTraining.length==0 ){
-                tempArrayTraining=[
-                    {
-                                "domain":"WELCOME",
-                                "entity":"WELCOME.INITIAL",
-                                "examples":["WELCOME.INITIAL"],
-                                "answer":{
-                                        //type:'option',
-                                        type:'carousel',
-                                        title:"<div><span>Hola !</span><span>Gracias por contactarme</span><span>En que te puedo ayudar ?</span></div>",
-                                        options:[
-                                            {label:"Ayuda",value:"trolo"},
-                                            {label:"Nose",value:"2"},
-                                            {label:"Que se yo",value:"3"},
-                                            {label:"Vose",value:"4"}
-                                        ] }
-                            },
-                            {
-                                "domain":"chat",
-                                "entity":"chat.greeting",
-                                "examples":["hola","hi","como andas ?","que haces?","que hacias?"],
-                                "answer":{type:'text',answer:"Hola, ¿ como te puedo ayudar ?"}
-                            },
-                            {
-                                "domain":"chat",
-                                "entity":"chat.chau",
-                                "examples":["me voy","chau","ya fue","nos vemos","ahi nos olemos"],
-                                "answer": {type:"image",source:"/img/china.jpg"}
-                            },
-                            {
-                                "domain":"simpsons",
-                                "entity":"simpsons.nerd",
-                                "examples":["nerd","inteligente","anda a estudiar"],
-                                "answer": {type:"image",source:"/img/nerd.gif"}
-                            },
-                            {
-                                "domain":"simpsons",
-                                "entity":"simpsons.fanatico",
-                                "examples":["simpsons","ay caramba!","a la grande le puse cuca","marge"],
-                                "answer": {type:"option",title:"Fanatico de los simpsons, deberas elejir:",
-                                    options:[
-                                    {value:"hola",label:"mandando saludosss"},
-                                    {value:"lavadora",label:"La lavadora"},
-                                    {value:"caja",label:"la caja"}
-                                ]}
-                            },
-                            {
-                                "domain":"simpsons",
-                                "entity":"simpsons.plandental",
-                                "examples":["plan dental"],
-                                "answer":{type:'text',answer:"Liza necesita frenos"}
-                            },
-                            {
-                                "domain":"simpsons",
-                                "entity":"simpsons.lizanecesitarenos",
-                                "examples":["Liza necesita frenos"],
-                                "answer":{type:'text',answer:"plan dental"}
-                            },
-                            {
-                                "domain":"puteadas",
-                                "entity":"puteadas.mal",
-                                "examples":["putaso","trolo","hijo de puta","HDP","concha de tu madre",],
-                                "answer": {type:"image",source:"/img/escribir.gif",alt:"Lo voy a anotar en mi maquina de escribir invisible"}
-                            }
-                    ];
-            }
+            let tempArrayTraining = Object.values(newProps.chatbotConfig.training) ;
             tempArrayTraining = tempArrayTraining.map((elemTT,elemIDD)=>{
                 return {...elemTT,key: elemIDD}
             }) ;
-            /*
-            console.dir(tempArrayTraining) ;
-            console.dir(newProps) ;
-            console.dir(state) ;
-            */
             return { chatbotConfig: newProps.chatbotConfig, arrayTraining: tempArrayTraining, flagCachedProps: true  } ;
         } else {
             return false ;
@@ -133,7 +62,11 @@ export class TablaTraining extends React.Component {
     //
     parseColumns(){
         let outCols   = [] ;
-        let tagColors = ['geekblue','blue','volcano','lime-5','gold-4','magenta-3'] ;
+        let tagColors = ['geekblue','blue','volcano','lime','gold','magenta','purple'] ;
+        //
+        let tempLang = navigator.language || navigator.languages[0] || 'es' ;
+        moment.locale(tempLang) ;
+        //
         try {
             //
             outCols = [
@@ -157,8 +90,8 @@ export class TablaTraining extends React.Component {
                         render: (text) => {
                             let tempTT = Array.isArray(text)==true ?
                                         text.map((elemTT,idxTT)=>{
-                                            let color = idxTT<tagColors.length ? idxTT : (idxTT % tagColors.length) ;
-                                            color     = tagColors[ color ] ;
+                                            let idxColor = idxTT<tagColors.length ? idxTT : (idxTT % tagColors.length) ;
+                                            let color    = tagColors[ idxColor ] ;
                                             return (
                                                 <span key={idxTT} style={{fontWeight:'500',display:'block',width:'100%'}} >
                                                     <Tag color={color}>{elemTT}</Tag>
@@ -199,10 +132,12 @@ export class TablaTraining extends React.Component {
                 },
                 {title: 'Timestamp' ,
                         width: 100,dataIndex:'timestamp_last_update', key:'timestamp_last_update',
+                        render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{moment(text).fromNow()}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
                 },
                 {title: this.props.translate.table.domain ,
                         width: 200,dataIndex:'domain', key:'domain',
+                        render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
                 }
             ] ;
@@ -220,7 +155,6 @@ export class TablaTraining extends React.Component {
     onAcceptNewIntent(argNewIntent){
       try {
         //
-        console.log('.....onAcceptNewIntent:: ',argNewIntent) ;
         let tempNewIntent = {
             answer: argNewIntent.intentAnswer,
             domain: argNewIntent.domain||'default',
@@ -237,7 +171,7 @@ export class TablaTraining extends React.Component {
             tempArrayTraining.push( tempNewIntent ) ;
         }
         this.setState({arrayTraining:tempArrayTraining,modalNewIntent: false, intentNewModify: false}) ;
-        this.saveChangesToTrainning() ;
+        this.saveChangesTotraining() ;
         //
       } catch(errNI){
         console.dir(errNI) ;
@@ -254,7 +188,7 @@ export class TablaTraining extends React.Component {
         }
     }
     //
-    saveChangesToTrainning(){
+    saveChangesTotraining(){
         try {
             //
             let chatbotTrain = {
@@ -265,7 +199,7 @@ export class TablaTraining extends React.Component {
               let objIntent = {...this.state.arrayTraining[ idTrain ]} ;
               delete objIntent.key ;
               let idIntent  = objIntent.entity ;
-              chatbotTrain[ idIntent ] = objIntent ;
+              chatbotTrain.train[ idIntent ] = objIntent ;
             }
             //
             const openNotificationWithIcon = (type,argText) => {
@@ -322,9 +256,6 @@ export class TablaTraining extends React.Component {
                     <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({modalNewIntent: true});}} type="primary" size="large" style={{ marginLeft: '15px' }}>
                       {this.props.translate.form.newIntent}
                     </Button>
-                    <Button onClick={this.saveChangesToTrainning} type="primary" size="large" style={{ marginLeft: '15px' }}>
-                      {this.props.translate.form.savechanges}
-                    </Button>
                 </div>
                 <Table
                     //rowSelection={{...this.rowSelection()}}
@@ -348,4 +279,4 @@ export class TablaTraining extends React.Component {
     }
     //
 } ;
-//
+//idxColor:

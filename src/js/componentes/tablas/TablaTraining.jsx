@@ -2,100 +2,10 @@
 * TablaTraining
 */
 import React                                               from 'react' ;
-import { Table, Form, Input, Button, notification }        from 'antd'  ;
+import { Table, Input, Button, notification, Icon, Tag }   from 'antd'  ;
+import moment                                              from 'moment-timezone'  ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
-//
-const EditableContext = React.createContext();
-//
-const EditableRow = ({ form, index, ...props }) => (
-  <EditableContext.Provider value={form}>
-    <tr {...props} />
-  </EditableContext.Provider>
-);
-//
-const EditableFormRow = Form.create()(EditableRow);
-//
-class EditableCell extends React.Component {
-    constructor(props){
-        super(props) ;
-        this.state = {
-            editing: false,
-        } ;
-        this.toggleEdit = this.toggleEdit.bind(this) ;
-        this.save       = this.save.bind(this) ;
-        this.renderCell = this.renderCell.bind(this) ;
-    }
-  //
-  toggleEdit(){
-    const editing = !this.state.editing;
-    this.setState({ editing }, () => {
-      if (editing) {
-        this.input.focus();
-      }
-    });
-  };
-  //
-  save(e){
-    const { record, handleSave } = this.props;
-    this.form.validateFields((error, values) => {
-      if (error && error[e.currentTarget.id]) {
-        return;
-      }
-      this.toggleEdit();
-      handleSave({ ...record, ...values });
-    });
-  };
-  //
-  renderCell(form){
-    this.form = form;
-    const { children, dataIndex, record, title } = this.props;
-    const { editing } = this.state;
-    return editing ? (
-      <Form.Item style={{ margin: 0 }}>
-        {form.getFieldDecorator(dataIndex, {
-          rules: [
-            {
-              required: true,
-              message: `${title} is required.`,
-            },
-          ],
-          initialValue: record[dataIndex],
-        })(<Input ref={node => (this.input = node)} onPressEnter={this.save} onBlur={this.save} />)}
-      </Form.Item>
-    ) : (
-      <div
-        className="editable-cell-value-wrap"
-        style={{ paddingRight: 24 }}
-        onClick={this.toggleEdit}
-      >
-        {children}
-      </div>
-    );
-  };
-  //
-  render() {
-    const {
-      editable,
-      dataIndex,
-      title,
-      record,
-      index,
-      handleSave,
-      children,
-      ...restProps
-    } = this.props;
-    return (
-      <td {...restProps}>
-        {editable ? (
-          <EditableContext.Consumer>{this.renderCell}</EditableContext.Consumer>
-        ) : (
-          children
-        )}
-      </td>
-    );
-  }
-}
 //
 export class TablaTraining extends React.Component {
     constructor(props){
@@ -103,13 +13,14 @@ export class TablaTraining extends React.Component {
         this.onChange       = this.onChange.bind(this) ;
         this.parseColumns   = this.parseColumns.bind(this)   ;
         this.onChangeSearch = this.onChangeSearch.bind(this) ;
-        this.handleSave     = this.handleSave.bind(this) ;
         this.onAcceptNewIntent      = this.onAcceptNewIntent.bind(this) ;
+        this.onClickEditIntent      = this.onClickEditIntent.bind(this) ;
         this.saveChangesToTrainning = this.saveChangesToTrainning.bind(this) ;
         this.state = {
             modalNewIntent: false,
             flagCachedProps: false,
             flagSpinner: false,
+            intentNewModify: false,
             textBusqueda: '',
             chatbotConfig: this.props.chatbotConfig,
             arrayTraining: Object.values(this.props.chatbotConfig.trainning),
@@ -200,36 +111,99 @@ export class TablaTraining extends React.Component {
         }
     }
     //
+    onClickEditIntent(argRowIntent){
+        try {
+            //
+            let tempIntent2Modify = {
+                intentNewModify:{
+                    intentName: argRowIntent.entity ,
+                    intentLanguage: argRowIntent.language||'es' ,
+                    intentExamples: argRowIntent.examples ,
+                    intentDomain: argRowIntent.domain ,
+                    intentAnswer: argRowIntent.answer
+                },
+                modalNewIntent: true
+            } ;
+            this.setState( {...tempIntent2Modify} ) ;
+            //
+        } catch(errOCI){
+            console.dir(errOCI) ;
+        }
+    }
+    //
     parseColumns(){
-        let outCols = [] ;
+        let outCols   = [] ;
+        let tagColors = ['geekblue','blue','volcano','lime-5','gold-4','magenta-3'] ;
         try {
             //
             outCols = [
-                {title: 'Domain',
-                        width: 200,dataIndex:'domain', key:'domain',fixed: 'left',editable: true,
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
-                } ,
-                {title: 'Intend',
-                        dataIndex: 'entity',width:200,key: 'entity',fixed: 'left',editable: true,
+                {title: this.props.translate.table.intent ,
+                        dataIndex: 'entity',width:200,key: 'entity',
+                        render: (text,argRow) => {
+                            return(
+                                <div>
+                                    <a style={{fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
+                                        onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
+                                    >
+                                        <Icon type="edit" style={{color:'green'}}/>
+                                        <span style={{marginLeft:'5px'}}>{text}</span>
+                                    </a>
+                                </div>
+                        )},
                         defaultSortOrder: 'descend', sorter: (a, b) => a.entity.localeCompare(b.entity)
                 },
-                {title: 'Examples',width: 200,
-                        dataIndex:'examples', key:'examples',editable: true,
+                {title: this.props.translate.table.examples ,width: 200,
+                        dataIndex:'examples', key:'examples',
                         render: (text) => {
-                            /*
-                            console.log('....render::examples:: text: ') ;
-                            console.dir(text) ;
-                            */
-                            let tempTT = Array.isArray(text)==true ? text.join(' - ') : text ;
-                            return( <div>
-                                    <a style={{fontWeight:'700',color:'#497EC0'}} >{tempTT}</a>
+                            let tempTT = Array.isArray(text)==true ?
+                                        text.map((elemTT,idxTT)=>{
+                                            let color = idxTT<tagColors.length ? idxTT : (idxTT % tagColors.length) ;
+                                            color     = tagColors[ color ] ;
+                                            return (
+                                                <span key={idxTT} style={{fontWeight:'500',display:'block',width:'100%'}} >
+                                                    <Tag color={color}>{elemTT}</Tag>
+                                                </span>
+                                            )
+                                        })
+                                        : text ;
+                            return(
+                                <div>
+                                    {tempTT}
                                 </div>
-                            )}
-                        //defaultSortOrder: 'descend', sorter: (a, b) => a.examples.localeCompare(b.examples)
+                              )}
                 },
-                {title: 'Answer'       ,width: 200,dataIndex:'answer',key:'answer',editable: true
-                        //render: (text) => <a style={{fontWeight:'700',color:'#497EC0'}} >{text}</a>,
-                        //defaultSortOrder: 'descend', sorter: (a, b) => a.status.localeCompare(b.status) } ,
+                {title: this.props.translate.table.answer       ,width: 200,dataIndex:'answer',key:'answer',
+                        render: (text) =>
+                            <div>
+                                <span>{this.props.translate.form.answerType}: </span>
+                                <span style={{fontWeight:'600'}}>{text.type}</span><hr/>
+                                <span>{text.title||''}</span><br/>
+                                <span>{text.text||text.answer||''}</span><br/>
+                                <span>{text.image||''}</span><br/>
+                                {
+                                    (text.options && text.options.length>0) ?
+                                        text.options.map((elemObj,idx)=>{
+                                            return (
+                                                <div key={idx}>
+                                                    <span style={{fontWeight:'600'}}>{elemObj.label}: </span>
+                                                    <span>{elemObj.value}</span>
+                                                    <br/>
+                                                </div>
+                                            )
+                                        })
+                                        :
+                                        null
+
+                                }
+                            </div>
+                },
+                {title: 'Timestamp' ,
+                        width: 100,dataIndex:'timestamp_last_update', key:'timestamp_last_update',
+                        defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
+                },
+                {title: this.props.translate.table.domain ,
+                        width: 200,dataIndex:'domain', key:'domain',
+                        defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
                 }
             ] ;
             //
@@ -246,15 +220,24 @@ export class TablaTraining extends React.Component {
     onAcceptNewIntent(argNewIntent){
       try {
         //
+        console.log('.....onAcceptNewIntent:: ',argNewIntent) ;
+        let tempNewIntent = {
+            answer: argNewIntent.intentAnswer,
+            domain: argNewIntent.domain||'default',
+            examples: argNewIntent.intentExamples||argNewIntent.examples||[],
+            entity: argNewIntent.intentName,
+            timestamp_last_update: moment( new Date() ).tz("America/Argentina/Buenos_Aires").format()
+        };
         let tempArrayTraining = this.state.arrayTraining ;
-        tempArrayTraining.push({
-          key: tempArrayTraining.length,
-          answer: argNewIntent.intentAnswer,
-          domain: argNewIntent.domain||'default',
-          examples: argNewIntent.intentExamples||argNewIntent.examples||[],
-          entity: argNewIntent.intentName
-        });
-        this.setState({arrayTraining:tempArrayTraining,modalNewIntent: false}) ;
+        let indexIntent       = tempArrayTraining.findIndex((elemIntent)=>{ return elemIntent.entity.toUpperCase()==tempNewIntent.entity.toUpperCase() ; }) ;
+        if ( indexIntent!=-1 ){
+            tempArrayTraining[indexIntent] = Object.assign({...tempArrayTraining[indexIntent]},tempNewIntent) ;
+        } else {
+            tempNewIntent.creation_ts = moment( new Date() ).tz("America/Argentina/Buenos_Aires").format() ;
+            tempArrayTraining.push( tempNewIntent ) ;
+        }
+        this.setState({arrayTraining:tempArrayTraining,modalNewIntent: false, intentNewModify: false}) ;
+        this.saveChangesToTrainning() ;
         //
       } catch(errNI){
         console.dir(errNI) ;
@@ -270,17 +253,6 @@ export class TablaTraining extends React.Component {
             console.dir(errOCS) ;
         }
     }
-    //
-    handleSave(row){
-        const newData = [...this.state.arrayTraining];
-        const index = newData.findIndex(item => row.key === item.key);
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        this.setState({ arrayTraining: newData });
-    };
     //
     saveChangesToTrainning(){
         try {
@@ -298,7 +270,8 @@ export class TablaTraining extends React.Component {
             //
             const openNotificationWithIcon = (type,argText) => {
               notification[type]({
-                  //message: <h1>putooo</h1>,
+                  //message: <h1>holaaa</h1>,
+                  top: 180,
                   description: <h2>{argText}</h2>
               });
             } ;
@@ -322,36 +295,13 @@ export class TablaTraining extends React.Component {
     //
     render(){
         //
-        const components = {
-            body: {
-              row: EditableFormRow,
-              cell: EditableCell,
-            },
-          };
-        //
-        const columns = this.state.columnas.map(col => {
-            if (!col.editable) {
-              return col;
-            }
-            return {
-              ...col,
-              onCell: record => ({
-                record,
-                editable: col.editable,
-                dataIndex: col.dataIndex,
-                title: col.title,
-                handleSave: this.handleSave,
-              }),
-            };
-          });
-        //
         let arrayDatos = [] ;
         if ( this.state.textBusqueda.length==0 ){
-            arrayDatos = this.state.arrayTraining ;
+            arrayDatos = this.state.arrayTraining.map((elemTC,elemIdx)=>{ return {...elemTC,key: elemIdx} ; }) ;
         } else {
             this.state.arrayTraining.forEach((elemTC,elemIdx)=>{
                 if ( Object.values(elemTC).join("").toUpperCase().indexOf(this.state.textBusqueda.toUpperCase())!=-1 ){
-                    arrayDatos.push( {...elemTC} ) ;
+                    arrayDatos.push( {...elemTC, key: elemIdx} ) ;
                 }
             }) ;
         }
@@ -359,7 +309,7 @@ export class TablaTraining extends React.Component {
         return(
             <div>
                 <FormNewIntent  onAccept={this.onAcceptNewIntent}
-                                data={false}
+                                data={this.state.intentNewModify}
                                 modalVisible={this.state.modalNewIntent}
                                 onCancelModal={(argEE)=>{argEE.preventDefault();this.setState({modalNewIntent:false})}}
                                 translate={this.props.translate}
@@ -380,9 +330,10 @@ export class TablaTraining extends React.Component {
                     //rowSelection={{...this.rowSelection()}}
                     loading={this.state.flagSpinner}
                     //
-                    //columns={this.state.columnas}
+                    columns={this.state.columnas}
                     dataSource={ arrayDatos }
-                    columns={columns}
+                    rowKey="entity"
+                    // columns={columns}
                     //components={components}
                     //
                     style={{marginLeft:'10px'}}

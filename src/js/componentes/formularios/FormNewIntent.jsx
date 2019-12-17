@@ -13,6 +13,7 @@ const { Title } = Typography ;
 export class FormNewIntent extends React.Component {
     constructor(props){
         super(props) ;
+        console.log('......FormNewIntent:: this.props.data: ',this.props.data) ;
         this.state              = {
             flagSpinner:false,
             modalVisible: this.props.modalVisible,
@@ -20,7 +21,6 @@ export class FormNewIntent extends React.Component {
             dataNewIntent: this.props.data!=false ? {...this.props.data} : {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}},
             formStep: 0,
         } ;
-        this.onAcceptNewIntent  = this.onAcceptNewIntent.bind(this) ;
         this.onNextStep         = this.onNextStep.bind(this) ;
         this.onPrevStep         = this.onPrevStep.bind(this) ;
     }
@@ -28,23 +28,36 @@ export class FormNewIntent extends React.Component {
     componentDidMount(){}
     //
     static getDerivedStateFromProps(newProps, state) {
-        return { modalVisible: newProps.modalVisible } ;
+        console.log('....FormNewIntent:: geteriveddd:: ',newProps);
+        if ( newProps.modalVisible!=state.modalVisible ){
+            console.log('.......(B) FormNewIntent:: geteriveddd:: VOY A ACTUALIZAR PROPSSS');
+            let newDerivedState = {
+                modalVisible: newProps.modalVisible,
+                dataNewIntent: newProps.data!=false ? {...newProps.data} : {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}},
+            } ;
+            return {...newDerivedState} ;
+        } else {
+            console.log('.......(C) FormNewIntent:: geteriveddd::  NO ACTUALIZO PROPSSSS');
+            return false ;
+        }
     }
     //
     onNextStep(argNextStep){
         try {
+            console.log('.....onNextStep:: ',argNextStep) ;
             let newState = {
                 dataNewIntent: Object.assign({...this.state.dataNewIntent},argNextStep),
                 formStep: this.state.formStep+1
             }
-            console.dir(newState) ;
             if ( newState.formStep>2 ){
-                this.onAcceptNewIntent( newState.dataNewIntent ) ;
+                console.log('......(B) onNextStep:: ',newState) ;
+                this.props.onAccept( {...newState.dataNewIntent} ) ;
                 newState.dataNewIntent = {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}} ;
                 newState.formStep = 0 ;
+                this.setState(newState) ;
+            } else {
+                this.setState(newState) ;
             }
-            //
-            this.setState(newState) ;
             //
         } catch(errNS){
             console.dir(errNS) ;
@@ -56,17 +69,6 @@ export class FormNewIntent extends React.Component {
             formStep: this.state.formStep-1
         } ;
         this.setState(newState) ;
-    }
-    //
-    onAcceptNewIntent(argNewIntent){
-        try {
-            //
-            this.props.onAccept( argNewIntent ) ;
-            this.setState({formStep: 0}) ;
-            //
-        } catch(errNC){
-            console.dir(errNC) ;
-        }
     }
     //
     render(){
@@ -100,9 +102,9 @@ export class FormNewIntent extends React.Component {
                 <div className="waiboc-cl-form" >
                     <div style={{marginTop:'10px',marginBottom:'10px'}}>
                         <Steps size="small" current={this.state.formStep}>
-                            <Step title={this.props.translate.form.name} />
-                            <Step title={this.props.translate.form.examples} />
-                            <Step title={this.props.translate.form.answer} />
+                            <Step key="1" title={this.props.translate.form.name} />
+                            <Step key="2" title={this.props.translate.form.examples} />
+                            <Step key="3" title={this.props.translate.form.answer} />
                         </Steps>
                     </div>
                     <NextStepForm />

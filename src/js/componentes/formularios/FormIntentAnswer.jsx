@@ -23,6 +23,16 @@ export class FormIntentAnswerBase extends React.Component {
         const { resetFields } = this.props.form ;
         resetFields({names:['type','title','api','text','options' ]}) ;
     }
+    /*
+    static getDerivedStateFromProps(newProps, state) {
+        if ( state.flagCachedProps==false ){
+            
+            return { chatbotConfig: newProps.chatbotConfig, arrayTraining: tempArrayTraining, flagCachedProps: true  } ;
+        } else {
+            return false ;
+        }
+    }
+    */
     //
     onSubmitForm(){
         try {
@@ -70,7 +80,7 @@ export class FormIntentAnswerBase extends React.Component {
                         label={ <span>{this.props.translate.form.answerType}</span> }
                     >
                         {getFieldDecorator('type', {
-                            initialValue: this.props.data.intentAnswer.answerType||'text',
+                            initialValue: this.props.data.intentAnswer.type||'text',
                             rules: [{ required: true, message: this.props.translate.form.errorLanguage, whitespace: true }]
                         })
                         (
@@ -104,10 +114,10 @@ export class FormIntentAnswerBase extends React.Component {
                                         </span>}
                             >
                                 {getFieldDecorator('text', {
-                                    initialValue: this.props.data.intentAnswer.text||'',
+                                    initialValue: this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||'',
                                     rules: [{ required: true, message: this.props.translate.form.errorAnswerText, whitespace: true }]
                                 })
-                                (<Input allowClear size="large" />)}
+                                (<Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />)}
                             </Form.Item>
                             : null
                     }
@@ -121,10 +131,10 @@ export class FormIntentAnswerBase extends React.Component {
                                         </span>}
                             >
                                 {getFieldDecorator('title', {
-                                    initialValue: this.props.data.intentAnswer.answerTitle||'',
+                                    initialValue: this.props.data.intentAnswer.title||'',
                                     rules: [{ required: true, message: this.props.translate.form.errorAnswerTitle, whitespace: true }]
                                 })
-                                (<Input allowClear size="large" />)}
+                                (<Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />)}
                             </Form.Item>
                             : null
                     }
@@ -138,10 +148,10 @@ export class FormIntentAnswerBase extends React.Component {
                                         </span>}
                             >
                                 {getFieldDecorator('api', {
-                                    initialValue: this.props.data.intentAnswer.answerApi||'',
+                                    initialValue: this.props.data.intentAnswer.api||'',
                                     rules: [{ required: true, message: this.props.translate.form.errorAnswerApi, whitespace: true }]
                                 })
-                                (<Input allowClear size="large" />)}
+                                (<Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />)}
                             </Form.Item>
                             : null
                     }
@@ -165,6 +175,7 @@ export class FormIntentAnswerBase extends React.Component {
 //
 export const FormIntentAnswer = Form.create({ name: '',
     mapPropsToFields(props) {
+        console.log('....FormIntentAnswer:: props: ',props.data.intentAnswer) ;
         return {
             intentAnswer: Form.createFormField({ value: props.data.intentAnswer || {} })
         };

@@ -44,6 +44,10 @@
             "websiteDomains":"Input the url of your website / s, for example: https://www.mywebsite.com"
         },
         "table":{
+            "intent":"Intent",
+            "examples":"Examples",
+            "answer":"Answer",
+            "domain":"Domain",
             "description":"Description",
             "messagesConsumed":"Messages Consumed",
             "language":"Language",
@@ -148,6 +152,10 @@
             "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: https://www.mipagina.com"
         },
         "table":{
+            "intent":"Intención",
+            "examples":"Ejemplos",
+            "answer":"Respuesta",
+            "domain":"Dominio",
             "description":"Descripción",
             "messagesConsumed":"Mensajes consumidos",
             "language":"Lenguaje",
@@ -341,6 +349,10 @@
             "changesSaved":"As alterações foram salvas"
         },
         "table":{
+            "intent":"Intenção",
+            "examples":"Exemplos",
+            "answer":"Responda",
+            "domain":"Domínio",
             "description":"Descrição",
             "messagesConsumed":"Mensagens Consumidas",
             "language":"Idioma",

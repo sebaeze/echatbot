@@ -198,7 +198,25 @@ export class TablaTraining extends React.Component {
             for ( let idTrain=0; idTrain<this.state.arrayTraining.length; idTrain++ ){
               let objIntent = {...this.state.arrayTraining[ idTrain ]} ;
               delete objIntent.key ;
-              let idIntent  = objIntent.entity ;
+              /* Fix some fields values */
+              if ( objIntent.type=='text' ){
+                  // Old format with answer field instead of text
+                  if ( !objIntent.text && objIntent.answer ){
+                      objIntent.text   = objIntent.answer ;
+                      delete  objIntent.answer ;
+                    }
+                  // Convert all responses to array
+                  if ( !Array.isArray(objIntent.text) ){
+                    objIntent.text = new Array( objIntent.text ) ;
+                  }
+                  if ( !objIntent.html ){
+                    objIntent.html = '<div><span>'
+                                    + objIntent.text.join('</span><span>')
+                                    +'</span></div>' ;
+                  }
+              }
+              /* */
+              let idIntent                   = objIntent.entity ;
               chatbotTrain.train[ idIntent ] = objIntent ;
             }
             //

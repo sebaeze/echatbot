@@ -40,8 +40,6 @@ export class InicioPorque extends React.Component {
     render(){
         //
         let posY = this.state.isMobile==true ? 10 : 50 ;
-        console.log('....inicioPorque:: this.state.showDiv: '+this.state.showDiv+';') ;
-        // <Title key="0" style={{textAlign:'center'}}>Solución tecnologica:</Title>
         return(
             <Row style={{paddingTop:'45px'}} >
                 <Row>

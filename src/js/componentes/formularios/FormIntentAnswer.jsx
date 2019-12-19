@@ -3,6 +3,7 @@
 */
 import React                                             from 'react' ;
 import { Button, Form, Input, Tooltip, Icon,  Select }   from 'antd'  ;
+import { FormDynamicInputText }                          from  './FormDynamicInputText' ;
 //
 export class FormIntentAnswerBase extends React.Component {
     constructor(props){
@@ -113,11 +114,26 @@ export class FormIntentAnswerBase extends React.Component {
                                             <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
                                         </span>}
                             >
-                                {getFieldDecorator('text', {
+                                {
+                                getFieldDecorator('text', {
                                     initialValue: this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||'',
                                     rules: [{ required: true, message: this.props.translate.form.errorAnswerText, whitespace: true }]
                                 })
-                                (<Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />)}
+                                (
+                                    <Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />
+                                    <FormDynamicInputText
+                                        form={this.props.form}
+                                        textPlaceholder={this.props.translate.form.errorAnswerText}
+                                        fieldName="text"
+                                        type="array"
+                                        focus={true}
+                                        defaultTypefield="string"
+                                        textAdd={this.props.translate.form.errorAnswerText}
+                                        description={this.props.translate.form.errorAnswerText}
+                                        translate={this.props.translate}
+                                    />
+                                )
+                                }
                             </Form.Item>
                             : null
                     }

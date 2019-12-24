@@ -16,6 +16,7 @@ run start:admin
 - cd /git/echatbot
 - git pull
 - npm install
+- npm update echatbot-mongodb
 - export AMBIENTE=produccion
 - npm run build
 - npm run buildAdmin

@@ -64,14 +64,16 @@ if ( process.env.AMBIENTE=='produccion' ){
 *   Rutas
 */
 try {
-    //
+    /*
     app.all('*', function(req, res, next) {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', '*');
       res.header("Access-Control-Allow-Credentials", true);
       res.header("credentials","same-origin") ;
+      console.log('APP.ALL:: url: '+req.originalUrl+';');
       next() ;
     }) ;
+    */
     //
     routesApp(app,configuracionApp,db,passportConfigured)
       .then((finRutas)=>{
@@ -107,6 +109,15 @@ try {
             var certificate = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.cert.pem') );
             //
             console.log('.....(D) HTTPSS: listen') ;
+            //
+            app.get('*', function(req, res) {
+              res.set('access-Control-Allow-Origin', '*');
+              res.set('access-Control-Allow-Methods', '*');
+              res.setHeader("Access-Control-Allow-Credentials", true);
+              console.log('...(DDDD) req.params: ',req.params,';') ;
+              res.redirect('/404?Url='+req.originalUrl) ;
+            });
+            //
             https.createServer({
                 key: privateKey,
                 cert: certificate
@@ -116,6 +127,28 @@ try {
             console.log('.....(E) HTTPSS: FINNNN') ;
             //
         } else {
+          /*
+          app.get('*',function(req, res, next) {
+            console.log(' \n *** ERROR - 404 --> url: '+req.originalUrl+'; *** \n');
+            let flagAceptaJspon = ( ( req.headers && req.headers.accept ) ? String(req.headers.accept).toUpperCase().indexOf('APPLICATION/JSON')!=-1 : false ) ;
+            //
+            if ( flagAceptaJspon ) {
+                res.status(404);
+                res.send( { error: 'url: '+req.originalUrl+' Not found' } );
+                return;
+            }
+            res.redirect('/404?Url='+req.originalUrl) ;
+          });
+          */
+          //
+          app.get('*', function(req, res) {
+            res.set('access-Control-Allow-Origin', '*');
+            res.set('access-Control-Allow-Methods', '*');
+            res.setHeader("Access-Control-Allow-Credentials", true);
+            console.log('...(C) req.params: ',req.params,';') ;
+            res.redirect('/404?Url='+req.originalUrl) ;
+          });
+          //
           app.listen(3000,function(){
             console.log('....listen server on http://localhost:3000') ;
           }) ;

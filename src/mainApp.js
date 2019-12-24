@@ -8,7 +8,7 @@ import { Layout  }                         from 'antd';
 //
 import Encabezado                         from "./js/componentes/Encabezado" ;
 import PiePagina                          from "./js/componentes/PiePagina"  ;
-import NoEncontrado404                    from "./js/componentes/cuerpoPagina/NoEncontrado404"  ;
+import {NoEncontrado404}                  from "./js/componentes/cuerpoPagina/NoEncontrado404"  ;
 import SitemapCuerpo                      from "./js/componentes/cuerpoPagina/SitemapCuerpo"    ;
 import CuerpoInicio                       from "./js/componentes/cuerpoPagina/CuerpoInicio"  ;
 import { CuerpoAbout  }                   from "./js/componentes/cuerpoPagina/CuerpoAbout"   ;
@@ -57,6 +57,7 @@ export class App extends React.Component {
               <Route exact path="/error"                 component={(argMach) => <CuerpoAbout   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/services"              component={(argMach) => <CuerpoAbout   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/prices"                component={(argMach) => <CuerpoPrices  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/404"                   component={(argMach) => <NoEncontrado404  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
             </Content>
           </Router>
           <PiePagina translate={{...languageLocale()}} configuracion={configApp} />

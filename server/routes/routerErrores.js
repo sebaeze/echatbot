@@ -16,8 +16,8 @@ module.exports = (argConfig) => {
         }
         res.redirect('/error?mensaje='+mensajeError) ;
     });
-    //
-    router.use(function(req, res, next) {
+    /*
+    router.get('*',function(req, res, next) {
         console.log(' \n *** ERROR - 404 --> url: '+req.originalUrl+'; *** \n');
         let flagAceptaJspon = ( ( req.headers && req.headers.accept ) ? String(req.headers.accept).toUpperCase().indexOf('APPLICATION/JSON')!=-1 : false ) ;
         //
@@ -28,7 +28,7 @@ module.exports = (argConfig) => {
         }
         res.redirect('/404?Url='+req.originalUrl) ;
     });
-    //
+    */
     return router ;
     //
 }

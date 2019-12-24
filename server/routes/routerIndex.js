@@ -24,6 +24,7 @@ let opciones = {
 module.exports = (argConfig,argDb,argCatalogoMarcas) => {
   const defaultMetatags   = argConfig.metaTags.default ;
   //
+  // router.use('/', function(req,res,next){ console.log('....estoy en static::: '); next();},express.static( path.join(__dirname,'../../dist') , opciones ) );
   router.use('/', express.static( path.join(__dirname,'../../dist') , opciones ) );
   //
   router.get('/logout',function(req,res,next){
@@ -42,23 +43,25 @@ module.exports = (argConfig,argDb,argCatalogoMarcas) => {
     }
     //
   }) ;
+  /*
+  router.get('/:params', function(req, res, next) {
+    res.set('access-Control-Allow-Origin', '*');
+    res.set('access-Control-Allow-Methods', '*');
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    //
+    console.log('....me voy por (00000) params: ',req.params) ;
+    next() ;
+    //
+  });
+  */
   //
   router.get(['/','/404','/about','/error','/contact','/services','/prices'], function(req, res) {
     res.set('access-Control-Allow-Origin', '*');
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);
     //
+    //console.log('....me voy por (A) ') ;
     res.render( 'app.html', defaultMetatags ) ;
-    //
-  });
-  //
-  router.get('/test', function(req, res) {
-    res.set('access-Control-Allow-Origin', '*');
-    res.set('access-Control-Allow-Methods', '*');
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    console.log('....estoy en /test ') ;
-    // res.render( 'test.html', defaultMetatags ) ;
-    res.sendFile(path.join(__dirname, '../../dist/test.html'))
     //
   });
    // Login no requiere autenticar, sino entra en Loop

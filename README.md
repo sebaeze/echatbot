@@ -12,12 +12,12 @@ run start:admin
 
 
 ## Deploy Donweb
-pm2 delete waiboc-website
-cd /git/echatbot
-git pull
-npm install
-export AMBIENTE=produccion
-npm run build
-npm run buildAdmin
-pm2 start npm --no-automation  --name waiboc-website -- run startProd
-pm2 save
+- pm2 delete waiboc-website
+- cd /git/echatbot
+- git pull
+- npm install
+- export AMBIENTE=produccion
+- npm run build
+- npm run buildAdmin
+- pm2 start npm --no-automation  --name waiboc-website -- run startProd
+- pm2 save

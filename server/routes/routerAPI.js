@@ -121,7 +121,7 @@ module.exports = (argConfig,argDb) => {
             res.json( chatbotTrained ) ;
           }.bind(this))
           .catch(function(respErr){
-            console.log('.....ERROR: ADD_CHATBOT: -> ') ;
+            console.log('.....ERROR: TRAIN CHATBOT: -> ') ;
             console.dir(respErr) ;
             res.status(500) ;
             res.json(respErr) ;

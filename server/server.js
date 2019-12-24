@@ -7,13 +7,14 @@ const bodyParser       = require('body-parser') ;
 const cookieParser     = require('cookie-parser')   ;
 const session          = require('express-session') ;
 const MemoryStore      = require('session-memory-store')(session);
-// const dbClass          = require('./db/dbIndex').bases ;
 const utiles           = require('./lib/utiles').Utilitarios() ;
 const mustacheExpress  = require('mustache-express') ;
 //
 const https            = require('https') ;
 const path             = require('path')  ;
 const fs               = require('fs')    ;
+//
+require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 //
 import { bases as dbClass }    from 'echatbot-mongodb' ;
 import { routesApp }           from './routes/routerServer' ;

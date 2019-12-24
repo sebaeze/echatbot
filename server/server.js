@@ -14,8 +14,6 @@ const https            = require('https') ;
 const path             = require('path')  ;
 const fs               = require('fs')    ;
 //
-require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
-//
 import { bases as dbClass }    from 'echatbot-mongodb' ;
 import { routesApp }           from './routes/routerServer' ;
 import configuracionApp        from './config/general.json'  ;

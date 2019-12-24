@@ -2,9 +2,14 @@
 *
 */
 const router            = require('express').Router()   ;
-const path              = require('path') ;
+const fs                = require('fs')    ;
+const http              = require('http')  ;
+const https             = require('https') ;
+const path              = require('path')  ;
 const axios             = require('axios') ;
 const moment            = require('moment-timezone')     ;
+//
+const rootCA = require('ssl-root-cas/latest').inject().addFile( path.join(__dirname,'../cert/waiboc.com.fullchain.pem') );
 //
 module.exports = (argConfig,argDb) => {
   let API_NLP        = argConfig.API[process.env.AMBIENTE||'dev'] || false ;
@@ -84,7 +89,18 @@ module.exports = (argConfig,argDb) => {
                 objResultado.code   = 0 ;
                 objResultado.result = respUpd.training ;
                 let tempReqbody = { idAgente: argBotTrained._id, emailUserid: req.user.email, secretAPInlp: API_NLP.NLP_TRAIN_SECRET } ;
-                return axios.post( API_NLP.NLP_TRAIN , tempReqbody ) ;
+                //
+                console.log('....API_NLP.NLP_TRAIN: ',API_NLP.NLP_TRAIN) ;
+                let reqOptions = {
+                  url: API_NLP.NLP_TRAIN,
+                  method: 'POST',
+                  data: tempReqbody,
+                  ca: rootCA
+                } ;
+                //console.log('...reqOptions:: ',reqOptions ) ;
+                // return axios.post( API_NLP.NLP_TRAIN , tempReqbody ) ;
+                return axios( reqOptions ) ;
+                //
               })
               .then((respTrainApi)=>{
                 respData(objResultado) ;

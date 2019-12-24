@@ -56,6 +56,7 @@ class FormIntentNameBase extends React.Component {
                 >
                     {getFieldDecorator('intentName', {
                             initialValue: this.props.data.intentName||'',
+                            suppressWarning: true,
                             rules: [{ required: true, message: this.props.translate.form.errorIntentName, whitespace: true }],
                     })
                     (<Input allowClear size="large" ref={(argRef)=>{ /*this.firstNode=argRef; */argRef.focus(); }} />)}

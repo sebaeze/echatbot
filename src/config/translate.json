@@ -57,6 +57,7 @@
             "action":"Action"
         },
         "form":{
+            "testChatbot":"Test Chatbot",
             "appearance":"Appearance",
             "examples":"Examples",
             "answer":"Answer",
@@ -166,6 +167,7 @@
             "action":"Acción"
         },
         "form":{
+            "testChatbot":"Testear Chatbot",
             "appearance":"Apariencia",
             "examples":"Ejemplos",
             "answer":"Respuesta",
@@ -312,6 +314,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "testChatbot":"Teste o Chatbot",
             "appearance":"Aparência",
             "examples":"Exemplos",
             "answer":"Resposta",

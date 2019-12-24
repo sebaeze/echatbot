@@ -12,10 +12,8 @@ export const PARAMETROS = {
         CARRITO_SINCRONIZADO: 'carritoSincronizado'
     },
     BACKEND:{
-        API_ORDENES: '/api/ordenes',
         API_CONSULTAS: '/api/consultas',
-        API_SUSCRIPCION: '/api/suscripcion',
-        API_DISTRIBUIDORES: '/api/distribuidores'
+        API_SUSCRIPCION: '/api/suscripcion'
     },
     FORM:{
         USER_INFO: 'profile',

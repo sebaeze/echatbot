@@ -121,17 +121,6 @@ export class FormIntentAnswerBase extends React.Component {
                                 })
                                 (
                                     <Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />
-                                    <FormDynamicInputText
-                                        form={this.props.form}
-                                        textPlaceholder={this.props.translate.form.errorAnswerText}
-                                        fieldName="text"
-                                        type="array"
-                                        focus={true}
-                                        defaultTypefield="string"
-                                        textAdd={this.props.translate.form.errorAnswerText}
-                                        description={this.props.translate.form.errorAnswerText}
-                                        translate={this.props.translate}
-                                    />
                                 )
                                 }
                             </Form.Item>

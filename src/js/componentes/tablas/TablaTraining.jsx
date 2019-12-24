@@ -6,6 +6,8 @@ import { Table, Input, Button, notification, Icon, Tag }   from 'antd'  ;
 import moment                                              from 'moment-timezone'  ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
+import { TestChatbotWidget }                               from '../chat/TestChatbotWidget'    ;
+
 //
 export class TablaTraining extends React.Component {
     constructor(props){
@@ -17,6 +19,7 @@ export class TablaTraining extends React.Component {
         this.onClickEditIntent      = this.onClickEditIntent.bind(this) ;
         this.saveChangesTotraining = this.saveChangesTotraining.bind(this) ;
         this.state = {
+            flagWidgetTest: false,
             modalNewIntent: false,
             flagCachedProps: false,
             flagSpinner: false,
@@ -274,17 +277,19 @@ export class TablaTraining extends React.Component {
                     <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({modalNewIntent: true});}} type="primary" size="large" style={{ marginLeft: '15px' }}>
                       {this.props.translate.form.newIntent}
                     </Button>
+                    {
+                        this.state.flagWidgetTest==false ?
+                            <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({flagWidgetTest: true});}} type="primary" size="large" style={{ marginLeft: '15px' }}>
+                                {this.props.translate.form.testChatbot}
+                            </Button>
+                            : null
+                    }
                 </div>
                 <Table
-                    //rowSelection={{...this.rowSelection()}}
                     loading={this.state.flagSpinner}
-                    //
                     columns={this.state.columnas}
                     dataSource={ arrayDatos }
                     rowKey="entity"
-                    // columns={columns}
-                    //components={components}
-                    //
                     style={{marginLeft:'10px'}}
                     pagination={{position:'bottom'}}
                     onChange={this.onChange.bind(this)}
@@ -292,6 +297,7 @@ export class TablaTraining extends React.Component {
                     locale={this.props.translate}
                     scroll={{ x: 900 }}
                 />
+                <TestChatbotWidget  idAgent={this.props.chatbotConfig._id} />
             </div>
         )
     }

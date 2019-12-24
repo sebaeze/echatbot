@@ -3,9 +3,11 @@
 */
 const router            = require('express').Router()   ;
 const path              = require('path') ;
+const axios             = require('axios') ;
 const moment            = require('moment-timezone')     ;
 //
 module.exports = (argConfig,argDb) => {
+  let API_NLP        = argConfig.API[process.env.AMBIENTE||'dev'] || false ;
   const autenticado  = require( path.join(__dirname,'../auth/autenticado')  ).autenticado(argDb) ;
   //
   router.get('/chatbot',autenticado,function(req,res,next){
@@ -71,9 +73,6 @@ module.exports = (argConfig,argDb) => {
     //
     try {
       //
-      console.log('....../train:: body: ') ;
-      console.dir(req.body) ;
-      //
       let objResultado = { code: 0, result: {} } ;
       const updateTraining = (argBotTrained) => {
         return new Promise(function(respData,respRech){
@@ -84,6 +83,10 @@ module.exports = (argConfig,argDb) => {
                 respUpd = respUpd._doc ? respUpd._doc : respUpd ;
                 objResultado.code   = 0 ;
                 objResultado.result = respUpd.training ;
+                let tempReqbody = { idAgente: argBotTrained._id, emailUserid: req.user.email, secretAPInlp: API_NLP.NLP_TRAIN_SECRET } ;
+                return axios.post( API_NLP.NLP_TRAIN , tempReqbody ) ;
+              })
+              .then((respTrainApi)=>{
                 respData(objResultado) ;
               })
               .catch((errUT)=>{
@@ -102,7 +105,7 @@ module.exports = (argConfig,argDb) => {
             if ( chatbotInfo.length && chatbotInfo.length>0 ){ chatbotInfo=chatbotInfo[0]; }
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });
             if ( userConAcceso ){
-              chatbotInfo.training = {...req.body.train} ;
+              chatbotInfo.training = Object.assign(chatbotInfo.training,req.body.train) ;
               delete chatbotInfo._v ; delete chatbotInfo.__v ;
               return updateTraining( chatbotInfo ) ;
             } else {
@@ -251,35 +254,6 @@ module.exports = (argConfig,argDb) => {
             .catch(function(respErr){
                 console.log('.....error ADD Suscripcion: ') ;
                 console.dir(respErr) ;
-              res.status(500) ;
-              res.json(respErr) ;
-            }.bind(this)) ;
-      //
-    } catch(errRe){
-      res.status(500) ;
-      res.json(errRe) ;
-    }
-  });
-  //
-  router.post('/ordenes', function(req, res) {
-    res.set('Access-Control-Allow-Headers','*');
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Methods', '*');
-    res.set("Access-Control-Allow-Credentials", true);
-    //
-    try{
-      //
-      let nuevaorden = {...req.body} ;
-      argDb.ordenes.merge( nuevaorden )
-            .then(function(respUpdate){
-              console.log('....respuesta de merge ordenes:: ')  ;
-              res.json( (respUpdate._doc||respUpdate) );
-            }.bind(this))
-            .catch(function(respErr){
-                //
-                console.log('.....error merge ordenes: ') ;
-                console.dir(respErr) ;
-                //
               res.status(500) ;
               res.json(respErr) ;
             }.bind(this)) ;

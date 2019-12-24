@@ -21,6 +21,16 @@
             "database":"Waiboc"
         }
     },
+    "API":{
+        "dev":{
+            "NLP_TRAIN_SECRET":"zxc@asdqwe54321",
+            "NLP_TRAIN":"http://localhost:3001/chatbot/retrain"
+        },
+        "produccion":{
+            "NLP_TRAIN_SECRET":"zxc@asdqwe54321",
+            "NLP_TRAIN":"https://www.waiboc.com:3001/chatbot/retrain"
+        }
+    },
     "passport":{
         "dev":{
             "mercadolibre":{

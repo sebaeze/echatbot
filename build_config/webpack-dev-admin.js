@@ -6,6 +6,8 @@ const webpack                     = require("webpack");
 const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
+const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
+console.log('Hash Version: ',HASH_VERSION,';');
 //
 module.exports = {
   entry: './src/mainAdmin.js',
@@ -84,7 +86,15 @@ module.exports = {
   plugins: [
       new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery", 'window.jQuery': 'jquery' }),
       new CopyWebpackPlugin([ {from: 'src/img',to: 'img'}, {from: 'src/css',to: 'css'}, {from: 'src/xls'} ]),
+      new webpack.DefinePlugin({
+        '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),
+        '__URL_WIDGET__': JSON.stringify(HASH_VERSION.URLbackend),
+        '__ID_WIDGET__': JSON.stringify(HASH_VERSION.IDwidget)
+      }),
       new HtmlWebpackPlugin({
+        __HASH_BUILD__: HASH_VERSION.hashVersion ,
+        __URL_WIDGET__: HASH_VERSION.URLbackend ,
+        __ID_WIDGET__: HASH_VERSION.IDwidget ,
         filename: "admin.html",
         template: "./src/admin.html",
         title:"admin",
@@ -100,7 +110,6 @@ module.exports = {
         },
         hash:true
       }),
-      new HtmlWebpackPrefixPlugin(),
       new webpack.DefinePlugin({ "BACKEND_URL":"http://localhost:3000" })
     ]
 };

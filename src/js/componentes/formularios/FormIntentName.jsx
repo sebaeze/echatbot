@@ -50,7 +50,7 @@ class FormIntentNameBase extends React.Component {
                     hasFeedback
                     label={ <span>
                                 Intent
-                                <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.chatbotName} >
+                                <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.intentName} >
                                 <Icon type="question-circle-o" /> </Tooltip>
                             </span>}
                 >
@@ -59,7 +59,7 @@ class FormIntentNameBase extends React.Component {
                             suppressWarning: true,
                             rules: [{ required: true, message: this.props.translate.form.errorIntentName, whitespace: true }],
                     })
-                    (<Input allowClear size="large" ref={(argRef)=>{ /*this.firstNode=argRef; */argRef.focus(); }} />)}
+                    (<Input allowClear size="large" style={{fontWeight:'600'}}  ref={(argRef)=>{ /*this.firstNode=argRef; */argRef.focus(); }} />)}
                 </Form.Item>
                 <Form.Item
                     label={ <span>{this.props.translate.form.selectLanguage}</span> }
@@ -87,6 +87,7 @@ class FormIntentNameBase extends React.Component {
                 <Form.Item>
                     <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
                         {this.props.translate.next}
+                        <Icon type="right" />
                     </Button>
                 </Form.Item>
             </Form>

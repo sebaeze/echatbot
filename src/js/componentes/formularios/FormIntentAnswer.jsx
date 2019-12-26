@@ -3,6 +3,7 @@
 */
 import React                                             from 'react' ;
 import { Button, Form, Input, Tooltip, Icon,  Select }   from 'antd'  ;
+import Picker                                            from 'emoji-picker-react' ;
 import { FormDynamicInputText }                          from  './FormDynamicInputText' ;
 //
 export class FormIntentAnswerBase extends React.Component {
@@ -10,6 +11,7 @@ export class FormIntentAnswerBase extends React.Component {
         super(props) ;
         this.firstNode          = false ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
+        this.onEmojiClick       = this.onEmojiClick.bind(this) ;
         this.answerTypes        = {
             API:'api',
             TEXT:'text',
@@ -70,6 +72,14 @@ export class FormIntentAnswerBase extends React.Component {
         }
     };
     //
+    onEmojiClick(event, emojiObject){
+        try {
+            console.log('....onemojiclick:: emojiObject: ',emojiObject) ;
+        } catch(errOEC){
+            console.log('....ERROR:: OnEmojiclick:: errOEC: ',errOEC) ;
+        }
+    }
+    //
     render(){
         //
         const { getFieldDecorator } = this.props.form ;
@@ -120,7 +130,10 @@ export class FormIntentAnswerBase extends React.Component {
                                     rules: [{ required: true, message: this.props.translate.form.errorAnswerText, whitespace: true }]
                                 })
                                 (
-                                    <Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />
+                                    <div>
+                                        <Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />
+                                        <Picker onEmojiClick={this.onEmojiClick}  />
+                                    </div>
                                 )
                                 }
                             </Form.Item>
@@ -168,6 +181,7 @@ export class FormIntentAnswerBase extends React.Component {
                             style={{marginLeft:'10px'}}
                             onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
                         >
+                            <Icon type="left" />
                             {this.props.translate.previous}
                         </Button>
                     </Form.Item>

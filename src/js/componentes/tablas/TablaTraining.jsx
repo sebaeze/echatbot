@@ -274,7 +274,13 @@ export class TablaTraining extends React.Component {
                            onChange={this.onChangeSearch}
                            style={{height:'42px',marginLeft:'10px', width:'20%'}}
                     />
-                    <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({modalNewIntent: true});}} type="primary" size="large" style={{ marginLeft: '15px' }}>
+                    <Button onClick={(argEE)=>{
+                                            argEE.preventDefault() ;
+                                            console.log('....TablaTraining:: new intent::  falseeeeeeee') ;
+                                            this.setState({modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
+                                        }}
+                                        type="primary" size="large" style={{ marginLeft: '15px' }}
+                    >
                       {this.props.translate.form.newIntent}
                     </Button>
                     {
@@ -297,7 +303,11 @@ export class TablaTraining extends React.Component {
                     locale={this.props.translate}
                     scroll={{ x: 900 }}
                 />
-                <TestChatbotWidget  idAgent={this.props.chatbotConfig._id} />
+                {
+                    this.state.flagWidgetTest==true ?
+                            <TestChatbotWidget  idAgent={this.props.chatbotConfig._id} />
+                            : null
+                }
             </div>
         )
     }

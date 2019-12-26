@@ -5,7 +5,7 @@ import React                           from 'react' ;
 import { FormIntentName   }            from './FormIntentName'     ;
 import { FormIntentExamples }          from './FormIntentExamples' ;
 import { FormIntentAnswer }            from './FormIntentAnswer'   ;
-import { Modal, Typography, Steps, Spin }   from 'antd'  ;
+import { Modal, Typography, Steps, Icon }   from 'antd'  ;
 //
 const { Step  } = Steps      ;
 const { Title } = Typography ;
@@ -29,8 +29,10 @@ export class FormNewIntent extends React.Component {
     static getDerivedStateFromProps(newProps, state) {
         if ( newProps.modalVisible!=state.modalVisible ){
             let newDerivedState = {
+                formStep: 0,
                 modalVisible: newProps.modalVisible,
-                dataNewIntent: newProps.data!=false ? {...newProps.data} : {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}},
+                //dataNewIntent: newProps.data!=false ? {...newProps.data} : {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}},
+                dataNewIntent: newProps.modalVisible==true ? {...newProps.data} : {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}}
             } ;
             return {...newDerivedState} ;
         } else {
@@ -79,12 +81,26 @@ export class FormNewIntent extends React.Component {
             )
         }
         //
+        const TitleStep = (argProps) => {
+            return(
+            <span style={{fontSize:'18px', fontWeight:'600'}}>{argProps.text}</span>
+            )
+        }
+        //
         return(
             //
             <Modal
                 title={
-                    <Title level={3} style={{textAlign:'center',padding:'5px 5px 5px 5px'}}>{this.props.translate.newIntent}</Title>
+                    <div style={{width:'100%',color:'#012EFF', fontSize:'26px',fontWeight:'600'}} >
+                        <div style={{marginLeft:'20%'}} >
+                            <Icon type="edit" style={{color:'green'}}/>
+                            <span style={{marginLeft:'1%',color:'#012EFF',textAlign:'center',padding:'5px 5px 5px 5px', marginBottom:'0'}} >
+                                {this.props.translate.newIntent}
+                            </span>
+                        </div>
+                    </div>
                 }
+                wrapClassName="waiboc-cl-modal-intent"
                 maskClosable={false}
                 style={{border:'0.5px dotted gray',marginTop:'25px',zIndex:'9992'}}
                 bodyStyle={{paddingTop:'0'}}
@@ -94,11 +110,11 @@ export class FormNewIntent extends React.Component {
                 footer={null}
             >
                 <div className="waiboc-cl-form" >
-                    <div style={{marginTop:'10px',marginBottom:'10px'}}>
-                        <Steps size="small" current={this.state.formStep}>
-                            <Step key="1" title={this.props.translate.form.name} />
-                            <Step key="2" title={this.props.translate.form.examples} />
-                            <Step key="3" title={this.props.translate.form.answer} />
+                    <div style={{marginTop:'20px',marginBottom:'10px'}}>
+                        <Steps current={this.state.formStep}>
+                            <Step key="1" title={<TitleStep text={this.props.translate.form.name}     />}  icon={this.state.formStep==0 ? <Icon type="loading" /> : false } />
+                            <Step key="2" title={<TitleStep text={this.props.translate.form.examples} />} icon={this.state.formStep==1 ? <Icon type="loading" /> : false } />
+                            <Step key="3" title={<TitleStep text={this.props.translate.form.answer}   />} icon={this.state.formStep==2 ? <Icon type="loading" /> : false } />
                         </Steps>
                     </div>
                     <NextStepForm />

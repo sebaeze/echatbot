@@ -79,11 +79,13 @@ class FormIntentExamplesBase extends React.Component {
                             <div>
                                 <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
                                     {this.props.translate.next}
+                                    <Icon type="right" />
                                 </Button>
                                 <Button
                                     style={{marginLeft:'10px'}}
                                     onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
                                 >
+                                    <Icon type="left" />
                                     {this.props.translate.previous}
                                 </Button>
                             </div>

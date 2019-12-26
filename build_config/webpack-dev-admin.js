@@ -75,7 +75,10 @@ module.exports = {
     port: 9000,
     open: true,
     proxy: {
-        "/": "http://localhost:3000"
+        "/": {
+          target: "http://localhost:3000",
+          changeOrigin: true
+        }
     },
     headers: {
       "Access-Control-Allow-Origin": "*",

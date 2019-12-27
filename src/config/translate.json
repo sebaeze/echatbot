@@ -25,6 +25,26 @@
         "status":"Status",
         "trainChatbot":"Train Chatbot",
         "logout":"Logout",
+        "i18n":{
+            "search":"Search",
+            "clear":"Clear",
+            "notfound":"No Emoji Found",
+            "skintext":"Choose your default skin tone",
+            "categories":{
+              "search":"Search Results",
+              "recent":"Frequently Used",
+              "people":"Smileys & People",
+              "nature":"Animals & Nature",
+              "foods":"Food & Drink",
+              "activity":"Activity",
+              "places":"Travel & Places",
+              "objects":"Objects",
+              "symbols":"Symbols",
+              "flags":"Flags",
+              "custom":"Custom"
+            },
+            "categorieslabel":"Emoji categories"
+        },
         "answertType":{
             "text":"Text",
             "carousel":"Carousel",
@@ -140,6 +160,26 @@
         "status":"Estado",
         "trainChatbot":"Entrenar Chatbot",
         "logout":"Finalizar sesion",
+        "i18n":{
+            "search":"Buscar",
+            "clear":"Limpiar",
+            "notfound":"No Emoji encontrado",
+            "skintext":"Elija su tono de skin",
+            "categories":{
+              "search":"Resultados",
+              "recent":"Usados ultimamente",
+              "people":"Sonrisas y personas",
+              "nature":"Animales y naturaleza",
+              "foods":"Comida y bebida",
+              "activity":"Actividad",
+              "places":"Viajes y Lugares",
+              "objects":"Objectos",
+              "symbols":"Símbolos",
+              "flags":"Banderas",
+              "custom":"Personalizados"
+            },
+            "categorieslabel":"Categorias de Emoji"
+        },
         "answertType":{
             "text":"Texto",
             "carousel":"Carousel",
@@ -296,6 +336,26 @@
         "status":"Estado",
         "trainChatbot":"Treine seu chatbot",
         "logout":"Finalizar sessão",
+        "i18n":{
+            "search": "Search",
+            "clear": "Clear",
+            "notfound": "Nenhum Emoji encontrado",
+            "skintext": "Escolha o seu tom de pele padrão",
+            "categorias": {
+              "search": "Resultados da pesquisa",
+              "recente": "Utilizado frequentemente",
+              "pessoas": "Sorrisos e pessoas",
+              "nature": "Animals & Nature",
+              "foods": "Comida e bebida",
+              "activity": "Activity",
+              "places": "Travel & Places",
+              "objects": "Objects",
+              "symbols": "Symbols",
+              "flags": "Flags",
+              "custom": "Custom"
+            },
+            "categorieslabel": "Categorias de Emoji"
+         },
         "answertType":{
             "text":"Texto",
             "carousel":"Carrossel",

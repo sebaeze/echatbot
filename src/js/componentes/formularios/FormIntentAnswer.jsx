@@ -3,8 +3,11 @@
 */
 import React                                             from 'react' ;
 import { Button, Form, Input, Tooltip, Icon,  Select }   from 'antd'  ;
-import Picker                                            from 'emoji-picker-react' ;
+// import Picker                                            from 'emoji-picker-react' ;
+import { Picker }                                        from 'emoji-mart' ;
 import { FormDynamicInputText }                          from  './FormDynamicInputText' ;
+//
+import 'emoji-mart/css/emoji-mart.css'
 //
 export class FormIntentAnswerBase extends React.Component {
     constructor(props){
@@ -19,7 +22,8 @@ export class FormIntentAnswerBase extends React.Component {
             OPTIONS:'options',
             IMAGE:'image'
         } ;
-        this.state              = {flagSpinner:false, fieldPanel: this.answerTypes.TEXT } ;
+        this.state              = {flagSpinner:false, fieldPanel: this.answerTypes.TEXT, flagPicker: false } ;
+        this.inputText          = false ;
     }
     //
     componentDidMount(){
@@ -72,9 +76,11 @@ export class FormIntentAnswerBase extends React.Component {
         }
     };
     //
-    onEmojiClick(event, emojiObject){
+    onEmojiClick(argEmoji){
         try {
-            console.log('....onemojiclick:: emojiObject: ',emojiObject) ;
+            let tempNewValue = this.props.form.getFieldValue("text") || "" ;
+            tempNewValue     = tempNewValue + argEmoji.native ;
+            this.props.form.setFieldsValue({ text: tempNewValue });
         } catch(errOEC){
             console.log('....ERROR:: OnEmojiclick:: errOEC: ',errOEC) ;
         }
@@ -125,16 +131,28 @@ export class FormIntentAnswerBase extends React.Component {
                                         </span>}
                             >
                                 {
-                                getFieldDecorator('text', {
-                                    initialValue: this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||'',
-                                    rules: [{ required: true, message: this.props.translate.form.errorAnswerText, whitespace: true }]
-                                })
-                                (
-                                    <div>
-                                        <Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />
-                                        <Picker onEmojiClick={this.onEmojiClick}  />
-                                    </div>
-                                )
+                                    getFieldDecorator('text', {
+                                        initialValue: this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||'',
+                                        rules: [{ required: true, message: this.props.translate.form.errorAnswerText, whitespace: true }]
+                                    })
+                                    (
+                                            <Input allowClear size="large"
+                                                className="waiboc-cl-input-with-emoticon"
+                                                prefix={
+                                                    <span className="waiboc-span-emoticon"
+                                                            onClick={(argEEV)=>{
+                                                                argEEV.preventDefault() ;
+                                                                let tempFlagEmo = !this.state.flagPicker ;
+                                                                this.setState({flagPicker: tempFlagEmo}) ;
+                                                            }}
+                                                    >😀</span>
+                                                }
+                                                ref={(argRef)=>{ if ( this.inputText==false && argRef ){ this.inputText=argRef; } ;if (argRef){argRef.focus()} }}
+                                            />
+                                    )
+                                }
+                                {
+                                    this.state.flagPicker==true ? <Picker onSelect={this.onEmojiClick} title={null} i18n={this.props.translate.i18n} /> : null
                                 }
                             </Form.Item>
                             : null

@@ -1003,6 +1003,18 @@ div.react-bootstrap-table tbody tr:hover {
     font-size: 18px !important ;
 }
 */
+.waiboc-cl-form .emoji-mart-category .emoji-mart-emoji span:hover {
+    cursor:  pointer !important ;
+}
+.waiboc-cl-input-with-emoticon .ant-input-lg {
+    padding-left: 50px !important ;
+}
+span.waiboc-span-emoticon {
+    font-size: 25px !important ;
+}
+span.waiboc-span-emoticon:hover {
+    cursor: pointer !important ;
+}
 .waiboc-cl-modal-intent .ant-modal-header {
     background-color: #E0E6E5 !important ;
     border: 1px dotted grey !important ;

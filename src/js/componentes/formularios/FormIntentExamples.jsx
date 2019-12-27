@@ -60,7 +60,7 @@ class FormIntentExamplesBase extends React.Component {
                     {
                         <FormDynamicInputText
                             form={this.props.form}
-                            textPlaceholder="hello!, I need info !"
+                            textPlaceholder={this.props.translate.form.textAddIntentExample}
                             fieldName="intentExamples"
                             type="array"
                             focus={true}

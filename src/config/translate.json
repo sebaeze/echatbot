@@ -77,11 +77,13 @@
             "action":"Action"
         },
         "form":{
+            "newsletter":"Newsletter",
             "testChatbot":"Test Chatbot",
             "appearance":"Appearance",
             "examples":"Examples",
             "answer":"Answer",
             "answerType":"Type of answer",
+            "errorEmailInvalid":"Please, write a valid email",
             "errorIntentName":"Write a name for the intent",
             "errorLanguage":"Please, choose the language",
             "errorAnswerType":"Please, choose a type of response",
@@ -207,6 +209,7 @@
             "action":"Acción"
         },
         "form":{
+            "newsletter":"Suscribirse",
             "testChatbot":"Testear Chatbot",
             "appearance":"Apariencia",
             "examples":"Ejemplos",
@@ -214,6 +217,7 @@
             "answerType":"Tipo de respuesta",
             "intentExamples":"Agregar ejemplos de intención",
             "intentAnswer":"Agregar respuesta a intención",
+            "errorEmailInvalid":"Por favor, escriba un email valido",
             "errorIntentName":"Escriba un nombre para identificar la intención",
             "errorLanguage":"Seleccione el idioma",
             "errorAnswerType":"Por favor, elija el tipo de respuesta",
@@ -374,6 +378,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "newsletter":"Boletim de Notícias",
             "testChatbot":"Teste o Chatbot",
             "appearance":"Aparência",
             "examples":"Exemplos",
@@ -381,6 +386,7 @@
             "answerType":"Tipo de resposta",
             "intentExamples":"Adicione exemplos de intenção",
             "intentAnswer":"Adicione resposta à intenção",
+            "errorEmailInvalid": "Por favor, escreva um email válido",
             "errorIntentName":"Escreva um nome para a intenção",
             "errorLanguage":"Por favor, escolha o idioma",
             "errorAnswerType":"Por favor, escolha um tipo de resposta",

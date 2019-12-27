@@ -637,7 +637,10 @@ p[onclick]:hover, p[onclick]:focus {
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-#footer {
+#waiboc-suscribe .ant-btn-lg {
+    height: 45px !important ;
+}
+#waiboc-footer {
     background-color: #272723;
     /*padding: 30px 0 0 20px; */
     padding-top: 30px ;
@@ -645,39 +648,39 @@ p[onclick]:hover, p[onclick]:focus {
     color: #fff;
     font-size: 20px;
 }
-#footer div span {
+#waiboc-footer div span.ant-typography.ant-typography-secondary {
     width: 100% ;
     display: inline-block ;
 }
-#footer div a img {
+#waiboc-footer div a img {
     border-radius: 5px ;
     width: 35px ;
     height: 35px ;
     margin: 2px 2px 2px 15px;
 }
 @media(max-width: 700px){
-    #footer div a img {
+    #waiboc-footer div a img {
         border-radius: 5px ;
         width: 35px ;
         height: 35px ;
     }
 }
-#footer div a img:hover {
+#waiboc-footer div a img:hover {
     transform: scale(1.2, 1.2);
     opacity: 1;
 }
 /*  */
-#footer a, #footer a::before, #footer a:active, #footer a::after{
+#waiboc-footer a, #waiboc-footer a::before, #waiboc-footer a:active, #waiboc-footer a::after{
     color: #fff;
 }
-#footer span a:hover /* , #footer a:focus*/ {
+#waiboc-footer span a:hover /* , #waiboc-footer a:focus*/ {
     color: #fff;
     /*
     text-decoration: underline ;
     text-decoration-color: #51d8ad;
     */
 }
-#footer a label {
+#waiboc-footer a label {
     text-decoration: underline ;
     font-weight: bold ;
 }

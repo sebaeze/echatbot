@@ -5,35 +5,13 @@ import React                                                  from 'react' ;
 import { Row, Col, Typography, Form, Input, Button, Spin }    from 'antd'   ;
 import { enviarSuscripcion }                                  from '../../api/api' ;
 //
+const { Search } = Input ;
+//
 export class FormSuscripcion extends React.Component {
     constructor(props){
         super(props) ;
         this.state = { flagSpinner: false, flagEnviado:false } ;
     }
-    //
-    /*
-    onSubmitSuscripcionOLD(argEventEmail){
-        try {
-        argEventEmail.preventDefault() ;
-        this.setState({flagEnviandoForm:true}) ;
-        //
-        let nodoTarget = argEventEmail.target ;
-        nodoTarget     = nodoTarget.querySelectorAll('input[type=text]') || false ;
-        if ( nodoTarget ){
-            nodoTarget = (nodoTarget.length && nodoTarget.length>0) ? nodoTarget[0].value : nodoTarget.value ;
-            nodoTarget = nodoTarget.trim() ;
-        }
-        console.dir(nodoTarget) ;
-        //
-        setTimeout(() => {
-            this.setState({flagEnviandoForm:false,flagEnviado:true}) ;
-        }, 5000 );
-        //
-        } catch(errSEm){
-        console.dir(errSEm) ;
-        }
-    }
-    */
     //
     render(){
         //
@@ -53,7 +31,8 @@ export class FormSuscripcion extends React.Component {
         )} ;
         //
         const onSubmitSuscripcion = (e) => {
-            e.preventDefault();
+            if ( e ){ e.preventDefault(); }
+            //
             this.setState({flagSpinner:true}) ;
             this.props.form.validateFields({ force: true }, (error) => {
               if (error) {
@@ -81,7 +60,7 @@ export class FormSuscripcion extends React.Component {
           };
         //
         return(
-            <div>
+            <div id="waiboc-suscribe">
                 {
                     this.state.flagSpinner ?
                         <Spin size="large" />
@@ -93,17 +72,18 @@ export class FormSuscripcion extends React.Component {
                                 <Form.Item>
                                     {getFieldDecorator('email', {
                                             rules: [
-                                            {
-                                                type: 'email',
-                                                message: 'E-mail invalido!',
-                                            },
-                                            {
-                                                required: true,
-                                                message: 'Por favor, introduzca un email valido',
-                                            },
+                                                {type: 'email' , message: this.props.translate.form.errorEmailInvalid },
+                                                {required: true, message: this.props.translate.form.errorEmailInvalid }
                                             ],
-                                        })(<Input placeholder="email@com.ar" />)}
-                                        <Button htmlType="submit" style={{backgroundColor:'#49B6F9'}}>Suscribirme</Button>
+                                        })
+										(
+											<Search
+                                                placeholder="email@com.ar"
+                                                enterButton={this.props.translate.form.newsletter}
+                                                size="large"
+                                                onSearch={(value)=>{console.log(value); onSubmitSuscripcion() ;}}
+                                            />
+										)}
                                 </Form.Item>
                             </Form>
                 }

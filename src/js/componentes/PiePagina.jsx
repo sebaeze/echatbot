@@ -27,7 +27,7 @@ class PiePagina extends Component {
     //
     return (
         //
-        <footer id="footer" style={{zIndex:'100',marginTop:'10px',boxShadow:'0 -8px -6px -6px black'}}>
+        <footer id="waiboc-footer" style={{zIndex:'100',marginTop:'10px',boxShadow:'0 -8px -6px -6px black'}}>
           <Row style={{minHeight:'85%'}} >
               <Col xs={1}  md={1}  xl={1}></Col>
               <Col xs={23} md={23} xl={7}>
@@ -44,7 +44,7 @@ class PiePagina extends Component {
               <Col xs={1}  md={1}  xl={0}></Col>
               <Col xs={22} md={22} xl={7} >
                 <Title level={3}>{this.props.translate.news}</Title>
-                <FormSuscripcion />
+                <FormSuscripcion  translate={this.props.translate} />
               </Col>
           </Row>
           <Row style={{minHeight:'1%'}} >

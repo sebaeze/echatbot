@@ -145,9 +145,11 @@ export class FormIntentAnswerBase extends React.Component {
                                                                 let tempFlagEmo = !this.state.flagPicker ;
                                                                 this.setState({flagPicker: tempFlagEmo}) ;
                                                             }}
-                                                    >😀</span>
+                                                    >
+                                                        { this.state.flagPicker==true ? "⌨️" : "😀" }
+                                                    </span>
                                                 }
-                                                ref={(argRef)=>{ if ( this.inputText==false && argRef ){ this.inputText=argRef; } ;if (argRef){argRef.focus()} }}
+                                                ref={(argRef)=>{ if ( this.inputText==false && argRef ){ this.inputText=argRef; } ; if (argRef){argRef.focus()} }}
                                             />
                                     )
                                 }

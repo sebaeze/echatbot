@@ -7,7 +7,9 @@ import moment                                              from 'moment-timezone
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
 import { TestChatbotWidget }                               from '../chat/TestChatbotWidget'    ;
-
+import { ChatAnswerExample }                               from '../chat/ChatAnswerExample'    ;
+//
+const { CustomReply }   = window.waiboc ;
 //
 export class TablaTraining extends React.Component {
     constructor(props){
@@ -108,13 +110,15 @@ export class TablaTraining extends React.Component {
                                 </div>
                               )}
                 },
-                {title: this.props.translate.table.answer       ,width: 200,dataIndex:'answer',key:'answer',
+                {title: this.props.translate.table.answer       ,
+                        dataIndex:'answer',key:'answer',
                         render: (text) =>
                             <div>
                                 <span>{this.props.translate.form.answerType}: </span>
                                 <span style={{fontWeight:'600'}}>{text.type}</span><hr/>
                                 <span>{text.title||''}</span><br/>
-                                <span>{text.text||text.answer||''}</span><br/>
+                                <CustomReply datos={{output: text}} flagTimestamp={false} />
+
                                 <span>{text.image||''}</span><br/>
                                 {
                                     (text.options && text.options.length>0) ?
@@ -134,7 +138,7 @@ export class TablaTraining extends React.Component {
                             </div>
                 },
                 {title: 'Timestamp' ,
-                        width: 100,dataIndex:'timestamp_last_update', key:'timestamp_last_update',
+                        dataIndex:'timestamp_last_update', key:'timestamp_last_update',
                         render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{moment(text).fromNow()}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
                 },
@@ -305,7 +309,7 @@ export class TablaTraining extends React.Component {
                 />
                 {
                     this.state.flagWidgetTest==true ?
-                            <TestChatbotWidget  idAgent={this.props.chatbotConfig._id} />
+                            <TestChatbotWidget  idAgent={this.props.chatbotConfig._id} onWindowClose={()=>{this.setState({flagWidgetTest: false});}} />
                             : null
                 }
             </div>

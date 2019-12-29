@@ -7,7 +7,6 @@ import moment                                              from 'moment-timezone
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
 import { TestChatbotWidget }                               from '../chat/TestChatbotWidget'    ;
-import { ChatAnswerExample }                               from '../chat/ChatAnswerExample'    ;
 //
 const { CustomReply }   = window.waiboc ;
 //
@@ -76,7 +75,7 @@ export class TablaTraining extends React.Component {
             //
             outCols = [
                 {title: this.props.translate.table.intent ,
-                        dataIndex: 'entity',width:200,key: 'entity',
+                        dataIndex: 'entity',width:250,key: 'entity',
                         render: (text,argRow) => {
                             return(
                                 <div>
@@ -90,7 +89,7 @@ export class TablaTraining extends React.Component {
                         )},
                         defaultSortOrder: 'descend', sorter: (a, b) => a.entity.localeCompare(b.entity)
                 },
-                {title: this.props.translate.table.examples ,width: 200,
+                {title: this.props.translate.table.examples ,width: 250,
                         dataIndex:'examples', key:'examples',
                         render: (text) => {
                             let tempTT = Array.isArray(text)==true ?

@@ -87,7 +87,6 @@ module.exports = {
     }
   },
   plugins: [
-      new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery", 'window.jQuery': 'jquery' }),
       new CopyWebpackPlugin([ {from: 'src/img',to: 'img'}, {from: 'src/css',to: 'css'}, {from: 'src/xls'} ]),
       new webpack.DefinePlugin({
         '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),

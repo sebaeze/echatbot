@@ -81,7 +81,6 @@ module.exports = {
 		}
   },
   plugins: [
-      new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery", 'window.jQuery': 'jquery' }),
       new webpack.DefinePlugin({
         '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),
         '__URL_WIDGET__': JSON.stringify(HASH_VERSION.URLbackend),

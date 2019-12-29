@@ -1,15 +1,22 @@
 /*
 *
 */
-#idAccount .ant-menu-item .anticon + span {
-    font-weight: 500 !important ;
-    font-size: 18px !important ;
+#waiboc-account .ant-menu-item .anticon + span {
+    font-weight: 600 !important ;
+    font-size: 20px !important ;
 }
-#idAccount .ant-menu-item-selected {
-    background-color: inherit !important ;
-}
-#idAccount .ant-menu-item-selected span:hover {
+#waiboc-account .ant-menu-item-selected {
+    /* background-color: inherit !important ; */
     text-decoration: underline !important ;
+}
+#waiboc-account .ant-menu-item-selected span:hover {
+    text-decoration: underline !important ;
+}
+#waiboc-account .ant-menu-item .anticon, .ant-menu-submenu-title .anticon {
+    color:#002DFF !important;
+    font-size: 25px !important;
+    background-color:white !important;
+    padding: 5px 5px 5px 5px !important;
 }
 /*   */
 #idFormContacto .ant-form-item-label label {
@@ -17,4 +24,3 @@
     font-weight: 600 !important ;
 }
 /*   */
-/*  */

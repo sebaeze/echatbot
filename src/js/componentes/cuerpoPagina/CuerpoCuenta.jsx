@@ -62,18 +62,19 @@ export class CuerpoCuenta extends React.Component {
     render(){
         //
         return(
-            <Layout id="idAccount" style={{ paddingTop:'120px',minHeight: '100vh'}}>
+            <Layout id="waiboc-account" style={{ paddingTop:'120px',minHeight: '100vh'}}>
                 <Sider collapsible
                     width={250}
                     collapsed={this.state.filtroColapsado}
                     onCollapse={this.onCollapse}
+                    style={{backgroundColor:'#EBF2FE',color:'#002DFF',fontWeight:'600',fontSize:'22px'}}
                 >
                     <Menu defaultSelectedKeys={['1']} mode="inline"
                           defaultOpenKeys={['sub1']}
-                          style={{backgroundColor:'#001529',color:'white',fontWeight:'500',fontSize:'22px'}}
+                          style={{backgroundColor:'#EBF2FE',color:'black',fontWeight:'600',fontSize:'22px'}}
                     >
                         <Menu.Item key="1">
-                            <Icon type="user" style={{color:'#EBF2FE'}} />
+                            <Icon type="user"  />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.userInfo} >
                                 <span onClick={(argEV)=>{argEV.preventDefault();
                                             if ( this.state.formType!=PARAMETROS.FORM.USER_INFO.toUpperCase() ){
@@ -87,7 +88,7 @@ export class CuerpoCuenta extends React.Component {
                             </Tooltip>
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <Icon type="robot" style={{color:'#EBF2FE'}} />
+                            <Icon type="robot"  />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.botsConfiguration} >
                                 <span onClick={(argEV)=>{argEV.preventDefault();
                                             if ( this.state.formType!=PARAMETROS.FORM.CHATBOTS.toUpperCase() ){

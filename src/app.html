@@ -70,12 +70,16 @@
     <script type="text/javascript" src="<%= htmlWebpackPlugin.options.__URL_WIDGET__ %>/widget.js?<%= htmlWebpackPlugin.options.__HASH_BUILD__ %>"></script>
     <script>
         window.addEventListener('load',function () {
-            window.waiboc.initChatbotWidget({
+            if ( window.waiboc ){
+              window.waiboc.initChatbotWidget({
                 idAgent: '<%=htmlWebpackPlugin.options.__ID_WIDGET__%>',
                 defaultStyle:{
                     fontSize:'22px'
                 }
-            }) ;
+              }) ;
+            } else {
+              console.log('...Waiboc not installed.') ;
+            }
         }) ;
     </script>
     <!-- -->

@@ -32,6 +32,7 @@ const configPassportApp = (argConfigPassport,argApp, argDb) => {
     if ( argConfigPassport[keyStrategy].pathUrlCallback ){
       router.get(argConfigPassport[keyStrategy].pathUrlCallback, function(req, res, next) {
         let urlRedirect = req.session['urlRedirect'] || "/" ;
+        console.log('....urlRedirect: '+urlRedirect+' sess: '+req.session['urlRedirect']+' path: '+req.originalUrl )
         passport.authenticate(keyStrategy,function(err, user, info) {
           if (err) {
             console.log('err: '+err+';') ;

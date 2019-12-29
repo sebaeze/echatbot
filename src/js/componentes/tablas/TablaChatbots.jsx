@@ -180,7 +180,7 @@ export class TablaChatbots extends React.Component {
         try {
             //
             outCols = [
-                {title: this.props.translate.table.action,dataIndex: '',width:200,key: 'x',fixed: 'left',
+                {title: this.props.translate.table.action,dataIndex: '',width:100,key: 'x',fixed: 'left',
                        render: (argRecord) => {
                             return (
                                 <div  style={{width:'100%'}}>
@@ -192,22 +192,22 @@ export class TablaChatbots extends React.Component {
                 },
                 {title: 'Id',
                         width: 200,dataIndex:'_id', key:'_id',fixed: 'left',
-                        //render: text => <span style={{fontWeight:'700',color:'#497EC0'}}>{text}</span>,
-                        render: (text,objReg) => <a style={{fontWeight:'700',color:'#497EC0'}} onClick={()=>{this.onClickEditChatbot(objReg)}}>{text}</a>,
+                        render: (text,objReg) => <a style={{fontWeight:'500',color:'#497EC0'}} onClick={()=>{this.onClickEditChatbot(objReg)}}>{text}</a>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a._id.localeCompare(b._id) } ,
-                {title: this.props.translate.table.chatbotName,width: 200,
+                {title: this.props.translate.table.chatbotName,width: 250,
+                        render: (text) => <a style={{fontWeight:'700',color:'#497EC0'}} >{text}</a>,
                         dataIndex:'botName', key:'botName',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
-                {title: this.props.translate.status       ,width: 100,dataIndex:'status',key:'status',
-                        render: (text) => <a style={{fontWeight:'700',color:'#497EC0'}} >{text}</a>,
+                {title: this.props.translate.status       ,width: 200,dataIndex:'status',key:'status',
+                        render: (text) => <a style={{fontWeight:'700'}} >{text}</a>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.status.localeCompare(b.status) } ,
                 {title: this.props.translate.table.description       ,width: 150,dataIndex:'description',key:'description',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.description.localeCompare(b.description) } ,
-                {title: this.props.translate.table.plan  ,width: 150,dataIndex:'plan',key:'plan',
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.plan.localeCompare(b.plan) } ,
                 {title: this.props.translate.table.messagesConsumed ,width: 200,dataIndex:'qtyMessages', key:'qtyMessages',
                         render: text => <span style={{fontWeight:'700'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.qtyMessages - b.qtyMessages } ,
+                {title: this.props.translate.table.plan  ,width: 150,dataIndex:'plan',key:'plan',
+                        defaultSortOrder: 'descend', sorter: (a, b) => a.plan.localeCompare(b.plan) } ,
                 {title: this.props.translate.table.language ,width: 200,dataIndex:'language', key:'language',
                         render: text => <span style={{fontWeight:'700'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.language - b.language },
@@ -301,7 +301,7 @@ export class TablaChatbots extends React.Component {
                 >
                     <div style={{fontSize:'32px',width:'100%',textAlign:'center'}} >{this.props.translate.danger} <Icon type="exclamation" style={{color:'#FF0000',fontSize:'32px'}}/></div>
                 </Modal>
-                <div style={{width:'100%',marginTop:'20px',marginBottom:'15px'}}>
+                <div style={{width:'100%',marginTop:'5px',marginBottom:'5px'}}>
                     <Input placeholder={this.props.translate.search}
                            onChange={this.onChangeSearch}
                            style={{height:'42px',marginLeft:'10px', width:'20%'}}

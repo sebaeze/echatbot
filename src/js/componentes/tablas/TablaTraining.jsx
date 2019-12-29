@@ -7,7 +7,9 @@ import moment                                              from 'moment-timezone
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
 import { TestChatbotWidget }                               from '../chat/TestChatbotWidget'    ;
+import { ChatAnswerExample }                               from '../chat/ChatAnswerExample'    ;
 //
+if ( !window.waiboc ){ console.log('...ERROR: Failed to install Waiboc widget ***'); throw new Error("Waiboc widget failed"); }
 const { CustomReply }   = window.waiboc ;
 //
 export class TablaTraining extends React.Component {

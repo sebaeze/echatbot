@@ -170,6 +170,7 @@ export class TablaTraining extends React.Component {
             entity: argNewIntent.intentName,
             timestamp_last_update: moment( new Date() ).tz("America/Argentina/Buenos_Aires").format()
         };
+        //console.log('.....AcceptNewIntent:: tempNewIntent: ',tempNewIntent ) ;
         let tempArrayTraining = this.state.arrayTraining ;
         let indexIntent       = tempArrayTraining.findIndex((elemIntent)=>{ return elemIntent.entity.toUpperCase()==tempNewIntent.entity.toUpperCase() ; }) ;
         if ( indexIntent!=-1 ){
@@ -179,7 +180,7 @@ export class TablaTraining extends React.Component {
             tempArrayTraining.push( tempNewIntent ) ;
         }
         this.setState({arrayTraining:tempArrayTraining,modalNewIntent: false, intentNewModify: false}) ;
-        this.saveChangesTotraining() ;
+        this.saveChangesTotraining(tempNewIntent) ;
         //
       } catch(errNI){
         console.dir(errNI) ;
@@ -196,24 +197,25 @@ export class TablaTraining extends React.Component {
         }
     }
     //
-    saveChangesTotraining(){
+    saveChangesTotraining(argEntity){
         try {
             //
             let chatbotTrain = {
               _id: this.state.chatbotConfig._id,
               train: {}
             } ;
+            delete argEntity.key ;
+            chatbotTrain.train[ argEntity.entity ] = argEntity ;
+            //
+            /*
             for ( let idTrain=0; idTrain<this.state.arrayTraining.length; idTrain++ ){
               let objIntent = {...this.state.arrayTraining[ idTrain ]} ;
               delete objIntent.key ;
-              /* Fix some fields values */
               if ( objIntent.type=='text' ){
-                  // Old format with answer field instead of text
                   if ( !objIntent.text && objIntent.answer ){
                       objIntent.text   = objIntent.answer ;
                       delete  objIntent.answer ;
                     }
-                  // Convert all responses to array
                   if ( !Array.isArray(objIntent.text) ){
                     objIntent.text = new Array( objIntent.text ) ;
                   }
@@ -223,11 +225,10 @@ export class TablaTraining extends React.Component {
                                     +'</span></div>' ;
                   }
               }
-              /* */
               let idIntent                   = objIntent.entity ;
               chatbotTrain.train[ idIntent ] = objIntent ;
             }
-            //
+            */
             const openNotificationWithIcon = (type,argText) => {
               notification[type]({
                   //message: <h1>holaaa</h1>,
@@ -290,7 +291,7 @@ export class TablaTraining extends React.Component {
                     </Button>
                     {
                         this.state.flagWidgetTest==false ?
-                            <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({flagWidgetTest: true});}} type="primary" size="large" style={{ marginLeft: '15px' }}>
+                            <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({flagWidgetTest: true});}} type="primary" size="large" style={{ backgroundColor:'#8B6BEC',marginLeft: '15px' }}>
                                 {this.props.translate.form.testChatbot}
                             </Button>
                             : null
@@ -310,7 +311,8 @@ export class TablaTraining extends React.Component {
                 />
                 {
                     this.state.flagWidgetTest==true ?
-                            <TestChatbotWidget  idAgent={this.props.chatbotConfig._id} onWindowClose={()=>{this.setState({flagWidgetTest: false});}} />
+                            <TestChatbotWidget  idAgent={this.props.chatbotConfig._id}
+                                                onWindowClose={()=>{this.setState({flagWidgetTest: false});}} />
                             : null
                 }
             </div>

@@ -77,6 +77,8 @@
             "action":"Action"
         },
         "form":{
+            "fileDragger":"Add images, text files, xls, so on",
+            "newFileClickDrag":"Click or drag file to this area to upload",
             "newsletter":"Newsletter",
             "testChatbot":"Test Chatbot",
             "appearance":"Appearance",
@@ -209,6 +211,8 @@
             "action":"Acción"
         },
         "form":{
+            "fileDragger":"Agregar imágenes, archivos de texto, xls, etc.",
+            "newFileClickDrag":"Haga clic o arrastre el archivo a esta área para cargar",
             "newsletter":"Suscribirse",
             "testChatbot":"Testear Chatbot",
             "appearance":"Apariencia",
@@ -378,6 +382,8 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "fileDragger":"Adicione imagens, arquivos de texto, xls, etc.",
+            "newFileClickDrag":"Clique ou arraste o arquivo para esta área para fazer o envio",
             "newsletter":"Boletim de Notícias",
             "testChatbot":"Teste o Chatbot",
             "appearance":"Aparência",

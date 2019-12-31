@@ -1,8 +1,8 @@
 /*
 * FormIntentAnswer
 */
-import React                                             from 'react' ;
-import { Button, Form, Input, Tooltip, Icon,  Select }   from 'antd'  ;
+import React                                                    from 'react' ;
+import { Button, Form, Input, Tooltip, Icon,  Select, Upload, Spin }   from 'antd'  ;
 // import Picker                                            from 'emoji-picker-react' ;
 import { Picker }                                        from 'emoji-mart' ;
 import { FormDynamicInputText }                          from  './FormDynamicInputText' ;
@@ -13,6 +13,7 @@ export class FormIntentAnswerBase extends React.Component {
     constructor(props){
         super(props) ;
         this.firstNode          = false ;
+        this.normFile           = this.normFile.bind(this) ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
         this.onEmojiClick       = this.onEmojiClick.bind(this) ;
         this.answerTypes        = {
@@ -22,7 +23,7 @@ export class FormIntentAnswerBase extends React.Component {
             OPTIONS:'options',
             IMAGE:'image'
         } ;
-        this.state              = {flagSpinner:false, fieldPanel: this.answerTypes.TEXT, flagPicker: false } ;
+        this.state              = {flagSpinner:false, fieldPanel: this.answerTypes.TEXT, flagPicker: false, flagUploading: false } ;
         this.inputText          = false ;
     }
     //
@@ -30,16 +31,14 @@ export class FormIntentAnswerBase extends React.Component {
         const { resetFields } = this.props.form ;
         resetFields({names:['type','title','api','text','options' ]}) ;
     }
-    /*
-    static getDerivedStateFromProps(newProps, state) {
-        if ( state.flagCachedProps==false ){
-            
-            return { chatbotConfig: newProps.chatbotConfig, arrayTraining: tempArrayTraining, flagCachedProps: true  } ;
-        } else {
-            return false ;
+    //
+    normFile(e){
+        console.log('Upload event:', e);
+        if (Array.isArray(e)) {
+            return e;
         }
-    }
-    */
+        return e && e.fileList;
+    };
     //
     onSubmitForm(){
         try {
@@ -193,18 +192,57 @@ export class FormIntentAnswerBase extends React.Component {
                             </Form.Item>
                             : null
                     }
-                    <Form.Item>
-                        <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
-                            {this.props.translate.form.submit}
-                        </Button>
-                        <Button
-                            style={{marginLeft:'10px'}}
-                            onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
-                        >
-                            <Icon type="left" />
-                            {this.props.translate.previous}
-                        </Button>
+                    <Form.Item label={ <span>{this.props.translate.form.fileDragger}
+                                            <Tooltip  placement="bottomRight" title={this.props.translate.form.newFileClickDrag} ><Icon type="question-circle-o" /> </Tooltip>
+                                        </span>}
+                    >
+                        {getFieldDecorator('files', {valuePropName: 'fileList',getValueFromEvent: this.normFile })
+                            (
+                            <Upload.Dragger name="files"
+                                action={(argFile)=>{
+                                    if (argFile){
+                                        this.setState({flagUploading: true}) ;
+                                        let tempFiles = this.props.form.getFieldValue('files') || [] ;
+                                        argFile.text()
+                                            .then((finText)=>{
+                                                argFile['flagNewFile'] = true ;
+                                                console.log('....antes de DATA:: argFile: ', argFile) ;
+                                                //argFile['data']        = finText.toString('base64') ;
+                                                //argFile['data']        = finText ;
+                                                tempFiles.push(  argFile ) ;
+                                                this.props.form.setFieldsValue({ 'files': tempFiles });
+                                                this.setState({flagUploading: false}) ;
+                                            })
+                                            .catch((errText)=>{
+                                                console.log('....errText:: ',errText) ;
+                                                this.setState({flagUploading: false}) ;
+                                            })
+                                    }
+                                }}
+                            >
+                                <p className="ant-upload-drag-icon"><Icon type="inbox" /></p>
+                                <p className="ant-upload-text">{this.props.translate.form.newFileClickDrag}</p>
+                            </Upload.Dragger>
+                            )
+                        }
                     </Form.Item>
+                    {
+                        this.state.flagUploading==false ?
+                            <Form.Item>
+                                <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
+                                    {this.props.translate.form.submit}
+                                </Button>
+                                <Button
+                                    style={{marginLeft:'10px'}}
+                                    onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
+                                >
+                                    <Icon type="left" />
+                                    {this.props.translate.previous}
+                                </Button>
+                            </Form.Item>
+                            :
+                            <Spin size="large" />
+                    }
                 </Form>
         ) ;
     }

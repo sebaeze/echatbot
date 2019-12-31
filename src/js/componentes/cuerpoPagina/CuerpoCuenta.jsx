@@ -69,11 +69,12 @@ export class CuerpoCuenta extends React.Component {
                     onCollapse={this.onCollapse}
                     style={{backgroundColor:'#EBF2FE',color:'#002DFF',fontWeight:'600',fontSize:'22px'}}
                 >
-                    <Menu defaultSelectedKeys={['1']} mode="inline"
-                          defaultOpenKeys={['sub1']}
+                    <Menu mode="inline"
+                          // defaultOpenKeys={['sub1']}
                           style={{backgroundColor:'#EBF2FE',color:'black',fontWeight:'600',fontSize:'22px'}}
+                          selectedKeys={[this.state.formType]}
                     >
-                        <Menu.Item key="1">
+                        <Menu.Item key={PARAMETROS.FORM.USER_INFO} >
                             <Icon type="user"  />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.userInfo} >
                                 <span onClick={(argEV)=>{argEV.preventDefault();
@@ -87,7 +88,7 @@ export class CuerpoCuenta extends React.Component {
                                 {this.props.translate.menuAdmin.userInfo}</span>
                             </Tooltip>
                         </Menu.Item>
-                        <Menu.Item key="2">
+                        <Menu.Item key={PARAMETROS.FORM.CHATBOTS} >
                             <Icon type="robot"  />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.botsConfiguration} >
                                 <span onClick={(argEV)=>{argEV.preventDefault();

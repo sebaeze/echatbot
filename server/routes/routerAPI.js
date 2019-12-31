@@ -15,6 +15,45 @@ module.exports = (argConfig,argDb) => {
   let API_NLP        = argConfig.API[process.env.AMBIENTE||'dev'] || false ;
   const autenticado  = require( path.join(__dirname,'../auth/autenticado')  ).autenticado(argDb) ;
   //
+  const addNewFilesToChatbot = (argChatbotTrain) => {
+    return new Promise(function(respData,respRech){
+      try {
+        console.log('....addNewFilesToChatbot:: (A) ',argChatbotTrain) ;
+        let arrayFilesPromises = [] ;
+        Object.values(argChatbotTrain.train).forEach((elemEntity)=>{
+          if ( elemEntity.answer.files ){
+            elemEntity.answer.files.forEach((elemFile)=>{
+              if ( elemFile.flagNewFile && elemFile.flagNewFile==true ){
+                elemFile['idChatbot'] = argChatbotTrain._id ; // _id de chatbot
+                elemFile.flagNewFile  = false ;
+                console.log('....file 2 add:: ',elemFile) ;
+                arrayFilesPromises.push( argDb.files.add(elemFile) ) ;
+              }
+            }) ;
+          }
+        }) ;
+        //
+        console.log('....addNewFilesToChatbot:: (b) ll: '+arrayFilesPromises.length) ;
+        if ( arrayFilesPromises.length>0 ){
+          Promise.all( arrayFilesPromises )
+            .then((respAddFiles)=>{
+              console.log('....then ADD all files:: respAddFiles: ',respAddFiles) ;
+              respData( argChatbotTrain ) ;
+            })
+            .catch((errAddAll)=>{
+              respRech(errAddAll) ;
+            })
+        } else {
+          console.log('....addNewFilesToChatbot:: (zzz) ll: '+arrayFilesPromises.length) ;
+          respData( argChatbotTrain ) ;
+        }
+        //
+      } catch(errANFTC){
+        respRech(errANFTC) ;
+      }
+    }) ;
+  } ;
+  //
   router.get('/chatbot',autenticado,function(req,res,next){
     res.set('Access-Control-Allow-Headers','*');
     res.set('Access-Control-Allow-Origin', '*');
@@ -97,8 +136,6 @@ module.exports = (argConfig,argDb) => {
                   data: tempReqbody,
                   ca: rootCA
                 } ;
-                //console.log('...reqOptions:: ',reqOptions ) ;
-                // return axios.post( API_NLP.NLP_TRAIN , tempReqbody ) ;
                 return axios( reqOptions ) ;
                 //
               })
@@ -116,7 +153,17 @@ module.exports = (argConfig,argDb) => {
         }) ;
       }
       //
-      argDb.chatbot.qry( {_id: req.body._id} )
+      console.log('.../train::: body: ') ;
+      Object.values(req.body.train).forEach((elemT)=>{
+        console.log('....elemT.answer.files.length:: ',elemT.answer.files.length) ;
+      }) ;
+      //
+      addNewFilesToChatbot( req.body )
+          .then((resuTrain)=>{
+            req.body.train = resuTrain ;
+            return argDb.chatbot.qry( {_id: req.body._id} ) ;
+          })
+      //argDb.chatbot.qry( {_id: req.body._id} )
           .then(function(chatbotInfo){
             if ( chatbotInfo.length && chatbotInfo.length>0 ){ chatbotInfo=chatbotInfo[0]; }
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });

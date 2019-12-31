@@ -7,8 +7,9 @@ import { FormIntentExamples }          from './FormIntentExamples' ;
 import { FormIntentAnswer }            from './FormIntentAnswer'   ;
 import { Modal, Typography, Steps, Icon }   from 'antd'  ;
 //
-const { Step  } = Steps      ;
-const { Title } = Typography ;
+const { Step  }  = Steps      ;
+const { Title }  = Typography ;
+const INTENT_DEF = {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{} } ;
 //
 export class FormNewIntent extends React.Component {
     constructor(props){
@@ -17,7 +18,7 @@ export class FormNewIntent extends React.Component {
             flagSpinner:false,
             modalVisible: this.props.modalVisible,
             enviadoOk:false,
-            dataNewIntent: this.props.data!=false ? {...this.props.data} : {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}},
+            dataNewIntent: this.props.data!=false ? {...this.props.data} : {...INTENT_DEF},
             formStep: 0,
         } ;
         this.onNextStep         = this.onNextStep.bind(this) ;
@@ -31,8 +32,7 @@ export class FormNewIntent extends React.Component {
             let newDerivedState = {
                 formStep: 0,
                 modalVisible: newProps.modalVisible,
-                //dataNewIntent: newProps.data!=false ? {...newProps.data} : {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}},
-                dataNewIntent: newProps.modalVisible==true ? {...newProps.data} : {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}}
+                dataNewIntent: newProps.modalVisible==true ? {...newProps.data} : {...INTENT_DEF}
             } ;
             return {...newDerivedState} ;
         } else {
@@ -47,8 +47,9 @@ export class FormNewIntent extends React.Component {
                 formStep: this.state.formStep+1
             }
             if ( newState.formStep>2 ){
+                console.log('....voy a grabar newIntent:: newState: ',newState) ;
                 this.props.onAccept( {...newState.dataNewIntent} ) ;
-                newState.dataNewIntent = {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}} ;
+                newState.dataNewIntent = {...INTENT_DEF} ;
                 newState.formStep = 0 ;
                 this.setState(newState) ;
             } else {

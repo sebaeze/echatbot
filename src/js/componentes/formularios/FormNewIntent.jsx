@@ -41,6 +41,7 @@ export class FormNewIntent extends React.Component {
     }
     //
     onNextStep(argNextStep){
+        console.log('....onNextStep:: ',argNextStep) ;
         try {
             let newState = {
                 dataNewIntent: Object.assign({...this.state.dataNewIntent},argNextStep),

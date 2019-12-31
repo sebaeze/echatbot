@@ -55,7 +55,7 @@ class MapaGoogle extends React.Component {
         return(
             <Map
                 google={this.props.google}
-                zoom={8}
+                //zoom={8}
                 style={{width:(this.state.isMobile==true ? '350px' : '500px' ),height:(this.state.isMobile==true ? '350px' : '500px' )}}
                 initialCenter={{...this.state.coordenadaInicial}}
                 >

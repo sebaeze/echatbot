@@ -1009,6 +1009,9 @@ div.react-bootstrap-table tbody tr:hover {
 .waiboc-cl-form .emoji-mart-category .emoji-mart-emoji span:hover {
     cursor:  pointer !important ;
 }
+.waiboc-cl-form #intentName {
+    font-weight: 600 !important ;
+}
 .waiboc-cl-input-with-emoticon .ant-input-lg {
     padding-left: 50px !important ;
 }

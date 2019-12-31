@@ -77,7 +77,7 @@ export class TablaTraining extends React.Component {
             //
             outCols = [
                 {title: this.props.translate.table.intent ,
-                        dataIndex: 'entity',width:250,key: 'entity',
+                        dataIndex: 'entity',width:320,key: 'entity',
                         render: (text,argRow) => {
                             return(
                                 <div>

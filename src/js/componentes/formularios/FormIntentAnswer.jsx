@@ -2,7 +2,7 @@
 * FormIntentAnswer
 */
 import React                                                    from 'react' ;
-import { Button, Form, Input, Tooltip, Icon,  Select, Upload, Spin }   from 'antd'  ;
+import { Button, Form, Input, Tooltip, Icon,  Select, Upload, Spin, message  }   from 'antd'  ;
 // import Picker                                            from 'emoji-picker-react' ;
 import { Picker }                                        from 'emoji-mart' ;
 import { FormDynamicInputText }                          from  './FormDynamicInputText' ;
@@ -58,7 +58,30 @@ export class FormIntentAnswerBase extends React.Component {
                       let valField = tempFields[keyF] ;
                       tempOutAnswer[keyF] = valField ;
                   }
-                this.props.onSubmitOk( {intentAnswer: tempOutAnswer} ) ;
+                  /*
+                  if ( tempOutAnswer.files ){
+                      let tempFiles       = tempOutAnswer.files ;
+                      let tempArrPromises = [] ;
+                      tempOutAnswer.files = [] ;
+                      for ( let indF=0; indF<tempFiles.length; indF++ ){
+                          let objFile = tempFiles[ indF ] ;
+                      }
+
+                  } else {
+                    this.props.onSubmitOk( {intentAnswer: tempOutAnswer} ) ;
+                  }
+                  */
+                  //
+                  if ( tempOutAnswer.files && tempOutAnswer.files.length>0 ){
+                      console.log('.....(A) tempOutAnswer.files: ',tempOutAnswer.files) ;
+                    tempOutAnswer.files = tempOutAnswer.files.filter((elemFF)=>{
+                        return elemFF.status!="error"  ;
+                    }) ;
+                    console.log('.....(B) tempOutAnswer.files: ',tempOutAnswer.files) ;
+                  }
+                  //
+                  this.props.onSubmitOk( {intentAnswer: tempOutAnswer} ) ;
+                  //
               }
             });
         } catch(errFS){
@@ -88,6 +111,23 @@ export class FormIntentAnswerBase extends React.Component {
     render(){
         //
         const { getFieldDecorator } = this.props.form ;
+        //
+        const beforeUpload = (argFile,fileList) => {
+            /*
+            const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+            if (!isJpgOrPng) {
+              message.error('You can only upload JPG/PNG file!');
+            }
+            */
+            const isSizeOk = argFile.size<1024001 ;
+            if ( !isSizeOk ) {
+              message.error( this.props.translate.form.fileSize1MBError );
+              message.status = "error" ;
+              argFile.status   = 'error' ;
+              argFile.response = this.props.translate.form.fileSize1MBError  ;
+            }
+            return isSizeOk ;
+        }
         //
         return(
             //
@@ -196,27 +236,43 @@ export class FormIntentAnswerBase extends React.Component {
                                             <Tooltip  placement="bottomRight" title={this.props.translate.form.newFileClickDrag} ><Icon type="question-circle-o" /> </Tooltip>
                                         </span>}
                     >
-                        {getFieldDecorator('files', {valuePropName: 'fileList',getValueFromEvent: this.normFile })
+                        {getFieldDecorator('files',
+                            {valuePropName: 'fileList',getValueFromEvent: this.normFile,
+                            initialValue: this.props.data.intentAnswer.files }
+                        )
                             (
                             <Upload.Dragger name="files"
+                                // defaultFileList={filesTrained}
+                                beforeUpload={beforeUpload}
+                                customRequest={(argCR)=>{ return false ; }}
                                 action={(argFile)=>{
                                     if (argFile){
                                         this.setState({flagUploading: true}) ;
                                         let tempFiles = this.props.form.getFieldValue('files') || [] ;
+                                        let indFile   = tempFiles.findIndex((elemFF)=>{ return elemFF.name==argFile.name ; }) ;
                                         argFile.text()
                                             .then((finText)=>{
-                                                argFile['flagNewFile'] = true ;
-                                                console.log('....antes de DATA:: argFile: ', argFile) ;
-                                                //argFile['data']        = finText.toString('base64') ;
-                                                //argFile['data']        = finText ;
-                                                tempFiles.push(  argFile ) ;
+                                                let tempObjFile = {
+                                                    name: argFile.name ,
+                                                    size: argFile.size ,
+                                                    lastModified: argFile.lastModified ,
+                                                    type: argFile.type ,
+                                                    uid: argFile.uid ,
+                                                    data: "" ,
+                                                    flagNewFile: true
+                                                } ;
+                                                if ( indFile!=-1 ){
+                                                    tempFiles[ indFile ]   = tempObjFile ;
+                                                } else {
+                                                    tempFiles.push( tempObjFile  ) ;
+                                                }
                                                 this.props.form.setFieldsValue({ 'files': tempFiles });
                                                 this.setState({flagUploading: false}) ;
                                             })
                                             .catch((errText)=>{
                                                 console.log('....errText:: ',errText) ;
                                                 this.setState({flagUploading: false}) ;
-                                            })
+                                            }) ;
                                     }
                                 }}
                             >

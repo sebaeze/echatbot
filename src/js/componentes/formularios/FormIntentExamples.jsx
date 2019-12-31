@@ -36,7 +36,9 @@ class FormIntentExamplesBase extends React.Component {
                         this.setState({flagSpinner:false }) ;
                     }, 700 ) ;
               } else {
-                this.props.onSubmitOk( this.props.form.getFieldsValue() ) ;
+                let tempfieldsValues            = this.props.form.getFieldsValue() ;
+                tempfieldsValues.intentExamples = tempfieldsValues.intentExamples.filter((elemF)=>{ return elemF!=null ; }) ;
+                this.props.onSubmitOk( tempfieldsValues ) ;
               }
             });
         } catch(errFS){

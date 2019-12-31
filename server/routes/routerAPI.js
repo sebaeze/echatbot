@@ -26,18 +26,41 @@ module.exports = (argConfig,argDb) => {
               if ( elemFile.flagNewFile && elemFile.flagNewFile==true ){
                 elemFile['idChatbot'] = argChatbotTrain._id ; // _id de chatbot
                 elemFile.flagNewFile  = false ;
-                console.log('....file 2 add:: ',elemFile) ;
-                arrayFilesPromises.push( argDb.files.add(elemFile) ) ;
+                arrayFilesPromises.push( elemFile ) ;
               }
             }) ;
           }
         }) ;
         //
-        console.log('....addNewFilesToChatbot:: (b) ll: '+arrayFilesPromises.length) ;
         if ( arrayFilesPromises.length>0 ){
-          Promise.all( arrayFilesPromises )
+          //Promise.all( arrayFilesPromises )
+          argDb.files.add( arrayFilesPromises )
             .then((respAddFiles)=>{
               console.log('....then ADD all files:: respAddFiles: ',respAddFiles) ;
+              if ( !Array.isArray(respAddFiles) ){ respAddFiles=new Array(respAddFiles); }
+              respAddFiles.forEach((elemFileAdded)=>{
+                console.log('....voy a recorrer entities en busca de file:: '+elemFileAdded.name) ;
+                Object.values(argChatbotTrain.train).forEach((elemEntity)=>{
+                  console.log('......voy a recorrer files de entity ::'+elemEntity.entity+' lll: '+(elemEntity.answer.files ? elemEntity.answer.files.length : 'NO FILESSSS')) ;
+                  if ( elemEntity.answer.files && elemEntity.answer.files.length>0 ){
+                    //for( let indEnt=0; indEnt<elemEntity.answer.files)
+                    elemEntity.answer.files.forEach((elemEntt,indEntt)=>{
+                      console.log('....voy a BUSCARRR entitiy:: (A) entity: ',elemEntt) ; ;
+                      if ( elemEntt.name==elemFileAdded.name ){
+                        elemEntt = {
+                          _id: elemFileAdded._id ,
+                          name: elemFileAdded.name ,
+                          type: elemFileAdded.type ,
+                          lastModified: elemFileAdded.lastModified
+
+                        } ;
+                        elemEntity.answer.files[indEntt] = elemEntt ;
+                        console.log('....voy a modificar entitiy:: (B) entity: ',elemEntt) ; ;
+                      }
+                    }) ;
+                  }
+                }) ;
+              }) ;
               respData( argChatbotTrain ) ;
             })
             .catch((errAddAll)=>{
@@ -129,7 +152,6 @@ module.exports = (argConfig,argDb) => {
                 objResultado.result = respUpd.training ;
                 let tempReqbody = { idAgente: argBotTrained._id, emailUserid: req.user.email, secretAPInlp: API_NLP.NLP_TRAIN_SECRET } ;
                 //
-                console.log('....API_NLP.NLP_TRAIN: ',API_NLP.NLP_TRAIN) ;
                 let reqOptions = {
                   url: API_NLP.NLP_TRAIN,
                   method: 'POST',
@@ -160,10 +182,9 @@ module.exports = (argConfig,argDb) => {
       //
       addNewFilesToChatbot( req.body )
           .then((resuTrain)=>{
-            req.body.train = resuTrain ;
+            req.body.train = resuTrain.train ;
             return argDb.chatbot.qry( {_id: req.body._id} ) ;
           })
-      //argDb.chatbot.qry( {_id: req.body._id} )
           .then(function(chatbotInfo){
             if ( chatbotInfo.length && chatbotInfo.length>0 ){ chatbotInfo=chatbotInfo[0]; }
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });

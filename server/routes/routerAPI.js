@@ -155,7 +155,7 @@ module.exports = (argConfig,argDb) => {
       //
       console.log('.../train::: body: ') ;
       Object.values(req.body.train).forEach((elemT)=>{
-        console.log('....elemT.answer.files.length:: ',elemT.answer.files.length) ;
+        console.log('....elemT.answer.files.length:: ',((elemT.answer.files && elemT.answer.files.length) ? elemT.answer.files.length : 'nadaaa')) ;
       }) ;
       //
       addNewFilesToChatbot( req.body )

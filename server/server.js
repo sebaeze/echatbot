@@ -6,7 +6,7 @@ const app              = express();
 const bodyParser       = require('body-parser') ;
 const cookieParser     = require('cookie-parser')   ;
 const session          = require('express-session') ;
-const MemoryStore      = require('session-memory-store')(session);
+const MongoStore       = require('connect-mongo')(session);
 const utiles           = require('./lib/utiles').Utilitarios() ;
 const mustacheExpress  = require('mustache-express') ;
 //
@@ -40,9 +40,6 @@ Eventos(db,configuracionApp) ;
 app.use(cookieParser()) ;
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-app.use(session({ name:'mlsess',secret: 'wsx22wsx',cookie: {path: '/',httpOnly: true,maxAge: (2 * 24 * 60 * 60 * 1000) },proxy: true, resave: true,saveUninitialized: true, store: new MemoryStore() }));
-//
-const passportConfigured = configPassport(  configuracionApp.passport[process.env.AMBIENTE||'dev'] , app, db )  ;
 //
 app.disable('x-powered-by');
 app.disable('etag');
@@ -71,6 +68,15 @@ try {
       next() ;
     }) ;
     */
+    //
+    app.use(session({
+      name:'mlsess',secret: 'wsx22wsx',cookie: {path: '/',httpOnly: true,maxAge: (2 * 24 * 60 * 60 * 1000) },proxy: true, resave: true,saveUninitialized: true,
+      store: new MongoStore({
+        mongooseConnection: db.chatbot.getConeccion().connection,
+        collection:'sessionswebsite'
+      })
+    }));
+    let passportConfigured = configPassport(  configuracionApp.passport[process.env.AMBIENTE||'dev'] , app, db )  ;
     //
     routesApp(app,configuracionApp,db,passportConfigured)
       .then((finRutas)=>{

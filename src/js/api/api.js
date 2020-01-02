@@ -4,7 +4,6 @@
 import { PARAMETROS, opcionesPOST }     from '../utils/parametros' ;
 import { account }                      from './apiAccount'        ;
 import { chatbot   }                    from './apiChatbot'        ;
-import { productos }                    from './apiProductos'      ;
 import { distribuidores }               from './apiDistribuidores' ;
 //
 export const enviarSuscripcion = (argForm) => {
@@ -59,7 +58,6 @@ export const enviarConsulta = (argForm) => {
 //
 export const api = {
     account: account,
-    chatbot: chatbot,
-    productos: productos
+    chatbot: chatbot
 }
 //

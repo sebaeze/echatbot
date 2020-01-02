@@ -40,12 +40,13 @@ const addNewChatbot = (argNewBot) => {
     }) ;
 }
 //
-const trainChatbot  = (argTrainChatbot) => {
+const trainChatbot  = (argTrainChatbot,flagDeleteIntent=false) => {
     return new Promise(function(respOk,respRech){
         try {
             let opcionesAdd = {...opcionesPOST} ;
-            opcionesAdd.method = 'POST' ;
+            opcionesAdd.method = flagDeleteIntent==true ? 'DELETE' : 'POST' ;
             opcionesAdd.body    = JSON.stringify(argTrainChatbot) ;
+            console.log('....borrr//post:: opcionesAdd: ',opcionesAdd) ;
             //
             fetch( '/api/train'  , opcionesAdd )
                 .then((respFetch)=>{

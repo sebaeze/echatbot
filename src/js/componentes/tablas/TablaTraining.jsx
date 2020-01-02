@@ -20,6 +20,7 @@ export class TablaTraining extends React.Component {
         this.onChangeSearch = this.onChangeSearch.bind(this) ;
         this.onAcceptNewIntent      = this.onAcceptNewIntent.bind(this) ;
         this.onClickEditIntent      = this.onClickEditIntent.bind(this) ;
+        this.onClickDeleteIntent    = this.onClickDeleteIntent.bind(this) ;
         this.saveChangesTotraining = this.saveChangesTotraining.bind(this) ;
         this.state = {
             flagWidgetTest: false,
@@ -66,6 +67,21 @@ export class TablaTraining extends React.Component {
         }
     }
     //
+    onClickDeleteIntent(argRowIntent){
+        try {
+            //
+            this.setState({flagSpinner: true}) ;
+            let tempArrayTraining = this.state.arrayTraining.filter((elemEntity)=>{
+                return elemEntity.entity!=argRowIntent.entity  ;
+            }) ;
+            this.setState({arrayTraining: tempArrayTraining,flagSpinner: false}) ;
+            this.saveChangesTotraining( argRowIntent, true ) ;
+            //
+        } catch(errOCI){
+            console.dir(errOCI) ;
+        }
+    }
+    //
     parseColumns(){
         let outCols   = [] ;
         let tagColors = ['geekblue','blue','volcano','lime','gold','magenta','purple'] ;
@@ -81,11 +97,19 @@ export class TablaTraining extends React.Component {
                         render: (text,argRow) => {
                             return(
                                 <div>
+                                    <span style={{paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}>{text}</span><br/>
                                     <a style={{fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
                                         onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
                                     >
                                         <Icon type="edit" style={{color:'green'}}/>
-                                        <span style={{marginLeft:'5px'}}>{text}</span>
+                                        <span>{this.props.translate.edit}</span>
+                                    </a>
+                                    <br/>
+                                    <a style={{fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
+                                        onClick={(argEE)=>{argEE.preventDefault();this.onClickDeleteIntent(argRow);}}
+                                    >
+                                        <Icon type="delete" style={{color:'red'}}/>
+                                        <span>{this.props.translate.delete}</span>
                                     </a>
                                 </div>
                         )},
@@ -197,7 +221,7 @@ export class TablaTraining extends React.Component {
         }
     }
     //
-    saveChangesTotraining(argEntity){
+    saveChangesTotraining(argEntity, flagDeleteIntent=false ){
         try {
             //
             let chatbotTrain = {
@@ -207,28 +231,6 @@ export class TablaTraining extends React.Component {
             delete argEntity.key ;
             chatbotTrain.train[ argEntity.entity ] = argEntity ;
             //
-            /*
-            for ( let idTrain=0; idTrain<this.state.arrayTraining.length; idTrain++ ){
-              let objIntent = {...this.state.arrayTraining[ idTrain ]} ;
-              delete objIntent.key ;
-              if ( objIntent.type=='text' ){
-                  if ( !objIntent.text && objIntent.answer ){
-                      objIntent.text   = objIntent.answer ;
-                      delete  objIntent.answer ;
-                    }
-                  if ( !Array.isArray(objIntent.text) ){
-                    objIntent.text = new Array( objIntent.text ) ;
-                  }
-                  if ( !objIntent.html ){
-                    objIntent.html = '<div><span>'
-                                    + objIntent.text.join('</span><span>')
-                                    +'</span></div>' ;
-                  }
-              }
-              let idIntent                   = objIntent.entity ;
-              chatbotTrain.train[ idIntent ] = objIntent ;
-            }
-            */
             const openNotificationWithIcon = (type,argText) => {
               notification[type]({
                   //message: <h1>holaaa</h1>,
@@ -237,7 +239,7 @@ export class TablaTraining extends React.Component {
               });
             } ;
             //
-            api.chatbot.train( chatbotTrain )
+            api.chatbot.train( chatbotTrain, flagDeleteIntent )
                 .then((respTrain)=>{
                   if ( respTrain==false ){
                     openNotificationWithIcon('error',this.props.translate.form.userNotAuthorized) ;

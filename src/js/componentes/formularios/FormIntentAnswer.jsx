@@ -129,6 +129,12 @@ export class FormIntentAnswerBase extends React.Component {
             return isSizeOk ;
         }
         //
+        console.log('....this.props.data.intentAnswer: ',this.props.data.intentAnswer) ;
+        let filesInitialValue = this.props.data.intentAnswer.files.map((elemFIL,fileInd)=>{
+            return {...elemFIL,key: fileInd, uid: fileInd}
+        }) ;
+        console.log('.....filesInitialValue: ',filesInitialValue) ;
+        //
         return(
             //
                 <Form >
@@ -237,8 +243,9 @@ export class FormIntentAnswerBase extends React.Component {
                                         </span>}
                     >
                         {getFieldDecorator('files',
-                            {valuePropName: 'fileList',getValueFromEvent: this.normFile,
-                            initialValue: this.props.data.intentAnswer.files }
+                            {valuePropName: 'fileList',
+                            getValueFromEvent: this.normFile,
+                            initialValue: filesInitialValue }
                         )
                             (
                             <Upload.Dragger name="files"

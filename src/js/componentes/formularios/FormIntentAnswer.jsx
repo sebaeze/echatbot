@@ -130,9 +130,10 @@ export class FormIntentAnswerBase extends React.Component {
         }
         //
         console.log('....this.props.data.intentAnswer: ',this.props.data.intentAnswer) ;
-        let filesInitialValue = this.props.data.intentAnswer.files.map((elemFIL,fileInd)=>{
+        let filesInitialValue = (this.props.data.intentAnswer.files && Array.isArray(this.props.data.intentAnswer.files)) ? this.props.data.intentAnswer.files.map((elemFIL,fileInd)=>{
             return {...elemFIL,key: fileInd, uid: fileInd}
-        }) ;
+        })
+        : [] ;
         console.log('.....filesInitialValue: ',filesInitialValue) ;
         //
         return(

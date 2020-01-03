@@ -132,8 +132,7 @@ export class FormIntentAnswerBase extends React.Component {
         console.log('....this.props.data.intentAnswer: ',this.props.data.intentAnswer) ;
         let filesInitialValue = (this.props.data.intentAnswer.files && Array.isArray(this.props.data.intentAnswer.files)) ? this.props.data.intentAnswer.files.map((elemFIL,fileInd)=>{
             return {...elemFIL,key: fileInd, uid: fileInd}
-        })
-        : [] ;
+        }) : [] ;
         console.log('.....filesInitialValue: ',filesInitialValue) ;
         //
         return(
@@ -182,8 +181,9 @@ export class FormIntentAnswerBase extends React.Component {
                                         rules: [{ required: true, message: this.props.translate.form.errorAnswerText, whitespace: true }]
                                     })
                                     (
-                                            <Input allowClear size="large"
+                                            <Input.TextArea allowClear size="large"
                                                 className="waiboc-cl-input-with-emoticon"
+                                                autoSize={{ minRows: 1, maxRows: 2 }}
                                                 prefix={
                                                     <span className="waiboc-span-emoticon"
                                                             onClick={(argEEV)=>{
@@ -199,6 +199,15 @@ export class FormIntentAnswerBase extends React.Component {
                                             />
                                     )
                                 }
+                                <span className="waiboc-span-emoticon"
+                                        onClick={(argEEV)=>{
+                                            argEEV.preventDefault() ;
+                                            let tempFlagEmo = !this.state.flagPicker ;
+                                            this.setState({flagPicker: tempFlagEmo}) ;
+                                        }}
+                                >
+                                    { this.state.flagPicker==true ? "⌨️" : "😀" }
+                                </span>
                                 {
                                     this.state.flagPicker==true ? <Picker onSelect={this.onEmojiClick} title={null} i18n={this.props.translate.i18n} /> : null
                                 }

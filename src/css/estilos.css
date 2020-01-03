@@ -1009,8 +1009,19 @@ div.react-bootstrap-table tbody tr:hover {
 .waiboc-cl-form .emoji-mart-category .emoji-mart-emoji span:hover {
     cursor:  pointer !important ;
 }
+.waiboc-cl-form .ant-input, .waiboc-cl-form .ant-input-lg {
+    font-size: 20px !important ;
+}
+.waiboc-cl-form .ant-input-lg {
+    line-height: 40px !important ;
+}
 .waiboc-cl-form #intentName {
     font-weight: 600 !important ;
+}
+.waiboc-cl-form #botName  { /* .waiboc-cl-name input.ant-input.ant-input-lg { */
+    font-weight: 600 !important ;
+    font-size: 20px !important ;
+    color: rgb(73, 126, 192) ;
 }
 .waiboc-cl-input-with-emoticon .ant-input-lg {
     padding-left: 50px !important ;
@@ -1024,10 +1035,6 @@ span.waiboc-span-emoticon:hover {
 .waiboc-cl-modal-intent .ant-modal-header {
     background-color: #E0E6E5 !important ;
     border: 1px dotted grey !important ;
-}
-.waiboc-cl-form .ant-input-lg {
-    font-size: 20px !important ;
-    line-height: 40px !important ;
 }
 .waiboc-cl-form .ant-form-item-label i.anticon.anticon-question-circle-o {
     margin-left: 8px !important ;

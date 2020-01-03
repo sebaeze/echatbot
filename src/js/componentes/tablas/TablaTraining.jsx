@@ -2,7 +2,7 @@
 * TablaTraining
 */
 import React                                               from 'react' ;
-import { Table, Input, Button, notification, Icon, Tag, Popconfirm }   from 'antd'  ;
+import { Table, Input, Button, notification, Icon, Tag, Popconfirm, Collapse }   from 'antd'  ;
 import moment                                              from 'moment-timezone'  ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
@@ -147,24 +147,26 @@ export class TablaTraining extends React.Component {
                                 <span>{this.props.translate.form.answerType}: </span>
                                 <span style={{fontWeight:'600'}}>{text.type}</span><hr/>
                                 <span>{text.title||''}</span><br/>
-                                <CustomReply datos={{output: text}} flagTimestamp={false} />
-
-                                <span>{text.image||''}</span><br/>
-                                {
-                                    (text.options && text.options.length>0) ?
-                                        text.options.map((elemObj,idx)=>{
-                                            return (
-                                                <div key={idx}>
-                                                    <span style={{fontWeight:'600'}}>{elemObj.label}: </span>
-                                                    <span>{elemObj.value}</span>
-                                                    <br/>
-                                                </div>
-                                            )
-                                        })
-                                        :
-                                        null
-
-                                }
+                                <Collapse accordion>
+                                    <Collapse.Panel  header="Answer Example" key="1">
+                                        <CustomReply datos={{output: text}} flagTimestamp={false} />
+                                        <span>{text.image||''}</span><br/>
+                                        {
+                                            (text.options && text.options.length>0) ?
+                                                text.options.map((elemObj,idx)=>{
+                                                    return (
+                                                        <div key={idx}>
+                                                            <span style={{fontWeight:'600'}}>{elemObj.label}: </span>
+                                                            <span>{elemObj.value}</span>
+                                                            <br/>
+                                                        </div>
+                                                    )
+                                                })
+                                                :
+                                                null
+                                        }
+                                    </Collapse.Panel>
+                                </Collapse>
                             </div>
                 },
                 {title: 'Timestamp' ,

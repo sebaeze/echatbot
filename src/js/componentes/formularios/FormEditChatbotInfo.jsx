@@ -66,7 +66,7 @@ class FormEditChatbotInfoBase extends React.Component {
         return(
             //
             <div onKeyDown={this.handleKeyboard} >
-            <Form id="waiboc-id-form-editChatbot" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
+            <Form className="waiboc-cl-form"  onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
                 <Row >
                     <Form.Item
                         hasFeedback
@@ -76,7 +76,7 @@ class FormEditChatbotInfoBase extends React.Component {
                                 </span>}
                     >
                         {getFieldDecorator('botName', { rules: [{ required: true, message: 'Please, write a name for the Bot', whitespace: true }], })
-                        (<Input allowClear size="large" ref={(argRef)=>{ argRef.focus(); }} />)}
+                        (<Input allowClear size="large" className="waiboc-cl-names" ref={(argRef)=>{ argRef.focus(); }} />)}
                     </Form.Item>
                 </Row>
                 <Row >

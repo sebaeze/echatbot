@@ -107,7 +107,7 @@ class FormChatbots extends React.Component {
         //
         return(
             //
-            <Row id="idFormChatbot" onKeyDown={this.handleKeyboard}>
+            <Row className="waiboc-cl-form" onKeyDown={this.handleKeyboard}>
                 <Col xs={3}  md={3}  lg={5} xl={5} xxl={5}></Col>
                 <Col xs={16} md={16} lg={14} xl={14} xxl={14}>
                     <Form onSubmit={(argEV)=>{argEV.preventDefault();this.formSubmit();}} style={ {...estiloForm} } >
@@ -117,7 +117,9 @@ class FormChatbots extends React.Component {
                                 <Form.Item
                                     label={ <span>{this.props.translate.form.name}<Tooltip  placement="bottomRight" title="¿ Cuál es su nombre o cómo le gusta que lo llamen ?"> <Icon type="question-circle-o" /> </Tooltip> </span> }
                                 >
-                                    {getFieldDecorator('name', { rules: [{ required: true, message: 'Por favor, escriba su nombre', whitespace: true }], })(<Input allowClear size="large" />)}
+                                    {getFieldDecorator('name',{ rules: [{ required: true, message: 'Por favor, escriba su nombre', whitespace: true }], })
+                                        (<Input allowClear size="large" />)
+                                    }
                                 </Form.Item>
                             </Col>
                             <Col xs={1} md={1} lg={1} xl={1} xxl={1}></Col>

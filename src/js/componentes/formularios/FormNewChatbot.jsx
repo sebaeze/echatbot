@@ -102,7 +102,7 @@ class FormNewChatbotWithModal extends React.Component {
                                         </span>}
                             >
                                 {getFieldDecorator('botName', { rules: [{ required: true, message: 'Please, write a name for the Bot', whitespace: true }], })
-                                (<Input allowClear size="large" ref={(argRef)=>{ argRef.focus(); }} />)}
+                                (<Input allowClear className="waiboc-cl-names" size="large" ref={(argRef)=>{ argRef.focus(); }} />)}
                             </Form.Item>
                         </Row>
                         <Row >

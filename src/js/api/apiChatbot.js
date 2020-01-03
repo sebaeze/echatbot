@@ -46,7 +46,6 @@ const trainChatbot  = (argTrainChatbot,flagDeleteIntent=false) => {
             let opcionesAdd = {...opcionesPOST} ;
             opcionesAdd.method = flagDeleteIntent==true ? 'DELETE' : 'POST' ;
             opcionesAdd.body    = JSON.stringify(argTrainChatbot) ;
-            console.log('....borrr//post:: opcionesAdd: ',opcionesAdd) ;
             //
             fetch( '/api/train'  , opcionesAdd )
                 .then((respFetch)=>{

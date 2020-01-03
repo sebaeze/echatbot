@@ -1,5 +1,7 @@
 {
     "EN":{
+        "confirmation":"Confirmation",
+        "yes":"Yes",
         "search":"Search",
         "contact":"Contact",
         "contactUs":"Contact Us",
@@ -77,6 +79,7 @@
             "action":"Action"
         },
         "form":{
+            "deleteEntityConfirmation":"Are you sure to delete the entity ?",
             "fileSize1MBError":"File size must be smaller than 1MB",
             "fileDragger":"Add images, text files, xls, so on",
             "newFileClickDrag":"Click or drag file to this area to upload",
@@ -140,6 +143,8 @@
         ]
     },
     "ES":{
+        "confirmation":"Confirmaciòn",
+        "yes":"Si",
         "search":"Buscar",
         "contact":"Contacto",
         "contactUs":"Enviar Consulta",
@@ -212,6 +217,7 @@
             "action":"Acción"
         },
         "form":{
+            "deleteEntityConfirmation":"¿ Esta seguro de borrar la Intenciòn  ?",
             "fileSize1MBError":"Tamaño de archivo debe ser menor a 1MB",
             "fileDragger":"Agregar imágenes, archivos de texto, xls, etc.",
             "newFileClickDrag":"Haga clic o arrastre el archivo a esta área para cargar",
@@ -320,6 +326,8 @@
         ]
     },
     "PT":{
+        "confirmation":"Confirmação",
+        "yes":"Sim",
         "search":"Procurar",
         "contact":"Contato",
         "contactUs":"Contate Nos",
@@ -384,6 +392,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "deleteEntityConfirmation":"Tem certeza de que deseja excluir a intenção?",
             "fileSize1MBError":"Tamanho do arquivo deve ser menor que 1 MB",
             "fileDragger":"Adicione imagens, arquivos de texto, xls, etc.",
             "newFileClickDrag":"Clique ou arraste o arquivo para esta área para fazer o envio",

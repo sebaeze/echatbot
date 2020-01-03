@@ -2,7 +2,7 @@
 * TablaTraining
 */
 import React                                               from 'react' ;
-import { Table, Input, Button, notification, Icon, Tag }   from 'antd'  ;
+import { Table, Input, Button, notification, Icon, Tag, Popconfirm }   from 'antd'  ;
 import moment                                              from 'moment-timezone'  ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
@@ -97,20 +97,25 @@ export class TablaTraining extends React.Component {
                         render: (text,argRow) => {
                             return(
                                 <div>
-                                    <span style={{paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}>{text}</span><br/>
-                                    <a style={{fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
+                                    <span style={{paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}>
+                                        <u>{text}</u>
+                                    </span><br/>
+                                    <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
                                         onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
                                     >
                                         <Icon type="edit" style={{color:'green'}}/>
-                                        <span>{this.props.translate.edit}</span>
+                                        <span style={{marginLeft:'7px'}} >{this.props.translate.edit}</span>
                                     </a>
                                     <br/>
-                                    <a style={{fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
-                                        onClick={(argEE)=>{argEE.preventDefault();this.onClickDeleteIntent(argRow);}}
+                                    <Popconfirm placement="topRight" title={this.props.translate.form.deleteEntityConfirmation}
+                                        onConfirm={()=>{this.onClickDeleteIntent(argRow)}}
+                                        okText={this.props.translate.yes} cancelText="No"
                                     >
-                                        <Icon type="delete" style={{color:'red'}}/>
-                                        <span>{this.props.translate.delete}</span>
-                                    </a>
+                                        <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}} >
+                                            <Icon type="delete" style={{color:'red'}}/>
+                                            <span style={{marginLeft:'7px'}} >{this.props.translate.delete}</span>
+                                        </a>
+                                    </Popconfirm>
                                 </div>
                         )},
                         defaultSortOrder: 'descend', sorter: (a, b) => a.entity.localeCompare(b.entity)
@@ -136,7 +141,7 @@ export class TablaTraining extends React.Component {
                               )}
                 },
                 {title: this.props.translate.table.answer       ,
-                        dataIndex:'answer',key:'answer',
+                        dataIndex:'answer',key:'answer',width: 400,
                         render: (text) =>
                             <div>
                                 <span>{this.props.translate.form.answerType}: </span>
@@ -163,7 +168,7 @@ export class TablaTraining extends React.Component {
                             </div>
                 },
                 {title: 'Timestamp' ,
-                        dataIndex:'timestamp_last_update', key:'timestamp_last_update',
+                        dataIndex:'timestamp_last_update', key:'timestamp_last_update',width: 200,
                         render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{moment(text).fromNow()}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
                 },

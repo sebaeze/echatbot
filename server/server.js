@@ -70,7 +70,7 @@ try {
     */
     //
     app.use(session({
-      name:'mlsess',secret: 'wsx22wsx',cookie: {path: '/',httpOnly: true,maxAge: (2 * 24 * 60 * 60 * 1000) },proxy: true, resave: true,saveUninitialized: true,
+      name:'ckwaibocwebsite',secret: 'wsx22wsx',cookie: {path: '/',httpOnly: true,maxAge: (2 * 24 * 60 * 60 * 1000) },proxy: true, resave: true,saveUninitialized: true,
       store: new MongoStore({
         mongooseConnection: db.chatbot.getConeccion().connection,
         collection:'sessionswebsite'

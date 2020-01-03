@@ -79,6 +79,7 @@
             "action":"Action"
         },
         "form":{
+            "deleteChatbotConfirmation":"Are you sure to delete the chatbot ?",
             "deleteEntityConfirmation":"Are you sure to delete the entity ?",
             "fileSize1MBError":"File size must be smaller than 1MB",
             "fileDragger":"Add images, text files, xls, so on",
@@ -217,7 +218,8 @@
             "action":"Acción"
         },
         "form":{
-            "deleteEntityConfirmation":"¿ Esta seguro de borrar la Intenciòn  ?",
+            "deleteChatbotConfirmation":"¿ Esta seguro de borrar el Chatbot ?",
+            "deleteEntityConfirmation":"¿ Esta seguro de borrar la Intenciòn ?",
             "fileSize1MBError":"Tamaño de archivo debe ser menor a 1MB",
             "fileDragger":"Agregar imágenes, archivos de texto, xls, etc.",
             "newFileClickDrag":"Haga clic o arrastre el archivo a esta área para cargar",
@@ -392,6 +394,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
         },
         "form":{
+            "deleteChatbotConfirmation":"Você tem certeza que quer excluir o Chatbot?",
             "deleteEntityConfirmation":"Tem certeza de que deseja excluir a intenção?",
             "fileSize1MBError":"Tamanho do arquivo deve ser menor que 1 MB",
             "fileDragger":"Adicione imagens, arquivos de texto, xls, etc.",

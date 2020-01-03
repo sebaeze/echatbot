@@ -20,7 +20,6 @@ export class TestChatbotWidget extends React.Component {
     }
     //
     onWindowClose(){
-        console.log('......onWindowClose:: ') ;
         if ( this.props.onWindowClose && typeof this.props.onWindowClose=='function' ){
             window.waiboc.widgetVisible(false) ;
             this.props.onWindowClose() ;

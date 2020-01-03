@@ -2,7 +2,7 @@
 *
 */
 import React                                               from 'react' ;
-import { Table, Typography, Input, Button, Icon, Modal }   from 'antd'  ;
+import { Table, Typography, Input, Button, Icon, Modal, Popconfirm }   from 'antd'  ;
 import { api }                                      from '../../api/api' ;
 import { FormNewChatbot }                           from '../formularios/FormNewChatbot' ;
 //
@@ -26,7 +26,6 @@ export class TablaChatbots extends React.Component {
         this.state          = {
             userInfo: this.props.userInfo,
             modalVisible: false,
-            modalDeleteChatbot: false,
             chatbotBorrar: false,
             arrayChatbots: [],
             textBusqueda: '',
@@ -180,40 +179,64 @@ export class TablaChatbots extends React.Component {
         try {
             //
             outCols = [
-                {title: this.props.translate.table.action,dataIndex: '',width:100,key: 'x',fixed: 'left',
-                       render: (argRecord) => {
-                            return (
-                                <div  style={{width:'100%'}}>
-                                    <p style={{padding:'0',fontWeight:'600'}}>
-                                        <a  onClick={()=>this.onClickEditChatbot(argRecord)}>{this.props.translate.edit}</a>
-                                    </p>
-                                </div>
-                            )}
-                },
                 {title: 'Id',
-                        width: 200,dataIndex:'_id', key:'_id',fixed: 'left',
-                        render: (text,objReg) => <a style={{fontWeight:'500',color:'#497EC0'}} onClick={()=>{this.onClickEditChatbot(objReg)}}>{text}</a>,
-                        defaultSortOrder: 'descend', sorter: (a, b) => a._id.localeCompare(b._id) } ,
+                    width: 300,dataIndex:'_id', key:'_id',
+                    render: (text,argRow) => {
+                        return(
+                            <div>
+                                <span style={{paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}>
+                                    <u>{text}</u>
+                                </span><br/>
+                                <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
+                                    onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
+                                >
+                                    <Icon type="edit" style={{color:'green'}}/>
+                                    <span style={{marginLeft:'7px'}} >{this.props.translate.edit}</span>
+                                </a>
+                                <br/>
+                                <Popconfirm placement="topRight" title={this.props.translate.form.deleteChatbotConfirmation}
+                                    onConfirm={()=>{this.onClickDeleteChatbot(argRow);}}
+                                    okText={this.props.translate.yes} cancelText="No"
+                                >
+                                    <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}} >
+                                        <Icon type="delete" style={{color:'red'}}/>
+                                        <span style={{marginLeft:'7px'}} >{this.props.translate.delete}</span>
+                                    </a>
+                                </Popconfirm>
+                            </div>
+                        )
+                    },
+                    defaultSortOrder: 'descend', sorter: (a, b) => a._id.localeCompare(b._id)
+                } ,
                 {title: this.props.translate.table.chatbotName,width: 250,
-                        render: (text) => <a style={{fontWeight:'700',color:'#497EC0'}} >{text}</a>,
+                        render: (text,argRow) => {
+                            return(
+                                <a style={{fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
+                                    onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
+                                >
+                                    {text}
+                                </a>
+                            )
+                        } ,
                         dataIndex:'botName', key:'botName',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
                 {title: this.props.translate.status       ,width: 200,dataIndex:'status',key:'status',
-                        render: (text) => <a style={{fontWeight:'700'}} >{text}</a>,
+                        // render: (text) => <a style={{fontWeight:'700'}} >{text}</a>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.status.localeCompare(b.status) } ,
-                {title: this.props.translate.table.description       ,width: 150,dataIndex:'description',key:'description',
+                {title: this.props.translate.table.description       ,width: 250,dataIndex:'description',key:'description',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.description.localeCompare(b.description) } ,
                 {title: this.props.translate.table.messagesConsumed ,width: 200,dataIndex:'qtyMessages', key:'qtyMessages',
                         render: text => <span style={{fontWeight:'700'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.qtyMessages - b.qtyMessages } ,
                 {title: this.props.translate.table.plan  ,width: 150,dataIndex:'plan',key:'plan',
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.plan.localeCompare(b.plan) } ,
-                {title: this.props.translate.table.language ,width: 200,dataIndex:'language', key:'language',
+                        defaultSortOrder: 'descend', sorter: (a, b) => a.plan.localeCompare(b.plan) }
+                /* ,{title: this.props.translate.table.language ,width: 200,dataIndex:'language', key:'language',
                         render: text => <span style={{fontWeight:'700'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.language - b.language },
                 {title: this.props.translate.table.ChatbotStatusDisplay ,
                         dataIndex:'botSubtitle', key:'botSubtitle' , defaultSortOrder: 'descend',
                         sorter: (a, b) => a.botSubtitle.localeCompare(b.botSubtitle) }
+                */
             ] ;
             //
         } catch(errPC){
@@ -279,28 +302,6 @@ export class TablaChatbots extends React.Component {
         //
         return(
             <div  className="waiboc-cl-form">
-                <Modal
-                    title=""
-                    maskClosable={false}
-                    visible={this.state.modalDeleteChatbot}
-                    style={{top:'150px',zIndex:'9992'}}
-                    // onOk={this.onClickOkModal.bind(this)}
-                    onCancel={()=>{this.setState({modalDeleteChatbot:false});}}
-                    footer={[
-                        <Button key="DELETE" type="primary"
-                                onClick={ () => { this.onClickDeleteChatbot(this.state.chatbotBorrar);this.setState({modalDeleteChatbot:false}); } }
-                        >
-                            {this.props.translate.delete}
-                        </Button>,
-                        <Button key="CANCEL" type="primary"
-                                onClick={ () => { this.setState({modalDeleteChatbot:false}); } }
-                        >
-                            {this.props.translate.cancel}
-                        </Button>
-                        ]}
-                >
-                    <div style={{fontSize:'32px',width:'100%',textAlign:'center'}} >{this.props.translate.danger} <Icon type="exclamation" style={{color:'#FF0000',fontSize:'32px'}}/></div>
-                </Modal>
                 <div style={{width:'100%',marginTop:'5px',marginBottom:'5px'}}>
                     <Input placeholder={this.props.translate.search}
                            onChange={this.onChangeSearch}
@@ -311,16 +312,16 @@ export class TablaChatbots extends React.Component {
                     </Button>
                 </div>
                 <Table
-                    //rowSelection={{...this.rowSelection()}}
                     loading={this.state.flagSpinner}
                     columns={this.state.columnas}
-                    style={{marginLeft:'10px'}}
-                    pagination={{position:'top'}}
                     dataSource={ arrayDatos }
+                    rowKey="_id"
+                    style={{marginLeft:'10px'}}
+                    pagination={{position:'bottom'}}
                     onChange={this.onChange.bind(this)}
                     bordered
                     locale={this.props.translate}
-                    scroll={{ x: 1500 }}
+                    scroll={{ x: 1000 }}
                 />
                 {
                     this.state.modalVisible==true ?

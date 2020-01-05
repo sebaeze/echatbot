@@ -6,6 +6,8 @@ const webpack                     = require("webpack");
 const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
+const CompressionPlugin           = require('compression-webpack-plugin');
+const BrotliPlugin                = require('brotli-webpack-plugin');
 //
 const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
 console.log('Hash Version: ',HASH_VERSION,';');
@@ -107,7 +109,20 @@ module.exports = {
         },
         hash:true
       }),
-      new HtmlWebpackPrefixPlugin()
+      new HtmlWebpackPrefixPlugin(),
+      new CompressionPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: /\.js$|\.css$|\.html$/,
+          threshold: 10240,
+          minRatio: 0.7
+        }),
+        new BrotliPlugin({
+          asset: '[path].br[query]',
+          test: /\.js$|\.css$|\.html$/,
+          threshold: 10240,
+          minRatio: 0.7
+        })
     ]
 };
 //

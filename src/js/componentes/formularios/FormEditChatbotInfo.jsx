@@ -17,10 +17,6 @@ class FormEditChatbotInfoBase extends React.Component {
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
     }
     //
-    componentDidMount(){
-        // resetFields({names:['botSubtitle','botIcon','botSubtitle','description']}) ;
-    }
-    //
     static getDerivedStateFromProps(newProps, state) {
         return { modalVisible: newProps.modalVisible } ;
     }
@@ -191,63 +187,6 @@ export const FormEditChatbotInfo = Form.create({ name: '',
             description: Form.createFormField({ value: propsForm.chatbotConfig.description }),
             websiteDomains: Form.createFormField({ value: propsForm.chatbotConfig.websiteDomains })
         };
-    },
-    /*
-    onValuesChange(propsForm, newValues, fields) {
-        let outNewValues = false ;
-        console.log('......onValuesChange:: newValues: ') ;
-        propsForm.form.validateFields((err, values) => {
-            console.log('....(A) no errores:: flagErr: '+err+'values: ') ;
-            console.dir(values) ;
-            propsForm.formChange( values, err ) ;
-            if (!err) {
-              const { keys, names } = values;
-              console.log('Received values of form: ', values);
-              console.log('Merged values:', keys.map(key => names[key]));
-              propsForm.formChange( values ) ;
-            }
-        }) ;
-        // propsForm.formChange( outNewValues ) ;
     }
-    */
-   /*
-   onFieldsChange(propsForm, fields) {
-        let outNewValues = false ;
-        console.log('......onFieldsChange:: fields: ') ;
-        console.dir(fields) ;
-        for ( let keyField in fields ){
-            let fieldModified = fields[keyField] ;
-            if ( Array.isArray(fieldModified) ){
-                let tempArray = [].concat(propsForm.chatbotConfig[ keyField ]||[]) ;
-                console.log('...(A) en es array:: ') ;
-                console.dir(tempArray) ;
-                console.dir(fieldModified) ;
-                fieldModified.forEach((elemMod,elemIdx)=>{
-                    console.log('...elemIdx: '+elemIdx+':: ') ;
-                    console.dir(elemMod) ;
-                    if ( elemMod.validating==true ){
-                        tempArray[ elemIdx ] = elemMod.value ;
-                    }
-                }) ;
-                console.log('...(B) en es array:: modificado') ;
-                console.dir(tempArray) ;
-                if ( outNewValues==false ){ outNewValues={}; }
-                outNewValues[keyField] = [].concat(tempArray) ;
-            } else {
-                if ( fieldModified.validating==true ){
-                    if ( outNewValues==false ){ outNewValues={}; }
-                    outNewValues[keyField] = fieldModified.value ;
-                }
-            }
-        }
-        if ( outNewValues!=false ){
-            console.log('...voy a guardar::: outNewValues: ') ;
-            console.dir(outNewValues) ;
-            propsForm.formChange( outNewValues ) ;
-        }
-    }
-    */
 })(FormEditChatbotInfoBase);
-//
-//export default WrappedFormNewChatbot ;
 //

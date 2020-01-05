@@ -6,6 +6,8 @@ const router            = require('express').Router()   ;
 const fnEmail           = require('../lib/emailEnviar').email ;
 const path              = require('path') ;
 //
+import expressStaticGzip   from "express-static-gzip" ;
+//
 if ( !process.env.AMBIENTE ){ process.env.AMBIENTE="dev"; }
 //
 let opciones = {
@@ -25,7 +27,17 @@ module.exports = (argConfig,argDb,argCatalogoMarcas) => {
   const defaultMetatags   = argConfig.metaTags.default ;
   //
   // router.use('/', function(req,res,next){ console.log('....estoy en static::: '); next();},express.static( path.join(__dirname,'../../dist') , opciones ) );
-  router.use('/', express.static( path.join(__dirname,'../../dist') , opciones ) );
+  // router.use('/', express.static( path.join(__dirname,'../../dist') , opciones ) );
+  router.use('/', expressStaticGzip( path.join(__dirname,'../../dist') ,
+    {
+      index: false,
+      enableBrotli: true,
+      orderPreference: ['br', 'gz'],
+      setHeaders: function (res, path) {
+        res.setHeader("Cache-Control", "public, max-age=31536000");
+      }
+    })
+  );
   //
   router.get('/logout',function(req,res,next){
     res.set('access-Control-Allow-Origin', '*');

@@ -111,8 +111,7 @@ module.exports = {
           useShortDoctype: true
         },
         hash:true
-      }),
-      new webpack.DefinePlugin({ "BACKEND_URL":"http://localhost:3000" })
+      })
     ]
 };
 //

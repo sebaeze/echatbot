@@ -1,5 +1,6 @@
 {
     "EN":{
+        "moreInfo":"More Information",
         "confirmation":"Confirmation",
         "yes":"Yes",
         "search":"Search",
@@ -144,6 +145,7 @@
         ]
     },
     "ES":{
+        "moreInfo":"Más Información",
         "confirmation":"Confirmaciòn",
         "yes":"Si",
         "search":"Buscar",
@@ -296,12 +298,12 @@
             }
         ],
         "homeHeader":{
-            "title":"Asistente Virtual con AI para e-commerce",
+            "title":"Chatbot / Asistente Virtual para tu sitio web",
             "text":[
-            "Implementa un asistente virtual / chatbot de forma rápida y facíl",
-            "Mejora la atención y el tiempo de respuesta a tus clientes",
-            "Reduci la carga laboral en la mesa de ayuda",
-            "Usa AI para elaborar patrones de busquedas e implementar estrategias de venta"
+                "Implementa un chatbot de forma rápida y facíl",
+                "Mejora la atención y el tiempo de respuesta a tus clientes",
+                "Reduci la carga laboral en la mesa de ayuda",
+                "Panel de control con metricas de consultas en tu sitio web"
             ],
             "ourProposal":"Nuestra Propuesta"
         },
@@ -328,6 +330,7 @@
         ]
     },
     "PT":{
+        "moreInfo":"Mais Informações",
         "confirmation":"Confirmação",
         "yes":"Sim",
         "search":"Procurar",

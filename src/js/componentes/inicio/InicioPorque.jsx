@@ -2,12 +2,9 @@
 *
 */
 import React                                      from 'react' ;
-import { Row, Col, Carousel, Typography }         from 'antd'  ;
-import {ImagenConDescripcion}                     from './ImagenConDescripcion' ;
-import QueueAnim                                  from 'rc-queue-anim' ;
-import { AnimacionLink }                          from '../animacion/AnimacionLink' ;
+import { Row, Col, Typography }                   from 'antd'  ;
 //
-const { Title, Paragraph, Text }  = Typography ;
+const { Title } =  Typography ;
 //
 export class InicioPorque extends React.Component {
     constructor(props){
@@ -15,32 +12,7 @@ export class InicioPorque extends React.Component {
         this.state = {isMobile: (window.innerWidth<797), showDiv: this.props.flagShowDiv ? this.props.flagShowDiv : false } ;
     }
     //
-    componentDidMount(){
-        try{
-            /*
-            window.addEventListener("resize",function(argEventSCR){
-                this.setState({isMobile: (window.innerWidth<797)});
-            }.bind(this)) ;
-            */
-            //
-        } catch(errDM){
-            console.dir(errDM) ;
-        }
-    }
-    /*
-    componentWillReceiveProps(newProps){
-        try {
-            if ( newProps.flagShowDiv!=this.state.showDiv ){
-                this.setState({showDiv:newProps.flagShowDiv}) ;
-            }
-        } catch(errNewP){
-            console.dir(errNewP) ;
-        }
-    }
-    */
-    //
     static getDerivedStateFromProps(newProps, state) {
-        console.log('....inicioWhy:: newProps.flagShowDiv: ',newProps.flagShowDiv) ;
         if ( newProps.flagShowDiv!=state.flagShowDiv ){
             return {showDiv: newProps.flagShowDiv} ;
         } else {
@@ -49,8 +21,6 @@ export class InicioPorque extends React.Component {
     }
     //
     render(){
-        //
-        console.log('.....this.props.translate.HomeWhy:: ',this.props.translate.HomeWhy) ;
         //
         let Content = this.props.translate.HomeWhy.map((elemWhy,elemIdx)=>{
                     return(
@@ -61,7 +31,6 @@ export class InicioPorque extends React.Component {
                             <Title level={3}  >{elemWhy.description}</Title>
                             {
                                 elemWhy.text.map((elemText,idxTT)=>{
-                                    console.log('....ix: ',idxTT,' elemText: ',elemText) ;
                                     return(
                                         <span key={idxTT}>{elemText}</span>
                                     )
@@ -78,10 +47,9 @@ export class InicioPorque extends React.Component {
                         }
                     </Row>)
                 }) ;
-        console.log('....content:: ',Content ) ;
         //
         return(
-            <div style={{marginTop:'90px'}} >
+            <div style={{marginTop:'100px'}} id={this.props.id} >
                 <div className={this.state.showDiv==true?'fadeIn':'fadeOut'} >
                     {Content}
                 </div>

@@ -1,8 +1,8 @@
 /*
 *
 */
-import React                              from 'react' ;
-import { Typography, Row, Col }           from 'antd'  ;
+import React                                      from 'react' ;
+import { Typography, Row, Col, Button }           from 'antd'  ;
 import QueueAnim                          from 'rc-queue-anim' ;
 import TweenOne                           from 'rc-tween-one'  ;
 import { AnimacionLink }                  from '../animacion/AnimacionLink' ;
@@ -16,45 +16,44 @@ export class InicioEncabezado extends React.Component {
     //
     render(){
         //
-        let sumaY    = 190 ;
-        let sumDelay = 600 ;
-        //
+        //  <Title level={1} style={{marginBottom:(this.props.configuracion.isMobile==true ? '0': false)}}>{this.props.configuracion.empresa.name}</Title>
         return(
-            <div id={this.props.id ? this.props.id : "idDivInicioEncabezado" } style={{minHeight:'90vh'}} className="bg-inicial" >
-                <TweenOne style={{marginLeft:(this.props.configuracion.isMobile==true ? '20px':'70px'),marginTop:(this.props.configuracion.isMobile==true ? '10px':'80px')}}
-                            animation={{ x:450,y: sumaY, opacity: 0, type: 'from', delay: 300 }}
-                            name="TweenOne"
-                >
-                    <Title level={1} style={{marginBottom:(this.props.configuracion.isMobile==true ? '0': false)}}>{this.props.configuracion.empresa.name}</Title>
-                    <Title level={2} >{this.props.translate.homeHeader.title}</Title>
-                </TweenOne>
-                {
-                    this.props.translate.homeHeader.text.map((elemText,elemIdx)=>{
-                        sumDelay += 900 ;
-                        return(
-                            <div key={elemIdx} style={{marginTop:(this.props.configuracion.isMobile==true ? '1px' : '15px'),
-                                               paddingTop:(this.props.configuracion.isMobile==true ? '5px' : '10px'),
-                                               width:'95%'}}
+            <div id={this.props.id} style={{minHeight:'90vh'}} className="bg-inicial" >
+                <Row style={ this.props.configuracion.isMobile==true ? {} : {paddingTop:'90px'}}>
+                    <Col xs={1} md={1} lg={2} xl={2} xxl={2} ></Col>
+                    <Col xs={22} md={22} lg={10} xl={10} xxl={10} >
+                        <Title level={2} >{this.props.translate.homeHeader.title}</Title>
+                        {
+                            this.props.translate.homeHeader.text.map((elemText,elemIdx)=>{
+                                return(
+                                    <div key={elemIdx} style={{marginTop:(this.props.configuracion.isMobile==true ? '1px' : '15px'),
+                                                    paddingTop:(this.props.configuracion.isMobile==true ? '5px' : '10px'),
+                                                    width:'95%'}}
+                                    >
+                                        <span className="chat-line-home fadeIn" >{elemText}</span>
+                                    </div>
+                                ) ;
+                            })
+                        }
+                        <div style={{marginTop: '35px',width:'auto'}} >
+                            <AnimacionLink texto={
+                                            <Button type="primary" size="large" style={{backgroundColor:'#ADDF95'}}>
+                                                {this.props.translate.moreInfo}
+                                            </Button>
+                                        }
+                                        styleCss={{float: 'left', display: 'inline-block', position: 'relative' }}
+                                        offset={130}
+                                        siguienteDiv={this.props.siguienteDiv}
+                            />
+                            <Button type="primary" size="large"
+                                    style={{backgroundColor:'#ADDF95', marginLeft:'7px'}}
+                                    onClick={(argEV)=>{argEV.preventDefault();location.href="/account";}}
                             >
-                                <TweenOne key={elemIdx}
-                                          style={{marginLeft:(this.props.configuracion.isMobile==true ? '20px':'70px')}}
-                                          animation={{ x:450,y: sumaY, opacity: 0, type: 'from', delay: sumDelay, repeat: -1,repeatDelay: 15500 }}
-                                          name="TweenOne"
-                                >
-                                    <span className="chat-line-home" >{elemText}</span>
-                                </TweenOne>
-                            </div>
-                        ) ;
-                    })
-                }
-                <TweenOne key={"btbNextTO"}  style={{marginLeft:(this.props.configuracion.isMobile==true ? '20px':'70px')}}
-                            animation={{ x:450,y: sumaY, opacity: 0, type: 'from', delay: (sumDelay+=900), repeat: -1,repeatDelay: 15500 }} name="TweenOne">
-                    <div className="btn-continuar" key={"btbNext"}
-                         style={{marginTop: '35px',width:'auto'}}
-                    >
-                        <AnimacionLink texto={this.props.translate.homeHeader.ourProposal} siguienteDiv={this.props.siguienteDiv} />
-                    </div>
-                </TweenOne>
+                                {this.props.translate.login}
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
             </div>
         )
     }

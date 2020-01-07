@@ -41,7 +41,7 @@
   padding: 10px 10px 10px 10px ;
 }
 @media screen and (max-width: 400px) and (min-width: 10px) {
-  .chat-line-home { font-Size: 18px ; font-Weight: 500 ; width: 80% ; }
+  .chat-line-home { font-Size: 18px ; font-Weight: 500 ; /* width: 80% ; */ }
 }
 .chat-line-home {
   font-Size: 22px ;

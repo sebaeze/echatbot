@@ -62,7 +62,6 @@ export class Encabezado extends Component {
       let styleHeader = {
         minHeight: (this.state.isMobile ? '90px' : '120px'), backgroundColor: '#fff' ,position: 'fixed', zIndex: '9990', width: '100%'
       } ;
-      // console.log('....encaezado:: style:: ',styleHeader) ;
       //
       return (
         <Header className={"header"+(this.state.flagScroll==true ? " shadow-below " : "" )} theme="light" style={styleHeader} >

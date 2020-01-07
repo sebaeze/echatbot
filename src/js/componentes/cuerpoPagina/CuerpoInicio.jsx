@@ -14,8 +14,7 @@ export class CuerpoInicio extends Component {
     super(props)  ;
     this.state         = { isMobile: (window.innerWidth<797), showDivPorque:false } ;
     this.onFocusPorque = this.onFocusPorque.bind(this) ;
-    this.idDivPorq     = "idWhyUs" ;
-    this.idDivEquipos  = "idInicoEquipos" ;
+    this.idDivWhyUs    = "waiboc-header-whyus" ;
     this.divPorque     ;
   }
   //
@@ -48,14 +47,19 @@ export class CuerpoInicio extends Component {
     return (
           <div id="main" style={{paddingTop:'120px',minHeight: '80vh'}} >
               <div style={{minHeight:'70vh'}}>
-                <InicioEncabezado translate={this.props.translate} configuracion={this.props.configuracion} siguienteDiv={this.idDivPorq} />
+                <InicioEncabezado translate={this.props.translate}
+                                  id="waiboc-header-ini"
+                                  configuracion={this.props.configuracion}
+                                  siguienteDiv={this.idDivWhyUs}
+                />
               </div>
-              <div id={this.idDivPorq} style={{minHeight: '80vh',backgroundColor:'white', zIndex:'999', border:'2px solid red'}}
+              <div style={{minHeight: '80vh',backgroundColor:'white', zIndex:'999'}}
                   onFocus={this.onFocusPorque.bind(this)}
               >
                 <InicioPorque  translate={this.props.translate}
                                configuracion={this.props.configuracion}
-                               siguienteDiv={"waiboc-whyus"}
+                               id={this.idDivWhyUs}
+                               siguienteDiv={"waiboc-header-whyus"}
                                flagShowDiv={ this.state.showDivPorque }
                 />
               </div>

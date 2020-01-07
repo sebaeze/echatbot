@@ -17,13 +17,11 @@ export class AnimacionLink extends Component {
     //
     render(){
         //
-        // showHeightActive={['10%', '60%']} toShowHeight
-        //
         return(
-            <Link to={this.props.siguienteDiv} offsetTop={100}
-                ref={(c) => {
-                this.dom = ReactDOM.findDOMNode(c);
-                }}
+            <Link to={this.props.siguienteDiv}
+                  offsetTop={this.props.offset ? this.props.offset : 90}
+                  ref={(c) => { this.dom = ReactDOM.findDOMNode(c); }}
+                  style={this.props.styleCss ? this.props.styleCss : {} }
             >
                 {this.props.texto}
             </Link>

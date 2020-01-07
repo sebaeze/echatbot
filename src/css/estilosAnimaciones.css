@@ -162,23 +162,3 @@
   z-index: 9999 !important ;
   pointer-events: auto;
 }
-.btn-continuar {
-  border: 1px dashed grey ;
-  border-radius: 25px ;
-  color: black ;
-  width: 200px ;
-  font-size:  24px ;
-  line-height: 32px ;
-  position: absolute ;
-  z-index: 9999 !important ;
-  padding: 10px 20px 10px 20px ;
-  pointer-events: auto;
-}
-.btn-continuar:hover, .btn-continuar div:hover, .btn-continuar span:hover,
-.btn-continuar:focus, .btn-continuar div:focus, .btn-continuar span:focus
-{
-  z-index: 9999 !important;
-  cursor: pointer !important ;
-  border-bottom: 0.5px dotted grey !important ;
-  pointer-events: auto;
-}

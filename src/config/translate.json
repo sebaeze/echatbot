@@ -302,30 +302,31 @@
             "text":[
                 "Implementa un chatbot de forma rápida y facíl",
                 "Mejora la atención y el tiempo de respuesta a tus clientes",
-                "Reduci la carga laboral en la mesa de ayuda",
+                "Reduzca la carga laboral en la mesa de ayuda",
                 "Panel de control con metricas de consultas en tu sitio web"
             ],
             "ourProposal":"Nuestra Propuesta"
         },
         "HomeWhy":[
             {
-                "title":"Enfoque cognitivo",
-                "description":"Nuestro proposito es acompañarlo en la implementación de asistentes virtuales en su empresa.",
+                "title":"Chatbot en la nube",
+                "description":"El servicio se encuentra en la nube, por ello no requiere de implementación adicional en su hosting",
                 "image": false,
                 "text":[
-                    "Un chatbot, puede automatizar y resolver diferentes tareas, como mesa ayuda y ventas,",
-                    "dando como resultado, satisfacción del cliente y reducir la carga laboral"
+                    "Nuestro servicio cuenta con:",
+                    "🛠️ Herramientas para entrenar el chatbot",
+                    "💬 Widget para implementar ventana de chat en su sitio web",
+                    "📊 Panel de control para analisis y metricas"
                 ]
             },
             {
                 "title":"Facil y simple de usar",
-                "description":"Es de suma importancia que sea facil de usar, implementar y entrenar un chatbot debe ser una tarea facíl",
-                "text":[]
-            },
-            {
-                "title":"Responsabilidad y Transparencia",
-                "description":"AI puede ser un excelente recurso siempre y cuando se utilize con responsabilidad.\n Por eso, nuestra intención es acompañar de forma transparente y cuidadosa en la implementación",
-                "text":[]
+                "description":"En pocos pasos, ya puede tener su chatbot funcionando",
+                "text":[
+                    "💻 Registrese ",
+                    "🤖 Genere y entrene el bot",
+                    "💬 Copie el link del widget en su pagina "
+                ]
             }
         ]
     },

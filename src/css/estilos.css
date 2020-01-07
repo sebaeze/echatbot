@@ -1094,4 +1094,11 @@ span.waiboc-span-emoticon:hover {
     border-bottom: 0.5px dotted grey !important ;
     pointer-events: auto;
 }
+#waiboc-id-app .ant-btn:not([disabled]) {
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s !important;
+    border: 0.5px solid #001DFF !important ;
+}
+#waiboc-id-app .ant-btn:not([disabled]):hover {
+    
+}
 /*  */

@@ -58,16 +58,23 @@ if ( process.env.AMBIENTE=='produccion' ){
 *   Rutas
 */
 try {
-    /*
+    //
     app.all('*', function(req, res, next) {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Methods', '*');
-      res.header("Access-Control-Allow-Credentials", true);
-      res.header("credentials","same-origin") ;
-      console.log('APP.ALL:: url: '+req.originalUrl+';');
-      next() ;
+      //
+      var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
+      if ( process.env.AMBIENTE=='produccion' && String(hhost).toUpperCase().indexOf('WAIBOC.COM')==-1 ){
+          console.log('\n\n ***************** \n *** (B) ALGUN LOGI HIZO REDIRECT \n hhost: '+hhost+' \n****************** ');
+          res.redirect('https://www.google.com/' ) ;
+          console.log('...ya deberia haber echo redirect aca....  ') ;
+      } else {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', '*');
+        res.header("Access-Control-Allow-Credentials", true);
+        res.header("credentials","same-origin") ;
+        next() ;
+      }
+      //
     }) ;
-    */
     //
     app.use(session({
       name:'ckwaibocwebsite',secret: 'wsx22wsx',cookie: {path: '/',httpOnly: true,maxAge: (2 * 24 * 60 * 60 * 1000) },proxy: true, resave: true,saveUninitialized: true,
@@ -93,14 +100,11 @@ try {
       .then((finEngine)=>{
         app.use( finEngine.rutaErrores ) ;
         if ( process.env.AMBIENTE=='produccion' ){
-            console.log('.....(A) create server http') ;
             var httpPort = 80 ;
             const http   = express() ;
-            console.log('.....(B) HTTP: define *') ;
             //
             http.get('*', function(req, res) {
                 var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
-                console.log('.....(A) hhost: ',hhost,' indexOF:: '+String(hhost).toUpperCase().indexOf('WAIBOC.COM')) ;
                 if ( String(hhost).toUpperCase().indexOf('WAIBOC.COM')==-1 ){
                   console.log('\n\n ***************** \n *** ALGUN LOGI HIZO REDIRECT \n hhost: '+hhost+' \n****************** ');
                   res.redirect('https://www.google.com/' ) ;
@@ -109,7 +113,6 @@ try {
                   res.redirect('https://' + hhost + req.url ) ;
                 }
             }) ;
-            console.log('.....(C) HTTP: listen') ;
             http.listen( httpPort , function(){
               console.log('....http server listening in port '+httpPort+'.') ;
             });
@@ -117,8 +120,6 @@ try {
             var puerto      = process.env.PORT || 443  ;
             var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.privkey.pem') );
             var certificate = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.cert.pem') );
-            //
-            console.log('.....(D) HTTPSS: listen') ;
             //
             app.get('*', function(req, res) {
               res.set('access-Control-Allow-Origin', '*');

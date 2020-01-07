@@ -12,7 +12,7 @@ const { Title, Paragraph, Text }  = Typography ;
 export class InicioPorque extends React.Component {
     constructor(props){
         super(props) ;
-        this.state = {isMobile: (window.innerWidth<797),showDiv: this.props.flagShowDiv ? this.props.flagShowDiv : false } ;
+        this.state = {isMobile: (window.innerWidth<797), showDiv: this.props.flagShowDiv ? this.props.flagShowDiv : false } ;
     }
     //
     componentDidMount(){
@@ -27,7 +27,7 @@ export class InicioPorque extends React.Component {
             console.dir(errDM) ;
         }
     }
-    //
+    /*
     componentWillReceiveProps(newProps){
         try {
             if ( newProps.flagShowDiv!=this.state.showDiv ){
@@ -37,63 +37,56 @@ export class InicioPorque extends React.Component {
             console.dir(errNewP) ;
         }
     }
+    */
+    //
+    static getDerivedStateFromProps(newProps, state) {
+        console.log('....inicioWhy:: newProps.flagShowDiv: ',newProps.flagShowDiv) ;
+        if ( newProps.flagShowDiv!=state.flagShowDiv ){
+            return {showDiv: newProps.flagShowDiv} ;
+        } else {
+            return false ;
+        }
+    }
     //
     render(){
         //
-        let posY = this.state.isMobile==true ? 10 : 50 ;
-        return(
-            <Row style={{paddingTop:'45px'}} >
-                <Row>
-                    <QueueAnim
-                        animConfig={[
-                                [{ x: [0, 300], opacity: [1, 0] }, { y: [ posY, 0] }],
-                                [{ x: [0, 500]                  }, { y: [ posY, -50], opacity: [1, 0] }],
-                            ]}
-                            ease="easeInOutQuart"
-                    >
-                        {
-                            this.state.showDiv ?
-                                this.props.translate.HomeWhy.map((elemWhy,elemIdx)=>{
+        console.log('.....this.props.translate.HomeWhy:: ',this.props.translate.HomeWhy) ;
+        //
+        let Content = this.props.translate.HomeWhy.map((elemWhy,elemIdx)=>{
+                    return(
+                    <Row key={elemIdx} className="bg-azul" style={{minHeight:'80vh'}} >
+                        <Col xs={1} md={1} lg={1} xl={1} xxl={1} ></Col>
+                        <Col xs={22} md={22} lg={13} xl={13} xxl={13} >
+                            <Title level={1}  >{elemWhy.title}</Title>
+                            <Title level={3}  >{elemWhy.description}</Title>
+                            {
+                                elemWhy.text.map((elemText,idxTT)=>{
+                                    console.log('....ix: ',idxTT,' elemText: ',elemText) ;
                                     return(
-                                        //<Col xs={22} md={22} lg={7} xl={7} xxl={7}  key={elemIdx} style={{minHeight:'200px',marginLeft:'10px',marginRight:'10px'}}>
-                                        <Row key={elemIdx} className="bg-azul" style={{minHeight:'80vh'}} >
-                                            <Col xs={1} md={1} lg={1} xl={1} xxl={1} ></Col>
-                                            <Col xs={22} md={22} lg={13} xl={13} xxl={13} >
-                                                <Title level={1}  >{elemWhy.title}</Title>
-                                                <Title level={3}  >{elemWhy.description}</Title>
-                                                {
-                                                    elemWhy.text.map((elemText,idxTT)=>{
-                                                        return(
-                                                            <Text key={idxTT}>{elemText}</Text>
-                                                        )
-                                                    })
-                                                }
-                                            </Col>
-                                            {
-                                                elemWhy.image ?
-                                                <Col xs={24} md={24} lg={10} xl={10} xxl={10} >
-                                                    <img src={elemWhy.image} alt="cognitive" style={{width:'100%',height:'auto'}} />
-                                                </Col>
-                                                :
-                                                null
-                                            }
-                                        </Row>
+                                        <span key={idxTT}>{elemText}</span>
                                     )
                                 })
+                            }
+                        </Col>
+                        {
+                            elemWhy.image ?
+                                <Col xs={24} md={24} lg={10} xl={10} xxl={10} >
+                                    <img src={elemWhy.image} alt="cognitive" style={{width:'100%',height:'auto'}} />
+                                </Col>
                                 :
-                                []
+                                null
                         }
-                    </QueueAnim>
-                </Row>
-            </Row>
+                    </Row>)
+                }) ;
+        console.log('....content:: ',Content ) ;
+        //
+        return(
+            <div style={{marginTop:'90px'}} >
+                <div className={this.state.showDiv==true?'fadeIn':'fadeOut'} >
+                    {Content}
+                </div>
+            </div>
         ) ;
     }
-    /*
-    <Row>
-        <div className="btn-continuar" style={{marginLeft: (this.state.isMobile==true ? '7%' : '2%'),marginTop: (this.state.isMobile==true ? '8vh' : '30vh' ),width:'auto'}} >
-            <AnimacionLink texto={"Portal de ayuda"} siguienteDiv={this.props.siguienteDiv} />
-        </div>
-    </Row>
-    */
-    //
 } ;
+//

@@ -9,10 +9,10 @@ import AnimacionLogo                      from '../animacion/AnimacionLogo'    ;
 import { InicioEncabezado }               from  '../inicio/InicioEncabezado'   ;
 import { InicioPorque  }                  from  '../inicio/InicioPorque'       ;
 //
-class CuerpoInicio extends Component {
+export class CuerpoInicio extends Component {
   constructor(props) {
     super(props)  ;
-    this.state         = { isMobile: (window.innerWidth<797), showDivPorque:false, showDivEquipos: false } ;
+    this.state         = { isMobile: (window.innerWidth<797), showDivPorque:false } ;
     this.onFocusPorque = this.onFocusPorque.bind(this) ;
     this.idDivPorq     = "idWhyUs" ;
     this.idDivEquipos  = "idInicoEquipos" ;
@@ -27,11 +27,6 @@ class CuerpoInicio extends Component {
           this.setState({showDivPorque:true})  ;
         } else {
           this.setState({showDivPorque:false})  ;
-        }
-        if ( scrollPos>700 ){
-          this.setState({showDivEquipos:true})  ;
-        } else {
-          this.setState({showDivEquipos:false})  ;
         }
       }.bind(this)) ;
       //
@@ -58,13 +53,15 @@ class CuerpoInicio extends Component {
               <div id={this.idDivPorq} style={{minHeight: '80vh',backgroundColor:'white', zIndex:'999', border:'2px solid red'}}
                   onFocus={this.onFocusPorque.bind(this)}
               >
-                <InicioPorque     translate={this.props.translate} configuracion={this.props.configuracion} siguienteDiv={"idInicioEquipos"} flagShowDiv={ this.state.showDivPorque } />
+                <InicioPorque  translate={this.props.translate}
+                               configuracion={this.props.configuracion}
+                               siguienteDiv={"waiboc-whyus"}
+                               flagShowDiv={ this.state.showDivPorque }
+                />
               </div>
           </div>
       )
       //
     }
   }
-/* */
-export default CuerpoInicio ;
-/* */
+//

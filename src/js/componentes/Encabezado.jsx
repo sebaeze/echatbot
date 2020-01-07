@@ -16,7 +16,7 @@ import '../../css/estilosHeader.css' ;
 import 'antd/lib/menu/style/css'     ;
 import 'antd/lib/popover/style/css'  ;
 //
-class Encabezado extends Component {
+export class Encabezado extends Component {
   constructor(props) {
     super(props) ;
     this.state       = { flagScroll:false, menuNavVisible: false, isMobile: (window.innerWidth<796), userInfo: false } ;
@@ -58,11 +58,14 @@ class Encabezado extends Component {
   }
   //
   render() {
-    //
+      //
+      let styleHeader = {
+        minHeight: (this.state.isMobile ? '90px' : '120px'), backgroundColor: '#fff' ,position: 'fixed', zIndex: '9990', width: '100%'
+      } ;
+      // console.log('....encaezado:: style:: ',styleHeader) ;
+      //
       return (
-        <Header className={"header"+(this.state.flagScroll==true ? " shadow-below " : "" )} theme="light"
-                style={{ minHeight: (this.state.isMobile ? '50px' : '120px'), backgroundColor: '#fff' ,position: 'fixed', zIndex: '9990', width: '100%' }}
-        >
+        <Header className={"header"+(this.state.flagScroll==true ? " shadow-below " : "" )} theme="light" style={styleHeader} >
           <Row>
             <Col xs={10} md={10} lg={6} xl={4} xxl={4}  >
               <LogoEmpresa />
@@ -84,6 +87,4 @@ class Encabezado extends Component {
       //
     }
   }
-/* */
-export default Encabezado ;
-/* */
+//

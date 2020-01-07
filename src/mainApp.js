@@ -6,11 +6,11 @@ import ReactDOM                            from "react-dom"  ;
 import { BrowserRouter as Router, Route }  from 'react-router-dom'   ;
 import { Layout  }                         from 'antd';
 //
-import Encabezado                         from "./js/componentes/Encabezado" ;
+import { Encabezado }                     from "./js/componentes/Encabezado" ;
 import PiePagina                          from "./js/componentes/PiePagina"  ;
 import {NoEncontrado404}                  from "./js/componentes/cuerpoPagina/NoEncontrado404"  ;
 import SitemapCuerpo                      from "./js/componentes/cuerpoPagina/SitemapCuerpo"    ;
-import CuerpoInicio                       from "./js/componentes/cuerpoPagina/CuerpoInicio"  ;
+import { CuerpoInicio }                   from "./js/componentes/cuerpoPagina/CuerpoInicio"  ;
 import { CuerpoAbout  }                   from "./js/componentes/cuerpoPagina/CuerpoAbout"   ;
 import { CuerpoPrices }                   from "./js/componentes/cuerpoPagina/CuerpoPrices"  ;
 import FormContacto                       from "./js/componentes/formularios/FormContacto" ;

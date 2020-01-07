@@ -6,7 +6,7 @@ import ReactDOM                            from "react-dom"  ;
 import { BrowserRouter as Router, Route }  from 'react-router-dom'   ;
 import { Layout  }                         from 'antd';
 //
-import Encabezado                          from "./js/componentes/Encabezado" ;
+import { Encabezado }                      from "./js/componentes/Encabezado" ;
 import PiePagina                           from "./js/componentes/PiePagina"  ;
 import { NoEncontrado404 }                 from "./js/componentes/cuerpoPagina/NoEncontrado404"  ;
 import { CuerpoLogin   }                   from "./js/componentes/cuerpoPagina/CuerpoLogin"  ;

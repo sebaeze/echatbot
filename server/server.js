@@ -100,8 +100,8 @@ try {
             //
             http.get('*', function(req, res) {
                 var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
-                console.log('.....(A) hhost: ',hhost,' indexOF:: '+hhost.toUpperCase().indexOf('WAIBOC.COM')) ;
-                if ( hhost.toUpperCase().indexOf('WAIBOC.COM')==-1 ){
+                console.log('.....(A) hhost: ',hhost,' indexOF:: '+String(hhost).toUpperCase().indexOf('WAIBOC.COM')) ;
+                if ( String(hhost).toUpperCase().indexOf('WAIBOC.COM')==-1 ){
                   console.log('\n\n ***************** \n *** ALGUN LOGI HIZO REDIRECT \n hhost: '+hhost+' \n****************** ');
                   res.redirect('https://www.google.com/' ) ;
                 } else {

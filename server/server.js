@@ -100,8 +100,7 @@ try {
             //
             http.get('*', function(req, res) {
                 var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
-                //
-                console.log('.....(A) hhost: ',hhost) ;
+                console.log('.....(A) hhost: ',hhost,' indexOF:: '+hhost.toUpperCase().indexOf('WAIBOC.COM')) ;
                 if ( hhost.toUpperCase().indexOf('WAIBOC.COM')!=-1 ){
                   console.log('\n\n ***************** \n *** ALGUN LOGI HIZO REDIRECT \n ****************** ');
                   res.redirect('https://www.google.com/' ) ;
@@ -127,7 +126,7 @@ try {
               res.setHeader("Access-Control-Allow-Credentials", true);
               //
               var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
-              console.log('.....(B) hhost: ',hhost) ;
+              console.log('.....(B) hhost: ',hhost,' indexOF:: '+hhost.toUpperCase().indexOf('WAIBOC.COM')) ;
               if ( hhost.toUpperCase().indexOf('WAIBOC.COM')!=-1 ){
                 console.log('\n\n ***************** \n *** ALGUN LOGI HIZO REDIRECT \n ****************** ');
                 res.redirect('https://www.google.com/' ) ;

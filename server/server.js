@@ -101,8 +101,8 @@ try {
             http.get('*', function(req, res) {
                 var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
                 console.log('.....(A) hhost: ',hhost,' indexOF:: '+hhost.toUpperCase().indexOf('WAIBOC.COM')) ;
-                if ( hhost.toUpperCase().indexOf('WAIBOC.COM')!=-1 ){
-                  console.log('\n\n ***************** \n *** ALGUN LOGI HIZO REDIRECT \n ****************** ');
+                if ( hhost.toUpperCase().indexOf('WAIBOC.COM')==-1 ){
+                  console.log('\n\n ***************** \n *** ALGUN LOGI HIZO REDIRECT \n hhost: '+hhost+' \n****************** ');
                   res.redirect('https://www.google.com/' ) ;
                 } else {
                   console.log('....voy a redirect --> '+ hhost + req.url+';') ;
@@ -124,14 +124,6 @@ try {
               res.set('access-Control-Allow-Origin', '*');
               res.set('access-Control-Allow-Methods', '*');
               res.setHeader("Access-Control-Allow-Credentials", true);
-              //
-              var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
-              console.log('.....(B) hhost: ',hhost,' indexOF:: '+hhost.toUpperCase().indexOf('WAIBOC.COM')) ;
-              if ( hhost.toUpperCase().indexOf('WAIBOC.COM')!=-1 ){
-                console.log('\n\n ***************** \n *** ALGUN LOGI HIZO REDIRECT \n ****************** ');
-                res.redirect('https://www.google.com/' ) ;
-              }
-              //
               console.log('...(DDDD) req.params: ',req.params,';') ;
               res.redirect('/404?Url='+req.originalUrl) ;
             });

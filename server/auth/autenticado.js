@@ -28,12 +28,20 @@ module.exports.autenticado = (argDb) => {
         } else {
             let reqContenttype = req.headers['accept'] || req.headers['content-type'] || 'html' ;
             console.log(new Date().toISOString()+'......reqContenttype: '+reqContenttype+' originalUrl: '+req.originalUrl+' req.url: '+req.url+' usuario not-logged') ;
-            if ( String(reqContenttype).indexOf("json")!=-1 ){
-                res.status(401) ;
-                res.json( {error:"no-logoneado",mensaje:"debe autenticarse a traves de la url /auth"} ) ;
+            //
+            var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
+            console.log('.....(B) hhost: ',hhost,' indexOF:: '+hhost.toUpperCase().indexOf('WAIBOC.COM')) ;
+            if ( process.env.AMBIENTE=='produccion' && hhost.toUpperCase().indexOf('WAIBOC.COM')==-1 ){
+                console.log('\n\n ***************** \n *** ALGUN LOGI HIZO REDIRECT \n hhost: '+hhost+' \n****************** ');
+                res.redirect('https://www.google.com/' ) ;
             } else {
-                req.session['urlRedirect'] = req.originalUrl ;
-                res.redirect('/login?urlRedirect='+req.originalUrl);
+                if ( String(reqContenttype).indexOf("json")!=-1 ){
+                    res.status(401) ;
+                    res.json( {error:"no-logoneado",mensaje:"debe autenticarse a traves de la url /auth"} ) ;
+                } else {
+                    req.session['urlRedirect'] = req.originalUrl ;
+                    res.redirect('/login?urlRedirect='+req.originalUrl);
+                }
             }
         }
     } );

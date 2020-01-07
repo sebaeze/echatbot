@@ -61,7 +61,7 @@ class Encabezado extends Component {
     //
       return (
         <Header className={"header"+(this.state.flagScroll==true ? " shadow-below " : "" )} theme="light"
-                style={{ minHeight:'120px', backgroundColor: '#fff' ,position: 'fixed', zIndex: '9990', width: '100%' }}
+                style={{ minHeight: (this.state.isMobile ? '50px' : '120px'), backgroundColor: '#fff' ,position: 'fixed', zIndex: '9990', width: '100%' }}
         >
           <Row>
             <Col xs={10} md={10} lg={6} xl={4} xxl={4}  >

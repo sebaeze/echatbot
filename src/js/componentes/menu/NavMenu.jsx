@@ -10,7 +10,7 @@ const { SubMenu } = Menu ;
 //
 class NavMenu extends React.Component {
     constructor(props){
-        super(props) ;
+        super(props);
     }
     //
     componentDidMount(){}

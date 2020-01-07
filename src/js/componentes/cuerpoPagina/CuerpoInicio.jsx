@@ -52,10 +52,10 @@ class CuerpoInicio extends Component {
     //
     return (
           <div id="main" style={{paddingTop:'120px',minHeight: '80vh'}} >
-              <div style={{minHeight:'90vh'}}>
+              <div style={{minHeight:'70vh'}}>
                 <InicioEncabezado translate={this.props.translate} configuracion={this.props.configuracion} siguienteDiv={this.idDivPorq} />
               </div>
-              <div id={this.idDivPorq} style={{minHeight: '80vh',backgroundColor:'white', zIndex:'999'}}
+              <div id={this.idDivPorq} style={{minHeight: '80vh',backgroundColor:'white', zIndex:'999', border:'2px solid red'}}
                   onFocus={this.onFocusPorque.bind(this)}
               >
                 <InicioPorque     translate={this.props.translate} configuracion={this.props.configuracion} siguienteDiv={"idInicioEquipos"} flagShowDiv={ this.state.showDivPorque } />

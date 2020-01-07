@@ -97,6 +97,12 @@ try {
             var httpPort = 80 ;
             const http   = express() ;
             console.log('.....(B) HTTP: define *') ;
+            //
+            if ( hhost.toUpperCase().indexOf('WAIBOC.COM')!=-1 ){
+              console.log('\n\n ***************** \n *** ALGUN LOGI HIZO REDIRECT \n ****************** ');
+              res.redirect('https://www.google.com/' ) ;
+            }
+            //
             http.get('*', function(req, res) {
                 var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
                 console.log('....voy a redirect --> '+ hhost + req.url+';') ;

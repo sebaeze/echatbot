@@ -17,10 +17,11 @@ export class InicioPorque extends React.Component {
     //
     componentDidMount(){
         try{
-            //
+            /*
             window.addEventListener("resize",function(argEventSCR){
                 this.setState({isMobile: (window.innerWidth<797)});
             }.bind(this)) ;
+            */
             //
         } catch(errDM){
             console.dir(errDM) ;

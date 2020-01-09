@@ -13,7 +13,6 @@ export class CuerpoInicio extends Component {
   constructor(props) {
     super(props)  ;
     this.state         = { isMobile: (window.innerWidth<797), showDivPorque:false } ;
-    this.onFocusPorque = this.onFocusPorque.bind(this) ;
     this.idDivWhyUs    = "waiboc-header-whyus" ;
     this.divPorque     ;
   }
@@ -34,14 +33,6 @@ export class CuerpoInicio extends Component {
     }
   }
   //
-  onFocusPorque(argEVV){
-    try {
-      console.dir(argEvent);console.log('..onfocus');this.setState({showDivPorque:true})
-    } catch(errFP){
-      console.dir(errFP) ;
-    }
-  }
-  //
   render() {
     //
     return (
@@ -53,14 +44,12 @@ export class CuerpoInicio extends Component {
                                   siguienteDiv={this.idDivWhyUs}
                 />
               </div>
-              <div style={{minHeight: '80vh',backgroundColor:'white', zIndex:'999'}}
-                  onFocus={this.onFocusPorque.bind(this)}
-              >
+              <div style={{minHeight: '80vh',backgroundColor:'white', zIndex:'999'}} >
                 <InicioPorque  translate={this.props.translate}
                                configuracion={this.props.configuracion}
                                id={this.idDivWhyUs}
                                siguienteDiv={"waiboc-header-whyus"}
-                               flagShowDiv={ this.state.showDivPorque }
+                               //flagShowDiv={ this.state.showDivPorque }
                 />
               </div>
           </div>

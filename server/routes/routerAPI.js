@@ -72,7 +72,6 @@ module.exports = (argConfig,argDb) => {
       //
       delete req.body._v  ;
       delete req.body.__v ;
-      console.log('.../files:: req.body: ',req.body) ;
       let qry = {
         idChatbot: req.body.idChatbot,
         name: req.body.name,
@@ -82,17 +81,17 @@ module.exports = (argConfig,argDb) => {
       //
       argDb.files.get( qry )
             .then(function(resFiles){
-              console.log('....respuesta de get file:: resFiles: ',resFiles) ;
               if ( resFiles.length==0 ){
-                return saveNewFileToChatbot( req.body ) ;
+                return saveNewFileToChatbot( argDb, req.body, argConfig ) ;
               } else {
+                console.log('....el archivo ya existeeee:: name: ',req.body.name) ;
                 return resFiles[0] ;
               }
             }.bind(this))
             .then(function(respAdd){
               let respFiles = respAdd._doc ? respAdd._doc : respAdd  ;
               if ( respFiles.data ){ delete respFiles.data; }
-              console.log('....respuesta de files:: respFiles: ',respFiles) ;
+              console.log('....then__2:: Respuesta de files:: respFiles: ',respFiles) ;
               res.json( respFiles );
             }.bind(this))
             .catch(function(respErr){

@@ -17,19 +17,21 @@ export const saveNewFileToChatbot = (argDb,argFile,argConfig) => {
     try {
         //
         argFile['relativePath']   = path.sep + argFile.idChatbot + path.sep + argFile.name ;
-        argFile['fullPathServer'] = CONFIG_API.PATH_STORAGE + relativePath ;
+        argFile['fullPathServer'] = CONFIG_API.PATH_STORAGE + argFile['relativePath'] ;
         let path2Chatbot          = CONFIG_API.PATH_STORAGE + path.sep + argFile.idChatbot ;
         console.log('...path2Chatbot: ',path2Chatbot,' elative: ',argFile['relativePath'],' fullPath: ',argFile['fullPathServer'] ) ;
         //
         if ( !fs.existsSync(path2Chatbot) ){ fs.mkdirSync( path2Chatbot ) ; }
         //
-        fsPromises.writeFile( argFile.name, argFile.data )
+        argFile.data = argFile.data.substr( (argFile.data.indexOf(',') + 1) ) ;// Remove "data:image/png;base64,"
+        fsPromises.writeFile( argFile.fullPathServer , Buffer.alloc( argFile.data,'base64').toString('binary') ,  "binary" )
           .then((respWrite)=>{
+            console.log('....termine el write de data:: respWrite: ',respWrite) ;
             return argDb.files.add( argFile ) ;
           })
           .then((respAddFile)=>{
             if ( respAddFile.length>0 ){ respAddFile=respAddFile[0]; }
-            respData( argFile ) ;
+            respData( respAddFile ) ;
           })
           .catch((errAddAll)=>{
             respRech(errAddAll) ;

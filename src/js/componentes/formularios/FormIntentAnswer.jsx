@@ -1,7 +1,8 @@
 /*
 * FormIntentAnswer
 */
-import React                                                    from 'react' ;
+import React                                             from 'react' ;
+import axios                                             from 'axios' ;
 import { Button, Form, Input, Tooltip, Icon,  Select, Upload, Spin, message  }   from 'antd'  ;
 // import Picker                                            from 'emoji-picker-react' ;
 import { Picker }                                        from 'emoji-mart' ;
@@ -15,6 +16,7 @@ export class FormIntentAnswerBase extends React.Component {
         this.firstNode          = false ;
         this.normFile           = this.normFile.bind(this) ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
+        this.handleChange       = this.handleChange.bind(this) ;
         this.onEmojiClick       = this.onEmojiClick.bind(this) ;
         this.answerTypes        = {
             API:'api',
@@ -39,6 +41,27 @@ export class FormIntentAnswerBase extends React.Component {
         }
         return e && e.fileList;
     };
+    //
+    handleChange(info){
+        //
+        console.log('....handleChange:: info: ',info) ;
+        //
+        if (info.file.status === 'uploading') {
+          //this.setState({ loading: true });
+          return;
+        }
+        /*
+        if (info.file.status === 'done') {
+          // Get this url from response in real world.
+          getBase64(info.file.originFileObj, imageUrl =>
+            this.setState({
+              imageUrl,
+              loading: false,
+            }),
+          );
+        }
+        */
+      };
     //
     onSubmitForm(){
         try {
@@ -111,7 +134,6 @@ export class FormIntentAnswerBase extends React.Component {
     render(){
         //
         const { getFieldDecorator } = this.props.form ;
-        //
         const beforeUpload = (argFile,fileList) => {
             /*
             const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -126,6 +148,7 @@ export class FormIntentAnswerBase extends React.Component {
               argFile.status   = 'error' ;
               argFile.response = this.props.translate.form.fileSize1MBError  ;
             }
+            console.log('....beforeUpload:: isSizeOk: ',isSizeOk) ;
             return isSizeOk ;
         }
         //
@@ -257,10 +280,69 @@ export class FormIntentAnswerBase extends React.Component {
                         )
                             (
                             <Upload.Dragger name="files"
-                                // defaultFileList={filesTrained}
                                 beforeUpload={beforeUpload}
-                                customRequest={(argCR)=>{ return false ; }}
-                                action={(argFile)=>{
+                                onChange={this.handleChange}
+                                method="post"
+                                action="/api/files"
+                                customRequest={
+                                    (argCR)=>{
+                                        let fr = new FileReader() ;
+                                        fr.readAsDataURL( argCR.file );
+                                        fr.onerror = (errFR) => { console.log('...ERROR: FR: ',errFR) ; } ;
+                                        fr.onload  = () => {
+                                            let reqOptions = {
+                                                url: "/api/files",
+                                                method: 'POST',
+                                                withCredentials: true,
+                                                data: {
+                                                    idChatbot: this.props.chatbotConfig._id,
+                                                    name: argCR.file.name ,
+                                                    size: argCR.file.size ,
+                                                    type: argCR.file.type ,
+                                                    lastModified: argCR.file.lastModified ,
+                                                    // data: respText
+                                                    // data: new Buffer.from( respText , 'binary').toString('base64')
+                                                    data: fr.result
+                                                }
+                                            } ;
+                                            axios( reqOptions )
+                                                .then((respAXios)=>{
+                                                    console.log('.....argCR.file_id: ',argCR.file._id) ;
+                                                })
+                                                .catch((errText)=>{
+                                                    console.log('...ERROR: errText:: ',errText) ;
+                                                })
+                                        } ;
+                                        //
+                                        /*
+                                        argCR.file.text()
+                                            .then((respText)=>{
+                                                let reqOptions = {
+                                                    url: "/api/files",
+                                                    method: 'POST',
+                                                    withCredentials: true,
+                                                    data: {
+                                                        idChatbot: this.props.chatbotConfig._id,
+                                                        name: argCR.file.name ,
+                                                        size: argCR.file.size ,
+                                                        type: argCR.file.type ,
+                                                        lastModified: argCR.file.lastModified ,
+                                                        // data: respText
+                                                        data: new Buffer.from( respText , 'binary').toString('base64')
+                                                    }
+                                                } ;
+                                                return axios( reqOptions ) ;
+                                            })
+                                            .then((respAXios)=>{
+                                                console.log('.....argCR.file_id: ',argCR.file._id) ;
+                                            })
+                                            .catch((errText)=>{
+                                                console.log('...ERROR: errText:: ',errText) ;
+                                            })
+                                            */
+                                    }
+                                }
+                                action333={(argFile)=>{
                                     if (argFile){
                                         this.setState({flagUploading: true}) ;
                                         let tempFiles = this.props.form.getFieldValue('files') || [] ;

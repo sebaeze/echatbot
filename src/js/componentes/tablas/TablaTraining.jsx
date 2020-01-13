@@ -279,6 +279,7 @@ export class TablaTraining extends React.Component {
             <div>
                 <FormNewIntent  onAccept={this.onAcceptNewIntent}
                                 data={this.state.intentNewModify}
+                                chatbotConfig={this.props.chatbotConfig}
                                 modalVisible={this.state.modalNewIntent}
                                 onCancelModal={(argEE)=>{argEE.preventDefault();this.setState({modalNewIntent:false})}}
                                 translate={this.props.translate}

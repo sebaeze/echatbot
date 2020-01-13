@@ -13,6 +13,7 @@ export class CuerpoEditBot extends React.Component {
     constructor(props){
         super(props) ;
         this.updateChatbotConfig = this.updateChatbotConfig.bind(this) ;
+        this.onChangeTab         = this.onChangeTab.bind(this) ;
         this.state = {
             idChatbot: this.props.match.params.idChatbot||false,
             userInfo: false,
@@ -21,6 +22,7 @@ export class CuerpoEditBot extends React.Component {
             chatbotConfig:false,
             chatbotConfigPendingSave: false
         } ;
+        this.tabs = { CONFIG: 'config', APPEARANCE: 'appearance', TRAINING: 'training', CONVERSATIONS: 'conversations' } ;
     }
     //
     componentDidMount(){
@@ -88,30 +90,38 @@ export class CuerpoEditBot extends React.Component {
         }
     }
     //
-    /*
-    componentDidUpdate(prevProps, prevState) {
-        Object.entries(this.props).forEach(([key, val]) =>
-          prevProps[key] !== val && console.log(`Prop '${key}' changed:: val: `+val+';')
-        );
-        if (this.state) {
-          Object.entries(this.state).forEach(([key, val]) =>
-            prevState[key] !== val && console.log(`State '${key}' changed:: val: `+val+';')
-          );
+    onChangeTab(argNextTab){
+        try {
+            if ( String(window.location.hash).toUpperCase().indexOf(argNextTab.toUpperCase())==-1 ){
+                window.location.hash = '#'+argNextTab ;
+            }
+        } catch(errOCT){
+            console.log('...ERROR: onChange tab:: ',errOCT) ;
         }
     }
-    */
     //
     render(){
         //
         let tempChatbotConfig = this.state.chatbotConfig ;
+        const activeTab = () => {
+            let outTab = this.tabs.CONFIG ;
+            let urlHash = (window.location.hash && String(window.location.hash).length>0 ) ? String(window.location.hash).substr(1) : false ;
+            if ( urlHash && this.tabs[ urlHash.toUpperCase() ] ){
+                outTab = this.tabs[ urlHash.toUpperCase() ]  ;
+            }
+            return outTab ;
+        }
         //
         return(
             <div id="waiboc-id-edit-chatbot" ref={(argRef)=>{ this.refContainer=argRef; }} style={{paddingTop:'145px',minHeight:'110vh',backgroundColor:'#F4F4F4'}}>
                     <BackTop>
                         <div className="ant-back-top-inner"><Icon type="arrow-up" /></div>
                     </BackTop>
-                    <Tabs style={{width:'95%',marginLeft:'2%'}}>
-                        <TabPane key="1"
+                    <Tabs style={{width:'95%',marginLeft:'2%'}}
+                          onChange={this.onChangeTab}
+                          activeKey={  activeTab() }
+                    >
+                        <TabPane key={this.tabs.CONFIG}
                             tab={<span>
                                 <Icon type="edit" theme="twoTone" />
                                 {this.props.translate.menuAdmin.botsConfiguration}
@@ -130,7 +140,7 @@ export class CuerpoEditBot extends React.Component {
                                     <div style={{marginTop:'15px'}}></div>
                                 </Col>
                                 <Col xs={1}  md={1}  lg={0}  xl={0}  xxl={0}></Col>
-                                <Col xs={22} md={22} lg={16} xl={16} xxl={16}>
+                                <Col xs={22} md={22} lg={20} xl={20} xxl={20}>
                                     {
                                         this.state.chatbotConfig==false ?
                                         <Spin size="large" />
@@ -145,7 +155,7 @@ export class CuerpoEditBot extends React.Component {
                                 </Col>
                             </Row>
                         </TabPane>
-                        <TabPane key="2"
+                        <TabPane key={this.tabs.APPEARANCE}
                             tab={<span>
                                 <Icon type="message" theme="twoTone" />
                                 {this.props.translate.form.appearance}
@@ -153,7 +163,7 @@ export class CuerpoEditBot extends React.Component {
                         >
                             tab 3
                         </TabPane>
-                        <TabPane key="3"
+                        <TabPane key={this.tabs.TRAINING}
                             tab={<span>
                                 <Icon type="message" theme="twoTone" />
                                 {this.props.translate.form.training}
@@ -176,7 +186,7 @@ export class CuerpoEditBot extends React.Component {
                                 </Col>
                             </Row>
                         </TabPane>
-                        <TabPane key="4"
+                        <TabPane key={this.tabs.CONVERSATIONS}
                             tab={<span>
                                 <Icon type="message" theme="twoTone" />
                                 {this.props.translate.form.conversations}

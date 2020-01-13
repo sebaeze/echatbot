@@ -60,7 +60,6 @@ export class TablaChatbots extends React.Component {
     //
     componentDidUpdate(prevProps){
         try {
-            //console.log('.....didupdate:: this.flagMounted: '+this.flagMounted+';') ;
             if ( this.flagMounted==true && this.props.userInfo.email!=prevProps.userInfo.email ){
                 this.setState({flagSpinner: true}) ;
                 api.chatbot.qry({idUser: this.props.userInfo.email})

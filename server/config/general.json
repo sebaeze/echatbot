@@ -23,6 +23,7 @@
     },
     "API":{
         "dev":{
+            "PATH_STORAGE":"C:\\07WAIBOC\\storage",
             "NLP_TRAIN_SECRET":"zxc@asdqwe54321",
             "NLP_TRAIN":"http://localhost:3001/chatbot/retrain"
         },
@@ -31,6 +32,7 @@
             "NLP_TRAIN":  "https://www.waiboc.com:3001/chatbot/retrain"
         },
         "produccion":{
+            "PATH_STORAGE":"/WAIBOC/storage",
             "NLP_TRAIN_SECRET":"zxc@asdqwe54321",
             "NLP_TRAIN":"https://www.waiboc.com:3001/chatbot/retrain"
         }

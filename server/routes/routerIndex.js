@@ -23,11 +23,22 @@ let opciones = {
 /*
 *
 */
-module.exports = (argConfig,argDb,argCatalogoMarcas) => {
+module.exports = (argConfig,argDb) => {
   const defaultMetatags   = argConfig.metaTags.default ;
+  const CONFIG_API        = argConfig.API[ (process.env.AMBIENTE ? process.env.AMBIENTE : 'dev' )  ] ;
   //
   // router.use('/', function(req,res,next){ console.log('....estoy en static::: '); next();},express.static( path.join(__dirname,'../../dist') , opciones ) );
-  // router.use('/', express.static( path.join(__dirname,'../../dist') , opciones ) );
+  try {
+    console.log('....CONFIG_API.PATH_STORAGE: ',CONFIG_API.PATH_STORAGE) ;
+    if ( !require('fs').existsSync( CONFIG_API.PATH_STORAGE ) ){
+      require('fs').mkdirSync( CONFIG_API.PATH_STORAGE );
+    }
+  } catch(errPathStorage){
+    console.log('....ERROR: Static path storage files: ',errPathStorage) ;
+    throw errPathStorage ;
+  }
+  router.use('/', express.static( CONFIG_API.PATH_STORAGE , opciones ) );
+  //
   router.use('/', expressStaticGzip( path.join(__dirname,'../../dist') ,
     {
       index: false,

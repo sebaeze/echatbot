@@ -201,7 +201,6 @@ export class TablaTraining extends React.Component {
             entity: argNewIntent.intentName,
             timestamp_last_update: moment( new Date() ).tz("America/Argentina/Buenos_Aires").format()
         };
-        //console.log('.....AcceptNewIntent:: tempNewIntent: ',tempNewIntent ) ;
         let tempArrayTraining = this.state.arrayTraining ;
         let indexIntent       = tempArrayTraining.findIndex((elemIntent)=>{ return elemIntent.entity.toUpperCase()==tempNewIntent.entity.toUpperCase() ; }) ;
         if ( indexIntent!=-1 ){

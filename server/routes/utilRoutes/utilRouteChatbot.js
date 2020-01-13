@@ -1,13 +1,50 @@
 /*
 *
 */
+const fs         = require('fs')    ;
+const fsPromises = require('fs').promises;
 const axios      = require('axios') ;
 const path       = require('path')  ;
 const rootCA     = require('ssl-root-cas/latest').inject().addFile( path.join(__dirname,'../../cert/waiboc.com.fullchain.pem') );
 //
-let API_NLP      = false ; //argConfig.API[process.env.AMBIENTE||'dev'] || false ;
+let API_NLP      = false ;
 //
-export const addNewFilesToChatbot = (argDb,argChatbotTrain) => {
+export const saveNewFileToChatbot = (argDb,argFile,argConfig) => {
+  //
+  const CONFIG_API        = argConfig.API[ (process.env.AMBIENTE ? process.env.AMBIENTE : 'dev' )  ] ;
+  //
+  return new Promise(function(respData,respRech){
+    try {
+        //
+        argFile['relativePath']   = path.sep + argFile.idChatbot + path.sep + argFile.name ;
+        argFile['fullPathServer'] = CONFIG_API.PATH_STORAGE + relativePath ;
+        let path2Chatbot          = CONFIG_API.PATH_STORAGE + path.sep + argFile.idChatbot ;
+        console.log('...path2Chatbot: ',path2Chatbot,' elative: ',argFile['relativePath'],' fullPath: ',argFile['fullPathServer'] ) ;
+        //
+        if ( !fs.existsSync(path2Chatbot) ){ fs.mkdirSync( path2Chatbot ) ; }
+        //
+        fsPromises.writeFile( argFile.name, argFile.data )
+          .then((respWrite)=>{
+            return argDb.files.add( argFile ) ;
+          })
+          .then((respAddFile)=>{
+            if ( respAddFile.length>0 ){ respAddFile=respAddFile[0]; }
+            respData( argFile ) ;
+          })
+          .catch((errAddAll)=>{
+            respRech(errAddAll) ;
+          }) ;
+      //
+    } catch(errANFTC){
+      respRech(errANFTC) ;
+    }
+  }) ;
+} ;
+//
+export const addNewFilesToChatbot = (argDb,argChatbotTrain,argConfig) => {
+    //
+    const CONFIG_API        = argConfig.API[ (process.env.AMBIENTE ? process.env.AMBIENTE : 'dev' )  ] ;
+    //
     return new Promise(function(respData,respRech){
       try {
         let arrayFilesPromises = [] ;
@@ -15,7 +52,7 @@ export const addNewFilesToChatbot = (argDb,argChatbotTrain) => {
           if ( elemEntity.answer.files ){
             elemEntity.answer.files.forEach((elemFile)=>{
               if ( elemFile.flagNewFile && elemFile.flagNewFile==true ){
-                elemFile['idChatbot'] = argChatbotTrain._id ; // _id de chatbot
+                elemFile['idChatbot'] = argChatbotTrain._id ;
                 elemFile.flagNewFile  = false ;
                 arrayFilesPromises.push( elemFile ) ;
               }

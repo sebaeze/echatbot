@@ -5,7 +5,7 @@ const router            = require('express').Router()   ;
 const path              = require('path')  ;
 const moment            = require('moment-timezone')     ;
 //
-import { updateTraining, addNewFilesToChatbot }    from './utilRoutes/utilRouteChatbot' ;
+import { updateTraining, addNewFilesToChatbot, saveNewFileToChatbot }    from './utilRoutes/utilRouteChatbot' ;
 //
 module.exports = (argConfig,argDb) => {
   //
@@ -62,6 +62,53 @@ module.exports = (argConfig,argDb) => {
     //
   }) ;
   //
+  router.post('/files',autenticado,function(req,res,next){
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    //
+    try {
+      //
+      delete req.body._v  ;
+      delete req.body.__v ;
+      console.log('.../files:: req.body: ',req.body) ;
+      let qry = {
+        idChatbot: req.body.idChatbot,
+        name: req.body.name,
+        type: req.body.type,
+        campos:{ data: 0 }
+      } ;
+      //
+      argDb.files.get( qry )
+            .then(function(resFiles){
+              console.log('....respuesta de get file:: resFiles: ',resFiles) ;
+              if ( resFiles.length==0 ){
+                return saveNewFileToChatbot( req.body ) ;
+              } else {
+                return resFiles[0] ;
+              }
+            }.bind(this))
+            .then(function(respAdd){
+              let respFiles = respAdd._doc ? respAdd._doc : respAdd  ;
+              if ( respFiles.data ){ delete respFiles.data; }
+              console.log('....respuesta de files:: respFiles: ',respFiles) ;
+              res.json( respFiles );
+            }.bind(this))
+            .catch(function(respErr){
+              console.log('.....ERROR: /files :: Adding files: ',respErr) ;
+              res.status(500) ;
+              res.json(respErr) ;
+            }.bind(this)) ;
+    //
+    } catch(errGetBots){
+      console.dir(errGetBots) ;
+      res.status(500) ;
+      res.json(errGetBots) ;
+    }
+    //
+  }) ;
+  //
   router.post('/train',autenticado,function(req,res,next){
     res.set('Access-Control-Allow-Headers','*');
     res.set('Access-Control-Allow-Origin', '*');
@@ -70,7 +117,7 @@ module.exports = (argConfig,argDb) => {
     //
     try {
       //
-      addNewFilesToChatbot( argDb, req.body )
+      addNewFilesToChatbot( argDb, req.body, argConfig )
           .then((resuTrain)=>{
             req.body.train = resuTrain.train ;
             return argDb.chatbot.qry( {_id: req.body._id} ) ;

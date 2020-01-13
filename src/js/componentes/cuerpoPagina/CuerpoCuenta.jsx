@@ -4,7 +4,6 @@
 import { Layout, Menu, Icon, Typography, Row, Col, Tooltip } from 'antd'   ;
 import React                             from 'react' ;
 import FormUserInfo                      from '../formularios/FormUserInfo' ;
-import FormChatbots                      from '../formularios/FormChatbots' ;
 import { TablaChatbots }                 from '../tablas/TablaChatbots'     ;
 import { api }                           from '../../api/api' ;
 import { PARAMETROS }                    from '../../utils/parametros' ;
@@ -23,7 +22,8 @@ export class CuerpoCuenta extends React.Component {
             filtroColapsado: this.props.configuracion.isMobile==true ? true : false,
             formType: (this.props.match.params && this.props.match.params.seccion && this.props.match.params.seccion.length>0 ) ? this.props.match.params.seccion : PARAMETROS.FORM.USER_INFO
         } ;
-        this.onCollapse = this.onCollapse.bind(this) ;
+        this.onCollapse     = this.onCollapse.bind(this) ;
+        this.onClickFormUrl = this.onClickFormUrl.bind(this) ;
     }
     //
     componentDidMount(){
@@ -43,13 +43,15 @@ export class CuerpoCuenta extends React.Component {
         }
     }
     //
-    /*
-    static getDerivedStateFromProps(newProps, state) {
-        console.log('......Cuerpocuenta:: getDerivedStateFromProps: ') ;
-        console.dir(state) ;
-        return false ; // { listaBots: newProps.listaBots } ;
+    onClickFormUrl(argTarget){
+        try {
+            if ( this.state.formType!=argTarget.toUpperCase() ){
+                this.setState({formType: argTarget.toUpperCase() }) ;
+            }
+        } catch(errOCF){
+            console.log('....CuerpoCuenta:: ERROR:: onClickFormurl:: ',errOCF) ;
+        }
     }
-    */
     //
     onCollapse(argCollapse){
         try {
@@ -70,35 +72,19 @@ export class CuerpoCuenta extends React.Component {
                     style={{backgroundColor:'#EBF2FE',color:'#002DFF',fontWeight:'600',fontSize:'22px'}}
                 >
                     <Menu mode="inline"
-                          // defaultOpenKeys={['sub1']}
                           style={{backgroundColor:'#EBF2FE',color:'black',fontWeight:'600',fontSize:'22px'}}
                           selectedKeys={[this.state.formType]}
                     >
                         <Menu.Item key={PARAMETROS.FORM.USER_INFO} >
-                            <Icon type="user"  />
+                            <Icon type="user" onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.USER_INFO);}}  />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.userInfo} >
-                                <span onClick={(argEV)=>{argEV.preventDefault();
-                                            if ( this.state.formType!=PARAMETROS.FORM.USER_INFO.toUpperCase() ){
-                                                this.setState({formType: PARAMETROS.FORM.USER_INFO}) ;
-                                            } else{
-                                                console.log('....ya estoy en user info') ;
-                                            }
-                                        }}
-                                >
-                                {this.props.translate.menuAdmin.userInfo}</span>
+                                <span  onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.USER_INFO);}} > {this.props.translate.menuAdmin.userInfo}</span>
                             </Tooltip>
                         </Menu.Item>
                         <Menu.Item key={PARAMETROS.FORM.CHATBOTS} >
-                            <Icon type="robot"  />
+                            <Icon type="robot"  onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.CHATBOTS);}} />
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.botsConfiguration} >
-                                <span onClick={(argEV)=>{argEV.preventDefault();
-                                            if ( this.state.formType!=PARAMETROS.FORM.CHATBOTS.toUpperCase() ){
-                                                this.setState({formType: PARAMETROS.FORM.CHATBOTS}) ;
-                                            } else{
-                                                console.log('....ya estoy en CHATBOTS') ;
-                                            }
-                                        }}
-                                >Chatbots</span>
+                                <span onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.CHATBOTS);}}  >Chatbots</span>
                             </Tooltip>
                         </Menu.Item>
                     </Menu>

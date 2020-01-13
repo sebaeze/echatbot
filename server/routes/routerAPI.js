@@ -84,14 +84,16 @@ module.exports = (argConfig,argDb) => {
               if ( resFiles.length==0 ){
                 return saveNewFileToChatbot( argDb, req.body, argConfig ) ;
               } else {
-                console.log('....el archivo ya existeeee:: name: ',req.body.name) ;
                 return resFiles[0] ;
               }
             }.bind(this))
             .then(function(respAdd){
               let respFiles = respAdd._doc ? respAdd._doc : respAdd  ;
               if ( respFiles.data ){ delete respFiles.data; }
-              console.log('....then__2:: Respuesta de files:: respFiles: ',respFiles) ;
+              delete respFiles.fullPathServer ;
+              delete respFiles.__v ;
+              delete respFiles.ts_last_update ;
+              delete respFiles.ts_creation    ;
               res.json( respFiles );
             }.bind(this))
             .catch(function(respErr){
@@ -116,11 +118,14 @@ module.exports = (argConfig,argDb) => {
     //
     try {
       //
+      /*
       addNewFilesToChatbot( argDb, req.body, argConfig )
           .then((resuTrain)=>{
             req.body.train = resuTrain.train ;
             return argDb.chatbot.qry( {_id: req.body._id} ) ;
           })
+          */
+      argDb.chatbot.qry( {_id: req.body._id} )
           .then(function(chatbotInfo){
             if ( chatbotInfo.length && chatbotInfo.length>0 ){ chatbotInfo=chatbotInfo[0]; }
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });

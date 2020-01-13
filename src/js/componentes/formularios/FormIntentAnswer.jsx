@@ -286,6 +286,7 @@ export class FormIntentAnswerBase extends React.Component {
                                 action="/api/files"
                                 customRequest={
                                     (argCR)=>{
+                                        this.setState({flagUploading: true}) ;
                                         let fr = new FileReader() ;
                                         fr.readAsDataURL( argCR.file );
                                         fr.onerror = (errFR) => { console.log('...ERROR: FR: ',errFR) ; } ;
@@ -300,46 +301,30 @@ export class FormIntentAnswerBase extends React.Component {
                                                     size: argCR.file.size ,
                                                     type: argCR.file.type ,
                                                     lastModified: argCR.file.lastModified ,
-                                                    // data: respText
-                                                    // data: new Buffer.from( respText , 'binary').toString('base64')
                                                     data: fr.result
                                                 }
                                             } ;
                                             axios( reqOptions )
                                                 .then((respAXios)=>{
-                                                    console.log('.....argCR.file_id: ',argCR.file._id) ;
+                                                    //
+                                                    let tempFiles = this.props.form.getFieldValue('files') || [] ;
+                                                    let indFile   = tempFiles.findIndex((elemFF)=>{ return elemFF.name==respAXios.data.name ; }) ;
+                                                    respAXios.data.uid = respAXios.data._id ;
+                                                    respAXios.data.key = respAXios.data._id ;
+                                                    if ( indFile!=-1 ){
+                                                        tempFiles[ indFile ]   = respAXios.data ;
+                                                    } else {
+                                                        tempFiles.push( respAXios.data  ) ;
+                                                    }
+                                                    this.props.form.setFieldsValue({ 'files': tempFiles });
+                                                    this.setState({flagUploading: false}) ;
                                                 })
                                                 .catch((errText)=>{
                                                     console.log('...ERROR: errText:: ',errText) ;
+                                                    this.setState({flagUploading: false}) ;
                                                 })
                                         } ;
                                         //
-                                        /*
-                                        argCR.file.text()
-                                            .then((respText)=>{
-                                                let reqOptions = {
-                                                    url: "/api/files",
-                                                    method: 'POST',
-                                                    withCredentials: true,
-                                                    data: {
-                                                        idChatbot: this.props.chatbotConfig._id,
-                                                        name: argCR.file.name ,
-                                                        size: argCR.file.size ,
-                                                        type: argCR.file.type ,
-                                                        lastModified: argCR.file.lastModified ,
-                                                        // data: respText
-                                                        data: new Buffer.from( respText , 'binary').toString('base64')
-                                                    }
-                                                } ;
-                                                return axios( reqOptions ) ;
-                                            })
-                                            .then((respAXios)=>{
-                                                console.log('.....argCR.file_id: ',argCR.file._id) ;
-                                            })
-                                            .catch((errText)=>{
-                                                console.log('...ERROR: errText:: ',errText) ;
-                                            })
-                                            */
                                     }
                                 }
                                 action333={(argFile)=>{

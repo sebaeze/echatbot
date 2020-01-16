@@ -27,6 +27,8 @@ export class CuerpoEditBot extends React.Component {
     //
     componentDidMount(){
         try {
+            console.log('....this.props.history: ',this.props.history) ;
+            //
             if ( this.state.flagCachedProps==false ){
                 let tempUserInfo = false ;
                 this.setState({flagSpinner: true}) ;

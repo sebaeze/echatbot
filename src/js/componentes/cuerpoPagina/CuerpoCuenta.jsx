@@ -29,9 +29,11 @@ export class CuerpoCuenta extends React.Component {
     componentDidMount(){
         try {
             //
+            console.log('....CuerpoCuenta:: componentDidMount:: ') ;
             api.account.getUserInfo()
                 .then((resDataUsr)=>{
                     let tempFormType = this.state.formType ; /* Obliga a re.render */
+                    console.log('....(B) CuerpoCuenta:: componentDidMount:: resDataUsr: ',resDataUsr) ;
                     this.setState({formType: tempFormType, userInfo: resDataUsr}) ;
                 })
                 .catch((errResDM)=>{
@@ -70,6 +72,9 @@ export class CuerpoCuenta extends React.Component {
                     collapsed={this.state.filtroColapsado}
                     onCollapse={this.onCollapse}
                     style={{backgroundColor:'#EBF2FE',color:'#002DFF',fontWeight:'600',fontSize:'22px'}}
+                    trigger={
+                        <Icon type="appstore" />
+                    }
                 >
                     <Menu mode="inline"
                           style={{backgroundColor:'#EBF2FE',color:'black',fontWeight:'600',fontSize:'22px'}}

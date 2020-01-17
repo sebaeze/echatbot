@@ -12,7 +12,7 @@ import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon }   from 'antd'  ;
 class FormUserInfo extends React.Component {
     constructor(props){
         super(props) ;
-        this.state            = {flagSpinner:false, userInfo: this.props.userInfo, enviadoOk:false,errorMsg:[] } ;
+        this.state            = {flagSpinner:false, userInfo: false , enviadoOk:false,errorMsg:[] } ;
         this.handleKeyboard   = this.handleKeyboard.bind(this)   ;
         this.formSubmit       = this.formSubmit.bind(this) ;
     }
@@ -21,7 +21,11 @@ class FormUserInfo extends React.Component {
     //
     //
     static getDerivedStateFromProps(newProps, state) {
-        return { userInfo: newProps.userInfo } ;
+        if ( newProps.userInfo!=false && state.userInfo==false ){
+            return { userInfo: newProps.userInfo } ;
+        } else {
+            return false ;
+        }
     }
     //
     handleKeyboard(event){

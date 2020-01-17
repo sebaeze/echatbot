@@ -4,7 +4,6 @@
 export const PARAMETROS = {
     SESSION:{
         USUARIO:'USER_SESSION',
-        CATEGORIAS_MARCAS: 'categoriasMarcas',
         TIEMPO_SINCRONIZACION_MINUTOS: 30,
         CARRITO: 'carrito',
         CARRITO_ESTADO_INICIAL: 'INICIAL',

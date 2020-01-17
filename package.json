@@ -59,7 +59,7 @@
     "rc-tween-one": "^2.6.2",
     "react": "^16.8.6",
     "react-chat-widget": "^2.1.5",
-    "react-dom": "^16.8.6",
+    "react-dom": "^16.12.0",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^5.0.1",
     "react-spinners": "^0.5.4",
@@ -71,9 +71,9 @@
     "webpack": "^4.30.0"
   },
   "scripts": {
-    "build": "webpack       --mode production --config ./build_config/webpack-prod-website.js",
-    "buildAdmin": "webpack  --mode production --config ./build_config/webpack-prod-admin.js",
-    "buildTest": "webpack   --mode production --config ./build_config/webpack-dev-test.js",
+    "build": "webpack  --mode production  --config ./build_config/webpack-prod-website.js",
+    "buildAdmin": "webpack  --mode production  --config ./build_config/webpack-prod-admin.js",
+    "build:ssr": "webpack  --mode development --config ./build_config/webpack-prod-website-ssr.js",
     "start": "babel-node ./server/server.js",
     "buildProd": "export AMBIENTE=produccion && npm run build && npm run buildAdmin",
     "startProd": "export AMBIENTE=produccion && babel-node ./server/server.js",

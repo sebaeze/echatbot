@@ -1,12 +1,24 @@
 /*
 *
 */
-const express           = require('express') ;
-const router            = require('express').Router()   ;
-const fnEmail           = require('../lib/emailEnviar').email ;
-const path              = require('path') ;
+const express            = require('express') ;
+const router             = require('express').Router()   ;
+const { renderToString } = require("react-dom/server");
+const fnEmail            = require('../lib/emailEnviar').email ;
+const path               = require('path') ;
 //
 import expressStaticGzip   from "express-static-gzip" ;
+let App = null ;
+let SSR = null ;
+//
+try {
+  console.log('....voy para readddd ') ;
+  App                 = require("../../dist/mainAppSSR");
+  console.log('....voy para render2String ') ;
+  SSR                 = renderToString(App) ;
+} catch(errSSR){
+  console.log('....error haciendo render2String:: errSSR: ',errSSR) ;
+}
 //
 if ( !process.env.AMBIENTE ){ process.env.AMBIENTE="dev"; }
 //
@@ -84,7 +96,21 @@ module.exports = (argConfig,argDb) => {
     res.setHeader("Access-Control-Allow-Credentials", true);
     //
     //console.log('....me voy por (A) ') ;
-    res.render( 'app.html', defaultMetatags ) ;
+    // res.render( 'app.html', defaultMetatags ) ;
+    // res.render( 'app.html', defaultMetatags ) ;
+    res.send(
+      `<!DOCTYPE html>
+      <html>
+        <head>
+          <title>Webpack SSR Demo</title>
+          <meta charset="utf-8" />
+        </head>
+        <body>
+          <div id="app">${SSR}</div>
+          <script src="./index.js"></script>
+        </body>
+      </html>`
+    ) ;
     //
   });
    // Login no requiere autenticar, sino entra en Loop

@@ -99,10 +99,10 @@ export class CuerpoCuenta extends React.Component {
                         <Col xs={24} md={24} lg={26} xl={26} xxl={26}>
                             {
                                 this.state.formType.toUpperCase()==PARAMETROS.FORM.USER_INFO.toUpperCase() ?
-                                    <FormUserInfo translate={this.props.translate} userInfo={this.state.userInfo} />
+                                    <FormUserInfo translate={this.props.translate} userInfo={this.state.userInfo} configuracion={this.props.configuracion} />
                                     :
                                     this.state.formType.toUpperCase()==PARAMETROS.FORM.CHATBOTS.toUpperCase() ?
-                                        <TablaChatbots translate={this.props.translate} userInfo={this.state.userInfo} />
+                                        <TablaChatbots translate={this.props.translate} userInfo={this.state.userInfo} configuracion={this.props.configuracion} />
                                         : null
                             }
                         </Col>

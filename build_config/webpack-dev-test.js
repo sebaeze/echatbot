@@ -5,12 +5,14 @@ const path                        = require('path');
 const webpack                     = require("webpack");
 const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
-const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
+//
+const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
+console.log('Hash Version: ',HASH_VERSION,';');
 //
 module.exports = {
-  entry: './src/mainTest.js',
+  entry: './test/reactTest.js',
   output: {
-    filename: 'mainTest.js',
+    filename: 'reactTest.js',
     path: path.join(__dirname, '../dist')
   },
   module:{
@@ -71,7 +73,10 @@ module.exports = {
     port: 9000,
     open: true,
     proxy: {
-        "/": "http://localhost:3000"
+        "/": {
+          target: "http://localhost:3000",
+          changeOrigin: false
+        }
     },
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -80,25 +85,23 @@ module.exports = {
     }
   },
   plugins: [
-      new CopyWebpackPlugin([ {from: 'src/img',to: 'img'}, {from: 'src/css',to: 'css'}, {from: 'src/xls'} ]),
+      new webpack.DefinePlugin({
+        '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),
+        '__URL_WIDGET__': JSON.stringify(HASH_VERSION.URLbackend),
+        '__ID_WIDGET__': JSON.stringify(HASH_VERSION.IDwidget)
+      }),
       new HtmlWebpackPlugin({
-        filename: "test.html",
-        template: "./src/admin.html",
-        title:"test",
+        __HASH_BUILD__: HASH_VERSION.hashVersion ,
+        __URL_WIDGET__: HASH_VERSION.URLbackend ,
+        __ID_WIDGET__: HASH_VERSION.IDwidget ,
+        filename: "reactTest.html",
+        template: "./test/reactTest.html",
+        title:"reactTest",
         inject: true,
         prefix: '/',
-        minify:{
-          collapseWhitespace: true,
-          removeComments: true,
-          removeRedundantAttributes: true,
-          removeScriptTypeAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-          useShortDoctype: true
-        },
+        minify: false ,
         hash:true
-      }),
-      new HtmlWebpackPrefixPlugin(),
-      new webpack.DefinePlugin({ "BACKEND_URL":"http://localhost:3000" })
+      })
     ]
 };
 //

@@ -1,8 +1,9 @@
 /*
 * TablaTraining
 */
-import React                                               from 'react' ;
-import { Table, Input, Button, notification, Icon, Tag, Popconfirm, Collapse }   from 'antd'  ;
+import React                                          from 'react' ;
+import { Table, Input, Button, notification, Icon }   from 'antd'  ;
+import { Row, Col, Tag, Popconfirm, Collapse      }   from 'antd'  ;
 import moment                                              from 'moment-timezone'  ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
@@ -285,26 +286,39 @@ export class TablaTraining extends React.Component {
                                 translate={this.props.translate}
                 />
                 <div style={{width:'100%',marginTop:'20px',marginBottom:'15px'}}>
-                    <Input placeholder={this.props.translate.search}
-                           onChange={this.onChangeSearch}
-                           style={{height:'42px',marginLeft:'10px', width:'20%'}}
-                    />
-                    <Button onClick={(argEE)=>{
-                                            argEE.preventDefault() ;
-                                            console.log('....TablaTraining:: new intent::  falseeeeeeee') ;
-                                            this.setState({modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
-                                        }}
-                                        type="primary" size="large" style={{ marginLeft: '15px' }}
-                    >
-                      {this.props.translate.form.newIntent}
-                    </Button>
-                    {
-                        this.state.flagWidgetTest==false ?
-                            <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({flagWidgetTest: true});}} type="primary" size="large" style={{ backgroundColor:'#8B6BEC',marginLeft: '15px' }}>
-                                {this.props.translate.form.testChatbot}
+                    <Row>
+                        <Col xs={24}  md={24}  lg={8} xl={8} xxl={8}>
+                            <Input placeholder={this.props.translate.search}
+                                onChange={this.onChangeSearch}
+                                style={{height:'42px',width:'90%'}}
+                            />
+                        </Col>
+                        <Col xs={0}   md={0}   lg={1} xl={1} xxl={1}></Col>
+                        <Col xs={24}  md={24}  lg={4} xl={4} xxl={4}>
+                            <Button onClick={(argEE)=>{
+                                                    argEE.preventDefault() ;
+                                                    console.log('....TablaTraining:: new intent::  falseeeeeeee') ;
+                                                    this.setState({modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
+                                                }}
+                                                type="primary" size="large"
+                                                style={{width:'90%',marginTop:'3px'}}
+                            >
+                            {this.props.translate.form.newIntent}
                             </Button>
-                            : null
-                    }
+                        </Col>
+                        <Col xs={0} md={0} lg={1} xl={1} xxl={1} ></Col>
+                        <Col xs={24}  md={24}  lg={4} xl={4} xxl={4}>
+                            {
+                                this.state.flagWidgetTest==false ?
+                                    <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({flagWidgetTest: true});}}
+                                            type="primary" size="large" style={{width:'90%',marginTop:'3px',backgroundColor:'#8B6BEC'}}
+                                    >
+                                        {this.props.translate.form.testChatbot}
+                                    </Button>
+                                    : null
+                            }
+                        </Col>
+                    </Row>
                 </div>
                 <Table
                     loading={this.state.flagSpinner}

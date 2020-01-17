@@ -1,8 +1,9 @@
 /*
 *
 */
-import React                                               from 'react' ;
-import { Table, Typography, Input, Button, Icon, Modal, Popconfirm }   from 'antd'  ;
+import React                                        from 'react' ;
+import { Table, Typography, Input, Button, Icon }   from 'antd'  ;
+import { Modal, Popconfirm, Row, Col }              from 'antd'  ;
 import { api }                                      from '../../api/api' ;
 import { FormNewChatbot }                           from '../formularios/FormNewChatbot' ;
 import { CuerpoEditBot }                            from "../cuerpoPagina/CuerpoEditBot" ;
@@ -131,8 +132,6 @@ export class TablaChatbots extends React.Component {
     //
     onClickEditChatbot(argChatbot){
         try {
-            console.log('....onClickEditChatbot:: argChatbot: ') ;
-            console.dir(argChatbot) ;
             // window.location.href = '/edit/'+argChatbot._id ;
             this.setState({idChatbotEdit: (argChatbot._id||argChatbot.idChatbot)}) ;
             //
@@ -214,7 +213,7 @@ export class TablaChatbots extends React.Component {
                 {title: this.props.translate.table.chatbotName,width: 250,
                         render: (text,argRow) => {
                             return(
-                                <a style={{fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
+                                <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
                                     onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
                                 >
                                     {text}
@@ -316,13 +315,25 @@ export class TablaChatbots extends React.Component {
                         :
                         <div>
                             <div style={{width:'100%',marginTop:'5px',marginBottom:'5px'}}>
-                                <Input placeholder={this.props.translate.search}
-                                    onChange={this.onChangeSearch}
-                                    style={{height:'42px',marginLeft:'10px', width:'20%'}}
-                                />
-                                <Button type="primary" size={"large"} style={{marginLeft:'10px'}} className="btn-edit-menu"  onClick={this.onClickCreateNewChatbot} >
-                                {this.props.translate.newChatbot}
-                                </Button>
+                                <Row>
+                                    <Col xs={1} md={1} lg={1} xl={1} xxl={1} ></Col>
+                                    <Col xs={23} md={23} lg={8} xl={8} xxl={8} >
+                                        <Input placeholder={this.props.translate.search}
+                                            onChange={this.onChangeSearch}
+                                            style={{height:'42px', width:'90%'}}
+                                        />
+                                    </Col>
+                                    <Col xs={1} md={1} lg={1} xl={1} xxl={1} ></Col>
+                                    <Col xs={24} md={24} lg={8} xl={8} xxl={8} >
+                                        <Button type="primary"
+                                                size={"large"} className="btn-edit-menu"
+                                                onClick={this.onClickCreateNewChatbot}
+                                                style={{marginTop:'3px'}}
+                                        >
+                                            {this.props.translate.newChatbot}
+                                        </Button>
+                                    </Col>
+                                </Row>
                             </div>
                             <Table
                                 loading={this.state.flagSpinner}

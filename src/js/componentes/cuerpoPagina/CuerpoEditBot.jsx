@@ -14,8 +14,10 @@ export class CuerpoEditBot extends React.Component {
         super(props) ;
         this.updateChatbotConfig = this.updateChatbotConfig.bind(this) ;
         this.onChangeTab         = this.onChangeTab.bind(this) ;
+        let tempFlagUrlEdit      = ( this.props.match && this.props.match.params && this.props.match.params.idChatbot ) ;
         this.state = {
-            idChatbot: (this.props.match && this.props.match.params && this.props.match.params.idChatbot ) ? this.props.match.params.idChatbot : false,
+            flagUrlEdit: tempFlagUrlEdit ,
+            idChatbot: tempFlagUrlEdit==true ? this.props.match.params.idChatbot : false,
             userInfo: false,
             flagSpinner: false,
             flagCachedProps: false,
@@ -27,8 +29,6 @@ export class CuerpoEditBot extends React.Component {
     //
     componentDidMount(){
         try {
-            console.log('....this.props.history: ',this.props.history) ;
-            //
             if ( this.state.flagCachedProps==false ){
                 let tempUserInfo = false ;
                 this.setState({flagSpinner: true}) ;
@@ -114,18 +114,25 @@ export class CuerpoEditBot extends React.Component {
             return outTab ;
         }
         //
+        let styleCloseIcon = this.props.configuracion.isMobile==true ?
+                                {position:'fixed'   ,top:'90px',left:'50px', backgroundColor:'white', border:'0.5px dotted gray'}
+                                :
+                                {position:'absolute',top:'5px' ,right:'5px', backgroundColor:'white', border:'0.5px dotted gray'} ;
+        //
         return(
             <div id="waiboc-id-edit-chatbot"
                  ref={(argRef)=>{ this.refContainer=argRef; }}
-                 style={{paddingTop:(this.props.onFinishEdit==false ? '145px' : '0px'),minHeight:'110vh',backgroundColor:'#F4F4F4'}}
+                 style={{paddingTop:(this.props.onFinishEdit==false ? '145px' : '0px'),border:(this.props.onFinishEdit==false ? 'none':'2px solid grey'),minHeight:'110vh',backgroundColor:'#F4F4F4'}}
             >
                 {
                     this.props.onFinishEdit ?
-                        <div style={{position:'absolute', top:'5px', right:'5px'}}>
+                        <div style={styleCloseIcon}>
                             <Icon type="close-square" className="waiboc-close-icon"
-                                    style={{fontSize:'38px',fontWeight:'600',color: 'green'}}
                                     onClick={(argEC)=>{
                                         argEC.preventDefault() ;
+                                        if (window.location.hash && String(window.location.hash).length>0){
+                                            window.location.hash='';
+                                        }
                                         this.props.onFinishEdit() ;
                                     }}
                             />

@@ -72,9 +72,9 @@
     "webpack": "^4.30.0"
   },
   "scripts": {
-    "build": "webpack       --mode production --config ./build_config/webpack-prod-website.js",
-    "buildAdmin": "webpack  --mode production --config ./build_config/webpack-prod-admin.js",
-    "buildTest": "webpack   --mode production --config ./build_config/webpack-dev-test.js",
+    "build":      "webpack   --mode production  --config ./build_config/webpack-prod-website.js",
+    "buildAdmin": "webpack   --mode production  --config ./build_config/webpack-prod-admin.js",
+    "react:test": "webpack   --mode development --config ./build_config/webpack-dev-test.js",
     "start": "babel-node ./server/server.js",
     "buildProd": "export AMBIENTE=produccion && npm run build && npm run buildAdmin",
     "startProd": "export AMBIENTE=produccion && babel-node ./server/server.js",
@@ -82,7 +82,7 @@
     "start:node": "nodemon --exec babel-node ./server/server.js",
     "start:react": "webpack-dev-server --config ./build_config/webpack-dev-website.js",
     "start:admin": "webpack-dev-server --config ./build_config/webpack-dev-admin.js",
-    "start:test": "webpack-dev-server --config ./build_config/webpack-dev-test.js"
+    "start:test":  "webpack-dev-server --config ./build_config/webpack-dev-test.js"
   },
   "browserslist": [
     ">0.2%",

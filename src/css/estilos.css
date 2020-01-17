@@ -971,21 +971,21 @@ div.react-bootstrap-table tbody tr:hover {
     z-index: 9999 !important ;
 }
 /*  */
-#waiboc-id-app .ant-tabs-nav-container .ant-tabs-tab span {
+#waiboc-main-node .ant-tabs-nav-container .ant-tabs-tab span {
     font-size: 22px !important ;
 }
-#waiboc-id-app span{
+#waiboc-main-node span{
     font-size: 18px !important ;
 }
-#waiboc-id-app form div.ant-form-item-label span {
+#waiboc-main-node form div.ant-form-item-label span {
     font-size: 22px !important ;
     font-weight: 600 !important ;
 }
-#waiboc-id-app .ant-back-top {
+#waiboc-main-node .ant-back-top {
     z-index: 9995 !important ;
     bottom: 100px;
 }
-#waiboc-id-app .ant-back-top-inner {
+#waiboc-main-node .ant-back-top-inner {
     z-index: 9995 !important ;
     height: 40px;
     width: 40px;
@@ -997,11 +997,11 @@ div.react-bootstrap-table tbody tr:hover {
     font-size: 20px;
 }
 /*  */
-#waiboc-id-app .has-success.has-feedback .ant-form-item-children-icon svg, .has-warning.has-feedback .ant-form-item-children-icon svg, .has-error.has-feedback .ant-form-item-children-icon svg, .is-validating.has-feedback .ant-form-item-children-icon svg {
+#waiboc-main-node .has-success.has-feedback .ant-form-item-children-icon svg, .has-warning.has-feedback .ant-form-item-children-icon svg, .has-error.has-feedback .ant-form-item-children-icon svg, .is-validating.has-feedback .ant-form-item-children-icon svg {
     margin-left: 35px !important ;
 }
 /*
-#waiboc-id-app i.anticon, .waiboc-cl-form i.anticon{
+#waiboc-main-node i.anticon, .waiboc-cl-form i.anticon{
     margin-left: 15px !important ;
     font-size: 18px !important ;
 }
@@ -1040,14 +1040,14 @@ span.waiboc-span-emoticon:hover {
     margin-left: 8px !important ;
     font-size: 18px !important ;
 }
-#waiboc-id-app .ant-select-selection-selected-value ,.waiboc-cl-form .ant-select-selection-selected-value {
+#waiboc-main-node .ant-select-selection-selected-value ,.waiboc-cl-form .ant-select-selection-selected-value {
     font-size: 18px !important ;
     font-weight: 600 !important ;
 }
-#waiboc-id-app i.anticon.anticon-check-circle, .waiboc-cl-form i.anticon.anticon-check-circle {
+#waiboc-main-node i.anticon.anticon-check-circle, .waiboc-cl-form i.anticon.anticon-check-circle {
     margin-left: 5px !important ;
 }
-#waiboc-id-app .ant-form-item-label span,.waiboc-cl-form .ant-form-item-label > label, #waiboc-id-app .ant-form-item-label div {
+#waiboc-main-node .ant-form-item-label span,.waiboc-cl-form .ant-form-item-label > label, #waiboc-main-node .ant-form-item-label div {
     font-size: 20px !important ;
     font-weight: 500 !important ;
     white-space: normal !important ;
@@ -1055,14 +1055,14 @@ span.waiboc-span-emoticon:hover {
     display: inline-block !important ;
 }
 /*  */
-#waiboc-id-app .ant-btn-dashed {
+#waiboc-main-node .ant-btn-dashed {
     border-width: 2px !important ;
 }
-#waiboc-id-app .ant-row .ant-form-item, .waiboc-cl-form .ant-row .ant-form-item{
+#waiboc-main-node .ant-row .ant-form-item, .waiboc-cl-form .ant-row .ant-form-item{
     margin-bottom: 5px !important ;
 }
 /*  */
-#waiboc-id-app .fadeOut{
+#waiboc-main-node .fadeOut{
     opacity:0;
     /*
     width:0;
@@ -1071,13 +1071,13 @@ span.waiboc-span-emoticon:hover {
     transition: width 5.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
 
 }
-#waiboc-id-app .fadeIn{
+#waiboc-main-node .fadeIn{
     opacity:1;
     /* width:100%; */
     height:100%;
     transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s ;
 }
-#waiboc-id-app .btn-continuar {
+#waiboc-main-node .btn-continuar {
     border: 1px dashed grey ;
     border-radius: 25px ;
     color: black ;
@@ -1089,18 +1089,35 @@ span.waiboc-span-emoticon:hover {
     padding: 10px 20px 10px 20px ;
     pointer-events: auto;
 }
-#waiboc-id-app .btn-continuar:hover, .btn-continuar div:hover, .btn-continuar span:hover,
-#waiboc-id-app .btn-continuar:focus, .btn-continuar div:focus, .btn-continuar span:focus {
+#waiboc-main-node .btn-continuar:hover, .btn-continuar div:hover, .btn-continuar span:hover,
+#waiboc-main-node .btn-continuar:focus, .btn-continuar div:focus, .btn-continuar span:focus {
     z-index: 9999 !important;
     cursor: pointer !important ;
     border-bottom: 0.5px dotted grey !important ;
     pointer-events: auto;
 }
-#waiboc-id-app .ant-btn:not([disabled]) {
+#waiboc-main-node .ant-btn:not([disabled]) {
     transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s !important;
     border: 0.5px solid #001DFF !important ;
 }
+.waiboc-close-icon {
+    cursor: pointer !important ;
+    z-index: 9999 !important ;
+    font-size: 38px !important;
+    font-weight: 600 !important ;
+    color: #002DFF !important ;
+    box-shadow: 0 !important ;
+    transition: box-shadow 1s !important ;
+}
 .waiboc-close-icon:hover {
     cursor: pointer !important ;
+    box-shadow: 0 0 3px #515151 !important ;
+}
+#waiboc-main-node .ant-tabs-tab-prev-icon-target, #waiboc-main-node .ant-tabs-tab-next-icon-target  {
+    font-size: 20px !important ;
+}
+#waiboc-main-node .ant-table-thead > tr > th {
+    padding-top: 0 !important ;
+    padding-bottom: 0 !important ;
 }
 /*  */

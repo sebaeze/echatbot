@@ -30,8 +30,6 @@ module.exports = {
       },
       {
         test: /\.(svg|woff|woff2|ttf|eot|otf)([\?]?.*)$/,
-        //loader: 'url-loader?limit=false'
-        // Muy importante indicar la direccion para buscar por nombre "/" indica que busca en directorio raiz
         loader: 'file-loader?name=/[name].[ext]',
      },
      {
@@ -74,13 +72,6 @@ module.exports = {
   devServer: {
     port: 9000,
     open: true,
-    /*
-    disableHostCheck: true,
-    host: '0.0.0.0',
-    hot: true,
-    hotOnly: true,
-    inline: true,
-    */
     proxy: {
         "/": {
           target: "http://localhost:3000",

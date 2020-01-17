@@ -2,7 +2,7 @@
 *
 */
 import React                                   from 'react' ;
-import { Tabs, Icon, Spin, Row, Col, BackTop, notification }   from 'antd'  ;
+import { Tabs, Icon, Spin, Row, Col, BackTop, notification, Button }   from 'antd'  ;
 import { api }                                 from '../../api/api' ;
 import { FormEditChatbotInfo }                 from '../formularios/FormEditChatbotInfo' ;
 import { TablaTraining       }                 from '../tablas/TablaTraining'            ;
@@ -15,7 +15,7 @@ export class CuerpoEditBot extends React.Component {
         this.updateChatbotConfig = this.updateChatbotConfig.bind(this) ;
         this.onChangeTab         = this.onChangeTab.bind(this) ;
         this.state = {
-            idChatbot: this.props.match.params.idChatbot||false,
+            idChatbot: (this.props.match && this.props.match.params && this.props.match.params.idChatbot ) ? this.props.match.params.idChatbot : false,
             userInfo: false,
             flagSpinner: false,
             flagCachedProps: false,
@@ -115,7 +115,23 @@ export class CuerpoEditBot extends React.Component {
         }
         //
         return(
-            <div id="waiboc-id-edit-chatbot" ref={(argRef)=>{ this.refContainer=argRef; }} style={{paddingTop:'145px',minHeight:'110vh',backgroundColor:'#F4F4F4'}}>
+            <div id="waiboc-id-edit-chatbot"
+                 ref={(argRef)=>{ this.refContainer=argRef; }}
+                 style={{paddingTop:(this.props.onFinishEdit==false ? '145px' : '0px'),minHeight:'110vh',backgroundColor:'#F4F4F4'}}
+            >
+                {
+                    this.props.onFinishEdit ?
+                        <div style={{position:'absolute', top:'5px', right:'5px'}}>
+                            <Icon type="close-square" className="waiboc-close-icon"
+                                    style={{fontSize:'38px',fontWeight:'600',color: 'green'}}
+                                    onClick={(argEC)=>{
+                                        argEC.preventDefault() ;
+                                        this.props.onFinishEdit() ;
+                                    }}
+                            />
+                        </div>
+                        : null
+                }
                     <BackTop>
                         <div className="ant-back-top-inner"><Icon type="arrow-up" /></div>
                     </BackTop>

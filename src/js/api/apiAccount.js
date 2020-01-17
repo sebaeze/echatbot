@@ -9,9 +9,6 @@ const updateAccount = (argAccount) => {
     return new Promise(function(respOk,respRech){
         try {
             //
-            console.log('....estoy en updateAccount:: ') ;
-            console.dir(argAccount) ;
-            //
             ls( PARAMETROS.SESSION.USUARIO, argAccount ) ;
             //
             let tempOptPost = opcionesPOST ;
@@ -99,7 +96,6 @@ const logoutAccount = () => {
         try {
             //
             if ( ls( PARAMETROS.SESSION.USUARIO ) ){
-                console.log('....voy a removerrrr') ;
                 ls.remove( PARAMETROS.SESSION.USUARIO ) ;
             }
             //

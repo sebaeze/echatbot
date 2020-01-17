@@ -5,6 +5,7 @@ import React                                               from 'react' ;
 import { Table, Typography, Input, Button, Icon, Modal, Popconfirm }   from 'antd'  ;
 import { api }                                      from '../../api/api' ;
 import { FormNewChatbot }                           from '../formularios/FormNewChatbot' ;
+import { CuerpoEditBot }                            from "../cuerpoPagina/CuerpoEditBot" ;
 //
 const { Title } = Typography ;
 //
@@ -24,6 +25,7 @@ export class TablaChatbots extends React.Component {
         let tempColumn      = this.parseColumns() ;
         this.flagMounted    = false ;
         this.state          = {
+            idChatbotEdit: false ,
             userInfo: this.props.userInfo,
             modalVisible: false,
             chatbotBorrar: false,
@@ -131,7 +133,9 @@ export class TablaChatbots extends React.Component {
         try {
             console.log('....onClickEditChatbot:: argChatbot: ') ;
             console.dir(argChatbot) ;
-            window.location.href = '/edit/'+argChatbot._id ;
+            // window.location.href = '/edit/'+argChatbot._id ;
+            this.setState({idChatbotEdit: (argChatbot._id||argChatbot.idChatbot)}) ;
+            //
         } catch(errDelChatbot){
             console.dir(errEditChatbot) ;
         }
@@ -301,45 +305,57 @@ export class TablaChatbots extends React.Component {
         //
         return(
             <div  className="waiboc-cl-form">
-                <div style={{width:'100%',marginTop:'5px',marginBottom:'5px'}}>
-                    <Input placeholder={this.props.translate.search}
-                           onChange={this.onChangeSearch}
-                           style={{height:'42px',marginLeft:'10px', width:'20%'}}
-                    />
-                    <Button type="primary" size={"large"} style={{marginLeft:'10px'}} className="btn-edit-menu"  onClick={this.onClickCreateNewChatbot} >
-                      {this.props.translate.newChatbot}
-                    </Button>
-                </div>
-                <Table
-                    loading={this.state.flagSpinner}
-                    columns={this.state.columnas}
-                    dataSource={ arrayDatos }
-                    rowKey="_id"
-                    style={{marginLeft:'10px'}}
-                    pagination={{position:'bottom'}}
-                    onChange={this.onChange.bind(this)}
-                    bordered
-                    locale={this.props.translate}
-                    scroll={{ x: 1000 }}
-                />
                 {
-                    this.state.modalVisible==true ?
-                        <FormNewChatbot
-                            modalVisible={this.state.modalVisible}
-                            translate={this.props.translate}
-                            onCancelModal={this.onCancelModal}
-                            sel={
-                                (argSel)=>{
-                                    this.setState({modalVisible: false }) ;
-                                    let tempNewCBot = {
-                                        ...argSel,
-                                        idUser: this.state.userInfo.email
-                                    } ;
-                                    this.addNewChatbot(tempNewCBot) ;
-                                }
-                            }
+                    this.state.idChatbotEdit!=false ?
+                        <CuerpoEditBot translate={this.props.translate}
+                                    idChatbot={this.state.idChatbotEdit}
+                                    onFinishEdit={()=>{this.setState({idChatbotEdit: false});}}
+                                    configuracion={this.props.configuracion}
+                                    {...this.props.argMach}
                         />
-                        : null
+                        :
+                        <div>
+                            <div style={{width:'100%',marginTop:'5px',marginBottom:'5px'}}>
+                                <Input placeholder={this.props.translate.search}
+                                    onChange={this.onChangeSearch}
+                                    style={{height:'42px',marginLeft:'10px', width:'20%'}}
+                                />
+                                <Button type="primary" size={"large"} style={{marginLeft:'10px'}} className="btn-edit-menu"  onClick={this.onClickCreateNewChatbot} >
+                                {this.props.translate.newChatbot}
+                                </Button>
+                            </div>
+                            <Table
+                                loading={this.state.flagSpinner}
+                                columns={this.state.columnas}
+                                dataSource={ arrayDatos }
+                                rowKey="_id"
+                                style={{marginLeft:'10px'}}
+                                pagination={{position:'bottom'}}
+                                onChange={this.onChange.bind(this)}
+                                bordered
+                                locale={this.props.translate}
+                                scroll={{ x: 1000 }}
+                            />
+                            {
+                                this.state.modalVisible==true ?
+                                    <FormNewChatbot
+                                        modalVisible={this.state.modalVisible}
+                                        translate={this.props.translate}
+                                        onCancelModal={this.onCancelModal}
+                                        sel={
+                                            (argSel)=>{
+                                                this.setState({modalVisible: false }) ;
+                                                let tempNewCBot = {
+                                                    ...argSel,
+                                                    idUser: this.state.userInfo.email
+                                                } ;
+                                                this.addNewChatbot(tempNewCBot) ;
+                                            }
+                                        }
+                                    />
+                                    : null
+                            }
+                        </div>
                 }
             </div>
         )

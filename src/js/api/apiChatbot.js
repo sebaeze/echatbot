@@ -118,6 +118,7 @@ const qryChatbots = (argQry) => {
             //
             if ( !argQry.status ){ argQry.status='ACTIVE'; }
             let opcionesFetch = {...opcionesPOST} ;
+            delete opcionesFetch.body ;
             opcionesFetch.method = 'GET' ;
             let tempUrl = '/api/chatbot' + obj2qryString(argQry) ;
             //

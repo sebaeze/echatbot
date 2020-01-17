@@ -1100,7 +1100,7 @@ span.waiboc-span-emoticon:hover {
     transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s !important;
     border: 0.5px solid #001DFF !important ;
 }
-#waiboc-id-app .ant-btn:not([disabled]):hover {
-    
+.waiboc-close-icon:hover {
+    cursor: pointer !important ;
 }
 /*  */

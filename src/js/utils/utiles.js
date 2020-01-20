@@ -26,3 +26,12 @@ export const languageLocale = () => {
     return outLocate ;
 }
 //
+export const copy2Clipboard = (argText) =>{
+    try {
+        navigator.clipboard.writeText( argText ) ;
+    } catch(errC2C){
+        console.log('.....ERROR: copy2Clipboard:: errC2C: ',errC2C) ;
+        throw errC2C ;
+    }
+}
+//

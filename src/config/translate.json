@@ -1,5 +1,6 @@
 {
     "EN":{
+        "copyWidget":"Copy Widget",
         "moreInfo":"More Information",
         "confirmation":"Confirmation",
         "yes":"Yes",
@@ -145,6 +146,7 @@
         ]
     },
     "ES":{
+        "copyWidget":"Copiar Widget",
         "moreInfo":"Más Información",
         "confirmation":"Confirmaciòn",
         "yes":"Si",
@@ -331,6 +333,7 @@
         ]
     },
     "PT":{
+        "copyWidget":"Copiar Widget",
         "moreInfo":"Mais Informações",
         "confirmation":"Confirmação",
         "yes":"Sim",

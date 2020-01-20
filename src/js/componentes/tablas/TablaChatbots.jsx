@@ -3,10 +3,13 @@
 */
 import React                                        from 'react' ;
 import { Table, Typography, Input, Button, Icon }   from 'antd'  ;
-import { Modal, Popconfirm, Row, Col }              from 'antd'  ;
+import { Modal, Popconfirm, Row, Col, Collapse  }   from 'antd'  ;
 import { api }                                      from '../../api/api' ;
 import { FormNewChatbot }                           from '../formularios/FormNewChatbot' ;
-import { CuerpoEditBot }                            from "../cuerpoPagina/CuerpoEditBot" ;
+import { CuerpoEditBot  }                           from "../cuerpoPagina/CuerpoEditBot" ;
+import { copy2Clipboard }                           from '../../utils/utiles' ;
+import SyntaxHighlighter                            from 'react-syntax-highlighter' ;
+// import ReactMarkdown                                from 'react-markdown'     ;
 //
 const { Title } = Typography ;
 //
@@ -60,7 +63,7 @@ export class TablaChatbots extends React.Component {
             console.dir(errDM) ;
         }
     }
-    //
+    /*
     componentDidUpdate(prevProps){
         try {
             if ( this.flagMounted==true && this.props.userInfo.email!=prevProps.userInfo.email ){
@@ -79,6 +82,7 @@ export class TablaChatbots extends React.Component {
             console.dir(errDM) ;
         }
     }
+    */
     //
     static getDerivedStateFromProps(newProps, state) {
         return { userInfo: newProps.userInfo } ;
@@ -222,8 +226,43 @@ export class TablaChatbots extends React.Component {
                         } ,
                         dataIndex:'botName', key:'botName',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
+                {title: 'Widget',width: 450,
+                        render: (text,argRow) => {
+                            let widgetCodeLink = `<script type="text/javascript" src="${__URL_WIDGET__}/widget.js?r${String(argRow.ts_last_update).replace(/([-.:])/g,'')}"></script>
+<script>
+    window.addEventListener('load',function () {
+        window.waiboc.initChatbotWidget({
+            idAgent: '${argRow._id}',
+            options:{
+                botName: '${argRow.botName}',
+                botSubtitle: '${argRow.botSubtitle}',
+                senderPlaceholder: 'pendientetttttt'
+            },
+            defaultStyle:{
+                fontSize:'22px'
+            }
+        }) ;
+    }) ;
+</script>` ;
+                            //
+                            return(
+                                <div>
+                                    <Button onClick={()=>{copy2Clipboard(widgetCodeLink); }} >
+                                        <Icon type="copy" />
+                                        {this.props.translate.copyWidget}
+                                    </Button>
+                                    <Collapse accordion style={{marginTop:'10px'}} >
+                                        <Collapse.Panel  header="Code" key="1">
+                                            <SyntaxHighlighter language="javascript" >
+                                                {widgetCodeLink}
+                                            </SyntaxHighlighter>
+                                        </Collapse.Panel>
+                                    </Collapse>
+                                </div>
+                            )
+                        } ,
+                        key:'ww'},
                 {title: this.props.translate.status       ,width: 200,dataIndex:'status',key:'status',
-                        // render: (text) => <a style={{fontWeight:'700'}} >{text}</a>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.status.localeCompare(b.status) } ,
                 {title: this.props.translate.table.description       ,width: 250,dataIndex:'description',key:'description',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.description.localeCompare(b.description) } ,
@@ -345,7 +384,7 @@ export class TablaChatbots extends React.Component {
                                 onChange={this.onChange.bind(this)}
                                 bordered
                                 locale={this.props.translate}
-                                scroll={{ x: 1000 }}
+                                scroll={{ x: 2000 }}
                             />
                             {
                                 this.state.modalVisible==true ?

@@ -72,12 +72,6 @@ module.exports = {
   devServer: {
     port: 9000,
     open: true,
-    proxy: {
-        "/": {
-          target: "http://localhost:3000",
-          changeOrigin: false
-        }
-    },
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "Content-Type, Authorization, x-id, Content-Length, X-Requested-With",

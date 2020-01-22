@@ -146,7 +146,7 @@ export class TablaTraining extends React.Component {
                         render: (text) =>
                             <div>
                                 <span>{this.props.translate.form.answerType}: </span>
-                                <span style={{fontWeight:'600'}}>{text.type}</span><hr/>
+                                <span style={{fontWeight:'600'}}>{text.type ? text.type : ''}</span><hr/>
                                 <span>{text.title||''}</span><br/>
                                 <Collapse accordion>
                                     <Collapse.Panel  header="Answer Example" key="1">

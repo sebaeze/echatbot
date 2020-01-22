@@ -8,6 +8,7 @@ class FormIntentNameBase extends React.Component {
     constructor(props){
         super(props) ;
         this.state                = {flagSpinner:false} ;
+        this.validateIntentName   = this.validateIntentName.bind(this)   ;
         this.handleSelectChange   = this.handleSelectChange.bind(this)   ;
         this.onSubmitForm         = this.onSubmitForm.bind(this) ;
     }
@@ -40,6 +41,24 @@ class FormIntentNameBase extends React.Component {
         }
     }
     //
+    validateIntentName(rule, value, callback){
+        try {
+            /*
+            const { form } = this.props;
+            if (value && this.state.confirmDirty) {
+              form.validateFields(['confirm'], { force: true });
+            }
+            */
+            // let flagValid = new RegExp('^([a-zA-Z0-9]+[_-])*[a-zA-Z0-9]+\.[a-zA-Z0-9]+$').test( value ) ;
+            //let flagValid = new RegExp('^([a-zA-Z0-9][_-])+$').test( value ) ;
+            let flagValid = new RegExp('^[-_a-zA-Z0-9]+$').test( value ) ;
+            console.log('...value: ',value,' flagValid: ',flagValid) ;
+            callback();
+        } catch(errVIN){
+            console.log('...error:: errVIN: ',errVIN) ;
+        }
+    }
+    //
     render(){
         //
         const { getFieldDecorator, getFieldError } = this.props.form ;
@@ -56,10 +75,17 @@ class FormIntentNameBase extends React.Component {
                 >
                     {getFieldDecorator('intentName', {
                             initialValue: this.props.data.intentName||'',
-                            suppressWarning: true,
-                            rules: [{ required: true, message: this.props.translate.form.errorIntentName, whitespace: true }],
+                            suppressWarning: true ,
+                            normalize: (value)=>(value || '').toUpperCase(),
+                            rules: [
+                                { required: true, message: this.props.translate.form.errorIntentName } ,
+                                { pattern: new RegExp('^[-_a-zA-Z0-9]+$') , message: this.props.translate.form.errorIntentNameInvalid }
+                            ],
                     })
-                    (<Input allowClear size="large" style={{fontWeight:'600'}}  ref={(argRef)=>{ /*this.firstNode=argRef; */argRef.focus(); }} />)}
+                    ( <Input allowClear size="large" style={{fontWeight:'600'}}
+                             ref={(argRef)=>{ /*this.firstNode=argRef; */argRef.focus(); }}
+                      />
+                    )}
                 </Form.Item>
                 <Form.Item
                     label={ <span>{this.props.translate.form.selectLanguage}</span> }

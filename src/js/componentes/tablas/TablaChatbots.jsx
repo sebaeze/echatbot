@@ -1,13 +1,13 @@
 /*
 *
 */
-import React                                        from 'react' ;
-import { Table, Typography, Input, Button, Icon }   from 'antd'  ;
-import { Modal, Popconfirm, Row, Col, Collapse  }   from 'antd'  ;
+import React                                           from 'react' ;
+import { Table, Typography, Input, Button, Icon }      from 'antd'  ;
+import { Popconfirm, Row, Col, Popover, notification } from 'antd'  ;
 import { api }                                      from '../../api/api' ;
 import { FormNewChatbot }                           from '../formularios/FormNewChatbot' ;
 import { CuerpoEditBot  }                           from "../cuerpoPagina/CuerpoEditBot" ;
-import { copy2Clipboard }                           from '../../utils/utiles' ;
+import { copy2Clipboard, widgetCode }               from '../../utils/utiles' ;
 import SyntaxHighlighter                            from 'react-syntax-highlighter' ;
 // import ReactMarkdown                                from 'react-markdown'     ;
 //
@@ -44,16 +44,17 @@ export class TablaChatbots extends React.Component {
     //
     componentDidMount(){
         try {
-            this.flagMounted = true ;
-            if ( this.props.userInfo && this.props.userInfo.email.length>0 ){
+            if ( this.flagMounted==false ){
                 this.setState({flagSpinner: true}) ;
                 api.chatbot.qry({idUser: this.props.userInfo.email})
                     .then((respQry)=>{
                         respQry.forEach((elemCbot,elemIdx)=>{ elemCbot.key = elemIdx ; }) ;
+                        this.flagMounted = true ;
                         this.setState({arrayChatbots: respQry, flagSpinner: false}) ;
                     })
                     .catch((respErr)=>{
                         console.dir(respErr) ;
+                        this.flagMounted = true ;
                         this.setState({flagSpinner: false}) ;
                     }) ;
             } else {
@@ -137,7 +138,7 @@ export class TablaChatbots extends React.Component {
     onClickEditChatbot(argChatbot){
         try {
             // window.location.href = '/edit/'+argChatbot._id ;
-            this.setState({idChatbotEdit: (argChatbot._id||argChatbot.idChatbot)}) ;
+            this.setState({idChatbotEdit: argChatbot._id }) ;
             //
         } catch(errDelChatbot){
             console.dir(errEditChatbot) ;
@@ -181,18 +182,37 @@ export class TablaChatbots extends React.Component {
     }
     //
     parseColumns(){
+        //
         let outCols = [] ;
+        //
+        const notificationCopied = () => {
+            notification['success']({
+                description: <h2>{this.props.translate.copied}</h2>
+            });
+        } ;
+        //
+        //
         try {
             //
             outCols = [
                 {title: 'Id',
-                    width: 300,dataIndex:'_id', key:'_id',
+                    width: 210,dataIndex:'_id', key:'_id',
                     render: (text,argRow) => {
                         return(
                             <div>
-                                <span style={{paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}>
-                                    <u>{text}</u>
-                                </span><br/>
+                                <div style={{width:'100%',alignContent:'center'}} >
+                                    <a style={{paddingLeft:'5px',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
+                                        onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
+                                    >
+                                        <u>{argRow.botName}</u>
+                                    </a>
+                                </div>
+                                <a style={{paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'18px',color:'#497EC0'}}
+                                      onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
+                                >
+                                    {text}
+                                </a>
+                                <br/>
                                 <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
                                     onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
                                 >
@@ -212,72 +232,56 @@ export class TablaChatbots extends React.Component {
                             </div>
                         )
                     },
-                    defaultSortOrder: 'descend', sorter: (a, b) => a._id.localeCompare(b._id)
+                    defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName)
                 } ,
-                {title: this.props.translate.table.chatbotName,width: 250,
+                {title: this.props.translate.integration ,width: 150,
                         render: (text,argRow) => {
-                            return(
-                                <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
-                                    onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
-                                >
-                                    {text}
-                                </a>
-                            )
-                        } ,
-                        dataIndex:'botName', key:'botName',
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.botName.localeCompare(b.botName) },
-                {title: 'Widget',width: 450,
-                        render: (text,argRow) => {
-                            let widgetCodeLink = `<script type="text/javascript" src="${__URL_WIDGET__}/widget.js?r${String(argRow.ts_last_update).replace(/([-.:])/g,'')}"></script>
-<script>
-    window.addEventListener('load',function () {
-        window.waiboc.initChatbotWidget({
-            idAgent: '${argRow._id}',
-            options:{
-                botName: '${argRow.botName}',
-                botSubtitle: '${argRow.botSubtitle}',
-                senderPlaceholder: 'pendientetttttt'
-            },
-            defaultStyle:{
-                fontSize:'22px'
-            }
-        }) ;
-    }) ;
-</script>` ;
+                            if ( !argRow.options ){ argRow.options={}; }
+                            let widgetCodeLink = widgetCode({
+                                url: __URL_WIDGET__,
+                                ts_last_update: argRow.ts_last_update,
+                                _id: argRow._id,
+                                botName: argRow.options.botName || argRow.botName || '' ,
+                                botSubtitle: argRow.options.botSubtitle || argRow.botSubtitle || '' ,
+                                senderPlaceholder: argRow.options.senderPlaceholder || argRow.senderPlaceholder || '',
+                                botStatus: argRow.options.botStatus || argRow.botStatus || '',
+                                cssStyle: argRow.options.cssStyle || argRow.cssStyle || ''
+                            }) ;
                             //
                             return(
                                 <div>
-                                    <Button onClick={()=>{copy2Clipboard(widgetCodeLink); }} >
+                                    <Button onClick={()=>{copy2Clipboard(widgetCodeLink);notificationCopied();}} >
                                         <Icon type="copy" />
                                         {this.props.translate.copyWidget}
                                     </Button>
-                                    <Collapse accordion style={{marginTop:'10px'}} >
-                                        <Collapse.Panel  header="Code" key="1">
-                                            <SyntaxHighlighter language="javascript" >
-                                                {widgetCodeLink}
-                                            </SyntaxHighlighter>
-                                        </Collapse.Panel>
-                                    </Collapse>
+                                    <div style={{width:'100%',marginTop:'10px'}}>
+                                        <Popover trigger="hover"
+                                                content={
+                                                    <SyntaxHighlighter language="javascript" >
+                                                        {widgetCodeLink}
+                                                    </SyntaxHighlighter>
+                                                }
+                                                style={{width:'200px',height:'200px'}}
+                                        >
+                                            <span style={{cursor:'pointer',borderBottom:'0.5px dotted grey',fontSize:'30px', fontWeight:'500'}}>
+                                                <Icon type="code" style={{marginRight:'10px',fontSize:'30px'}} />
+                                                {this.props.translate.checkWidgetCode}
+                                            </span>
+                                        </Popover>
+                                    </div>
                                 </div>
                             )
                         } ,
                         key:'ww'},
-                {title: this.props.translate.status       ,width: 200,dataIndex:'status',key:'status',
+                {title: this.props.translate.status                 ,width: 70,dataIndex:'status',key:'status',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.status.localeCompare(b.status) } ,
-                {title: this.props.translate.table.description       ,width: 250,dataIndex:'description',key:'description',
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.description.localeCompare(b.description) } ,
-                {title: this.props.translate.table.messagesConsumed ,width: 200,dataIndex:'qtyMessages', key:'qtyMessages',
-                        render: text => <span style={{fontWeight:'700'}}>{text}</span>,
+                {title: this.props.translate.table.plan             ,width: 70,dataIndex:'plan',key:'plan',
+                        defaultSortOrder: 'descend', sorter: (a, b) => a.plan.localeCompare(b.plan) },
+                {title: this.props.translate.table.messagesConsumed ,width: 120,dataIndex:'qtyMessages', key:'qtyMessages',
+                        render: text => <div style={{width:'100%', textAlign:'center'}} ><span style={{fontWeight:'700'}}>{text}</span></div>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.qtyMessages - b.qtyMessages } ,
-                {title: this.props.translate.table.plan  ,width: 150,dataIndex:'plan',key:'plan',
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.plan.localeCompare(b.plan) }
-                /* ,{title: this.props.translate.table.language ,width: 200,dataIndex:'language', key:'language',
-                        render: text => <span style={{fontWeight:'700'}}>{text}</span>,
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.language - b.language },
-                {title: this.props.translate.table.ChatbotStatusDisplay ,
-                        dataIndex:'botSubtitle', key:'botSubtitle' , defaultSortOrder: 'descend',
-                        sorter: (a, b) => a.botSubtitle.localeCompare(b.botSubtitle) }
-                */
+                {title: this.props.translate.table.description       ,width: 250,dataIndex:'description',key:'description',
+                        defaultSortOrder: 'descend', sorter: (a, b) => a.description.localeCompare(b.description) }
             ] ;
             //
         } catch(errPC){
@@ -384,7 +388,7 @@ export class TablaChatbots extends React.Component {
                                 onChange={this.onChange.bind(this)}
                                 bordered
                                 locale={this.props.translate}
-                                scroll={{ x: 2000 }}
+                                scroll={{ x: 1500 }}
                             />
                             {
                                 this.state.modalVisible==true ?

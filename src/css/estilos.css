@@ -1107,17 +1107,35 @@ span.waiboc-span-emoticon:hover {
     font-weight: 600 !important ;
     color: #002DFF !important ;
     box-shadow: 0 !important ;
-    transition: box-shadow 1s !important ;
+    transition: box-shadow 0.5s !important ;
 }
 .waiboc-close-icon:hover {
     cursor: pointer !important ;
-    box-shadow: 0 0 3px #515151 !important ;
+    box-shadow: 0 0 5px #515151 !important ;
 }
 #waiboc-main-node .ant-tabs-tab-prev-icon-target, #waiboc-main-node .ant-tabs-tab-next-icon-target  {
     font-size: 20px !important ;
 }
+#waiboc-main-node .ant-tabs-tab-prev-icon {
+    left: 30% !important ;
+}
+#waiboc-main-node .ant-tabs-tab-next-icon {
+    left: 10% !important ;
+}
+#waiboc-main-node .ant-table-thead > tr > th .ant-table-header-column .ant-table-column-sorters > .ant-table-column-title {
+    text-align: center !important ;
+}
 #waiboc-main-node .ant-table-thead > tr > th {
-    padding-top: 0 !important ;
-    padding-bottom: 0 !important ;
+    padding-top: 5px !important ;
+    padding-bottom: 5px !important ;
+}
+#waiboc-main-node .ant-table-bordered .ant-table-tbody > tr > td {
+    font-weight: 500 !important ;
+    font-size: 14px !important ;
+    transition: font-size 1.6s !important ;
+}
+#waiboc-main-node .ant-table-bordered .ant-table-tbody > tr > td:hover {
+    font-weight: 600 !important ;
+    font-size: 16px !important ;
 }
 /*  */

@@ -29,11 +29,9 @@ export class CuerpoCuenta extends React.Component {
     componentDidMount(){
         try {
             //
-            console.log('....CuerpoCuenta:: componentDidMount:: ') ;
             api.account.getUserInfo()
                 .then((resDataUsr)=>{
                     let tempFormType = this.state.formType ; /* Obliga a re.render */
-                    console.log('....(B) CuerpoCuenta:: componentDidMount:: resDataUsr: ',resDataUsr) ;
                     this.setState({formType: tempFormType, userInfo: resDataUsr}) ;
                 })
                 .catch((errResDM)=>{
@@ -68,7 +66,7 @@ export class CuerpoCuenta extends React.Component {
         return(
             <Layout id="waiboc-account" style={{ paddingTop:'120px',minHeight: '100vh'}}>
                 <Sider collapsible
-                    width={250}
+                    width={300}
                     collapsed={this.state.filtroColapsado}
                     onCollapse={this.onCollapse}
                     style={{backgroundColor:'#EBF2FE',color:'#002DFF',fontWeight:'600',fontSize:'22px'}}
@@ -81,15 +79,17 @@ export class CuerpoCuenta extends React.Component {
                           selectedKeys={[this.state.formType]}
                     >
                         <Menu.Item key={PARAMETROS.FORM.USER_INFO} >
-                            <Icon type="user" onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.USER_INFO);}}  />
+                            <span onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.USER_INFO);}} > 😀  </span>
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.userInfo} >
-                                <span  onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.USER_INFO);}} > {this.props.translate.menuAdmin.userInfo}</span>
+                                <span  style={{marginLeft:'18px'}} onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.USER_INFO);}} >
+                                    {this.props.translate.menuAdmin.userInfo}
+                                </span>
                             </Tooltip>
                         </Menu.Item>
                         <Menu.Item key={PARAMETROS.FORM.CHATBOTS} >
-                            <Icon type="robot"  onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.CHATBOTS);}} />
+                            <span onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.CHATBOTS);}} > 🤖  </span>
                             <Tooltip placement="topRight" title={this.props.translate.menuAdmin.botsConfiguration} >
-                                <span onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.CHATBOTS);}}  >Chatbots</span>
+                                <span style={{marginLeft:'18px'}} onClick={()=>{this.onClickFormUrl(PARAMETROS.FORM.CHATBOTS);}}  >Chatbots</span>
                             </Tooltip>
                         </Menu.Item>
                     </Menu>
@@ -98,12 +98,15 @@ export class CuerpoCuenta extends React.Component {
                     <Row>
                         <Col xs={24} md={24} lg={26} xl={26} xxl={26}>
                             {
-                                this.state.formType.toUpperCase()==PARAMETROS.FORM.USER_INFO.toUpperCase() ?
-                                    <FormUserInfo translate={this.props.translate} userInfo={this.state.userInfo} configuracion={this.props.configuracion} />
-                                    :
-                                    this.state.formType.toUpperCase()==PARAMETROS.FORM.CHATBOTS.toUpperCase() ?
-                                        <TablaChatbots translate={this.props.translate} userInfo={this.state.userInfo} configuracion={this.props.configuracion} />
-                                        : null
+                                this.state.userInfo==false ? null :
+                                    (
+                                        this.state.formType.toUpperCase()==PARAMETROS.FORM.USER_INFO.toUpperCase() ?
+                                            <FormUserInfo translate={this.props.translate} userInfo={this.state.userInfo} configuracion={this.props.configuracion} />
+                                            :
+                                            this.state.formType.toUpperCase()==PARAMETROS.FORM.CHATBOTS.toUpperCase() ?
+                                                <TablaChatbots translate={this.props.translate} userInfo={this.state.userInfo} configuracion={this.props.configuracion} />
+                                                : null
+                                    )
                             }
                         </Col>
                     </Row>

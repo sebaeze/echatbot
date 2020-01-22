@@ -1,5 +1,8 @@
 {
     "EN":{
+        "integration":"Integration",
+        "copied":"Successfully copied to clipboard",
+        "checkWidgetCode":"Link to Widget",
         "copyWidget":"Copy Widget",
         "moreInfo":"More Information",
         "confirmation":"Confirmation",
@@ -56,16 +59,17 @@
             "options":"Options"
         },
         "menuAdmin":{
-            "userInfo":"User Information",
-            "botsConfiguration":"Configuration of Chatbots"
+            "userInfo":"Personal Information",
+            "botsConfiguration":"Configuration"
         },
         "tooltip":{
+            "subtitleBot":"Text or legend to display above the chatbot name",
             "intentExamples":"Add examples of user's queries",
             "intentAnswer":"Add at least 1 answer to the intent",
             "intentName":"Define a unique name to identify the Intent",
             "chatbotName":"Choose a name for your chatbot",
             "chatbotAccesslist":"Access list by email address",
-            "websiteDomains":"Input the url of your website / s, for example: https://www.mywebsite.com"
+            "websiteDomains":"Input the url of your website / s, for example: www.mywebsite.com"
         },
         "table":{
             "intent":"Intent",
@@ -81,6 +85,9 @@
             "action":"Action"
         },
         "form":{
+            "subtitleBot":"Short description",
+            "nameToDisplay":"Name to display",
+            "senderPlaceholder":"Placeholder input user",
             "deleteChatbotConfirmation":"Are you sure to delete the chatbot ?",
             "deleteEntityConfirmation":"Are you sure to delete the entity ?",
             "fileSize1MBError":"File size must be smaller than 1MB",
@@ -106,12 +113,12 @@
             "nonValidIntentExample":"Example for intent should not be empty",
             "userNotAuthorized":"User is not authorized to modify this chatbot",
             "newIntent":"New intent",
-            "websiteDomains":"Enter the website (s) to use the chatbot, example: https://www.mywebsite.com",
+            "websiteDomains":"URL Website, example: www.mywebsite.com",
             "nonValidwebsiteDomains":"Input  valid domain address",
-            "accessList":"Admins",
+            "accessList":"Access List",
             "nonValidAccessList":"Input  valid email",
             "textAddEmail":"Add Email",
-            "textAddWebsite":"Add website",
+            "textAddWebsite":"Add Website",
             "language":"English",
             "selectLanguage":"Select the language",
             "country":"Country",
@@ -124,7 +131,7 @@
             "savechanges":"Save Changes",
             "submit":"Submit",
             "lastName":"Last Name",
-            "description":"Aditional Comments",
+            "description":"Description",
             "training":"Training",
             "conversations":"Conversations",
             "changesSaved":"The changes were saved"
@@ -146,6 +153,9 @@
         ]
     },
     "ES":{
+        "integration":"Integración",
+        "copied":"Copiado al portapapeles",
+        "checkWidgetCode":"Enlace a Widget",
         "copyWidget":"Copiar Widget",
         "moreInfo":"Más Información",
         "confirmation":"Confirmaciòn",
@@ -202,11 +212,12 @@
             "options":"Lista de opciones"
         },
         "tooltip":{
+            "subtitleBot":"Texto o leyenda a mostrar debajo del nombre del chatbot",
             "intentExamples":"Agregue ejemplos de consultas de usuarios",
             "intentName":"Defina un nombre unico para identificar la Intención",
             "chatbotName":"Elija un nombre para su chatbot",
             "chatbotAccesslist":"Otorgue acceso para editar su chatbot agregando el email",
-            "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: https://www.mipagina.com"
+            "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: www.mywebsite.com"
         },
         "table":{
             "intent":"Intención",
@@ -222,6 +233,9 @@
             "action":"Acción"
         },
         "form":{
+            "subtitleBot":"Descripción breve",
+            "nameToDisplay":"Nombre a mostrar",
+            "senderPlaceholder":"Placeholder input usuario",
             "deleteChatbotConfirmation":"¿ Esta seguro de borrar el Chatbot ?",
             "deleteEntityConfirmation":"¿ Esta seguro de borrar la Intenciòn ?",
             "fileSize1MBError":"Tamaño de archivo debe ser menor a 1MB",
@@ -246,12 +260,12 @@
             "nonValidIntentExample":"Ejemplo de intención no puede ser un string en blanco",
             "userNotAuthorized":"Usuario no esta autorizado a modificar este chatbot",
             "newIntent":"Nueva intención",
-            "websiteDomains":"Ingrese URLs de los sitios a utilizar el chatbot, ejemplo: https://www.mipagina.com",
+            "websiteDomains":"URL Website, ejemplo: www.mywebsite.com",
             "nonValidwebsiteDomains":"Ingrese un dominio valido",
-            "accessList":"Administradores:",
+            "accessList":"List de accesos",
             "nonValidAccessList":"Ingrese un email valido",
             "textAddEmail":"Agregar Email",
-            "textAddWebsite":"Agregar website",
+            "textAddWebsite":"Agregar Website",
             "language":"Español",
             "selectLanguage":"Seleccionar Idioma",
             "country":"País",
@@ -264,14 +278,14 @@
             "phone":"Telefono",
             "savechanges":"Guardar Cambios",
             "lastName":"Apellido",
-            "description":"Comentario / Nota adicional",
+            "description":"Descripción",
             "training":"Entrenar",
             "conversations":"Conversaciones",
             "changesSaved":"Los cambios fueron guardados"
         },
         "menuAdmin":{
-            "userInfo":"Información de usuario",
-            "botsConfiguration":"Configuracion de Chatbots"
+            "userInfo":"Información Personal",
+            "botsConfiguration":"Configuración"
         },
         "cognitiveAnalytics":"Analisis Cognitivo",
         "betaPlanLeyend":"Por el momento, solo contamos con el plan Beta, el cual consiste en 600 mensajes gratis x mes.\n Si te interesa el servicio, ponete en contacto a travez del formulario de contacto",
@@ -333,6 +347,9 @@
         ]
     },
     "PT":{
+        "integration":"Integração",
+        "copied":"Copiado com êxito para a área de transferência",
+        "checkWidgetCode":"Link para o Widget",
         "copyWidget":"Copiar Widget",
         "moreInfo":"Mais Informações",
         "confirmation":"Confirmação",
@@ -390,17 +407,21 @@
             "options":"Opções"
         },
         "menuAdmin":{
-            "userInfo":"Informações do Usuário",
-            "botsConfiguration":"Configuração de Chatbots"
+            "userInfo":"Informação pessoal",
+            "botsConfiguration":"Configuração"
         },
         "tooltip":{
+            "subtitleBot":"Texto ou legenda a ser exibida acima do nome do chatbot",
             "intentExamples":"Adicione exemplos de intenção",
             "intentName":"Defina um nome exclusivo para identificar a intenção",
             "chatbotName":"Escolha um nome para o seu chatbot",
             "chatbotAccesslist":"Conceda acesso ao chatbot adicionando o endereço de email",
-            "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: https://www.mywebsite.com"
+            "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
+            "subtitleBot":"Pequena descrição",
+            "nameToDisplay":"Nome a ser exibido",
+            "senderPlaceholder":"Placeholder input usuário",
             "deleteChatbotConfirmation":"Você tem certeza que quer excluir o Chatbot?",
             "deleteEntityConfirmation":"Tem certeza de que deseja excluir a intenção?",
             "fileSize1MBError":"Tamanho do arquivo deve ser menor que 1 MB",
@@ -425,12 +446,12 @@
             "nonValidIntentExample":"Exemplo para intenção não deve estar vazio",
             "userNotAuthorized":"Usuário não autorizado a modificar este chatbot",
             "newIntent":"Nova intenção",
-            "websiteDomains":"Digite URLs dos sites para usar o chatbot, por exemplo: https://www.mywebsite.com",
+            "websiteDomains":"URL Website, por exemplo: www.mywebsite.com",
             "nonValidwebsiteDomains":"Introduzir endereço de domínio válido",
-            "accessList":"Administradores",
+            "accessList":"Lista de acessos",
             "nonValidAccessList":"Inserir email válido",
             "textAddEmail":"Adicionar Email",
-            "textAddWebsite":"Adicionar website",
+            "textAddWebsite":"Adicionar Website",
             "language":"Português",
             "selectLanguage":"Selecione o idioma",
             "country":"País",
@@ -443,7 +464,7 @@
             "savechanges":"Salvar alterações",
             "submit":"Enviar",
             "lastName":"Sobrenome",
-            "description":"Comentaários",
+            "description":"Descrição",
             "training":"Treinamento",
             "conversations":"Conversas",
             "changesSaved":"As alterações foram salvas"

@@ -114,6 +114,14 @@
         "admin":{
             "title":"Waiboc | Account",
             "keywords": "Admin | User administration"
+        },
+        "/account/chatbots":{
+            "title":"Waiboc | Chatbot config",
+            "globalTituloPagina":"Waiboc | Chatbot config"
+        },
+        "/account/profile":{
+            "title":"Waiboc | Personal Profile",
+            "globalTituloPagina":"Waiboc | Personal Profile"
         }
       }
 }

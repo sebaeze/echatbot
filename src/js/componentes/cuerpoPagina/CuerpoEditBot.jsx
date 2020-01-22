@@ -4,8 +4,9 @@
 import React                                   from 'react' ;
 import { Tabs, Icon, Spin, Row, Col, BackTop, notification, Button }   from 'antd'  ;
 import { api }                                 from '../../api/api' ;
-import { FormEditChatbotInfo }                 from '../formularios/FormEditChatbotInfo' ;
-import { TablaTraining       }                 from '../tablas/TablaTraining'            ;
+import { FormEditChatbotInfo }                 from '../formularios/FormEditChatbotInfo'       ;
+import { FormEditChatbotAppearance }           from '../formularios/FormEditChatbotAppearance' ;
+import { TablaTraining       }                 from '../tablas/TablaTraining'                  ;
 //
 const { TabPane } = Tabs ;
 //
@@ -53,16 +54,16 @@ export class CuerpoEditBot extends React.Component {
         }
     }
     //
-    /*
     static getDerivedStateFromProps(newProps, state) {
-        console.log('.....not-cached:: getDerivedStateFromProps:: state: ',state) ;
-        if ( state.flagCachedProps==false ){
-            return { flagCachedProps: true } ;
+        if ( newProps.idChatbot!=state.idChatbot ){
+            let newState = {
+                idChatbot: newProps.idChatbot
+            } ;
+            return newState ;
         } else {
             return false ;
         }
     }
-    */
     //
     updateChatbotConfig(argChatbotConfigUpdate){
         try {
@@ -122,7 +123,7 @@ export class CuerpoEditBot extends React.Component {
         return(
             <div id="waiboc-id-edit-chatbot"
                  ref={(argRef)=>{ this.refContainer=argRef; }}
-                 style={{paddingTop:(this.props.onFinishEdit==false ? '145px' : '0px'),border:(this.props.onFinishEdit==false ? 'none':'2px solid grey'),minHeight:'110vh',backgroundColor:'#F4F4F4'}}
+                 style={{paddingTop:(this.props.onFinishEdit==false ? '145px' : '0px'),border:(this.props.onFinishEdit==false ? 'none':'0.6px dotted grey'),minHeight:'110vh',backgroundColor:'#F4F4F4'}}
             >
                 {
                     this.props.onFinishEdit ?
@@ -148,12 +149,12 @@ export class CuerpoEditBot extends React.Component {
                     >
                         <TabPane key={this.tabs.CONFIG}
                             tab={<span>
-                                <Icon type="edit" theme="twoTone" />
+                                <Icon type="tool" theme="twoTone" />
                                 {this.props.translate.menuAdmin.botsConfiguration}
                             </span>}
                         >
                             <Row>
-                                <Col xs={24}  md={24}  lg={4}  xl={4}  xxl={4}>
+                                <Col xs={24}  md={24}  lg={2}  xl={2}  xxl={2}>
                                     {
                                         this.state.flagSpinner==true ?
                                             <Spin size="large" />
@@ -165,7 +166,7 @@ export class CuerpoEditBot extends React.Component {
                                     <div style={{marginTop:'15px'}}></div>
                                 </Col>
                                 <Col xs={1}  md={1}  lg={0}  xl={0}  xxl={0}></Col>
-                                <Col xs={22} md={22} lg={20} xl={20} xxl={20}>
+                                <Col xs={22} md={22} lg={24} xl={24} xxl={24}>
                                     {
                                         this.state.chatbotConfig==false ?
                                         <Spin size="large" />
@@ -182,11 +183,37 @@ export class CuerpoEditBot extends React.Component {
                         </TabPane>
                         <TabPane key={this.tabs.APPEARANCE}
                             tab={<span>
-                                <Icon type="message" theme="twoTone" />
+                                <Icon type="edit" theme="twoTone" />
                                 {this.props.translate.form.appearance}
                             </span>}
                         >
-                            tab 3
+                            <Row>
+                                <Col xs={24}  md={24}  lg={0}  xl={0}  xxl={0}>
+                                    {
+                                        this.state.flagSpinner==true ?
+                                            <Spin size="large" />
+                                            :
+                                            null
+                                    }
+                                </Col>
+                                <Col xs={24}  md={24}  lg={0}  xl={0}  xxl={0}>
+                                    <div style={{marginTop:'15px'}}></div>
+                                </Col>
+                                <Col xs={1}  md={1}  lg={0}  xl={0}  xxl={0}></Col>
+                                <Col xs={22} md={22} lg={24} xl={24} xxl={24}>
+                                    {
+                                        this.state.chatbotConfig==false ?
+                                        <Spin size="large" />
+                                        :
+                                        <FormEditChatbotAppearance
+                                            translate={this.props.translate}
+                                            chatbotConfig={{...tempChatbotConfig}}
+                                            onSubmitChanges={this.updateChatbotConfig.bind(this)}
+                                            container={this.refContainer}
+                                        />
+                                    }
+                                </Col>
+                            </Row>
                         </TabPane>
                         <TabPane key={this.tabs.TRAINING}
                             tab={<span>

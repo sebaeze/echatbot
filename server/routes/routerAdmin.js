@@ -25,9 +25,9 @@ module.exports = (argConfig,argDb) => {
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);
     //
-    const metatagsAdmin   = argConfig.metaTags.admin || {} ;
+    const metatagsAdmin   = argConfig.metaTags[String(req.originalUrl).toLowerCase()]  || argConfig.metaTags.admin || {} ;
     let tempMetatags      = Object.assign({...defaultMetatags},{...metatagsAdmin}) ;
-    tempMetatags.globalTituloPagina = "Account" ;
+    // tempMetatags.globalTituloPagina = "Account" ;
     res.render( 'admin.html', tempMetatags ) ;
     //
   });

@@ -7,16 +7,31 @@ import localeES                           from 'antd/es/date-picker/locale/es_ES
 import localeBR                           from 'antd/es/date-picker/locale/pt_BR';
 import localeEN                           from 'antd/es/date-picker/locale/en_US';
 //
+import localePaginationEN                 from 'rc-pagination/es/locale/en_US' ;
+import localePaginationES                 from 'rc-pagination/es/locale/es_ES' ;
+import localePaginationPT                 from 'rc-pagination/es/locale/pt_BR' ;
+//
 export const languageLocale = () => {
     let outLocate = localeEN ;
     try {
+        //
         let tempLenguaje   = navigator.language || navigator.languages[0] || "EN" ;
         tempLenguaje       = tempLenguaje.substr(0,2).toUpperCase() ;
         let tempLocaleBI   = translate[tempLenguaje] || {} ;
+        //
         switch( tempLenguaje ){
-          case 'ES': outLocate = localeES ; break ;
-          case 'EN': outLocate = localeEN ; break ;
-          case 'PT': outLocate = localeBR ; break ;
+          case 'ES':
+              outLocate = localeES ;
+              outLocate.pagination = localePaginationES ;
+          break ;
+          case 'EN':
+              outLocate = localeEN ;
+              outLocate.pagination = localePaginationEN ;
+          break ;
+          case 'PT':
+              outLocate = localeBR ;
+              outLocate.pagination = localePaginationPT ;
+          break ;
           default : /* nada */  break ;
         }
         outLocate = Object.assign({...tempLocaleBI},outLocate) ;

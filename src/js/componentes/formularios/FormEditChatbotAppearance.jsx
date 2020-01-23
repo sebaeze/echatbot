@@ -96,7 +96,8 @@ class FormEditChatbotAppearanceBase extends React.Component {
                                         { rules: [{ required: true, message: this.props.translate.form.senderPlaceholder, whitespace: true }], })
                     (<Input allowClear size="large" className="waiboc-cl-names" ref={(argRef)=>{ argRef.focus(); }} />)}
                 </Form.Item>
-                <Row style={{marginTop:'5px'}}>
+                <Row style={{marginTop:'10px'}}>
+                    <Col xs={1} md={1} lg={8} xl={8} xxl={8}></Col>
                     <Col xs={18} md={18} lg={10} xl={8} xll={8} >
                         <Button type="primary" size={"large"} style={{marginLeft:'10%'}} className="btn-edit-menu"
                                 onClick={ (argEEV)=>{

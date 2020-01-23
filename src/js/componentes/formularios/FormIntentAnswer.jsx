@@ -230,7 +230,7 @@ export class FormIntentAnswerBase extends React.Component {
                                     { this.state.flagPicker==true ? "⌨️" : "😀" }
                                 </span><br/>
                                 {
-                                    this.state.flagPicker==true ? <Picker onSelect={this.onEmojiClick} title={null} i18n={this.props.translate.i18n} /> : null
+                                    this.state.flagPicker==true ? <Picker onSelect={this.onEmojiClick} title={'Emojis'} i18n={this.props.translate.i18n} /> : null
                                 }
                             </Form.Item>
                             : null

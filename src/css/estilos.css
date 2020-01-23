@@ -956,17 +956,25 @@ div.react-bootstrap-table tbody tr:hover {
     background-size: cover;
     background-position: center;
   }
-  .btn-edit-menu {
+/*  */
+/*
+#waiboc-main-node .ant-btn:not([disabled]) {
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s !important;
+    border: 0.5px solid #001DFF !important ;
+}
+*/
+#waiboc-main-node .ant-btn.btn-edit-menu {
 	height: 50px !important ;
 	font-size: 18px !important ;
-	font-weight: 600 !important ;
+	font-weight: 500 !important ;
 	background-color: #4178BE !important ;
-    margin-left: 10px !important ;
-    transition: all 0.3s ease-in-out;
-  }
-  .btn-edit-menu:hover {
+    margin-left: 5px !important ;
+    /* transition: all 1s ease-in-out ; */
+    transition: box-shadow 0.6s !important ;
+}
+#waiboc-main-node .ant-btn.btn-edit-menu:hover {
     box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
+}
 .ant-notification {
     z-index: 9999 !important ;
 }
@@ -1095,10 +1103,6 @@ span.waiboc-span-emoticon:hover {
     cursor: pointer !important ;
     border-bottom: 0.5px dotted grey !important ;
     pointer-events: auto;
-}
-#waiboc-main-node .ant-btn:not([disabled]) {
-    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s !important;
-    border: 0.5px solid #001DFF !important ;
 }
 .waiboc-close-icon {
     cursor: pointer !important ;

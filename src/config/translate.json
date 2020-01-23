@@ -72,6 +72,7 @@
             "websiteDomains":"Input the url of your website / s, for example: www.mywebsite.com"
         },
         "table":{
+            "lastUpdate":"Last Update",
             "usageQuantity":"Usage quantity",
             "intent":"Intent",
             "examples":"Examples",
@@ -86,6 +87,7 @@
             "action":"Action"
         },
         "form":{
+            "checkAnswer":"Check Aswer Here",
             "subtitleBot":"Short description",
             "nameToDisplay":"Name to display",
             "senderPlaceholder":"Placeholder input user",
@@ -222,6 +224,7 @@
             "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: www.mywebsite.com"
         },
         "table":{
+            "lastUpdate":"Última Modificación",
             "usageQuantity":"Cantidad de usos",
             "intent":"Intención",
             "examples":"Ejemplos",
@@ -236,6 +239,7 @@
             "action":"Acción"
         },
         "form":{
+            "checkAnswer":"Revisar respuesta aqui",
             "subtitleBot":"Descripción breve",
             "nameToDisplay":"Nombre a mostrar",
             "senderPlaceholder":"Placeholder input usuario",
@@ -423,6 +427,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
+            "checkAnswer":"Verifique a resposta aqui",
             "subtitleBot":"Pequena descrição",
             "nameToDisplay":"Nome a ser exibido",
             "senderPlaceholder":"Placeholder input usuário",
@@ -475,6 +480,7 @@
             "changesSaved":"As alterações foram salvas"
         },
         "table":{
+            "lastUpdate":"Última atualização",
             "usageQuantity":"Quantidade de uso",
             "intent":"Intenção",
             "examples":"Exemplos",

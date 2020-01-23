@@ -163,7 +163,8 @@ class FormEditChatbotInfoBase extends React.Component {
                         this.state.enviadoOk==true    ? <Icon type="smile" style={{fontSize:'35px',marginLeft:'25px'}} theme="twoTone" twoToneColor="#52c41a" /> : null
                     }
                 </Form.Item>
-                <Row style={{marginTop:'5px'}}>
+                <Row style={{marginTop:'10px'}}>
+                    <Col xs={1} md={1} lg={8} xl={8} xxl={8}></Col>
                     <Col xs={18} md={18} lg={10} xl={8} xll={8} >
                         <Button type="primary" size={"large"} style={{marginLeft:'10%'}} className="btn-edit-menu"
                                 onClick={ (argEEV)=>{

@@ -3,7 +3,7 @@
 */
 import React                                          from 'react' ;
 import { Table, Input, Button, notification, Icon }   from 'antd'  ;
-import { Row, Col, Tag, Popconfirm, Collapse      }   from 'antd'  ;
+import { Row, Col, Tag, Popconfirm, Popover }              from 'antd'  ;
 import moment                                              from 'moment-timezone'  ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
@@ -149,42 +149,30 @@ export class TablaTraining extends React.Component {
                 {title: this.props.translate.table.answer       ,
                         dataIndex:'answer',key:'answer',width: 400,
                         render: (text) =>
-                            <div>
-                                <span>{this.props.translate.form.answerType}: </span>
-                                <span style={{fontWeight:'600'}}>{text.type ? text.type : ''}</span><hr/>
-                                <span>{text.title||''}</span><br/>
-                                <Collapse accordion>
-                                    <Collapse.Panel  header="Answer Example" key="1">
-                                        <CustomReply datos={{output: text}} flagTimestamp={false} />
-                                        <span>{text.image||''}</span><br/>
-                                        {
-                                            (text.options && text.options.length>0) ?
-                                                text.options.map((elemObj,idx)=>{
-                                                    return (
-                                                        <div key={idx}>
-                                                            <span style={{fontWeight:'600'}}>{elemObj.label}: </span>
-                                                            <span>{elemObj.value}</span>
-                                                            <br/>
-                                                        </div>
-                                                    )
-                                                })
-                                                :
-                                                null
-                                        }
-                                    </Collapse.Panel>
-                                </Collapse>
+                            <div style={{width:'100%',marginTop:'10px'}}>
+                                <Popover trigger="hover"
+                                        content={ <CustomReply datos={{output: text}} flagTimestamp={false} /> }
+                                        style={{width:'200px',height:'200px'}}
+                                >
+                                    <span style={{cursor:'pointer',borderBottom:'0.5px dotted grey',fontSize:'30px', fontWeight:'500'}}>
+                                        <span style={{marginRight:'10px',fontSize:'30px'}} >💬</span>
+                                        {this.props.translate.form.checkAnswer}
+                                    </span>
+                                </Popover>
                             </div>
                 },
-                {title: 'Timestamp' ,
-                        dataIndex:'timestamp_last_update', key:'timestamp_last_update',width: 200,
+                {title: this.props.translate.table.lastUpdate ,
+                        dataIndex:'timestamp_last_update', key:'timestamp_last_update',width: 250,
                         render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{moment(text).fromNow()}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
-                },
-                {title: this.props.translate.table.domain ,
+                }
+                /*
+                ,{title: this.props.translate.table.domain ,
                         width: 200,dataIndex:'domain', key:'domain',
                         render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
                 }
+                */
             ] ;
             //
         } catch(errPC){
@@ -337,7 +325,7 @@ export class TablaTraining extends React.Component {
                     dataSource={ arrayDatos }
                     rowKey="entity"
                     style={{marginLeft:'10px'}}
-                    pagination={{position:'bottom'}}
+                    pagination={{position:'bottom', defaultPageSize: 50, showSizeChanger:true, showQuickJumper: true,locale:this.props.translate.pagination}}
                     onChange={this.onChange.bind(this)}
                     bordered
                     locale={this.props.translate}

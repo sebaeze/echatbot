@@ -94,7 +94,7 @@ export class TablaTraining extends React.Component {
             //
             outCols = [
                 {title: this.props.translate.table.intent ,
-                        dataIndex: 'entity',width:320,key: 'entity',
+                        dataIndex: 'entity',width:150,key: 'entity',
                         render: (text,argRow) => {
                             return(
                                 <div>
@@ -121,7 +121,7 @@ export class TablaTraining extends React.Component {
                         )},
                         defaultSortOrder: 'descend', sorter: (a, b) => a.entity.localeCompare(b.entity)
                 },
-                {title: this.props.translate.table.examples ,width: 250,
+                {title: this.props.translate.table.examples ,width: 200,
                         dataIndex:'examples', key:'examples',
                         render: (text) => {
                             let tempTT = Array.isArray(text)==true ?
@@ -140,6 +140,11 @@ export class TablaTraining extends React.Component {
                                     {tempTT}
                                 </div>
                               )}
+                },
+                {title: this.props.translate.table.usageQuantity ,width: 150,
+                    dataIndex:'usageQuantity', key:'usageQuantity',
+                    render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
+                    defaultSortOrder: 'descend', sorter: (a, b) => a.usageQuantity-b.usageQuantity
                 },
                 {title: this.props.translate.table.answer       ,
                         dataIndex:'answer',key:'answer',width: 400,
@@ -205,9 +210,15 @@ export class TablaTraining extends React.Component {
         let tempArrayTraining = this.state.arrayTraining ;
         let indexIntent       = tempArrayTraining.findIndex((elemIntent)=>{ return elemIntent.entity.toUpperCase()==tempNewIntent.entity.toUpperCase() ; }) ;
         if ( indexIntent!=-1 ){
-            tempArrayTraining[indexIntent] = Object.assign({...tempArrayTraining[indexIntent]},tempNewIntent) ;
+            let prevIntent = {...tempArrayTraining[indexIntent]} ;
+            for ( let keyIntent in tempNewIntent ){
+                prevIntent[keyIntent] = tempNewIntent[keyIntent] ;
+            }
+            tempArrayTraining[indexIntent] = {...prevIntent} ;
+            tempNewIntent                  = {...prevIntent} ;
         } else {
-            tempNewIntent.creation_ts = moment( new Date() ).tz("America/Argentina/Buenos_Aires").format() ;
+            tempNewIntent.usageQuantity = 1 ;
+            tempNewIntent.creation_ts   = moment( new Date() ).tz("America/Argentina/Buenos_Aires").format() ;
             tempArrayTraining.push( tempNewIntent ) ;
         }
         this.setState({arrayTraining:tempArrayTraining,modalNewIntent: false, intentNewModify: false}) ;
@@ -294,7 +305,7 @@ export class TablaTraining extends React.Component {
                             />
                         </Col>
                         <Col xs={0}   md={0}   lg={1} xl={1} xxl={1}></Col>
-                        <Col xs={24}  md={24}  lg={4} xl={4} xxl={4}>
+                        <Col xs={24}  md={24}  lg={5} xl={5} xxl={5}>
                             <Button onClick={(argEE)=>{
                                                     argEE.preventDefault() ;
                                                     console.log('....TablaTraining:: new intent::  falseeeeeeee') ;
@@ -307,7 +318,7 @@ export class TablaTraining extends React.Component {
                             </Button>
                         </Col>
                         <Col xs={0} md={0} lg={1} xl={1} xxl={1} ></Col>
-                        <Col xs={24}  md={24}  lg={4} xl={4} xxl={4}>
+                        <Col xs={24}  md={24}  lg={5} xl={5} xxl={5}>
                             {
                                 this.state.flagWidgetTest==false ?
                                     <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({flagWidgetTest: true});}}

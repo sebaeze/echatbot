@@ -72,6 +72,7 @@
             "websiteDomains":"Input the url of your website / s, for example: www.mywebsite.com"
         },
         "table":{
+            "usageQuantity":"Usage quantity",
             "intent":"Intent",
             "examples":"Examples",
             "answer":"Answer",
@@ -221,6 +222,7 @@
             "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: www.mywebsite.com"
         },
         "table":{
+            "usageQuantity":"Cantidad de usos",
             "intent":"Intención",
             "examples":"Ejemplos",
             "answer":"Respuesta",
@@ -473,6 +475,7 @@
             "changesSaved":"As alterações foram salvas"
         },
         "table":{
+            "usageQuantity":"Quantidade de uso",
             "intent":"Intenção",
             "examples":"Exemplos",
             "answer":"Responda",

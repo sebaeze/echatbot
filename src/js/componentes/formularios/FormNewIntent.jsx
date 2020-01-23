@@ -41,14 +41,12 @@ export class FormNewIntent extends React.Component {
     }
     //
     onNextStep(argNextStep){
-        console.log('....onNextStep:: ',argNextStep) ;
         try {
             let newState = {
                 dataNewIntent: Object.assign({...this.state.dataNewIntent},argNextStep),
                 formStep: this.state.formStep+1
             }
             if ( newState.formStep>2 ){
-                console.log('....voy a grabar newIntent:: newState: ',newState) ;
                 this.props.onAccept( {...newState.dataNewIntent} ) ;
                 newState.dataNewIntent = {...INTENT_DEF} ;
                 newState.formStep = 0 ;

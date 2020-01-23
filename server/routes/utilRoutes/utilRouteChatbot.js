@@ -110,23 +110,23 @@ export const updateTraining = (argConfig,argDb,argEmail,argBotTrained) => {
         //
         argDb.chatbot.add( {...argBotTrained}  )
             .then((respUpd)=>{
-            if ( respUpd.length && respUpd.length>0 ){ respUpd=respUpd[0]; }
-            respUpd = respUpd._doc ? respUpd._doc : respUpd ;
-            objResultado.code   = 0 ;
-            objResultado.result = respUpd.training ;
-            let tempReqbody = { idAgente: argBotTrained._id, emailUserid: argEmail, secretAPInlp: API_NLP.NLP_TRAIN_SECRET } ;
-            //
-            let reqOptions = { url: API_NLP.NLP_TRAIN, method: 'POST', data: tempReqbody, ca: rootCA } ;
-            return axios( reqOptions ) ;
+              if ( respUpd.length && respUpd.length>0 ){ respUpd=respUpd[0]; }
+              respUpd = respUpd._doc ? respUpd._doc : respUpd ;
+              objResultado.code   = 0 ;
+              objResultado.result = respUpd.training ;
+              let tempReqbody = { idAgente: argBotTrained._id, emailUserid: argEmail, secretAPInlp: API_NLP.NLP_TRAIN_SECRET } ;
+              //
+              let reqOptions = { url: API_NLP.NLP_TRAIN, method: 'POST', data: tempReqbody, ca: rootCA } ;
+              return axios( reqOptions ) ;
             //
             })
             .then((respTrainApi)=>{
-            respData(objResultado) ;
+              respData(objResultado) ;
             })
             .catch((errUT)=>{
-            objResultado.code   = 500 ;
-            objResultado.result = {error: errUT, message: errUT} ;
-            respRech(objResultado) ;
+              objResultado.code   = 500 ;
+              objResultado.result = {error: errUT, message: errUT} ;
+              respRech(objResultado) ;
             }) ;
     } catch(errUT){
       respRech(errUT) ;

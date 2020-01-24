@@ -25,6 +25,7 @@ export class TablaTraining extends React.Component {
         this.saveChangesTotraining = this.saveChangesTotraining.bind(this) ;
         this.state = {
             flagWidgetTest: false,
+            modalIntentVisible: false,
             modalNewIntent: false,
             flagCachedProps: false,
             flagSpinner: false,
@@ -59,7 +60,8 @@ export class TablaTraining extends React.Component {
                     intentDomain: argRowIntent.domain ,
                     intentAnswer: argRowIntent.answer
                 },
-                modalNewIntent: true
+                modalIntentVisible: true,
+                modalNewIntent: false
             } ;
             this.setState( {...tempIntent2Modify} ) ;
             //
@@ -94,11 +96,13 @@ export class TablaTraining extends React.Component {
             //
             outCols = [
                 {title: this.props.translate.table.intent ,
-                        dataIndex: 'entity',width:150,key: 'entity',
+                        dataIndex: 'entity',width:250,key: 'entity',
                         render: (text,argRow) => {
                             return(
                                 <div>
-                                    <span style={{paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}>
+                                    <span style={{cursor:'pointer',paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
+                                          onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
+                                    >
                                         <u>{text}</u>
                                     </span><br/>
                                     <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
@@ -121,7 +125,7 @@ export class TablaTraining extends React.Component {
                         )},
                         defaultSortOrder: 'descend', sorter: (a, b) => a.entity.localeCompare(b.entity)
                 },
-                {title: this.props.translate.table.examples ,width: 200,
+                {title: this.props.translate.table.examples ,width: 250,
                         dataIndex:'examples', key:'examples',
                         render: (text) => {
                             let tempTT = Array.isArray(text)==true ?
@@ -209,7 +213,7 @@ export class TablaTraining extends React.Component {
             tempNewIntent.creation_ts   = moment( new Date() ).tz("America/Argentina/Buenos_Aires").format() ;
             tempArrayTraining.push( tempNewIntent ) ;
         }
-        this.setState({arrayTraining:tempArrayTraining,modalNewIntent: false, intentNewModify: false}) ;
+        this.setState({arrayTraining:tempArrayTraining,modalIntentVisible: false, intentNewModify: false}) ;
         this.saveChangesTotraining(tempNewIntent) ;
         //
       } catch(errNI){
@@ -280,8 +284,9 @@ export class TablaTraining extends React.Component {
                 <FormNewIntent  onAccept={this.onAcceptNewIntent}
                                 data={this.state.intentNewModify}
                                 chatbotConfig={this.props.chatbotConfig}
-                                modalVisible={this.state.modalNewIntent}
-                                onCancelModal={(argEE)=>{argEE.preventDefault();this.setState({modalNewIntent:false})}}
+                                modalVisible={this.state.modalIntentVisible}
+                                flagNewIntent={this.state.modalNewIntent}
+                                onCancelModal={(argEE)=>{argEE.preventDefault();this.setState({modalIntentVisible:false})}}
                                 translate={this.props.translate}
                 />
                 <div style={{width:'100%',marginTop:'20px',marginBottom:'15px'}}>
@@ -297,7 +302,7 @@ export class TablaTraining extends React.Component {
                             <Button onClick={(argEE)=>{
                                                     argEE.preventDefault() ;
                                                     console.log('....TablaTraining:: new intent::  falseeeeeeee') ;
-                                                    this.setState({modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
+                                                    this.setState({modalIntentVisible: true, modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
                                                 }}
                                                 type="primary" size="large"
                                                 style={{width:'90%',marginTop:'3px'}}
@@ -329,7 +334,7 @@ export class TablaTraining extends React.Component {
                     onChange={this.onChange.bind(this)}
                     bordered
                     locale={this.props.translate}
-                    scroll={{ x: 900 }}
+                    scroll={{ x: 1500 }}
                 />
                 {
                     this.state.flagWidgetTest==true ?

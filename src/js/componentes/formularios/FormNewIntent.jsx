@@ -17,6 +17,7 @@ export class FormNewIntent extends React.Component {
         this.state              = {
             flagSpinner:false,
             modalVisible: this.props.modalVisible,
+            flagNewIntent: this.props.flagNewIntent,
             enviadoOk:false,
             dataNewIntent: this.props.data!=false ? {...this.props.data} : {...INTENT_DEF},
             formStep: 0,
@@ -32,6 +33,7 @@ export class FormNewIntent extends React.Component {
             let newDerivedState = {
                 formStep: 0,
                 modalVisible: newProps.modalVisible,
+                flagNewIntent: newProps.flagNewIntent,
                 dataNewIntent: newProps.modalVisible==true ? {...newProps.data} : {...INTENT_DEF}
             } ;
             return {...newDerivedState} ;
@@ -72,7 +74,7 @@ export class FormNewIntent extends React.Component {
         const NextStepForm    = (props) => {
             return(
                 this.state.formStep==0 ?
-                    <FormIntentName translate={this.props.translate} data={{...this.state.dataNewIntent}} chatbotConfig={this.props.chatbotConfig} onSubmitOk={this.onNextStep} prev={this.onPrevStep} />
+                    <FormIntentName translate={this.props.translate} flagNewIntent={this.state.flagNewIntent} data={{...this.state.dataNewIntent}} chatbotConfig={this.props.chatbotConfig} onSubmitOk={this.onNextStep} prev={this.onPrevStep} />
                     :
                     this.state.formStep==1 ?
                         <FormIntentExamples translate={this.props.translate} data={{...this.state.dataNewIntent}} chatbotConfig={this.props.chatbotConfig} onSubmitOk={this.onNextStep} prev={this.onPrevStep}  />

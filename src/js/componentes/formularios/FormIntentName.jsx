@@ -83,6 +83,7 @@ class FormIntentNameBase extends React.Component {
                             ],
                     })
                     ( <Input allowClear size="large" style={{fontWeight:'600'}}
+                             disabled={this.props.flagNewIntent==true ? false : true}
                              ref={(argRef)=>{ /*this.firstNode=argRef; */argRef.focus(); }}
                       />
                     )}

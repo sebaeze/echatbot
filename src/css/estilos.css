@@ -1136,7 +1136,7 @@ span.waiboc-span-emoticon:hover {
 #waiboc-main-node .ant-table-bordered .ant-table-tbody > tr > td {
     font-weight: 500 !important ;
     font-size: 14px !important ;
-    transition: font-size 1.6s !important ;
+    /* transition: font-size 1.6s !important ; */
 }
 #waiboc-main-node .ant-table-bordered .ant-table-tbody > tr > td:hover {
     font-weight: 600 !important ;

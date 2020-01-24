@@ -51,24 +51,14 @@ export const copy2Clipboard = (argText) =>{
 }
 //
 export const widgetCode = ( argOptions ) => {
-    return(
-`<script type="text/javascript" src="${argOptions.url}/widget.js?r${String(argOptions.ts_last_update).replace(/([-.:])/g,'')}"></script>
+    return( `<script type="text/javascript" src="${argOptions.url}/widget.js?r${String(argOptions.ts_last_update).replace(/([-.:])/g,'')}"></script>
 <script>
     window.addEventListener('load',function () {
         window.waiboc.initChatbotWidget({
             idAgent: '${argOptions._id}',
-            options:{
-                botName: '${argOptions.botName}',
-                botSubtitle: '${argOptions.botSubtitle}',
-                senderPlaceholder: '${argOptions.senderPlaceholder}',
-                botStatus: '${argOptions.botStatus}'
-            },
-            defaultStyle:{
-                fontSize:'${argOptions.cssStyle}'
-            }
+            secret: '${argOptions.secret}'
         }) ;
     }) ;
-</script>`
-    ) ;
+</script>` ) ;
 }
 //

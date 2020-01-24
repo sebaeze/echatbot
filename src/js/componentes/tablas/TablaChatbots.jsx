@@ -236,18 +236,7 @@ export class TablaChatbots extends React.Component {
                 } ,
                 {title: this.props.translate.integration ,width: 150,
                         render: (text,argRow) => {
-                            if ( !argRow.options ){ argRow.options={}; }
-                            let widgetCodeLink = widgetCode({
-                                url: __URL_WIDGET__,
-                                ts_last_update: argRow.ts_last_update,
-                                _id: argRow._id,
-                                botName: argRow.options.botName || argRow.botName || '' ,
-                                botSubtitle: argRow.options.botSubtitle || argRow.botSubtitle || '' ,
-                                senderPlaceholder: argRow.options.senderPlaceholder || argRow.senderPlaceholder || '',
-                                botStatus: argRow.options.botStatus || argRow.botStatus || '',
-                                cssStyle: argRow.options.cssStyle || argRow.cssStyle || ''
-                            }) ;
-                            //
+                            let widgetCodeLink = widgetCode({ url: __URL_WIDGET__, ts_last_update: argRow.ts_last_update, _id: argRow._id, secret: argRow.secret }) ;
                             return(
                                 <div>
                                     <Button onClick={()=>{copy2Clipboard(widgetCodeLink);notificationCopied();}} >

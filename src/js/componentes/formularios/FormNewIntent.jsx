@@ -79,7 +79,7 @@ export class FormNewIntent extends React.Component {
                     this.state.formStep==1 ?
                         <FormIntentExamples translate={this.props.translate} data={{...this.state.dataNewIntent}} chatbotConfig={this.props.chatbotConfig} onSubmitOk={this.onNextStep} prev={this.onPrevStep}  />
                         :
-                        <FormIntentAnswer translate={this.props.translate} data={{...this.state.dataNewIntent}} chatbotConfig={this.props.chatbotConfig} onSubmitOk={this.onNextStep} prev={this.onPrevStep}  />
+                        <FormIntentAnswer   translate={this.props.translate} data={{...this.state.dataNewIntent}} chatbotConfig={this.props.chatbotConfig} onSubmitOk={this.onNextStep} prev={this.onPrevStep}  />
             )
         }
         //

@@ -6,7 +6,7 @@ import axios                                             from 'axios' ;
 import { Button, Form, Input, Tooltip, Icon,  Select, Upload, Spin, message  }   from 'antd'  ;
 // import Picker                                            from 'emoji-picker-react' ;
 import { Picker }                                        from 'emoji-mart' ;
-import { FormDynamicInputText }                          from  './FormDynamicInputText' ;
+import { FormDynamicInputOption }                        from  './FormDynamicInputOption' ;
 //
 import 'emoji-mart/css/emoji-mart.css'
 //
@@ -22,16 +22,27 @@ export class FormIntentAnswerBase extends React.Component {
             API:'api',
             TEXT:'text',
             CAROUSEL:'carousel',
-            OPTIONS:'options',
-            IMAGE:'image'
+            OPTIONS:'options'
+            //,IMAGE:'image'
         } ;
-        this.state              = {flagSpinner:false, fieldPanel: this.answerTypes.TEXT, flagPicker: false, flagUploading: false } ;
+        this.state              = {
+            flagSpinner:false,
+            fieldPanel: this.props.data.intentAnswer.type || this.answerTypes.TEXT,
+            flagPicker: false,
+            flagUploading: false
+        } ;
         this.inputText          = false ;
     }
     //
-    componentDidMount(){
-        const { resetFields } = this.props.form ;
-        resetFields({names:['type','title','api','text','options' ]}) ;
+    static getDerivedStateFromProps(newProps, state) {
+        if ( newProps.data.type!=state.fieldPanel ){
+            let newDerivedState = {
+                fieldPanel: newProps.data.intentAnswer.type || false
+            } ;
+            return {...newDerivedState} ;
+        } else {
+            return false ;
+        }
     }
     //
     normFile(e){
@@ -61,7 +72,7 @@ export class FormIntentAnswerBase extends React.Component {
           );
         }
         */
-      };
+    };
     //
     onSubmitForm(){
         try {
@@ -133,14 +144,8 @@ export class FormIntentAnswerBase extends React.Component {
     //
     render(){
         //
-        const { getFieldDecorator } = this.props.form ;
+        const { getFieldDecorator, getFieldsValue } = this.props.form ;
         const beforeUpload = (argFile,fileList) => {
-            /*
-            const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-            if (!isJpgOrPng) {
-              message.error('You can only upload JPG/PNG file!');
-            }
-            */
             const isSizeOk = argFile.size<1024001 ;
             if ( !isSizeOk ) {
               message.error( this.props.translate.form.fileSize1MBError );
@@ -148,13 +153,13 @@ export class FormIntentAnswerBase extends React.Component {
               argFile.status   = 'error' ;
               argFile.response = this.props.translate.form.fileSize1MBError  ;
             }
-            console.log('....beforeUpload:: isSizeOk: ',isSizeOk) ;
             return isSizeOk ;
         }
         //
         let filesInitialValue = (this.props.data.intentAnswer.files && Array.isArray(this.props.data.intentAnswer.files)) ? this.props.data.intentAnswer.files.map((elemFIL,fileInd)=>{
             return {...elemFIL,key: fileInd, uid: fileInd}
         }) : [] ;
+        let arrayOptions      = this.props.data.intentAnswer.options || [] ;
         //
         return(
             //
@@ -187,68 +192,71 @@ export class FormIntentAnswerBase extends React.Component {
                         )
                         }
                     </Form.Item>
+                    <Form.Item
+                        hasFeedback
+                        label={ <span>
+                                    Text
+                                    <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                </span>}
+                    >
+                        {
+                            getFieldDecorator('text', {
+                                initialValue: this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||'',
+                                rules: [{ required: this.state.fieldPanel==this.answerTypes.TEXT? true : false , message: this.props.translate.form.errorAnswerText, whitespace: true }]
+                            })
+                            (
+                                    <Input.TextArea allowClear size="large"
+                                        className="waiboc-cl-input-with-emoticon"
+                                        autoSize={{ minRows: 1, maxRows: 4 }}
+                                        prefix={
+                                            <span className="waiboc-span-emoticon"
+                                                    onClick={(argEEV)=>{
+                                                        argEEV.preventDefault() ;
+                                                        let tempFlagEmo = !this.state.flagPicker ;
+                                                        this.setState({flagPicker: tempFlagEmo}) ;
+                                                    }}
+                                            >
+                                                { this.state.flagPicker==true ? "⌨️" : "😀" }
+                                            </span>
+                                        }
+                                        ref={(argRef)=>{ if ( this.inputText==false && argRef ){ this.inputText=argRef; } ; if (argRef){argRef.focus()} }}
+                                    />
+                            )
+                        }
+                        <span className="waiboc-span-emoticon"
+                                onClick={(argEEV)=>{
+                                    argEEV.preventDefault() ;
+                                    let tempFlagEmo = !this.state.flagPicker ;
+                                    this.setState({flagPicker: tempFlagEmo}) ;
+                                }}
+                        >
+                            { this.state.flagPicker==true ? "⌨️" : "😀" }
+                        </span><br/>
+                        {
+                            this.state.flagPicker==true ? <Picker onSelect={this.onEmojiClick} title={'Emojis'} i18n={this.props.translate.i18n} /> : null
+                        }
+                    </Form.Item>
                     {
-                        this.state.fieldPanel==this.answerTypes.TEXT ?
+                        this.state.fieldPanel==this.answerTypes.OPTIONS ?
                             <Form.Item
                                 hasFeedback
                                 label={ <span>
-                                            Text
+                                            Options
                                             <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
                                         </span>}
                             >
-                                {
-                                    getFieldDecorator('text', {
-                                        initialValue: this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||'',
-                                        rules: [{ required: true, message: this.props.translate.form.errorAnswerText, whitespace: true }]
-                                    })
-                                    (
-                                            <Input.TextArea allowClear size="large"
-                                                className="waiboc-cl-input-with-emoticon"
-                                                autoSize={{ minRows: 1, maxRows: 4 }}
-                                                prefix={
-                                                    <span className="waiboc-span-emoticon"
-                                                            onClick={(argEEV)=>{
-                                                                argEEV.preventDefault() ;
-                                                                let tempFlagEmo = !this.state.flagPicker ;
-                                                                this.setState({flagPicker: tempFlagEmo}) ;
-                                                            }}
-                                                    >
-                                                        { this.state.flagPicker==true ? "⌨️" : "😀" }
-                                                    </span>
-                                                }
-                                                ref={(argRef)=>{ if ( this.inputText==false && argRef ){ this.inputText=argRef; } ; if (argRef){argRef.focus()} }}
-                                            />
-                                    )
-                                }
-                                <span className="waiboc-span-emoticon"
-                                        onClick={(argEEV)=>{
-                                            argEEV.preventDefault() ;
-                                            let tempFlagEmo = !this.state.flagPicker ;
-                                            this.setState({flagPicker: tempFlagEmo}) ;
-                                        }}
-                                >
-                                    { this.state.flagPicker==true ? "⌨️" : "😀" }
-                                </span><br/>
-                                {
-                                    this.state.flagPicker==true ? <Picker onSelect={this.onEmojiClick} title={'Emojis'} i18n={this.props.translate.i18n} /> : null
-                                }
-                            </Form.Item>
-                            : null
-                    }
-                    {
-                        (this.state.fieldPanel==this.answerTypes.IMAGE || this.state.fieldPanel==this.answerTypes.OPTIONS) ?
-                            <Form.Item
-                                hasFeedback
-                                label={ <span>
-                                            Title
-                                            <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
-                                        </span>}
-                            >
-                                {getFieldDecorator('title', {
-                                    initialValue: this.props.data.intentAnswer.title||'',
-                                    rules: [{ required: true, message: this.props.translate.form.errorAnswerTitle, whitespace: true }]
-                                })
-                                (<Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />)}
+                                <FormDynamicInputOption
+                                    form={this.props.form}
+                                    styleButton={{width:'60%'}}
+                                    textPlaceholderLabel="*** LABEL ***"
+                                    textPlaceholderValue="*** VALUE ***"
+                                    initialValues={arrayOptions}
+                                    fieldName="options"
+                                    type="array"
+                                    defaultTypefield="string"
+                                    textAdd={this.props.translate.form.textAddOption}
+                                    description={this.props.translate.form.nonValidOption}
+                                />
                             </Form.Item>
                             : null
                     }

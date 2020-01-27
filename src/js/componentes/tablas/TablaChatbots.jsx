@@ -64,26 +64,6 @@ export class TablaChatbots extends React.Component {
             console.dir(errDM) ;
         }
     }
-    /*
-    componentDidUpdate(prevProps){
-        try {
-            if ( this.flagMounted==true && this.props.userInfo.email!=prevProps.userInfo.email ){
-                this.setState({flagSpinner: true}) ;
-                api.chatbot.qry({idUser: this.props.userInfo.email})
-                    .then((respQry)=>{
-                        respQry.forEach((elemCbot,elemIdx)=>{ elemCbot.key = elemIdx ; }) ;
-                        this.setState({arrayChatbots: respQry, flagSpinner: false}) ;
-                    })
-                    .catch((respErr)=>{
-                        console.dir(respErr) ;
-                        this.setState({flagSpinner: false}) ;
-                    }) ;
-            }
-        } catch(errDM){
-            console.dir(errDM) ;
-        }
-    }
-    */
     //
     static getDerivedStateFromProps(newProps, state) {
         return { userInfo: newProps.userInfo } ;
@@ -91,8 +71,6 @@ export class TablaChatbots extends React.Component {
     //
     onClickDeleteChatbot(argChatbot){
         try {
-            console.log('....deleteChatbot:: argChatbot: ') ;
-            console.dir(argChatbot) ;
             //
             this.setState({flagSpinner: true}) ;
             api.chatbot.delete(argChatbot)
@@ -137,7 +115,6 @@ export class TablaChatbots extends React.Component {
     //
     onClickEditChatbot(argChatbot){
         try {
-            // window.location.href = '/edit/'+argChatbot._id ;
             this.setState({idChatbotEdit: argChatbot._id }) ;
             //
         } catch(errDelChatbot){
@@ -268,7 +245,7 @@ export class TablaChatbots extends React.Component {
                         defaultSortOrder: 'descend', sorter: (a, b) => a.plan.localeCompare(b.plan) },
                 {title: this.props.translate.table.messagesConsumed ,width: 120,dataIndex:'qtyMessages', key:'qtyMessages',
                         render: text => <div style={{width:'100%', textAlign:'center'}} ><span style={{fontWeight:'700'}}>{text}</span></div>,
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.qtyMessages - b.qtyMessages } ,
+                        defaultSortOrder: 'descend', sorter: (a, b) => b.qtyMessages-a.qtyMessages } ,
                 {title: this.props.translate.table.description       ,width: 250,dataIndex:'description',key:'description',
                         defaultSortOrder: 'descend', sorter: (a, b) => a.description.localeCompare(b.description) }
             ] ;
@@ -348,19 +325,19 @@ export class TablaChatbots extends React.Component {
                         <div>
                             <div style={{width:'100%',marginTop:'5px',marginBottom:'5px'}}>
                                 <Row>
-                                    <Col xs={1} md={1} lg={1} xl={1} xxl={1} ></Col>
-                                    <Col xs={23} md={23} lg={8} xl={8} xxl={8} >
-                                        <Input placeholder={this.props.translate.search}
-                                            onChange={this.onChangeSearch}
-                                            style={{height:'42px', width:'90%'}}
+                                    <Col xs={24} md={24} lg={8} xl={8} xxl={8} >
+                                        <Input  allowClear
+                                                size="large"
+                                                placeholder={this.props.translate.search}
+                                                onChange={this.onChangeSearch}
+                                                style={{height:'100%', width:'100%', marginLeft:'10px'}}
                                         />
                                     </Col>
-                                    <Col xs={1} md={1} lg={1} xl={1} xxl={1} ></Col>
                                     <Col xs={24} md={24} lg={8} xl={8} xxl={8} >
                                         <Button type="primary"
                                                 size={"large"} className="btn-edit-menu"
                                                 onClick={this.onClickCreateNewChatbot}
-                                                style={{marginTop:'3px'}}
+                                                style={{width:'80%',marginTop:'3px',marginLeft:'20px'}}
                                         >
                                             {this.props.translate.newChatbot}
                                         </Button>

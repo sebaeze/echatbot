@@ -97,8 +97,8 @@
             "copyright": "www.waiboc.com",
             "keywords": "chatbot, virtual assistan, ai, watson, ibm",
             "orgTitle":"Waiboc | Chatbot",
-            "orgDescripcion":"Chatbot / Virtual Assistant with Artificial Intelligence for ecommerce, using AI",
-            "descripcion":"Chatbot / Virtual Assistant with Artificial Intelligence for ecommerce, using AI",
+            "orgDescripcion":"Waiboc | Chatbot for your website. Create your virtual assistance ",
+            "descripcion":"Waiboc | Chatbot for your website",
             "canonical":"https://www.waiboc.com",
             "orgUrl": "https://www.waiboc.com",
             "headerEmpresa":"Waiboc chatbot digital services",
@@ -116,11 +116,11 @@
             "keywords": "Admin | User administration"
         },
         "/account/chatbots":{
-            "title":"Waiboc | Chatbot config",
-            "globalTituloPagina":"Waiboc | Chatbot config"
+            "title":"Waiboc | Chatbots",
+            "globalTituloPagina":"Waiboc | Chatbots"
         },
         "/account/profile":{
-            "title":"Waiboc | Personal Profile",
+            "title":"Waiboc | Personal",
             "globalTituloPagina":"Waiboc | Personal Profile"
         }
       }

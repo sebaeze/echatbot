@@ -58,7 +58,6 @@ class FormEditChatbotInfoBase extends React.Component {
         //
         const { getFieldDecorator, resetFields, getFieldsError, getFieldError } = this.props.form ;
         let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'140px'} : {} ;
-        console.log('...render:: Form.Item:: ',Form.Item) ;
         //
         return(
             //

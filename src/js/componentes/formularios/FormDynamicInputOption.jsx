@@ -2,7 +2,10 @@
 *
 */
 import React                                         from 'react' ;
-import { Form, Input, Icon, Button, Row, Col }       from 'antd'  ;
+import { Form, Input, Icon, Button, Row, Col, Select }       from 'antd'  ;
+//
+const { CustomReply }   = window.waiboc ;
+//  <CustomReply datos={{output: text}} flagTimestamp={false} />
 //
 export class FormDynamicInputOption extends React.Component {
     constructor(props){
@@ -10,6 +13,7 @@ export class FormDynamicInputOption extends React.Component {
         this.nodeFocus    = false ;
         this.add          = this.add.bind(this) ;
         this.remove       = this.remove.bind(this) ;
+        this.handleSelectChange   = this.handleSelectChange.bind(this) ;
         this.state        = {
             // keys:[],
             flagFocusInput: false,
@@ -55,17 +59,27 @@ export class FormDynamicInputOption extends React.Component {
         this.setState({keys: tempKeys})  ;
         // this.forceUpdate() ;
         // this.setState({keys: tempKeys })
-      };
-      //
-      add(){
-        //
-        // let tempId   = this.state.ids++ ;
-        //let tempKeys = this.state.keys.concat( tempId );
-        let tempKeys = this.state.keys.concat( this.state.keys.length );
-        this.setState({keys: tempKeys, flagFocusInput: true })  ;
-        // this.forceUpdate() ;
-        //  this.setState({keys: tempKeys }) ;
-      };
+    };
+    //
+    add(){
+    //
+    // let tempId   = this.state.ids++ ;
+    //let tempKeys = this.state.keys.concat( tempId );
+    let tempKeys = this.state.keys.concat( this.state.keys.length );
+    this.setState({keys: tempKeys, flagFocusInput: true })  ;
+    // this.forceUpdate() ;
+    //  this.setState({keys: tempKeys }) ;
+    };
+    //
+    //
+    handleSelectChange(value){
+        this.props.form.setFieldsValue({
+            type: value
+        });
+        if ( value ){
+            this.setState({fieldPanel: value})
+        }
+    };
     //
     render(){
         //
@@ -74,7 +88,7 @@ export class FormDynamicInputOption extends React.Component {
         const formItemLayout = { labelCol: { xs: { span: 24 }, sm: { span: 4 }, }, wrapperCol: { xs: { span: 24 }, sm: { span: 20 }, md:{span:6}, lg:{span:6}, xl:{span:6}, xxl:{span:6} } };
         //
         const formItems      = this.state.keys.map((k, index) => {
-                let tempInitialObject = (this.state.initialValues[k] && typeof this.state.initialValues[k]=='object') ? this.state.initialValues[k] : {label:'',value:''} ;
+                let tempInitialObject = (this.state.initialValues[k] && typeof this.state.initialValues[k]=='object') ? this.state.initialValues[k] : {label:'',value: false} ;
                 return(
                     <div key={k}>
                         <Row key={k}>
@@ -112,20 +126,38 @@ export class FormDynamicInputOption extends React.Component {
                                     hasFeedback
                                 >
                                     {
-                                        getFieldDecorator(`${this.props.fieldName}[${k}].value`,
-                                        {
-                                            type: this.props.type,
-                                            required: true,
-                                            initialValue: tempInitialObject.value ,
-                                            validateTrigger: ['onChange', 'onBlur'],
-                                            suppressWarning: true,
-                                            rules: [ {suppressWarning: true, type:  this.props.defaultTypefield, required: true, message: this.props.description,
-                                            }, ],
-                                        })
+                                        getFieldDecorator(
+                                            `${this.props.fieldName}[${k}].value`,
+                                            {
+                                                rules: [{ required: true, message: this.props.description, whitespace: true }],
+                                                ...(tempInitialObject.value==false ? {} : {initialValue:tempInitialObject.value})
+                                            }
+                                        )
                                         (
-                                            <Input placeholder={this.props.textPlaceholderValue} size="large" style={{ width: '80%' }} />
-                                        )}
-                                    { this.state.keys.length > 0 ? ( <Icon style={{marginLeft:'10px'}} className="dynamic-delete-button" type="minus-circle-o" onClick={() => this.remove(k)} /> ) : null}
+                                            <Select
+                                                placeholder={this.props.textPlaceholderValue}
+                                                onchange={
+                                                    (argValue)=>{
+                                                        let objDummy = {} ;
+                                                        objDummy[ `${this.props.fieldName}[${k}].value` ] = argValue ;
+                                                        this.props.form.setFieldsValue( objDummy );
+                                                    }
+                                                }
+                                                getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                                                size="large"
+                                            >
+                                                {
+                                                    Object.values(this.props.chatbotTraining).map((elemEntity,idxEntity)=>{
+                                                            return(
+                                                                <Select.Option value={elemEntity.entity} key={idxEntity}>
+                                                                    <b>{elemEntity.entity}</b>
+                                                                </Select.Option>
+                                                                )
+                                                    })
+                                                }
+                                            </Select>
+                                        )
+                                    }
                                 </Form.Item>
                             </Col>
                         </Row>

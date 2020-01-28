@@ -13,11 +13,12 @@ import 'emoji-mart/css/emoji-mart.css'
 export class FormIntentAnswerBase extends React.Component {
     constructor(props){
         super(props) ;
-        this.firstNode          = false ;
-        this.normFile           = this.normFile.bind(this) ;
-        this.handleSelectChange = this.handleSelectChange.bind(this) ;
-        this.handleChange       = this.handleChange.bind(this) ;
-        this.onEmojiClick       = this.onEmojiClick.bind(this) ;
+        this.firstNode            = false ;
+        this.normFile             = this.normFile.bind(this) ;
+        this.handleSelectChange   = this.handleSelectChange.bind(this) ;
+        this.handleChange         = this.handleChange.bind(this) ;
+        this.onEmojiClick         = this.onEmojiClick.bind(this) ;
+        this.draggerCustomRequest = this.draggerCustomRequest.bind(this) ;
         this.answerTypes        = {
             API:'api',
             TEXT:'text',
@@ -73,6 +74,50 @@ export class FormIntentAnswerBase extends React.Component {
         }
         */
     };
+    //
+    draggerCustomRequest(argCR){
+        try {
+            this.setState({flagUploading: true}) ;
+            let fr = new FileReader() ;
+            fr.readAsDataURL( argCR.file );
+            fr.onerror = (errFR) => { console.log('...ERROR: FR: ',errFR) ; throw errFR; } ;
+            fr.onload  = () => {
+                let reqOptions = {
+                    url: "/api/files",
+                    method: 'POST',
+                    withCredentials: true,
+                    data: {
+                        idChatbot: this.props.chatbotConfig._id,
+                        name: argCR.file.name ,
+                        size: argCR.file.size ,
+                        type: argCR.file.type ,
+                        lastModified: argCR.file.lastModified ,
+                        data: fr.result
+                    }
+                } ;
+                axios( reqOptions )
+                    .then((respAXios)=>{
+                        let tempFiles = this.props.form.getFieldValue('files') || [] ;
+                        let indFile   = tempFiles.findIndex((elemFF)=>{ return elemFF.name==respAXios.data.name ; }) ;
+                        respAXios.data.uid = respAXios.data._id ;
+                        respAXios.data.key = respAXios.data._id ;
+                        if ( indFile!=-1 ){
+                            tempFiles[ indFile ]   = respAXios.data ;
+                        } else {
+                            tempFiles.push( respAXios.data  ) ;
+                        }
+                        this.props.form.setFieldsValue({ 'files': tempFiles });
+                        this.setState({flagUploading: false}) ;
+                    })
+                    .catch((errText)=>{
+                        console.log('...ERROR: errText:: ',errText) ;
+                        this.setState({flagUploading: false}) ;
+                    })
+            } ;
+        } catch(errDCR){
+            console.log('...ERROR: Dragger:: CustomRequest:: errDCR: ',errDCR) ;
+        }
+    }
     //
     onSubmitForm(){
         try {
@@ -248,9 +293,10 @@ export class FormIntentAnswerBase extends React.Component {
                                 <FormDynamicInputOption
                                     form={this.props.form}
                                     styleButton={{width:'60%'}}
-                                    textPlaceholderLabel="*** LABEL ***"
-                                    textPlaceholderValue="*** VALUE ***"
+                                    textPlaceholderLabel={this.props.translate.form.optionsLabelToDisplay}
+                                    textPlaceholderValue={this.props.translate.form.optionsValueSelect}
                                     initialValues={arrayOptions}
+                                    chatbotTraining={this.props.chatbotConfig.training}
                                     fieldName="options"
                                     type="array"
                                     defaultTypefield="string"
@@ -282,9 +328,11 @@ export class FormIntentAnswerBase extends React.Component {
                                         </span>}
                     >
                         {getFieldDecorator('files',
-                            {valuePropName: 'fileList',
-                            getValueFromEvent: this.normFile,
-                            initialValue: filesInitialValue }
+                            {
+                                valuePropName: 'fileList',
+                                getValueFromEvent: this.normFile,
+                                initialValue: filesInitialValue
+                            }
                         )
                             (
                             <Upload.Dragger name="files"
@@ -292,79 +340,7 @@ export class FormIntentAnswerBase extends React.Component {
                                 onChange={this.handleChange}
                                 method="post"
                                 action="/api/files"
-                                customRequest={
-                                    (argCR)=>{
-                                        this.setState({flagUploading: true}) ;
-                                        let fr = new FileReader() ;
-                                        fr.readAsDataURL( argCR.file );
-                                        fr.onerror = (errFR) => { console.log('...ERROR: FR: ',errFR) ; } ;
-                                        fr.onload  = () => {
-                                            let reqOptions = {
-                                                url: "/api/files",
-                                                method: 'POST',
-                                                withCredentials: true,
-                                                data: {
-                                                    idChatbot: this.props.chatbotConfig._id,
-                                                    name: argCR.file.name ,
-                                                    size: argCR.file.size ,
-                                                    type: argCR.file.type ,
-                                                    lastModified: argCR.file.lastModified ,
-                                                    data: fr.result
-                                                }
-                                            } ;
-                                            axios( reqOptions )
-                                                .then((respAXios)=>{
-                                                    //
-                                                    let tempFiles = this.props.form.getFieldValue('files') || [] ;
-                                                    let indFile   = tempFiles.findIndex((elemFF)=>{ return elemFF.name==respAXios.data.name ; }) ;
-                                                    respAXios.data.uid = respAXios.data._id ;
-                                                    respAXios.data.key = respAXios.data._id ;
-                                                    if ( indFile!=-1 ){
-                                                        tempFiles[ indFile ]   = respAXios.data ;
-                                                    } else {
-                                                        tempFiles.push( respAXios.data  ) ;
-                                                    }
-                                                    this.props.form.setFieldsValue({ 'files': tempFiles });
-                                                    this.setState({flagUploading: false}) ;
-                                                })
-                                                .catch((errText)=>{
-                                                    console.log('...ERROR: errText:: ',errText) ;
-                                                    this.setState({flagUploading: false}) ;
-                                                })
-                                        } ;
-                                        //
-                                    }
-                                }
-                                action333={(argFile)=>{
-                                    if (argFile){
-                                        this.setState({flagUploading: true}) ;
-                                        let tempFiles = this.props.form.getFieldValue('files') || [] ;
-                                        let indFile   = tempFiles.findIndex((elemFF)=>{ return elemFF.name==argFile.name ; }) ;
-                                        argFile.text()
-                                            .then((finText)=>{
-                                                let tempObjFile = {
-                                                    name: argFile.name ,
-                                                    size: argFile.size ,
-                                                    lastModified: argFile.lastModified ,
-                                                    type: argFile.type ,
-                                                    uid: argFile.uid ,
-                                                    data: "" ,
-                                                    flagNewFile: true
-                                                } ;
-                                                if ( indFile!=-1 ){
-                                                    tempFiles[ indFile ]   = tempObjFile ;
-                                                } else {
-                                                    tempFiles.push( tempObjFile  ) ;
-                                                }
-                                                this.props.form.setFieldsValue({ 'files': tempFiles });
-                                                this.setState({flagUploading: false}) ;
-                                            })
-                                            .catch((errText)=>{
-                                                console.log('....errText:: ',errText) ;
-                                                this.setState({flagUploading: false}) ;
-                                            }) ;
-                                    }
-                                }}
+                                customRequest={this.draggerCustomRequest}
                             >
                                 <p className="ant-upload-drag-icon"><Icon type="inbox" /></p>
                                 <p className="ant-upload-text">{this.props.translate.form.newFileClickDrag}</p>

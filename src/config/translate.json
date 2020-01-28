@@ -87,6 +87,8 @@
             "action":"Action"
         },
         "form":{
+            "optionsValueSelect":"Selecione uma intenção",
+            "optionsLabelToDisplay":"Option name to display",
             "checkAnswer":"Check Aswer Here",
             "subtitleBot":"Short description",
             "nameToDisplay":"Name to display",
@@ -241,6 +243,8 @@
             "action":"Acción"
         },
         "form":{
+            "optionsValueSelect":"Eljia una intención",
+            "optionsLabelToDisplay":"Nombre de apción a mostrar",
             "checkAnswer":"Revisar respuesta aqui",
             "subtitleBot":"Descripción breve",
             "nameToDisplay":"Nombre a mostrar",
@@ -431,6 +435,8 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
+            "optionsValueSelect":"",
+            "optionsLabelToDisplay":"Nome da opção a ser exibida",
             "checkAnswer":"Verifique a resposta aqui",
             "subtitleBot":"Pequena descrição",
             "nameToDisplay":"Nome a ser exibido",

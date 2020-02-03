@@ -3,7 +3,6 @@
 */
 const path                        = require('path');
 const webpack                     = require("webpack");
-// const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 const CompressionPlugin           = require('compression-webpack-plugin');

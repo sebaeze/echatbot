@@ -6,7 +6,8 @@ import axios                                             from 'axios' ;
 import { Button, Form, Input, Tooltip, Icon,  Select, Upload, Spin, message  }   from 'antd'  ;
 // import Picker                                            from 'emoji-picker-react' ;
 import { Picker }                                        from 'emoji-mart' ;
-import { FormDynamicInputOption }                        from  './FormDynamicInputOption' ;
+import { FormDynamicInputOption }                        from './FormDynamicInputOption' ;
+import { InputTextAnswer }                               from '../input/InputTextEmojiAttachment' ;
 //
 import 'emoji-mart/css/emoji-mart.css'
 //
@@ -29,7 +30,6 @@ export class FormIntentAnswerBase extends React.Component {
         this.state              = {
             flagSpinner:false,
             fieldPanel: this.props.data.intentAnswer.type || this.answerTypes.TEXT,
-            flagPicker: false,
             flagUploading: false
         } ;
         this.inputText          = false ;
@@ -244,42 +244,16 @@ export class FormIntentAnswerBase extends React.Component {
                                     <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
                                 </span>}
                     >
-                        {
-                            getFieldDecorator('text', {
-                                initialValue: this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||'',
-                                rules: [{ required: this.state.fieldPanel==this.answerTypes.TEXT? true : false , message: this.props.translate.form.errorAnswerText, whitespace: true }]
-                            })
-                            (
-                                    <Input.TextArea allowClear size="large"
-                                        className="waiboc-cl-input-with-emoticon"
-                                        autoSize={{ minRows: 1, maxRows: 4 }}
-                                        prefix={
-                                            <span className="waiboc-span-emoticon"
-                                                    onClick={(argEEV)=>{
-                                                        argEEV.preventDefault() ;
-                                                        let tempFlagEmo = !this.state.flagPicker ;
-                                                        this.setState({flagPicker: tempFlagEmo}) ;
-                                                    }}
-                                            >
-                                                { this.state.flagPicker==true ? "⌨️" : "😀" }
-                                            </span>
-                                        }
-                                        ref={(argRef)=>{ if ( this.inputText==false && argRef ){ this.inputText=argRef; } ; if (argRef){argRef.focus()} }}
-                                    />
-                            )
-                        }
-                        <span className="waiboc-span-emoticon"
-                                onClick={(argEEV)=>{
-                                    argEEV.preventDefault() ;
-                                    let tempFlagEmo = !this.state.flagPicker ;
-                                    this.setState({flagPicker: tempFlagEmo}) ;
-                                }}
-                        >
-                            { this.state.flagPicker==true ? "⌨️" : "😀" }
-                        </span><br/>
-                        {
-                            this.state.flagPicker==true ? <Picker onSelect={this.onEmojiClick} title={'Emojis'} i18n={this.props.translate.i18n} /> : null
-                        }
+                        <InputTextAnswer
+                            fieldName={"text"}
+                            form={this.props.form}
+                            errorMsg={this.props.translate.form.errorAnswerText}
+                            customStyle={{width:'450px'}}
+                            initialValue={this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||''}
+                            onChangeValue={(argEE)=>{
+                                this.props.form.setFieldsValue({ 'text': argEE.target.value||'' });
+                            }}
+                        />
                     </Form.Item>
                     {
                         this.state.fieldPanel==this.answerTypes.OPTIONS ?

@@ -71,6 +71,7 @@ module.exports = {
   resolveLoader: {
     modules: [ path.join(__dirname,'../node_modules') ]
   },
+  /*
   optimization: {
 		splitChunks: {
 			cacheGroups: {
@@ -82,6 +83,33 @@ module.exports = {
 			}
 		}
   },
+  */
+  optimization: {
+    runtimeChunk: 'single',
+      splitChunks: {
+        chunks: 'all',
+        maxInitialRequests: Infinity,
+        minSize: 0,
+        cacheGroups: {
+          reactVendor: {
+            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            name: "reactvendor"
+          },
+          utilityVendor: {
+            test: /[\\/]node_modules[\\/](lodash|moment|moment-timezone)[\\/]/,
+            name: "utilityVendor"
+          },
+          antdVendor: {
+            test: /[\\/]node_modules[\\/](antd)[\\/]/,
+            name: "antdVendor"
+          },
+          vendor: {
+             test: /[\\/]node_modules[\\/](!antd)(!lodash)(!moment)(!moment-timezone)[\\/]/,
+          name: "vendor"
+        },
+        },
+      },
+    },
   plugins: [
       new webpack.DefinePlugin({
         '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),

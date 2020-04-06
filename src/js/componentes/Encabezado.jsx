@@ -73,7 +73,7 @@ export class Encabezado extends Component {
             <Col xs={10} md={10} lg={6} xl={4} xxl={4}  >
               <LogoEmpresa />
             </Col>
-            <Col  xs={13} md={13} lg={16} xl={20} xxl={20} >
+            <Col  xs={13} md={13} lg={19} xl={19} xxl={19} >
                 {this.state.isMobile ?
                     <Popover placement="bottomRight" title={false}
                              content={ <NavMenu userInfo={this.state.userInfo} translate={this.props.translate} isMobile={this.state.isMobile} /> } trigger="click"

@@ -155,8 +155,8 @@ class FormContacto extends React.Component {
                             this.state.flagSpinner==true ?
                                 <Spin size="large" />
                                 :
-                                <Button type="primary" htmlType="submit" style={{padding:'0',margin:'0',width:'100px'}} >
-                                    Enviar
+                                <Button type="primary" size="large" htmlType="submit" >
+                                    {this.props.translate.contactUs}
                                 </Button>
                         }
                     </Form.Item>

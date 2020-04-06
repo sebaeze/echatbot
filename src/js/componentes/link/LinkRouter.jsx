@@ -5,21 +5,25 @@ import React                                    from 'react' ;
 import ReactDOM                                 from 'react-dom' ;
 import { withRouter }                           from "react-router-dom" ;
 import ScrollAnim                               from 'rc-scroll-anim' ;
+import { HashLink }                             from 'react-router-hash-link';
 import { PARAMETROS }                           from '../../utils/parametros' ;
 //
-const { Link }             = ScrollAnim ;
+const { Link }     = ScrollAnim ;
 //
 class LinkRouter  extends React.Component {
     //
     constructor(props){
         super(props) ;
         this.state       = {
+            fullUrl: this.props.url,
             url: this.props.url ,
             hasHash: false,
             hash: ""
         } ;
-        this.refLinkHash = false ;
+        this.refLinkwithHash = false ;
+        this.refAnimatedLink = false ;
         this.refLink     = this.refLink.bind(this) ;
+        this.refHashLink = this.refHashLink.bind(this) ;
         this.onClickLink = this.onClickLink.bind(this) ;
     } ;
     //
@@ -41,21 +45,37 @@ class LinkRouter  extends React.Component {
     }
     //
     refLink(argRef){
-        if ( argRef && this.refLinkHash==false ){
-            this.refLinkHash = ReactDOM.findDOMNode( argRef ) ;
+        if ( argRef && this.refAnimatedLink==false ){
+            this.refAnimatedLink = ReactDOM.findDOMNode( argRef ) ;
         }
     }
     //
+    refHashLink(argRef){
+        if ( argRef && this.refLinkwithHash==false ){
+            this.refLinkwithHash = ReactDOM.findDOMNode( argRef ) ;
+        }
+    }
+    // <LinkWithHash {...this.state} ref={this.refHashLink} >{this.props.children}</LinkWithHash>
     onClickLink(argEE){
         try {
             if ( process.env.APP_ID==PARAMETROS.APP_ID.HOME ){
+                //console.log('....hashash: ',this.state.hasHash,' hash: ',this.state.hash,' url: ',this.state.url,' pathna: ',window.location.pathname) ;
                 if ( this.state.url==window.location.pathname && this.state.hasHash==true ){
-                    this.refLinkHash.click() ;
+                    this.refAnimatedLink.click() ;
                 } else {
-                    this.props.history.push( this.state.url ) ;
+                    let tempUrl = this.state.url + ( this.state.hasHash==true ? "#"+this.state.hash : "" ) ;
+                    //console.log('...this.props.history: ',this.props.history,' push: ',this.props.history.push) ;
+                    //this.props.history.push( tempUrl ) ;
+                    this.refLinkwithHash.click() ;
+                    if ( this.state.fullUrl.indexOf("#")==-1 ){
+                        setTimeout(() => {
+                            window.scrollTo({top: 0, behavior: 'smooth'});
+                        }, 300 );
+                    }
                 }
             } else {
-                window.location.href = this.state.url ;
+                let tempUrl = this.state.url + ( this.state.hasHash==true ? "/#"+this.state.hash : "" ) ;
+                window.location.href = tempUrl ;
             }
         } catch(errOCL){
             console.log('ERROR: ',errOCL) ;
@@ -65,14 +85,25 @@ class LinkRouter  extends React.Component {
     render(){
         return(
             <div rel="noopener noreferrer"  >
-                <Link style={{display:'none'}} ease={"easeOutCirc"} offsetTop={80} toHash={false} to={ this.state.hash }
-                      ref={this.refLink}
-                >
-                    {this.props.children}
-                </Link>
+                {
+                    this.state.hasHash
+                        ?   <Link style={{display:'none'}} ease={"easeOutCirc"} offsetTop={80} toHash={false} to={ this.state.hash }
+                                    ref={this.refLink}
+                            >
+                                {this.props.children}
+                            </Link>
+                        :   null
+                }
                 <a onClick={this.onClickLink} rel="noopener noreferrer" >
                     {this.props.children}
                 </a>
+                <HashLink   to={this.state.fullUrl} style={{display:'none'}}
+                            scroll={ (el) => { el.scrollIntoView({ behavior: 'smooth', block: 'start' }) ; }}
+                >
+                    <div ref={this.refHashLink}>
+                        {this.props.children}
+                    </div>
+                </HashLink>
             </div>
         )
     }

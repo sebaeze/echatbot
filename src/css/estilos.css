@@ -1,6 +1,22 @@
 /*
 *
 */
+:root {
+    --font-color-important: #002DFF ;
+}
+header li.ant-menu-item {
+    height: 100% ;
+}
+header li.ant-menu-item a {
+    color: var(--font-color-important) ;
+    display: block ;
+    width: 100% ;
+    height: 100% ;
+}
+header li.ant-menu-item a:hover {
+    text-decoration: none !important ;
+    border-bottom: none !important ;
+}
 a:hover {
     text-decoration: none ;
     border-bottom: 0.5px dotted grey ;

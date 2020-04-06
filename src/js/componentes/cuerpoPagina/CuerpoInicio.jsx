@@ -2,37 +2,21 @@
 *
 */
 import React                              from 'react'  ;
+import Fade                               from 'react-reveal/Fade'  ;
 import { Row, Col }                       from 'antd'   ;
 import { Carousel, Button }               from 'antd'   ;
 import AnimacionInicial                   from '../animacion/AnimacionInicial' ;
 import { AnimacionCarousel }              from '../animacion/AnimacionCarousel' ;
 import AnimacionLogo                      from '../animacion/AnimacionLogo'    ;
-import FormContacto                       from "../formularios/FormContacto" ;
+import FormContacto                       from "../formularios/FormContacto"   ;
 import { InicioEncabezado }               from  '../inicio/InicioEncabezado'   ;
 import { InicioPorque  }                  from  '../inicio/InicioPorque'       ;
 //
 export class CuerpoInicio extends React.Component {
   constructor(props) {
     super(props)  ;
-    this.state         = { isMobile: (window.innerWidth<797), showDivPorque:false } ;
     this.idDivWhyUs    = "waiboc-header-whyus" ;
     this.divPorque     ;
-  }
-  //
-  componentDidMount(){
-    try {
-      document.addEventListener('scroll',function(argEvenSCroll){
-        let scrollPos = document.body.scrollTop || document.documentElement.scrollTop || 9999 ;
-        if ( scrollPos>300 ){
-          this.setState({showDivPorque:true})  ;
-        } else {
-          this.setState({showDivPorque:false})  ;
-        }
-      }.bind(this)) ;
-      //
-    } catch(errHeader){
-      console.dir(errHeader) ;
-    }
   }
   //
   render() {

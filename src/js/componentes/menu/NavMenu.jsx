@@ -62,19 +62,27 @@ class NavMenu extends React.Component {
                     }
                     <Menu.Item key="2">
                         <LinkRouter  url={"/#contact"} >
-                            <Icon type="mail" /> {this.props.translate.contact}
+                            {this.props.translate.contact}
                         </LinkRouter>
                     </Menu.Item>
                     <Menu.Item key="3">
                         <LinkRouter  url={"/about"} >
-                            <Icon type="user" /> {this.props.translate.about}
+                            {this.props.translate.about}
                         </LinkRouter>
                     </Menu.Item>
-                    <Menu.Item key="4"><a rel="noopener noreferrer" href="/services"      >{this.props.translate.services}</a></Menu.Item>
-                    <Menu.Item key="5"><a rel="noopener noreferrer" href="/prices"        >{this.props.translate.prices}</a></Menu.Item>
+                    <Menu.Item key="4">
+                        <LinkRouter  url={"/services"} >
+                            {this.props.translate.services}
+                        </LinkRouter>
+                    </Menu.Item>
+                    <Menu.Item key="5">
+                        <LinkRouter  url={"/prices"} >
+                            {this.props.translate.prices}
+                        </LinkRouter>
+                    </Menu.Item>
                     {
                         this.props.userInfo==false ?
-                            <Menu.Item key="7" className="li-no-hover" style={{height:'60px'}}>
+                            <Menu.Item key="7" className="li-no-hover" >
                                 <Button  type="primary" block
                                         className="btn-shadow-login"
                                         onClick={(argEV)=>{argEV.preventDefault();location.href="/account";}}

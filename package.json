@@ -63,6 +63,7 @@
     "react-dom": "^16.8.6",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^5.0.1",
+    "react-router-hash-link": "^1.2.2",
     "react-spinners": "^0.5.4",
     "react-syntax-highlighter": "^12.2.1",
     "react-visibility-sensor": "^5.1.1",
@@ -73,7 +74,7 @@
     "webpack": "^4.30.0"
   },
   "scripts": {
-    "build:home":  "webpack   --mode production  --config ./build_config/webpack-prod-website.js",
+    "build:home": "webpack   --mode production  --config ./build_config/webpack-prod-website.js",
     "build:admin": "webpack   --mode production  --config ./build_config/webpack-prod-admin.js",
     "react:test": "webpack   --mode development --config ./build_config/webpack-dev-test.js",
     "start": "babel-node ./server/server.js",
@@ -83,7 +84,7 @@
     "start:node": "nodemon --exec babel-node ./server/server.js",
     "start:home": "webpack-dev-server --config ./build_config/webpack-dev-website.js",
     "start:admin": "webpack-dev-server --config ./build_config/webpack-dev-admin.js",
-    "start:test":  "webpack-dev-server --config ./build_config/webpack-dev-test.js"
+    "start:test": "webpack-dev-server --config ./build_config/webpack-dev-test.js"
   },
   "browserslist": [
     ">0.2%",

@@ -5,34 +5,13 @@ import React                                                    from 'react' ;
 import { Row, Col, Spin, Form, Input, Button, Tooltip, Icon, Modal }   from 'antd'  ;
 import { enviarConsulta }                                       from '../../api/api' ;
 //
-import '../../../css/estilosContacto.css' ;
-//
 class FormContacto extends React.Component {
     constructor(props){
         super(props) ;
         this.state            = {flagSpinner:false, flagEnviada: false, flagPantContacto:((this.props.match && this.props.match.isExact) ? true : false )} ;
-        this.onSubmitConsulta = this.onSubmitConsulta.bind(this) ;
+        this.onSubForm        = this.onSubForm.bind(this)        ;
         this.onClickOkModal   = this.onClickOkModal.bind(this)   ;
         this.onclickCancel    = this.onclickCancel.bind(this)    ;
-    }
-    //
-    componentWillMount(){}
-    //
-    onSubmitConsulta(argEventCont){
-        try {
-            argEventCont.preventDefault() ;
-            //
-            console.log('....onSubmitConsulta:: ') ;
-            let arrayInputForm = argEventCont.target.querySelectorAll('input,textarea') ;
-            let objForm        = {} ;
-            arrayInputForm.forEach((elemInp)=>{
-                objForm[ elemInp.id ] = elemInp.value || elemInp.textContent || elemInp.innerHTML || false ;
-            }) ;
-            console.dir(objForm) ;
-            //
-        } catch(argEventCont){
-            console.dir(argEventCont) ;
-        }
     }
     //
     onClickOkModal(argClickOk){
@@ -43,13 +22,11 @@ class FormContacto extends React.Component {
         this.setState({flagEnviada:false}) ;
     } ;
     //
-    render(){
-        //
-        const { getFieldDecorator, getFieldError } = this.props.form ;
-        let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'140px'} : {} ;
-        //
-        const onSubmit = (e) => {
-            e.preventDefault();
+    onSubForm(argEE) {
+        try {
+            //
+            if ( argEE && argEE.preventDefault ){ argEE.preventDefault(); }
+            //
             this.setState({flagSpinner:true}) ;
             this.props.form.validateFields({ force: true }, (error) => {
               if (error) {
@@ -59,8 +36,6 @@ class FormContacto extends React.Component {
                   //return null;
               } else {
                 //this.setState({flagSpinner:false}) ;
-                console.dir(this.props.form.getFieldsValue()) ;
-                console.log('.....valid:: parece que anda bien ***') ;
                 enviarConsulta( this.props.form.getFieldsValue() )
                     .then((respCC)=>{
                         console.log('....consulta enviada ok') ;
@@ -76,12 +51,27 @@ class FormContacto extends React.Component {
                 this.setState({flagSpinner:false}) ;
               }, 700 );
               //
-            });
-          };
+            }) ;
+            //
+        } catch(errSF){
+            console.dir(errSF) ;
+        }
+    } ;
+    //
+    render(){
+        //
+        const { getFieldDecorator, getFieldError } = this.props.form ;
+        let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'140px'} : {} ;
+        if ( this.props.customStyle ){
+            estiloForm = {
+                ...estiloForm,
+                ...this.props.customStyle
+            }
+        }
         //
         return(
             //
-            <Row  className="waiboc-cl-form" >
+            <Row  className="waiboc-cl-form" id="contact" >
                 <Col xs={3}  md={3}  lg={6} xl={6}></Col>
                 <Col xs={16} md={16} lg={12} xl={12}>
                     <Modal
@@ -101,7 +91,7 @@ class FormContacto extends React.Component {
                         <Icon type="check-circle" theme="twoTone" twoToneColor="#52c41a" style={{fontSize:'32px'}} />
                         <span style={{fontSize:'32px'}} >Perfecto!</span>
                     </Modal>
-                    <Form onSubmit={onSubmit} style={ {...estiloForm} }
+                    <Form onSubmit={this.onSubForm} style={ {...estiloForm} }
                     >
                     <Form.Item
                         label={
@@ -115,7 +105,7 @@ class FormContacto extends React.Component {
                     >
                         {getFieldDecorator('nombre', {
                             rules: [{ required: true, message: 'Por favor, escriba su nombre', whitespace: true }],
-                        })(<Input />)}
+                        })(<Input size="large"  />)}
                     </Form.Item>
                     <Form.Item label="E-mail">
                         {getFieldDecorator('email', {
@@ -130,7 +120,7 @@ class FormContacto extends React.Component {
                             },
                             ],
                         }
-                        )(<Input />)}
+                        )(<Input size="large" />)}
                     </Form.Item>
                     <Form.Item
                         label={
@@ -144,7 +134,7 @@ class FormContacto extends React.Component {
                     >
                     {getFieldDecorator('telefono', {
                         rules: [{ required: false, message: 'Ingrese su número de Whatsapp / teléfono si desea recibir respuesta por Whatsapp / Teléfono ' }],
-                    })(<Input style={{ width: '100%' }} />)}
+                    })(<Input size="large" style={{ width: '100%' }} />)}
                     </Form.Item>
                     <Form.Item
                         label={
@@ -158,7 +148,7 @@ class FormContacto extends React.Component {
                     >
                         {getFieldDecorator('mensaje', {
                             rules: [{ required: true, message: 'Por favor, escriba su mensaje', whitespace: true }],
-                        })(<Input.TextArea />)}
+                        })(<Input.TextArea size="large" />)}
                     </Form.Item>
                     <Form.Item>
                         {

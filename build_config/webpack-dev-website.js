@@ -6,6 +6,7 @@ const webpack                     = require("webpack");
 const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
+const APP_ID                      = require('./config.js').APP_ID ;
 //
 // import { HASH_VERSION }      from './defineHash' ;
 const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
@@ -75,9 +76,9 @@ module.exports = {
   },
   devServer: {
     port: 9000,
-    open: true,
-    hot: true,
-    host: '0.0.0.0',
+    // open: true,
+    // hot: true,
+    // host: '0.0.0.0',
     proxy: {
         "/": "http://localhost:3000"
     },
@@ -107,6 +108,8 @@ module.exports = {
       }),
       new HtmlWebpackPrefixPlugin(),
       new webpack.DefinePlugin({
+        'process.env.AMBIENTE': JSON.stringify(process.env.AMBIENTE),
+        'process.env.APP_ID': JSON.stringify( APP_ID.HOME ),
         '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),
         '__URL_WIDGET__': JSON.stringify(HASH_VERSION.URLbackend),
         '__ID_WIDGET__': JSON.stringify(HASH_VERSION.IDwidget)

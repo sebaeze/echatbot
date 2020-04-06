@@ -1,15 +1,17 @@
 /*
 *
 */
-import React, { Component }               from 'react'  ;
+import React                              from 'react'  ;
+import { Row, Col }                       from 'antd'   ;
 import { Carousel, Button }               from 'antd'   ;
 import AnimacionInicial                   from '../animacion/AnimacionInicial' ;
 import { AnimacionCarousel }              from '../animacion/AnimacionCarousel' ;
 import AnimacionLogo                      from '../animacion/AnimacionLogo'    ;
+import FormContacto                       from "../formularios/FormContacto" ;
 import { InicioEncabezado }               from  '../inicio/InicioEncabezado'   ;
 import { InicioPorque  }                  from  '../inicio/InicioPorque'       ;
 //
-export class CuerpoInicio extends Component {
+export class CuerpoInicio extends React.Component {
   constructor(props) {
     super(props)  ;
     this.state         = { isMobile: (window.innerWidth<797), showDivPorque:false } ;
@@ -48,10 +50,11 @@ export class CuerpoInicio extends Component {
                 <InicioPorque  translate={this.props.translate}
                                configuracion={this.props.configuracion}
                                id={this.idDivWhyUs}
-                               siguienteDiv={"waiboc-header-whyus"}
+                               siguienteDiv={"contact"}
                                //flagShowDiv={ this.state.showDivPorque }
                 />
               </div>
+              <FormContacto translate={this.props.translate} configuracion={this.props.configuracion} customStyle={{marginTop:'110px'}} />
           </div>
       )
       //

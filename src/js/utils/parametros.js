@@ -1,7 +1,10 @@
 /*
 *
 */
+import { APP_ID }      from '../../../build_config/config' ;
+//
 export const PARAMETROS = {
+    APP_ID: { ...APP_ID },
     SESSION:{
         USUARIO:'USER_SESSION',
         TIEMPO_SINCRONIZACION_MINUTOS: 30,

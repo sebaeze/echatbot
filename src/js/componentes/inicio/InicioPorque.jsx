@@ -44,11 +44,13 @@ export class InicioPorque extends React.Component {
                     let currentId = this.props.id+elemIdx ;
                     let nextId    = (elemIdx<(this.props.translate.HomeWhy.length-1)) ? this.props.id+(elemIdx+1)  : false ;
                     //
+                    /*
                     if ( !this.state.divFade[currentId] ){
                         let tempState = this.state ;
                         tempState.divFade[currentId] = 'fadeOut' ;
                         this.setState(tempState) ;
                     }
+                    */
                     //
                     return(
                         <VisibilitySensor

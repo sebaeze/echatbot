@@ -2,8 +2,9 @@
 *
 */
 import React, { Component }                          from 'react' ;
-import { Layout, Menu, Breadcrumb, Icon, Dropdown }  from 'antd' ;
-import { Row, Col, Popover }                         from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Dropdown }  from 'antd'  ;
+import { Row, Col, Popover }                         from 'antd'  ;
+import { BackTop }                                   from 'antd'  ;
 //
 import NavMenu                             from './menu/NavMenu' ;
 import {LogoEmpresa}                       from './link/LogoEmpresa'  ;
@@ -65,6 +66,9 @@ export class Encabezado extends Component {
       //
       return (
         <Header className={"header"+(this.state.flagScroll==true ? " shadow-below " : "" )} theme="light" style={styleHeader} >
+          <BackTop>
+              <div className="ant-back-top-inner"><Icon type="arrow-up" /></div>
+          </BackTop>
           <Row>
             <Col xs={10} md={10} lg={6} xl={4} xxl={4}  >
               <LogoEmpresa />

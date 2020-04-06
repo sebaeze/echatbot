@@ -3,7 +3,8 @@
 */
 import React                             from 'react' ;
 import { Menu, Button, Icon }            from 'antd'  ;
-import { api        }                    from '../../api/api' ;
+import LinkRouter                        from '../link/LinkRouter' ;
+import { api        }                    from '../../api/api'      ;
 import { PARAMETROS }                    from '../../utils/parametros' ;
 //
 const { SubMenu } = Menu ;
@@ -41,7 +42,11 @@ class NavMenu extends React.Component {
                                 </span>
                                 }
                             >
-                                <Menu.Item key="5"><a href={"/account/"+PARAMETROS.FORM.CHATBOTS} ><Icon type="robot" />Chatbots</a></Menu.Item>
+                                <Menu.Item key="5">
+                                    <LinkRouter  url={"/account/"+PARAMETROS.FORM.CHATBOTS} >
+                                        <Icon type="robot" />Chatbots
+                                    </LinkRouter>
+                                </Menu.Item>
                                 <Menu.Item key="6"><a href={"/account/"+PARAMETROS.FORM.USER_INFO}><Icon type="profile" />{this.props.translate.myProfile}</a></Menu.Item>
                                 <Menu.Item key="7">
                                     <a  onClick={(argEVC)=>{
@@ -55,8 +60,16 @@ class NavMenu extends React.Component {
                                 </Menu.Item>
                             </SubMenu>
                     }
-                    <Menu.Item key="2"><a rel="noopener noreferrer" href="/contact"       >{this.props.translate.contact}</a> </Menu.Item>
-                    <Menu.Item key="3"><a rel="noopener noreferrer" href="/about"         >{this.props.translate.about}</a></Menu.Item>
+                    <Menu.Item key="2">
+                        <LinkRouter  url={"/#contact"} >
+                            <Icon type="mail" /> {this.props.translate.contact}
+                        </LinkRouter>
+                    </Menu.Item>
+                    <Menu.Item key="3">
+                        <LinkRouter  url={"/about"} >
+                            <Icon type="user" /> {this.props.translate.about}
+                        </LinkRouter>
+                    </Menu.Item>
                     <Menu.Item key="4"><a rel="noopener noreferrer" href="/services"      >{this.props.translate.services}</a></Menu.Item>
                     <Menu.Item key="5"><a rel="noopener noreferrer" href="/prices"        >{this.props.translate.prices}</a></Menu.Item>
                     {

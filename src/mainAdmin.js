@@ -47,8 +47,8 @@ export class App extends React.Component {
     //
     return (
       <Layout id="waiboc-main-node" style={{ background: '#fff',padding: '0' }}>
-          <Encabezado translate={{...languageLocale()}} />
           <Router>
+            <Encabezado translate={{...languageLocale()}} />
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
               <Route exact path="/account"               component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/account/:seccion"      component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
@@ -59,8 +59,8 @@ export class App extends React.Component {
               <Route exact path="/edit/:idChatbot"       component={(argMach) => <CuerpoEditBot translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/404"                   component={(argMach) => <NoEncontrado404  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
             </Content>
+            <PiePagina translate={{...languageLocale()}} configuracion={configApp} />
           </Router>
-          <PiePagina translate={{...languageLocale()}} configuracion={configApp} />
       </Layout>
     )
   }

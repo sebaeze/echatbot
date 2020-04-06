@@ -8,6 +8,7 @@ const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 const CompressionPlugin           = require('compression-webpack-plugin');
 const BrotliPlugin                = require('brotli-webpack-plugin');
+const APP_ID                      = require('./config.js').APP_ID ;
 //
 const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
 console.log('Hash Version: ',HASH_VERSION,';');
@@ -114,6 +115,8 @@ module.exports = {
   plugins: [
       new CopyWebpackPlugin([{from: 'src/img',to: 'img'},{from: 'src/css',to: 'css'}]),
       new webpack.DefinePlugin({
+        'process.env.AMBIENTE': JSON.stringify(process.env.AMBIENTE),
+        'process.env.APP_ID': JSON.stringify( APP_ID.HOME ),
         '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),
         '__URL_WIDGET__': JSON.stringify(HASH_VERSION.URLbackend),
         '__ID_WIDGET__': JSON.stringify(HASH_VERSION.IDwidget)

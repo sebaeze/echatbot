@@ -27,7 +27,7 @@ module.exports.autenticado = (argDb) => {
             }
         } else {
             let reqContenttype = req.headers['accept'] || req.headers['content-type'] || 'html' ;
-            console.log(new Date().toISOString()+'......reqContenttype: '+reqContenttype+' originalUrl: '+req.originalUrl+' req.url: '+req.url+' usuario not-logged') ;
+            // console.log(new Date().toISOString()+'......reqContenttype: '+reqContenttype+' originalUrl: '+req.originalUrl+' req.url: '+req.url+' usuario not-logged') ;
             //
             /*
             var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;

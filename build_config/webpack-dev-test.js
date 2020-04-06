@@ -80,6 +80,8 @@ module.exports = {
   },
   plugins: [
       new webpack.DefinePlugin({
+        'process.env.AMBIENTE': JSON.stringify(process.env.AMBIENTE),
+        'process.env.APP_ID': JSON.stringify( APP_ID.ADMIN ),
         '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),
         '__URL_WIDGET__': JSON.stringify(HASH_VERSION.URLbackend),
         '__ID_WIDGET__': JSON.stringify(HASH_VERSION.IDwidget)

@@ -1,5 +1,8 @@
 {
     "EN":{
+        "navigation":{
+            "home":"Home"
+        },
         "integration":"Integration",
         "copied":"Successfully copied to clipboard",
         "checkWidgetCode":"Link to Widget",
@@ -72,6 +75,7 @@
             "websiteDomains":"Input the url of your website / s, for example: www.mywebsite.com"
         },
         "table":{
+            "systemDefined":"System",
             "lastUpdate":"Last Update",
             "usageQuantity":"Usage quantity",
             "intent":"Intent",
@@ -161,6 +165,9 @@
         ]
     },
     "ES":{
+        "navigation":{
+            "home":"Inicio"
+        },
         "integration":"Integración",
         "copied":"Copiado al portapapeles",
         "checkWidgetCode":"Enlace a Widget",
@@ -228,6 +235,7 @@
             "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: www.mywebsite.com"
         },
         "table":{
+            "systemDefined":"Sistema",
             "lastUpdate":"Última Modificación",
             "usageQuantity":"Cantidad de usos",
             "intent":"Intención",
@@ -363,6 +371,9 @@
         ]
     },
     "PT":{
+        "navigation":{
+            "home":"Inicio"
+        },
         "integration":"Integração",
         "copied":"Copiado com êxito para a área de transferência",
         "checkWidgetCode":"Link para o Widget",
@@ -492,6 +503,7 @@
             "changesSaved":"As alterações foram salvas"
         },
         "table":{
+            "systemDefined":"Sistema",
             "lastUpdate":"Última atualização",
             "usageQuantity":"Quantidade de uso",
             "intent":"Intenção",

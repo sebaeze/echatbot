@@ -4,6 +4,7 @@
 import React                                           from 'react' ;
 import { Table, Typography, Input, Button, Icon }      from 'antd'  ;
 import { Popconfirm, Row, Col, Popover, notification } from 'antd'  ;
+import { Tooltip }                                     from 'antd'  ;
 import { api }                                      from '../../api/api' ;
 import { FormNewChatbot }                           from '../formularios/FormNewChatbot' ;
 import { CuerpoEditBot  }                           from "../cuerpoPagina/CuerpoEditBot" ;
@@ -302,11 +303,20 @@ export class TablaChatbots extends React.Component {
         //
         let arrayDatos = [] ;
         if ( this.state.textBusqueda.length==0 ){
-            arrayDatos = this.state.arrayChatbots ;
+            arrayDatos = this.state.arrayChatbots.map((elemE,idxE)=>{
+                return({
+                    ...elemE,
+                    key: idxE
+                }) ;
+            }) ;
         } else {
-            this.state.arrayChatbots.forEach((elemTC)=>{
+            this.state.arrayChatbots.forEach((elemTC,idxE)=>{
                 if ( Object.values(elemTC).join("").toUpperCase().indexOf(this.state.textBusqueda.toUpperCase())!=-1 ){
-                    arrayDatos.push( elemTC ) ;
+                    // arrayDatos.push( elemTC ) ;
+                    arrayDatos.push({
+                        ...elemTC,
+                        key: idxE
+                    }) ;
                 }
             }) ;
         }
@@ -323,39 +333,40 @@ export class TablaChatbots extends React.Component {
                         />
                         :
                         <div>
-                            <div style={{width:'100%',marginTop:'5px',marginBottom:'5px'}}>
-                                <Row>
-                                    <Col xs={24} md={24} lg={8} xl={8} xxl={8} >
-                                        <Input  allowClear
-                                                size="large"
-                                                placeholder={this.props.translate.search}
-                                                onChange={this.onChangeSearch}
-                                                style={{height:'100%', width:'100%', marginLeft:'10px'}}
-                                        />
-                                    </Col>
-                                    <Col xs={24} md={24} lg={8} xl={8} xxl={8} >
-                                        <Button type="primary"
-                                                size={"large"} className="btn-edit-menu"
-                                                onClick={this.onClickCreateNewChatbot}
-                                                style={{width:'80%',marginTop:'3px',marginLeft:'20px'}}
-                                        >
-                                            {this.props.translate.newChatbot}
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </div>
-                            <Table
-                                loading={this.state.flagSpinner}
-                                columns={this.state.columnas}
-                                dataSource={ arrayDatos }
-                                rowKey="_id"
-                                style={{marginLeft:'10px'}}
-                                pagination={{position:'bottom'}}
-                                onChange={this.onChange.bind(this)}
-                                bordered
-                                locale={this.props.translate}
-                                scroll={{ x: 1500 }}
-                            />
+                            <Row style={{paddingTop:'5px',paddingBottom:'5px'}} >
+                                <Col xs={24} md={24} lg={8} xl={8} xxl={8} >
+                                    <Input  allowClear
+                                            size="large"
+                                            placeholder={this.props.translate.search}
+                                            onChange={this.onChangeSearch}
+                                            style={{height:'100%', width:'100%', marginLeft:'10px'}}
+                                    />
+                                </Col>
+                                <Col xs={24} md={24} lg={8} xl={8} xxl={8} >
+                                    <Button type="primary"
+                                            size={"large"}
+                                            //className="btn-edit-menu"
+                                            onClick={this.onClickCreateNewChatbot}
+                                            style={{width:'80%',marginLeft:'20px'}}
+                                    >
+                                        {this.props.translate.newChatbot}
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <Row style={{paddingTop:'5px',paddingBottom:'5px'}} >
+                                <Table
+                                    loading={this.state.flagSpinner}
+                                    columns={this.state.columnas}
+                                    dataSource={ arrayDatos }
+                                    rowKey="_id"
+                                    style={{marginLeft:'10px'}}
+                                    pagination={{position:'bottom'}}
+                                    onChange={this.onChange.bind(this)}
+                                    bordered
+                                    locale={this.props.translate}
+                                    scroll={{ x: 1500 }}
+                                />
+                            </Row>
                             {
                                 this.state.modalVisible==true ?
                                     <FormNewChatbot

@@ -11,7 +11,6 @@ export class BotonMenuResponsive extends Component {
     render(){
         return(
             <i aria-label="icon: menu" tabIndex="-1" className="anticon anticon-menu nav-phone-icon"
-                style={{float:'right',marginRight:'25px',marginTop:'35px',border: '1px solid gray', padding: '2.5px 2.5px 2.5px 2.5px' }}
                 onClick={ this.props.onClick }
             >
                 <svg viewBox="64 64 896 896" focusable="false" className="" data-icon="menu" width="2.5em" height="2.5em" fill="currentColor" aria-hidden="true">

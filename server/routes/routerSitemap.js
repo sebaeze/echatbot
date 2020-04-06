@@ -14,8 +14,7 @@ const sitemapArray = (argObjetoCategoriasMarcas) => {
             { url: '/productos/'   ,  changefreq: 'daily'  , priority: 0.5 },
             { url: '/sindoh/'      ,  changefreq: 'monthly', priority: 0.7 },
             { url: '/sitemapHtml/' ,  changefreq: 'weekly' , priority: 0.7 },
-            { url: '/#contact'     ,  changefreq: 'monthly', priority: 0.7 },
-            { url: '/#dondeEstamos',  changefreq: 'monthly', priority: 0.7 }
+            { url: '/#contact'     ,  changefreq: 'monthly', priority: 0.7 }
         ] ;
         //
         let arrayCategorias = Object.values(argObjetoCategoriasMarcas.categorias) ;

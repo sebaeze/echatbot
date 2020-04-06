@@ -17,8 +17,8 @@ export class CuerpoLogin extends React.Component {
                         {width:'130px',height:'130px',marginTop:'20px'} : {width:'180px',height:'160px',marginTop:'20px'} ;
         //
         return(
-            <div style={{paddingTop:'100px',minHeight:'110vh'}}  className="bg-login" >
-                <div style={{marginTop:'150px'}} >
+            <div style={{paddingTop:'70px',minHeight:'110vh'}}  className="bg-login" >
+                <div style={{marginTop:'90px'}} >
                     <Row>
                         <Col xs={6} md={6}   lg={8} xl={8} xxl={8} ></Col>
                         <Col xs={18} md={18} lg={3} xl={3} xxl={3} >

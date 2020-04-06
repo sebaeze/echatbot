@@ -59,10 +59,10 @@ export const obj2qryString = (argJsObject) =>{
                 } else {
                     arrayQry.push( keyObj+'='+datoKey ) ;
                 }
-            } else {
+            }/* else {
                 console.log('.....se pierde la key ?? ') ;
                 console.dir(argJsObject) ;
-            }
+            } */
 		}
 	}
 	if ( arrayQry.length>0 ){

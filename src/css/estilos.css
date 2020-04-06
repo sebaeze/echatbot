@@ -4,18 +4,148 @@
 :root {
     --font-color-important: #002DFF ;
 }
+/*  */
+header {
+    padding: 0 !important ;
+    margin:  0 !important ;
+    height:  70px !important ;
+    line-height: 70px !important ;
+    background-color: #fff !important ;
+    position: fixed ;
+    z-index: 9990 ;
+    width: 100% ;
+}
+header .logo {
+    width: 150px ;
+    height: auto ;
+    margin-left: 40px ;
+    margin-top: 2px;
+}
+header ul.ant-menu {
+    width: 100% !important ;
+    z-index: 9991 !important ;
+    line-height: 70px !important ;
+    height: 70px !important ;
+    font-size: 22px !important ;
+}
 header li.ant-menu-item {
     height: 100% ;
 }
-header li.ant-menu-item a {
-    color: var(--font-color-important) ;
+header li.ant-menu-item a, .waiboc-header-submenu li.ant-menu-item a {
+    color: var(--font-color-important) !important ;
     display: block ;
     width: 100% ;
     height: 100% ;
+    font-size: 20px !important ;
+}
+header li.ant-menu-item i, .waiboc-header-submenu li.ant-menu-item i {
+    font-size: 20px !important ;
+    color: green !important ;
+    font-weight: 600 !important ;
 }
 header li.ant-menu-item a:hover {
     text-decoration: none !important ;
     border-bottom: none !important ;
+}
+header ul.ant-menu {
+    background-color: transparent !important ;
+}
+.waiboc-header-submenu {
+    font-weight: 600 !important ;
+    font-size: 22px !important ;
+    margin: 0 !important ;
+    padding: 0 !important ;
+    z-index: 9992 !important ;
+}
+/*   */
+.ant-menu-item > a, .ant-menu-item > span {
+    font-size: 20px !important ;
+    font-weight: 600 !important ;
+}
+.ant-menu-item > a i {
+    font-size: 22px !important ;
+    color: #1ab038 !important ;
+    font-weight: 600 !important ;
+}
+/*  */
+.shadow-below {
+    margin-bottom:10px;
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	   -moz-box-shadow: 0 8px 6px -6px black;
+	        box-shadow: 0 8px 6px -6px black;
+	   -ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+.btn-shadow-login {
+    transition: all 1s;
+}
+.btn-shadow-login:hover {
+    margin-bottom:10px;
+	-webkit-box-shadow: 0 8px 8px -2px black;
+	   -moz-box-shadow: 0 8px 8px -2px black;
+	        box-shadow: 0 8px 8px -2px black;
+}
+/*  */
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 160px;
+    line-height: 160px;
+    background: #364d79;
+    overflow: hidden;
+}
+.ant-carousel .slick-slide h3 {
+    color: #fff;
+}
+/*   */
+.whatsapp-icon {
+    position: fixed ;
+    bottom: 10% ;
+    right: 3% ;
+    z-index: 9999 ;
+}
+.whatsapp-icon i svg {
+    width: 60px !important ;
+    height: auto !important ;
+    color: #83B838 !important;
+
+}
+.whatsapp-icon img {
+    width: 90px !important ;
+    height: auto !important ;
+}
+.whatsapp-icon img:hover, .whatsapp-icon i svg:hover {
+    -webkit-filter: drop-shadow(5px 5px 5px #222 );
+    filter: drop-shadow(5px 5px 5px #222);
+    cursor: pointer ;
+}
+@media (max-width: 700px) {
+    .whatsapp-icon { bottom: 18% ; }
+    .whatsapp-icon i svg {
+        width: 40px !important ;
+        height: auto !important ;
+    }
+}
+/*   */
+#main .ant-carousel .slick-slide {
+    background-color: #fff !important ;
+}
+/*  */
+.a-no-hover:hover {
+    text-decoration: none !important ;
+    border-bottom: none !important ;
+}
+.ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected > .li-no-hover:hover {
+    text-decoration: none !important ;
+}
+.ant-menu-horizontal > li.ant-menu-item .no-hover:hover {
+    border-bottom: none !important ;
+}
+.ant-table-column-title {
+    font-size: 18px !important ;
+    font-weight: 600 !important ;
+}
+.ant-popover, .ant-modal-wrap, .ant-tooltip {
+    z-index: 9991 !important ;
 }
 a:hover {
     text-decoration: none ;
@@ -57,127 +187,6 @@ a:hover {
     #idContainer404 img          { margin-top: 35%;}
     #idContainer404 span.mensaje {font-size: 24px;}
 }
-/*  */
-#portfolio {
-    background: #f7f7f7;
-    padding: 30px 0;
-    min-height: 86vh;
-}
-@media (max-width: 700px) {
-    #portfolio {padding-top: 5px;}
-}
-#portfolio #portfolio-wrapper {
-    /* padding-right: 15px; */
-    min-height: 50vh ;
-}
-#portfolio #portfolio-flters {
-    padding: 0;
-    margin: 0 0 45px 0;
-    list-style: none;
-    text-align: center;
-}
-@media (max-width: 700px) {
-    #portfolio #portfolio-flters {margin-bottom: 15px;}
-}
-#portfolio #portfolio-flters li {
-    cursor: pointer;
-    margin: 0 10px;
-    display: inline-block;
-    padding: 10px 22px;
-    font-size: 12px;
-    line-height: 20px;
-    color: #666666;
-    border-radius: 4px;
-    text-transform: uppercase;
-    background: #fff;
-    margin-bottom: 5px;
-    transition: all 0.3s ease-in-out;
-}
-#portfolio #portfolio-flters li:hover, #portfolio #portfolio-flters li.filter-active {
-    background: #2dc997;
-    color: #fff;
-}
-  #portfolio .portfolio-item {
-    position: relative;
-    height: 200px;
-    overflow: hidden !important;
-    margin-bottom: 15px;
-    transition: all 350ms ease;
-    transform: scale(1);
-  }
-  #portfolio .portfolio-item a {
-    display: block;
-    margin-right: 15px;
-  }
-  #portfolio .portfolio-item img {
-    position: relative;
-    top: 0;
-    transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
-  /*  */
-  #portfolio .portfolio-item .details {
-    height: 50px;
-    background: #2dc997;
-    position: absolute;
-    width: 100%;
-    height: 50px;
-    bottom: -50px;
-    transition: all 450ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
-  .portfolio-item-desc {
-    height: 50px;
-    background: #2dc997;
-    position: absolute;
-    width: 100%;
-    height: 50px;
-    bottom: -50px;
-    transition: all 450ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
-  #portfolio .portfolio-item .details h4 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-    padding: 8px 0 2px 8px;
-    margin: 0;
-  }
-  #portfolio .portfolio-item .details span {
-    display: block;
-    color: #fff;
-    font-size: 13px;
-    padding-left: 8px;
-  }
-  #portfolio .portfolio-item:hover .details {
-    bottom: 0;
-  }
-  #portfolio .portfolio-item:hover img {
-    top: -30px;
-  }
-@media(max-width: 400px){
-    #portfolio .portfolio-item img {
-        top: 0px;
-    }
-    #portfolio .slick-current .portfolio-item .details {
-        bottom: 0;
-        font-weight: bold ;
-        transition: all 950ms cubic-bezier(0.645, 0.045, 0.355, 1);
-        /*
-        opacity: 0.5 ;
-        transition: all 250ms cubic-bezier(0.645, 0.045, 0.355, 1);
-        */
-    }
-    #portfolio .portfolio-item .details:hover {
-        /* text-decoration: underline ; */
-        cursor: pointer ;
-        opacity: unset ;
-        font-weight: bolder ;
-    }
-}
-/*   */
-#dondeEstamos {
-    background: #f7f7f7;
-    padding: 80px 0 40px 0;
-    min-height: 90vh ;
-}
 .sli    ck-active button{
     background: red;
   }
@@ -203,42 +212,7 @@ a:hover {
         min-height: 70vh ;
     }
 }
-/*   */
-/*  
-  .slick-active + .slick-active {
-    background: blue;
-  }
-  
-  .slick-active + .slick-active + .slick-active {
-    background: yellow;
-  }
-  */
-#portfolio a.link-producto-widget img {
-    /*
-    border-left: 2px solid grey ;
-    border-right: 2px solid grey ;
-    border-top: 2px solid grey ;
-    */
-    box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /* */
-    position: relative;
-    top: 0;
-    transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-    width: 300px !important;
-    height: auto !important;
-}
-/*
-#portfolio .portfolio-item img {
-    position: relative;
-    top: 0;
-    transition: all 600ms cubic-bezier(0.645, 0.045, 0.355, 1);
-    width: 200px !important;
-    height: auto !important;
-}
-*/
-/*
-*
-*/
+/* */
 .sans-serif {
     color: #666666 !important;
     font-family: "Open Sans", sans-serif !important;
@@ -464,29 +438,6 @@ i.slick-arrow2:hover {
      color: inherit ;
  }
 /*  */
-#porfolio .portfolio-categoria {
-    width: 100% !important ;
-    position: relative ;
-    display: inline-block ;
-}
-#portfolio .portfolio-item2 {
-    position: relative;
-    float: left;
-    display: inline-block ;
-    height: 200px;
-    overflow: hidden !important;
-    margin-bottom: 15px;
-    transition: all 350ms ease;
-    transform: scale(1);
-}
-/*
-#portfolio-wrapper {
-    visibility: hidden;
-}
-#portfolio-wrapper.slick-initialized {
-    visibility: visible;
-}
-*/
 .span-expand {
     text-decoration: none ;
     padding: 2px 2px 2px 2px ;
@@ -1180,3 +1131,42 @@ span.waiboc-span-emoticon:hover {
     font-weight: 600 !important ;
 }
 /*  */
+#waiboc-account .ant-menu-item .anticon + span {
+    font-weight: 600 !important ;
+    font-size: 20px !important ;
+}
+#waiboc-account .ant-menu-item-selected {
+    /* background-color: inherit !important ; */
+    text-decoration: underline !important ;
+}
+#waiboc-account .ant-menu-item-selected span:hover {
+    text-decoration: underline !important ;
+}
+#waiboc-account .ant-menu-item .anticon, .ant-menu-submenu-title .anticon {
+    color:#002DFF !important;
+    font-size: 25px !important;
+    /* background-color:white !important; */
+    padding: 5px 5px 5px 5px !important;
+}
+/*   */
+#idFormContacto .ant-form-item-label label {
+    font-size: 20px !important ;
+    font-weight: 600 !important ;
+}
+/*   */
+@media (max-width: 700px) {
+    header .logo {
+        width: 120px ;
+        height: auto ;
+        margin-left: 20px ;
+        margin-top: 1px;
+    }
+    header i.anticon.anticon-menu.nav-phone-icon {
+        float: right ;
+        margin-right: 15px ;
+        margin-top: 15px ;
+        border: 1px solid gray ;
+        padding: 2.5px 2.5px 2.5px 2.5px ;
+    }
+}
+/*   */

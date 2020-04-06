@@ -28,7 +28,8 @@ export class App extends React.Component {
     super(props) ;
     this.state = {
       isMobile: (window.innerWidth<797)
-    }
+    } ;
+    this.translate = languageLocale() ;
   }
   //
   componentDidMount(){
@@ -48,18 +49,18 @@ export class App extends React.Component {
     return (
       <Layout id="waiboc-main-node" style={{ background: '#fff',padding: '0' }}>
           <Router>
-            <Encabezado translate={{...languageLocale()}} />
+            <Encabezado translate={{...this.translate}} />
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
-              <Route exact path="/account"               component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/account/:seccion"      component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/bots"                  component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/login"                 component={(argMach) => <CuerpoLogin   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/users"                 component={(argMach) => <CuerpoCuenta  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/train/:idChatbot"      component={(argMach) => <CuerpoTrain   translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/edit/:idChatbot"       component={(argMach) => <CuerpoEditBot translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/404"                   component={(argMach) => <NoEncontrado404  translate={{...languageLocale()}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/account"               component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/account/:seccion"      component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/bots"                  component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/login"                 component={(argMach) => <CuerpoLogin   translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/users"                 component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/train/:idChatbot"      component={(argMach) => <CuerpoTrain   translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/edit/:idChatbot"       component={(argMach) => <CuerpoEditBot translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/404"                   component={(argMach) => <NoEncontrado404  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
             </Content>
-            <PiePagina translate={{...languageLocale()}} configuracion={configApp} />
+            <PiePagina translate={{...this.translate}} configuracion={configApp} />
           </Router>
       </Layout>
     )

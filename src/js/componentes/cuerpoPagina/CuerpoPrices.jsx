@@ -15,7 +15,7 @@ export class CuerpoPrices extends React.Component {
     //
     render(){
         return(
-            <div style={{paddingTop:'120px',minHeight:'110vh'}} className="bg-prices" >
+            <div style={{paddingTop:'120px',minHeight:'110vh'}} className="bg-prices" id="prices" >
                 <Row>
                     <Col xs={2} md={2} lg={2} xl={2} xxl={2} ></Col>
                     <Col xs={16} md={16} lg={18} xl={18} xxl={18} >

@@ -72,7 +72,8 @@ module.exports = {
   },
   devServer: {
     port: 9000,
-    open: true,
+    // open: true,
+    // hot: true,
     proxy: {
         "/": {
           target: "http://localhost:3000",

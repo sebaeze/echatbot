@@ -18,81 +18,72 @@ class NavMenu extends React.Component {
     //
     render(){
         //
-        let styleMenu = this.props.isMobile ? {} : { width: '100%',zIndex:'9991',lineHeight: '100px', fontSize: '24px', float:'right', marginRight: '1%' } ;
-        //
         return(
             <div>
                 <Menu
-                    id="idHeaerSubmenu"
                     theme="light"
                     className="menu-header-mobile"
                     mode={ this.props.isMobile ? "vertical" : "horizontal" }
-                    style={styleMenu}
+                    // style={styleMenu}
                 >
-                    {
-                        this.props.userInfo==false ?
-                            null :
-                            <SubMenu
-                                popupClassName="submenu-header"
-                                key="sub1"
-                                title={
-                                <span>
-                                    <Icon type="appstore" />
-                                    <span style={{fontSize:'21px',fontWeight:'700'}}><u>{this.props.userInfo.name+' '+this.props.userInfo.lastName}</u></span>
-                                </span>
-                                }
-                            >
-                                <Menu.Item key="5">
-                                    <LinkRouter  url={"/account/"+PARAMETROS.FORM.CHATBOTS} >
-                                        <Icon type="robot" />Chatbots
-                                    </LinkRouter>
-                                </Menu.Item>
-                                <Menu.Item key="6"><a href={"/account/"+PARAMETROS.FORM.USER_INFO}><Icon type="profile" />{this.props.translate.myProfile}</a></Menu.Item>
-                                <Menu.Item key="7">
-                                    <a  onClick={(argEVC)=>{
-                                        argEVC.preventDefault() ;
-                                        api.account.logout() ;
-                                        window.location.href = "/logout" ;
-                                    }}
-                                    >
-                                        <Icon type="logout" />{this.props.translate.logout}
-                                    </a>
-                                </Menu.Item>
-                            </SubMenu>
-                    }
-                    <Menu.Item key="2">
+                    <Menu.Item key="home">
+                        <LinkRouter  url={"/"} >
+                            {this.props.translate.navigation.home}
+                        </LinkRouter>
+                    </Menu.Item>
+                    <Menu.Item key="prices">
+                        <LinkRouter  url={"/#prices"} >
+                            {this.props.translate.prices}
+                        </LinkRouter>
+                    </Menu.Item>
+                    <Menu.Item key="contact">
                         <LinkRouter  url={"/#contact"} >
                             {this.props.translate.contact}
                         </LinkRouter>
                     </Menu.Item>
-                    <Menu.Item key="3">
-                        <LinkRouter  url={"/about"} >
-                            {this.props.translate.about}
-                        </LinkRouter>
-                    </Menu.Item>
-                    <Menu.Item key="4">
-                        <LinkRouter  url={"/services"} >
-                            {this.props.translate.services}
-                        </LinkRouter>
-                    </Menu.Item>
-                    <Menu.Item key="5">
-                        <LinkRouter  url={"/prices"} >
-                            {this.props.translate.prices}
-                        </LinkRouter>
-                    </Menu.Item>
                     {
-                        this.props.userInfo==false ?
-                            <Menu.Item key="7" className="li-no-hover" >
-                                <Button  type="primary" block
-                                        className="btn-shadow-login"
-                                        onClick={(argEV)=>{argEV.preventDefault();location.href="/account";}}
-                                        style={{marginBottom:'20%',height:'60px',backgroundColor:'#E0E6E5',verticalAlign:'bottom',color:'black',fontWeight:'500',fontSize:'20px',padding:'8px 8px 8px 8px' }}
+                        this.props.userInfo==false
+                            ?   <Menu.Item key="7" className="li-no-hover" >
+                                    <Button  type="primary" block
+                                            className="btn-shadow-login"
+                                            onClick={(argEV)=>{argEV.preventDefault();location.href="/account";}}
+                                            style={{marginBottom:'20%',height:'60px',backgroundColor:'#E0E6E5',verticalAlign:'bottom',color:'black',fontWeight:'500',fontSize:'20px',padding:'8px 8px 8px 8px' }}
+                                    >
+                                        {this.props.translate.login}
+                                    </Button>
+                                </Menu.Item>
+                            :   <SubMenu
+                                    popupClassName="waiboc-header-submenu"
+                                    key="sub1"
+                                    title={
+                                    <span>
+                                        <Icon type="appstore" />
+                                        <span style={{fontSize:'21px',fontWeight:'700'}}><u>{this.props.userInfo.name+' '+this.props.userInfo.lastName}</u></span>
+                                    </span>
+                                    }
                                 >
-                                    {this.props.translate.login}
-                                </Button>
-                            </Menu.Item>
-                            : null
-                    }
+                                    <Menu.Item key="5">
+                                        <LinkRouter  url={"/account/"+PARAMETROS.FORM.CHATBOTS} >
+                                            <Icon type="robot" />Chatbots
+                                        </LinkRouter>
+                                    </Menu.Item>
+                                    <Menu.Item key="6">
+                                        <LinkRouter  url={"/account/"+PARAMETROS.FORM.USER_INFO} >
+                                            <Icon type="profile" />{this.props.translate.myProfile}
+                                        </LinkRouter>
+                                    </Menu.Item>
+                                    <Menu.Item key="7">
+                                        <a  onClick={(argEVC)=>{
+                                            argEVC.preventDefault() ;
+                                            api.account.logout() ;
+                                            window.location.href = "/logout" ;
+                                        }}
+                                        >
+                                            <Icon type="logout" />{this.props.translate.logout}
+                                        </a>
+                                    </Menu.Item>
+                                </SubMenu>
+                        }
                 </Menu>
             </div>
         ) ;

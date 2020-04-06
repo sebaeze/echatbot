@@ -16,9 +16,8 @@ export class InicioEncabezado extends React.Component {
     //
     render(){
         //
-        //  <Title level={1} style={{marginBottom:(this.props.configuracion.isMobile==true ? '0': false)}}>{this.props.configuracion.empresa.name}</Title>
         return(
-            <div id={this.props.id} style={{minHeight:'80vh'}} className="bg-inicial" >
+            <div id={this.props.id} style={{minHeight:'100vh'}} className="bg-inicial" >
                 <Row style={ this.props.configuracion.isMobile==true ? {} : {paddingTop:'10px'}}>
                     <Row>
                         <Col xs={1} md={1} lg={2} xl={2} xxl={2} ></Col>

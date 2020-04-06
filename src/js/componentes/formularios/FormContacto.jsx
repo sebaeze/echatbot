@@ -61,7 +61,7 @@ class FormContacto extends React.Component {
     render(){
         //
         const { getFieldDecorator, getFieldError } = this.props.form ;
-        let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'140px'} : {} ;
+        let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'80px'} : {} ;
         if ( this.props.customStyle ){
             estiloForm = {
                 ...estiloForm,

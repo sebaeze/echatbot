@@ -24,7 +24,7 @@ export class LogoEmpresa extends React.Component {
         return(
             <LinkRouter  url={"/"} >
                 <img src={ "/img/logo.waiboc.transparent.png" }
-                    style={ this.state.isMobile==true ? {width:'150px',height:'auto',marginLeft:'40px',marginTop:'30px'} : {width:'200px',height:'auto',marginLeft:'40px',marginTop:'20px'} }
+                    className="logo"
                     alt="logo"
                 />
             </LinkRouter>

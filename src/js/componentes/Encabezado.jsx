@@ -13,7 +13,6 @@ import {BotonMenuResponsive}               from './botones/BotonMenuResponsive' 
 //
 const { Header } = Layout;
 //
-import '../../css/estilosHeader.css' ;
 import 'antd/lib/menu/style/css'     ;
 import 'antd/lib/popover/style/css'  ;
 //
@@ -60,20 +59,16 @@ export class Encabezado extends Component {
   //
   render() {
       //
-      let styleHeader = {
-        minHeight: (this.state.isMobile ? '90px' : '120px'), backgroundColor: '#fff' ,position: 'fixed', zIndex: '9990', width: '100%'
-      } ;
-      //
       return (
-        <Header className={"header"+(this.state.flagScroll==true ? " shadow-below " : "" )} theme="light" style={styleHeader} >
+        <Header className={(this.state.flagScroll==true ? " shadow-below " : "" )} theme="light" >
           <BackTop>
               <div className="ant-back-top-inner"><Icon type="arrow-up" /></div>
           </BackTop>
           <Row>
-            <Col xs={10} md={10} lg={6} xl={4} xxl={4}  >
+            <Col xs={10} md={10} lg={10} xl={10} xxl={10}  >
               <LogoEmpresa />
             </Col>
-            <Col  xs={13} md={13} lg={19} xl={19} xxl={19} >
+            <Col  xs={13} md={13} lg={14} xl={14} xxl={14} >
                 {this.state.isMobile ?
                     <Popover placement="bottomRight" title={false}
                              content={ <NavMenu userInfo={this.state.userInfo} translate={this.props.translate} isMobile={this.state.isMobile} /> } trigger="click"

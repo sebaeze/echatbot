@@ -76,7 +76,7 @@ class FormNewChatbotWithModal extends React.Component {
     render(){
         //
         const { getFieldDecorator, resetFields, getFieldsError, getFieldError } = this.props.form ;
-        let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'140px'} : {} ;
+        let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'80px'} : {} ;
         //
         return(
             //

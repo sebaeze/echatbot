@@ -112,19 +112,36 @@ export class TablaTraining extends React.Component {
                                         <span style={{marginLeft:'7px'}} >{this.props.translate.edit}</span>
                                     </a>
                                     <br/>
-                                    <Popconfirm placement="topRight" title={this.props.translate.form.deleteEntityConfirmation}
-                                        onConfirm={()=>{this.onClickDeleteIntent(argRow)}}
-                                        okText={this.props.translate.yes} cancelText="No"
-                                    >
-                                        <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}} >
-                                            <Icon type="delete" style={{color:'red'}}/>
-                                            <span style={{marginLeft:'7px'}} >{this.props.translate.delete}</span>
-                                        </a>
-                                    </Popconfirm>
+                                    {
+                                        argRow.systemDefined==true
+                                            ?   <span>no se puedeee</span>
+                                            :   <Popconfirm placement="topRight" title={this.props.translate.form.deleteEntityConfirmation}
+                                                    onConfirm={()=>{this.onClickDeleteIntent(argRow)}}
+                                                    okText={this.props.translate.yes} cancelText="No"
+                                                >
+                                                    <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}} >
+                                                        <h2>{argRow.systemDefined}</h2>
+                                                        <Icon type="delete" style={{color:'red'}}/>
+                                                        <span style={{marginLeft:'7px'}} >{this.props.translate.delete}</span>
+                                                    </a>
+                                                </Popconfirm>
+                                    }
                                 </div>
                         )},
                         defaultSortOrder: 'descend', sorter: (a, b) => a.entity.localeCompare(b.entity)
                 },
+                {title: this.props.translate.table.systemDefined     ,width: 120,dataIndex:'systemDefined',key:'systemDefined',
+                        defaultSortOrder: 'descend',
+                        render: text => {
+                            let tempText = text==true ? this.props.translate.yes : "No" ;
+                            return(
+                                <span style={{fontWeight:'600'}}>
+                                    {tempText}
+                                </span>
+                            )
+                        },
+                        sorter: (a, b) => a.systemDefined.localeCompare(b.systemDefined)
+                } ,
                 {title: this.props.translate.table.examples ,width: 250,
                         dataIndex:'examples', key:'examples',
                         render: (text) => {
@@ -270,11 +287,25 @@ export class TablaTraining extends React.Component {
         //
         let arrayDatos = [] ;
         if ( this.state.textBusqueda.length==0 ){
-            arrayDatos = this.state.arrayTraining.map((elemTC,elemIdx)=>{ return {...elemTC,key: elemIdx} ; }) ;
+            arrayDatos = this.state.arrayTraining.map((elemTC,elemIdx)=>{
+                // console.log('....elemTC.systemDefined: ',elemTC.systemDefined) ;
+                let tempsystemDefined = (typeof elemTC.systemDefined=="undefined") ? false : elemTC.systemDefined ;
+                return {
+                    ...elemTC,
+                    key: elemIdx,
+                    systemDefined: tempsystemDefined
+                } ;
+            }) ;
         } else {
             this.state.arrayTraining.forEach((elemTC,elemIdx)=>{
                 if ( Object.values(elemTC).join("").toUpperCase().indexOf(this.state.textBusqueda.toUpperCase())!=-1 ){
-                    arrayDatos.push( {...elemTC, key: elemIdx} ) ;
+                    // console.log('....elemTC.systemDefined: ',elemTC.systemDefined) ;
+                    let tempsystemDefined = (typeof elemTC.systemDefined=="undefined") ? false : elemTC.systemDefined ;
+                    arrayDatos.push( {
+                        ...elemTC,
+                        key: elemIdx,
+                        systemDefined: tempsystemDefined
+                    } ) ;
                 }
             }) ;
         }

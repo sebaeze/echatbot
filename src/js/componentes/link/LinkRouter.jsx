@@ -58,6 +58,7 @@ class LinkRouter  extends React.Component {
     // <LinkWithHash {...this.state} ref={this.refHashLink} >{this.props.children}</LinkWithHash>
     onClickLink(argEE){
         try {
+            console.log('...process.env.APP_ID: ',process.env.APP_ID) ;
             if ( process.env.APP_ID==PARAMETROS.APP_ID.HOME ){
                 //console.log('....hashash: ',this.state.hasHash,' hash: ',this.state.hash,' url: ',this.state.url,' pathna: ',window.location.pathname) ;
                 if ( this.state.url==window.location.pathname && this.state.hasHash==true ){
@@ -74,8 +75,9 @@ class LinkRouter  extends React.Component {
                     }
                 }
             } else {
-                let tempUrl = this.state.url + ( this.state.hasHash==true ? "/#"+this.state.hash : "" ) ;
-                window.location.href = tempUrl ;
+                //let tempUrl = this.state.url + ( this.state.hasHash==true ? "/#"+this.state.hash : "" ) ;
+                console.log('.....(B) url: ',this.state.fullUrl) ;
+                window.location.href = this.state.fullUrl ;
             }
         } catch(errOCL){
             console.log('ERROR: ',errOCL) ;

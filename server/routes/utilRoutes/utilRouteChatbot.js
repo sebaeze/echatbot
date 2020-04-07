@@ -108,12 +108,28 @@ export const updateTraining = (argConfig,argDb,argEmail,argBotTrained) => {
         //
         if (API_NLP==false){ API_NLP=argConfig.API[process.env.AMBIENTE||'dev'] || null } ;
         //
-        argDb.chatbot.add( {...argBotTrained}  )
+        let arrayPromises = [] ;
+        for ( let keyInt in argBotTrained.train ){
+          let elemIntent = argBotTrained.train[ keyInt ] ;
+          elemIntent.idChatbot = argBotTrained.idChatbot ;
+          // console.log('....kk: ',keyInt,' elemIntent: ',elemIntent) ;
+          arrayPromises.push(
+            argDb.intents.add( elemIntent )
+          ) ;
+        }
+        //
+        //argDb.chatbot.add( {...argBotTrained}  )
+        Promise.all( arrayPromises )
             .then((respUpd)=>{
+              //console.log('...finisg train:: respUpd: ',respUpd) ;
+              /*
               if ( respUpd.length && respUpd.length>0 ){ respUpd=respUpd[0]; }
               respUpd = respUpd._doc ? respUpd._doc : respUpd ;
               objResultado.code   = 0 ;
               objResultado.result = respUpd.training ;
+              */
+              objResultado.code   = 0 ;
+              objResultado.result = respUpd ;
               let tempReqbody = { idAgente: argBotTrained._id, emailUserid: argEmail, secretAPInlp: API_NLP.NLP_TRAIN_SECRET } ;
               //
               let reqOptions = { url: API_NLP.NLP_TRAIN, method: 'POST', data: tempReqbody, ca: rootCA } ;

@@ -74,8 +74,9 @@
     "webpack": "^4.30.0"
   },
   "scripts": {
+    "build:ssr": "webpack   --mode production   --config ./build_config/weback-ssr-home.js",
     "build:home": "webpack   --mode production   --config ./build_config/webpack-prod-website.js",
-    "build:admin": "webpack   --mode production   --config ./build_config/webpack-prod-admin.js",
+    "build:admin": "webpack  --mode production    --config ./build_config/webpack-prod-admin.js",
     "react:test": "webpack   --mode development  --config ./build_config/webpack-dev-test.js",
     "start": "babel-node ./server/server.js",
     "buildProd": "export AMBIENTE=produccion && npm run build && npm run buildAdmin",

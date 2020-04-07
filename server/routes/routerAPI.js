@@ -125,13 +125,19 @@ module.exports = (argConfig,argDb) => {
             return argDb.chatbot.qry( {_id: req.body._id} ) ;
           })
           */
+      // console.log('....req.body: ',req.body) ;
       argDb.chatbot.qry( {_id: req.body._id} )
           .then(function(chatbotInfo){
             if ( chatbotInfo.length && chatbotInfo.length>0 ){ chatbotInfo=chatbotInfo[0]; }
+            // console.log('....chatbotInfo.accessList: ',chatbotInfo.accessList) ;
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });
             if ( userConAcceso ){
+              /*
               chatbotInfo.training = Object.assign(chatbotInfo.training,req.body.train) ;
               delete chatbotInfo._v ; delete chatbotInfo.__v ;
+              */
+             chatbotInfo.idChatbot = req.body._id || chatbotInfo.idChatbot ;
+             chatbotInfo.train     = req.body.train || {} ;
               return updateTraining( argConfig , argDb, req.user.email, chatbotInfo ) ;
             } else {
               console.log('...*** NO POSEE ACCESO AL CHATBOT:: ',userConAcceso) ;

@@ -103,7 +103,8 @@ export class TablaTraining extends React.Component {
                                     <span style={{cursor:'pointer',paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
                                           onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
                                     >
-                                        <u>{text}</u>
+                                        <u>{text}</u><br/>
+                                        {argRow._id}
                                     </span><br/>
                                     <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
                                         onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
@@ -114,7 +115,7 @@ export class TablaTraining extends React.Component {
                                     <br/>
                                     {
                                         argRow.systemDefined==true
-                                            ?   <span>no se puedeee</span>
+                                            ?   <span style={{fontSize:'12px',color:'red'}} >{this.props.translate.form.systemDefinedDelete}</span>
                                             :   <Popconfirm placement="topRight" title={this.props.translate.form.deleteEntityConfirmation}
                                                     onConfirm={()=>{this.onClickDeleteIntent(argRow)}}
                                                     okText={this.props.translate.yes} cancelText="No"

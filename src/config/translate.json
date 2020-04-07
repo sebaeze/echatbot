@@ -91,6 +91,7 @@
             "action":"Action"
         },
         "form":{
+            "systemDefinedDelete":"It can't be deleted. System Defined",
             "optionsValueSelect":"Selecione uma intenção",
             "optionsLabelToDisplay":"Option name to display",
             "checkAnswer":"Check Aswer Here",
@@ -251,6 +252,7 @@
             "action":"Acción"
         },
         "form":{
+            "systemDefinedDelete":"No puede borrarse. Definida por sistema.",
             "optionsValueSelect":"Eljia una intención",
             "optionsLabelToDisplay":"Nombre de apción a mostrar",
             "checkAnswer":"Revisar respuesta aqui",
@@ -446,6 +448,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
+            "systemDefinedDelete":"Não pode ser excluído. Definido pelo sistema.",
             "optionsValueSelect":"",
             "optionsLabelToDisplay":"Nome da opção a ser exibida",
             "checkAnswer":"Verifique a resposta aqui",

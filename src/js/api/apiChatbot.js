@@ -11,7 +11,7 @@ const addNewChatbot = (argNewBot) => {
             opcionesAdd.method = 'POST' ;
             opcionesAdd.body    = JSON.stringify(argNewBot) ;
             //
-            fetch( '/api/chatbot'  , opcionesAdd )
+            fetch( PARAMETROS.BACKEND.API_CHATBOT_UPDATE  , opcionesAdd )
                 .then((respFetch)=>{
                     if ( respFetch.status>=200 && respFetch.status<=401 ){
                         if ( respFetch.status==401 ){
@@ -47,7 +47,7 @@ const trainChatbot  = (argTrainChatbot,flagDeleteIntent=false) => {
             opcionesAdd.method = flagDeleteIntent==true ? 'DELETE' : 'POST' ;
             opcionesAdd.body    = JSON.stringify(argTrainChatbot) ;
             //
-            fetch( '/api/train'  , opcionesAdd )
+            fetch( PARAMETROS.BACKEND.API_CHATBOT_TRAIN  , opcionesAdd )
                 .then((respFetch)=>{
                     if ( respFetch.status>=200 && respFetch.status<=401 ){
                         if ( respFetch.status==401 ){

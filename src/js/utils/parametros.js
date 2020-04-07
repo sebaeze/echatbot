@@ -15,7 +15,10 @@ export const PARAMETROS = {
     },
     BACKEND:{
         API_CONSULTAS: '/api/consultas',
-        API_SUSCRIPCION: '/api/suscripcion'
+        API_SUSCRIPCION: '/api/suscripcion',
+        API_CHATBOT_UPDATE: '/api/chatbot',
+        API_CHATBOT_TRAIN: '/api/train'
+
     },
     FORM:{
         USER_INFO: 'profile',

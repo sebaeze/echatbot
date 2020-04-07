@@ -13,8 +13,8 @@ import {BotonMenuResponsive}               from './botones/BotonMenuResponsive' 
 //
 const { Header } = Layout;
 //
-import 'antd/lib/menu/style/css'     ;
-import 'antd/lib/popover/style/css'  ;
+// import 'antd/lib/menu/style/css'     ;
+// import 'antd/lib/popover/style/css'  ;
 //
 export class Encabezado extends Component {
   constructor(props) {

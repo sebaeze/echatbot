@@ -8,6 +8,7 @@ const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 const CompressionPlugin           = require('compression-webpack-plugin');
 const BrotliPlugin                = require('brotli-webpack-plugin');
+const BundleAnalyzerPlugin        = require('webpack-bundle-analyzer').BundleAnalyzerPlugin ;
 const APP_ID                      = require('./config.js').APP_ID ;
 //
 const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
@@ -86,33 +87,34 @@ module.exports = {
 		}
   },
   */
- optimization: {
-  runtimeChunk: 'single',
-    splitChunks: {
-      chunks: 'all',
-      maxInitialRequests: Infinity,
-      minSize: 0,
-      cacheGroups: {
-        reactVendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: "reactvendor"
+  optimization: {
+    runtimeChunk: 'single',
+      splitChunks: {
+        chunks: 'all',
+        maxInitialRequests: Infinity,
+        minSize: 0,
+        cacheGroups: {
+          reactVendor: {
+            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            name: "vendorReact"
+          },
+          utilityVendor: {
+            test: /[\\/]node_modules[\\/](lodash|moment|moment-timezone)[\\/]/,
+            name: "VendorUtility"
+          },
+          antdVendor: {
+            test: /[\\/]node_modules[\\/](antd)[\\/]/,
+            name: "vendorAntd"
+          },
+          vendor: {
+            test: /[\\/]node_modules[\\/](!antd)(!lodash)(!moment)(!moment-timezone)[\\/]/,
+          name: "vendor"
         },
-        utilityVendor: {
-          test: /[\\/]node_modules[\\/](lodash|moment|moment-timezone)[\\/]/,
-          name: "utilityVendor"
-        },
-        antdVendor: {
-          test: /[\\/]node_modules[\\/](antd)[\\/]/,
-          name: "antdVendor"
-        },
-        vendor: {
-           test: /[\\/]node_modules[\\/](!antd)(!lodash)(!moment)(!moment-timezone)[\\/]/,
-        name: "vendor"
-      },
       },
     },
   },
   plugins: [
+      new BundleAnalyzerPlugin() ,
       new CopyWebpackPlugin([{from: 'src/img',to: 'img'},{from: 'src/css',to: 'css'}]),
       new webpack.DefinePlugin({
         'process.env.AMBIENTE': JSON.stringify(process.env.AMBIENTE),

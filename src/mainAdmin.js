@@ -32,20 +32,9 @@ export class App extends React.Component {
     this.translate = languageLocale() ;
   }
   //
-  componentDidMount(){
-    try {
-      window.addEventListener("resize",function(argEventSCR){
-        // this.setState({isMobile: (window.innerWidth<797)});   <---- Esto genera re-render sarpado
-      }.bind(this)) ;
-    } catch(errCDM){
-      console.dir(errCDM) ;
-    }
-  }
-  //
   render() {
     //
     configApp.isMobile = this.state.isMobile ;
-    //
     return (
       <Layout id="waiboc-main-node" style={{ background: '#fff',padding: '0' }}>
           <Router>

@@ -6,10 +6,9 @@ import { Layout, Menu, Breadcrumb, Icon, Dropdown }  from 'antd'  ;
 import { Row, Col, Popover }                         from 'antd'  ;
 import { BackTop }                                   from 'antd'  ;
 //
-import NavMenu                             from './menu/NavMenu' ;
 import {LogoEmpresa}                       from './link/LogoEmpresa'  ;
+import { MenuHeaderMobile   }              from './menu/MenuHeaderMobile'   ;
 import { api }                             from '../api/api' ;
-import {BotonMenuResponsive}               from './botones/BotonMenuResponsive'  ;
 //
 const { Header } = Layout;
 //
@@ -69,15 +68,13 @@ export class Encabezado extends Component {
               <LogoEmpresa />
             </Col>
             <Col  xs={13} md={13} lg={14} xl={14} xxl={14} >
-                {this.state.isMobile ?
-                    <Popover placement="bottomRight" title={false}
-                             content={ <NavMenu userInfo={this.state.userInfo} translate={this.props.translate} isMobile={this.state.isMobile} /> } trigger="click"
-                    >
-                        <BotonMenuResponsive onClick={this.onClickMenu.bind(this)} />
-                    </Popover>
-                    :
-                    <NavMenu userInfo={this.state.userInfo} translate={this.props.translate} isMobile={this.state.isMobile} />
-                }
+                <MenuHeaderMobile
+                      isMobile={this.state.isMobile}
+                      marcas={this.state.marcas}
+                      userInfo={this.state.userInfo}
+                      categorias={this.state.categorias}
+                      translate={this.props.translate}
+                />
            </Col>
           </Row>
         </Header>

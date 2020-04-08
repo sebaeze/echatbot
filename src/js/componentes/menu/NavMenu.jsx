@@ -9,7 +9,7 @@ import { PARAMETROS }                    from '../../utils/parametros' ;
 //
 const { SubMenu } = Menu ;
 //
-class NavMenu extends React.Component {
+export class NavMenu extends React.Component {
     constructor(props){
         super(props);
     }
@@ -24,6 +24,9 @@ class NavMenu extends React.Component {
                     theme="light"
                     className="menu-header-mobile"
                     mode={ this.props.isMobile ? "vertical" : "horizontal" }
+                    getPopupContainer={(trigger) => {return trigger.parentNode ;}}
+                    subMenuOpenDelay={0.3}
+                    subMenuCloseDelay={0.3}
                     // style={styleMenu}
                 >
                     <Menu.Item key="home">
@@ -90,6 +93,4 @@ class NavMenu extends React.Component {
     }
     //
 }
-//
-export default NavMenu ;
 //

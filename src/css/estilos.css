@@ -1154,6 +1154,25 @@ span.waiboc-span-emoticon:hover {
     font-weight: 600 !important ;
 }
 /*   */
+.waiboc-drawer ul.ant-menu {
+    /* border: 0.1px solid #1890FF !important ; */
+    border-radius: 3px ;
+    padding: 5px 5px 5px 5px ;
+    margin-top: 5px ;
+    box-shadow: 0 0 5px #515151 !important ;
+}
+.waiboc-drawer ul.ant-menu.menu-header-mobile li.ant-menu-item {
+    height: 60px !important ;
+    font-size: 20px !important ;
+    font-weight: 600 !important ;
+    text-align: center !important ;
+    z-index: 99999 !important ;
+}
+.waiboc-drawer ul.ant-menu.menu-header-mobile li.ant-menu-item > div:hover {
+    text-decoration: underline !important ;
+    background-color: #1890FF  !important ;
+}
+/*   */
 @media (max-width: 700px) {
     header .logo {
         width: 120px ;

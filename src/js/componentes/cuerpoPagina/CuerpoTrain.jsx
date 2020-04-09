@@ -2,7 +2,7 @@
 *
 */
 import React                      from 'react' ;
-import { ChatWidget }             from '../chat/ChatWidget' ;
+//import { CustomReply }                                     from 'waiboc-widget-react' ;
 //
 export class CuerpoTrain extends React.Component {
     constructor(props){

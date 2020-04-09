@@ -1,10 +1,10 @@
 /*
 *
 */
-import React                                         from 'react' ;
+import React                                                 from 'react' ;
 import { Form, Input, Icon, Button, Row, Col, Select }       from 'antd'  ;
-//
-const { CustomReply }   = window.waiboc ;
+import { CustomReply }                                       from 'waiboc-widget-react' ;
+// const { CustomReply }   = window.waiboc ;
 //  <CustomReply datos={{output: text}} flagTimestamp={false} />
 //
 export class FormDynamicInputOption extends React.Component {

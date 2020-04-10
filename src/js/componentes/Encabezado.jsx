@@ -7,6 +7,7 @@ import { Row, Col, Popover }                         from 'antd'  ;
 import { BackTop }                                   from 'antd'  ;
 //
 import {LogoEmpresa}                       from './link/LogoEmpresa'  ;
+import { NavMenu   }                       from './menu/NavMenu'      ;
 import { MenuHeaderMobile   }              from './menu/MenuHeaderMobile'   ;
 import { api }                             from '../api/api' ;
 //
@@ -67,7 +68,18 @@ export class Encabezado extends Component {
             <Col xs={10} md={10} lg={10} xl={10} xxl={10}  >
               <LogoEmpresa />
             </Col>
-            <Col  xs={13} md={13} lg={14} xl={14} xxl={14} >
+            <Col  xs={0} md={0} lg={13} xl={13} xxl={13} >
+                {
+                  this.state.isMobile==true
+                        ? null
+                        : <NavMenu translate={this.props.translate}
+                                  isMobile={this.state.isMobile}
+                                  userInfo={this.state.userInfo}
+                          />
+                }
+            </Col>
+            <Col  xs={10} md={10} lg={0} xl={0} xxl={0} ></Col>
+            <Col  xs={2} md={2} lg={0} xl={0} xxl={0} >
                 <MenuHeaderMobile
                       isMobile={this.state.isMobile}
                       marcas={this.state.marcas}

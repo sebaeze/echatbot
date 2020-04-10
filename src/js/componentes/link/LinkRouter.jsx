@@ -18,7 +18,8 @@ class LinkRouter  extends React.Component {
             fullUrl: this.props.url,
             url: this.props.url ,
             hasHash: false,
-            hash: ""
+            hash: "",
+            targetApp: this.props.targetApp ? this.props.targetApp : PARAMETROS.APP_ID.HOME
         } ;
         this.refLinkwithHash = false ;
         this.refAnimatedLink = false ;
@@ -58,8 +59,9 @@ class LinkRouter  extends React.Component {
     // <LinkWithHash {...this.state} ref={this.refHashLink} >{this.props.children}</LinkWithHash>
     onClickLink(argEE){
         try {
-            console.log('...process.env.APP_ID: ',process.env.APP_ID) ;
-            if ( process.env.APP_ID==PARAMETROS.APP_ID.HOME ){
+            console.log('...process.env.APP_ID: ',process.env.APP_ID,' target: ',this.state.targetApp,' url: ',this.state.fullUrl) ;
+            // if ( process.env.APP_ID==PARAMETROS.APP_ID.HOME ){
+            if ( process.env.APP_ID==this.state.targetApp ){
                 //console.log('....hashash: ',this.state.hasHash,' hash: ',this.state.hash,' url: ',this.state.url,' pathna: ',window.location.pathname) ;
                 if ( this.state.url==window.location.pathname && this.state.hasHash==true ){
                     this.refAnimatedLink.click() ;

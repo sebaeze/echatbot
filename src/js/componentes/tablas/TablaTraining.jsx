@@ -1,8 +1,8 @@
 /*
 * TablaTraining
 */
-import React                                          from 'react' ;
-import { Table, Input, Button, notification, Icon }   from 'antd'  ;
+import React                                               from 'react' ;
+import { Table, Input, Button, notification, Icon }        from 'antd'  ;
 import { Row, Col, Tag, Popconfirm, Popover }              from 'antd'  ;
 import moment                                              from 'moment-timezone'     ;
 import { CustomReply }                                     from 'waiboc-widget-react' ;
@@ -103,22 +103,19 @@ export class TablaTraining extends React.Component {
                         render: (text,argRow) => {
                             return(
                                 <div>
-                                    <span style={{cursor:'pointer',paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
-                                          onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
-                                    >
-                                        <u>{text}</u><br/>
-                                        {argRow._id}
-                                    </span><br/>
+                                    <span className="waiboc-tab-id-name" onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}} >
+                                        <u>{text}</u>
+                                    </span>
+                                    <br/>
                                     <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
                                         onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
                                     >
                                         <Icon type="edit" style={{color:'green'}}/>
                                         <span style={{marginLeft:'7px'}} >{this.props.translate.edit}</span>
                                     </a>
-                                    <br/>
                                     {
                                         argRow.systemDefined==true
-                                            ?   <span style={{fontSize:'12px',color:'red'}} >{this.props.translate.form.systemDefinedDelete}</span>
+                                            ?   <span style={{fontSize:'12px',color:'red',width:'100%',display:'block'}} >{this.props.translate.form.systemDefinedDelete}</span>
                                             :   <Popconfirm placement="topRight" title={this.props.translate.form.deleteEntityConfirmation}
                                                     onConfirm={()=>{this.onClickDeleteIntent(argRow)}}
                                                     okText={this.props.translate.yes} cancelText="No"
@@ -144,7 +141,7 @@ export class TablaTraining extends React.Component {
                                 </span>
                             )
                         },
-                        sorter: (a, b) => a.systemDefined.localeCompare(b.systemDefined)
+                        sorter: (a, b) => a.systemDefined - b.systemDefined
                 } ,
                 {title: this.props.translate.table.examples ,width: 250,
                         dataIndex:'examples', key:'examples',
@@ -179,8 +176,8 @@ export class TablaTraining extends React.Component {
                                         content={ <CustomReply datos={{output: text}} flagTimestamp={false} /> }
                                         style={{width:'200px',height:'200px'}}
                                 >
-                                    <span style={{cursor:'pointer',borderBottom:'0.5px dotted grey',fontSize:'30px', fontWeight:'500'}}>
-                                        <span style={{marginRight:'10px',fontSize:'30px'}} >💬</span>
+                                    <span className="waiboc-tab-answer-example" >
+                                        <span style={{marginRight:'10px'}} >💬</span>
                                         {this.props.translate.form.checkAnswer}
                                     </span>
                                 </Popover>
@@ -373,8 +370,11 @@ export class TablaTraining extends React.Component {
                 />
                 {
                     this.state.flagWidgetTest==true ?
-                            <TestChatbotWidget  idAgent={this.props.chatbotConfig._id}
-                                                onWindowClose={()=>{this.setState({flagWidgetTest: false});}} />
+                            <TestChatbotWidget
+                                //idAgent={this.props.chatbotConfig._id}
+                                chatbotConfig={this.state.chatbotConfig}
+                                onWindowClose={()=>{this.setState({flagWidgetTest: false});}}
+                            />
                             : null
                 }
             </div>

@@ -1,11 +1,12 @@
 /*
 * FormNewIntent
 */
-import React                           from 'react' ;
-import { FormIntentName   }            from './FormIntentName'     ;
-import { FormIntentExamples }          from './FormIntentExamples' ;
-import { FormIntentAnswer }            from './FormIntentAnswer'   ;
-import { Modal, Typography, Steps, Icon }   from 'antd'  ;
+import React                                from 'react' ;
+import { FormIntentName   }                 from './FormIntentName'     ;
+import { FormIntentExamples }               from './FormIntentExamples' ;
+import { FormIntentAnswer }                 from './FormIntentAnswer'   ;
+import { Typography, Steps, Icon }          from 'antd'  ;
+import { Drawer }                           from 'antd'  ;
 //
 const { Step  }  = Steps      ;
 const { Title }  = Typography ;
@@ -91,7 +92,7 @@ export class FormNewIntent extends React.Component {
         //
         return(
             //
-            <Modal
+            <Drawer
                 title={
                     <div style={{width:'100%',color:'#012EFF', fontSize:'26px',fontWeight:'600'}} >
                         <div style={{marginLeft:'20%'}} >
@@ -102,13 +103,16 @@ export class FormNewIntent extends React.Component {
                         </div>
                     </div>
                 }
-                wrapClassName="waiboc-cl-modal-intent"
-                maskClosable={false}
+                width={ (window.innerWidth<797) ? '99%' : '80%' }
+                placement="right"
+                // wrapClassName="waiboc-cl-modal-intent"
+                closable={true}
                 style={{border:'0.5px dotted gray',marginTop:'25px',zIndex:'9992'}}
                 bodyStyle={{paddingTop:'0'}}
                 headerStyle={{padding:'5px 5px 5px 5px'}}
                 visible={this.state.modalVisible}
                 onCancel={(argEC)=>{this.props.onCancelModal(argEC);}}
+                onClose={(argEC)=>{this.props.onCancelModal(argEC);}}
                 footer={null}
             >
                 <div className="waiboc-cl-form" >
@@ -121,8 +125,7 @@ export class FormNewIntent extends React.Component {
                     </div>
                     <NextStepForm />
                 </div>
-            </Modal>
-            //
+            </Drawer>
         ) ;
     }
     //

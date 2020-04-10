@@ -132,13 +132,9 @@ module.exports = (argConfig,argDb) => {
             // console.log('....chatbotInfo.accessList: ',chatbotInfo.accessList) ;
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });
             if ( userConAcceso ){
-              /*
-              chatbotInfo.training = Object.assign(chatbotInfo.training,req.body.train) ;
-              delete chatbotInfo._v ; delete chatbotInfo.__v ;
-              */
              chatbotInfo.idChatbot = req.body._id || chatbotInfo.idChatbot ;
              chatbotInfo.train     = req.body.train || {} ;
-              return updateTraining( argConfig , argDb, req.user.email, chatbotInfo ) ;
+              return updateTraining( argConfig , argDb, req.user.email, chatbotInfo, true ) ;
             } else {
               console.log('...*** NO POSEE ACCESO AL CHATBOT:: ',userConAcceso) ;
               objResultado.code = 401 ;
@@ -179,11 +175,14 @@ module.exports = (argConfig,argDb) => {
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });
             if ( userConAcceso ){
               delete chatbotInfo._v ; delete chatbotInfo.__v ;
+              /*
               for ( let keyEntity in req.body.train ){
                 console.log('....VOY A BORRAR ENTITY:: keyEntity ') ;
                 delete chatbotInfo.training[ keyEntity ] ;
               }
-              return updateTraining( argConfig , argDb, req.user.email, chatbotInfo ) ;
+              */
+              chatbotInfo.train = req.body.train ;
+              return updateTraining( argConfig , argDb, req.user.email, chatbotInfo, true ) ;
             } else {
               console.log('...*** NO POSEE ACCESO AL CHATBOT:: ',userConAcceso) ;
               objResultado.code = 401 ;

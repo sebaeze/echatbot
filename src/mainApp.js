@@ -5,10 +5,6 @@ import React                               from "react"      ;
 import ReactDOM                            from "react-dom"  ;
 import { BrowserRouter as Router, Route }  from 'react-router-dom'   ;
 import { Layout  }                         from 'antd';
-/*
-import { WaibocReactWidget, CustomReply }               from 'waiboc-widget-react' ;
-console.log('...WaibocReactWidget: ',WaibocReactWidget,' CustomReply: ',CustomReply)  ;
-*/
 //
 import { Encabezado }                     from "./js/componentes/Encabezado" ;
 import PiePagina                          from "./js/componentes/PiePagina"  ;

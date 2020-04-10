@@ -57,6 +57,9 @@ header ul.ant-menu {
     padding: 0 !important ;
     z-index: 9992 !important ;
 }
+.waiboc-header-submenu ul {
+    min-height: 150px !important ;
+}
 /*   */
 .ant-menu-item > a, .ant-menu-item > span {
     font-size: 20px !important ;
@@ -950,7 +953,7 @@ div.react-bootstrap-table tbody tr:hover {
     font-size: 22px !important ;
 }
 #waiboc-main-node span{
-    font-size: 18px !important ;
+    font-size: 18px  ;
 }
 #waiboc-main-node span.emoji{
     position: relative !important ;
@@ -1148,6 +1151,22 @@ span.waiboc-span-emoticon:hover {
     /* background-color:white !important; */
     padding: 5px 5px 5px 5px !important;
 }
+.waiboc-tab-id-name {
+    cursor: pointer ;
+    padding-left: 5px ;
+    width: 100% ;
+    font-weight: 600 ;
+    font-size: 20px ;
+    color: #497EC0 ;
+    display: block ;
+    height: 22px ;
+}
+.waiboc-tab-answer-example {
+    cursor: pointer ;
+    border-bottom: 0.5px dotted grey ;
+    font-size: 22px !important ;
+    font-weight: 500 ;
+}
 /*   */
 #idFormContacto .ant-form-item-label label {
     font-size: 20px !important ;
@@ -1162,11 +1181,17 @@ span.waiboc-span-emoticon:hover {
     box-shadow: 0 0 5px #515151 !important ;
 }
 .waiboc-drawer ul.ant-menu.menu-header-mobile li.ant-menu-item {
-    height: 60px !important ;
+    height: 40px !important ;
     font-size: 20px !important ;
     font-weight: 600 !important ;
-    text-align: center !important ;
+    /* text-align: center !important ; */
+    text-align: left !important ;
+    width: 80% !important ;
+    padding-left: 10% !important ;
     z-index: 99999 !important ;
+}
+.waiboc-drawer ul.ant-menu.menu-header-mobile li.ant-menu-item.btn-login {
+    height: 60px !important ;
 }
 .waiboc-drawer ul.ant-menu.menu-header-mobile li.ant-menu-item > div:hover {
     text-decoration: underline !important ;
@@ -1187,5 +1212,16 @@ span.waiboc-span-emoticon:hover {
         border: 1px solid gray ;
         padding: 2.5px 2.5px 2.5px 2.5px ;
     }
+    /*
+    .waiboc-header-submenu {
+        width: 97% !important ;
+        margin-top: 40px !important  ;
+        margin-left: 1.5% !important ;
+    }
+    .waiboc-header-submenu ul {
+        background-color: #f7f7f7 !important ;
+        font-weight: 600 !important ;
+    }
+    */
 }
 /*   */

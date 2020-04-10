@@ -230,8 +230,8 @@ export class TablaChatbots extends React.Component {
                                                 }
                                                 style={{width:'200px',height:'200px'}}
                                         >
-                                            <span style={{cursor:'pointer',borderBottom:'0.5px dotted grey',fontSize:'30px', fontWeight:'500'}}>
-                                                <Icon type="code" style={{marginRight:'10px',fontSize:'30px'}} />
+                                            <span className="waiboc-tab-answer-example" >
+                                                <Icon type="code" style={{marginRight:'10px'}} />
                                                 {this.props.translate.checkWidgetCode}
                                             </span>
                                         </Popover>

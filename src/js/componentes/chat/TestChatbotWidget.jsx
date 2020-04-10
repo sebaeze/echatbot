@@ -1,7 +1,9 @@
 /*
 *
 */
-import React         from  'react' ;
+import React                               from 'react' ;
+import { CustomReply, WaibocReactWidget }  from 'waiboc-widget-react' ;
+/// import { CustomReply, WaibocReactWidget }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
 //
 export class TestChatbotWidget extends React.Component {
     constructor(props){
@@ -9,7 +11,17 @@ export class TestChatbotWidget extends React.Component {
         this.onWindowOpen  = this.onWindowOpen.bind(this) ;
         this.onWindowClose = this.onWindowClose.bind(this) ;
         this.state   = {
-            idAgent: this.props.idAgent
+            idAgent: this.props.idAgent,
+            flagVisible: false,
+            chatbotConfig: this.props.chatbotConfig
+        }
+    } ;
+    //
+    static getDerivedStateFromProps(newProps,state){
+        if ( JSON.stringify(newProps.chatbotConfig)!=JSON.stringify(state.chatbotConfig) ){
+            return {chatbotConfig: newProps.chatbotConfig} ;
+        } else {
+            return false ;
         }
     } ;
     //
@@ -21,13 +33,17 @@ export class TestChatbotWidget extends React.Component {
     //
     onWindowClose(){
         if ( this.props.onWindowClose && typeof this.props.onWindowClose=='function' ){
-            window.waiboc.widgetVisible(false) ;
+            //window.waiboc.widgetVisible(false) ;
             this.props.onWindowClose() ;
         }
     }
     //
     componentDidMount(){
         try {
+            this.setState({
+                flagVisible: true
+            }) ;
+            /*
             window.waiboc.initChatbotWidget({
                 idAgent: this.props.idAgent,
                 onWindowOpen: this.onWindowOpen,
@@ -37,6 +53,7 @@ export class TestChatbotWidget extends React.Component {
                     fontSize:'22px'
                 }
             }) ;
+            */
         } catch(errDM){
             console.dir(errDM) ;
         }
@@ -51,8 +68,13 @@ export class TestChatbotWidget extends React.Component {
     }
     //
     render(){
+        //
         return(
-            <div></div>
+            <WaibocReactWidget
+                idAgent={this.state.chatbotConfig._id}
+                backEndServer={ __URL_WIDGET__ }
+                options={{...this.state.chatbotConfig.options}}
+            />
         )
     }
     //

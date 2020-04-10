@@ -102,39 +102,39 @@ export const addNewFilesToChatbot = (argDb,argChatbotTrain,argConfig) => {
 } ;
 //
 let objResultado = { code: 0, result: {} } ;
-export const updateTraining = (argConfig,argDb,argEmail,argBotTrained) => {
+export const updateTraining = (argConfig,argDb,argEmail,argBotTrained,argFlagDeleteIntent=false) => {
   return new Promise(function(respData,respRech){
     try {
         //
         if (API_NLP==false){ API_NLP=argConfig.API[process.env.AMBIENTE||'dev'] || null } ;
         //
+        objResultado      = { code: 0, result: {} } ;
         let arrayPromises = [] ;
-        for ( let keyInt in argBotTrained.train ){
-          let elemIntent = argBotTrained.train[ keyInt ] ;
-          elemIntent.idChatbot = argBotTrained.idChatbot ;
-          // console.log('....kk: ',keyInt,' elemIntent: ',elemIntent) ;
-          arrayPromises.push(
-            argDb.intents.add( elemIntent )
-          ) ;
-        }
         //
-        //argDb.chatbot.add( {...argBotTrained}  )
+        for ( let keyInt in argBotTrained.train ){
+          let elemIntent       = argBotTrained.train[ keyInt ] ;
+          elemIntent.idChatbot = argBotTrained.idChatbot ;
+          let tempPromise      = false ;
+          if ( argFlagDeleteIntent==true ){
+            tempPromise = argDb.intents.delete( elemIntent ) ;
+          } else {
+            tempPromise = argDb.intents.add( elemIntent ) ;
+          }
+          //
+          arrayPromises.push( tempPromise ) ;
+          //
+        } ;
+        //
         Promise.all( arrayPromises )
             .then((respUpd)=>{
-              //console.log('...finisg train:: respUpd: ',respUpd) ;
-              /*
-              if ( respUpd.length && respUpd.length>0 ){ respUpd=respUpd[0]; }
-              respUpd = respUpd._doc ? respUpd._doc : respUpd ;
-              objResultado.code   = 0 ;
-              objResultado.result = respUpd.training ;
-              */
+              //
               objResultado.code   = 0 ;
               objResultado.result = respUpd ;
               let tempReqbody = { idAgente: argBotTrained._id, emailUserid: argEmail, secretAPInlp: API_NLP.NLP_TRAIN_SECRET } ;
               //
               let reqOptions = { url: API_NLP.NLP_TRAIN, method: 'POST', data: tempReqbody, ca: rootCA } ;
               return axios( reqOptions ) ;
-            //
+              //
             })
             .then((respTrainApi)=>{
               respData(objResultado) ;
@@ -144,6 +144,7 @@ export const updateTraining = (argConfig,argDb,argEmail,argBotTrained) => {
               objResultado.result = {error: errUT, message: errUT} ;
               respRech(objResultado) ;
             }) ;
+        //
     } catch(errUT){
       respRech(errUT) ;
     }

@@ -299,7 +299,7 @@ export class FormIntentAnswerBase extends React.Component {
                                         initialValue: this.props.data.intentAnswer.api||'',
                                         rules: [{ required: true, message: this.props.translate.form.errorAnswerApi, whitespace: true }]
                                     })
-                                    (<Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />)}
+                                    (<Input allowClear size="large" ref={(argRef)=>{ if ( argRef && (window.innerWidth>797) ){ argRef.focus(); } }} />)}
                                 </Form.Item>
                                 : null
                         }

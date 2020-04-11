@@ -134,7 +134,7 @@ module.exports = (argConfig,argDb) => {
             if ( userConAcceso ){
              chatbotInfo.idChatbot = req.body._id || chatbotInfo.idChatbot ;
              chatbotInfo.train     = req.body.train || {} ;
-              return updateTraining( argConfig , argDb, req.user.email, chatbotInfo, true ) ;
+              return updateTraining( argConfig , argDb, req.user.email, chatbotInfo, false ) ;
             } else {
               console.log('...*** NO POSEE ACCESO AL CHATBOT:: ',userConAcceso) ;
               objResultado.code = 401 ;

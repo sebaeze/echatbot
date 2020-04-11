@@ -68,7 +68,7 @@ class FormIntentExamplesBase extends React.Component {
                                     textPlaceholder={this.props.translate.form.textAddIntentExample}
                                     fieldName="intentExamples"
                                     type="array"
-                                    focus={true}
+                                    focus={ (window.innerWidth>797) ? true : false }
                                     defaultTypefield="string"
                                     textAdd={this.props.translate.form.textAddIntentExample}
                                     description={this.props.translate.form.nonValidIntentExample}

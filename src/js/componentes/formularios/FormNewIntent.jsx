@@ -12,6 +12,19 @@ const { Step  }  = Steps      ;
 const { Title }  = Typography ;
 const INTENT_DEF = {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{} } ;
 //
+const TitleStep = (props) => {
+    //
+    let spanProps = { className: "waiboc-intent-step" } ;
+    let flagTargetCompleted = props.stepCompleted[ String(props.targetFormStep) ] || false ;
+    if ( flagTargetCompleted==true ){
+        spanProps.className = "waiboc-intent-step with-link" ;
+        spanProps.onClick   = ()=>{ props.goToFormStep({ targetFormStep: props.targetFormStep }) } ;
+    }
+    //
+    return( <span {...spanProps} > {props.text} </span> ) ;
+    //
+} ;
+//
 export class FormNewIntent extends React.Component {
     constructor(props){
         super(props) ;
@@ -21,10 +34,12 @@ export class FormNewIntent extends React.Component {
             flagNewIntent: this.props.flagNewIntent,
             enviadoOk:false,
             dataNewIntent: this.props.data!=false ? {...this.props.data} : {...INTENT_DEF},
+            stepCompleted:  this.props.flagNewIntent==true ? {"0": false, "1": false, "2":false } : {"0": true, "1": true, "2": true },
             formStep: 0,
         } ;
         this.onNextStep         = this.onNextStep.bind(this) ;
         this.onPrevStep         = this.onPrevStep.bind(this) ;
+        this.goToFormStep       = this.goToFormStep.bind(this) ;
     }
     //
     componentDidMount(){}
@@ -43,10 +58,29 @@ export class FormNewIntent extends React.Component {
         }
     }
     //
+    goToFormStep(argOptions){
+        try {
+            let targetStep = argOptions.targetFormStep ;
+            if ( targetStep!=this.state.formStep ){
+                if ( typeof targetStep=="string" ){
+                    targetStep = parseInt( targetStep.trim() ) ;
+                }
+                this.setState({ formStep: targetStep }) ;
+            }
+        } catch(errGTF){
+            console.log('....ERROR: ',errGTF) ;
+        }
+    } ;
+    //
     onNextStep(argNextStep){
         try {
+            //
+            let tempStepCompleted = {...this.state.stepCompleted} ;
+            tempStepCompleted[ String(this.state.formStep) ] = true ;
+            //
             let newState = {
                 dataNewIntent: Object.assign({...this.state.dataNewIntent},argNextStep),
+                stepCompleted: tempStepCompleted,
                 formStep: this.state.formStep+1
             }
             if ( newState.formStep>2 ){
@@ -84,29 +118,27 @@ export class FormNewIntent extends React.Component {
             )
         }
         //
-        const TitleStep = (argProps) => {
-            return(
-            <span style={{fontSize:'18px', fontWeight:'600'}}>{argProps.text}</span>
-            )
-        }
-        //
         return(
             //
             <Drawer
                 title={
                     <div style={{width:'100%',color:'#012EFF', fontSize:'26px',fontWeight:'600'}} >
-                        <div style={{marginLeft:'20%'}} >
+                        <div style={{marginLeft:'35%',height:'50px',lineHeight:'50px'}} >
                             <Icon type="edit" style={{color:'green'}}/>
                             <span style={{marginLeft:'1%',color:'#012EFF',textAlign:'center',padding:'5px 5px 5px 5px', marginBottom:'0'}} >
-                                {this.props.translate.newIntent}
+                                {
+                                this.state.flagNewIntent==true
+                                    ?   this.props.translate.newIntent
+                                    :   this.state.dataNewIntent.intentName||this.state.dataNewIntent.entity
+                                }
                             </span>
                         </div>
                     </div>
                 }
                 width={ (window.innerWidth<797) ? '99%' : '80%' }
                 placement="right"
-                // wrapClassName="waiboc-cl-modal-intent"
                 closable={true}
+                className="waiboc-drawer"
                 style={{border:'0.5px dotted gray',marginTop:'25px',zIndex:'9992'}}
                 bodyStyle={{paddingTop:'0'}}
                 headerStyle={{padding:'5px 5px 5px 5px'}}
@@ -118,9 +150,9 @@ export class FormNewIntent extends React.Component {
                 <div className="waiboc-cl-form" >
                     <div style={{marginTop:'20px',marginBottom:'10px'}}>
                         <Steps current={this.state.formStep}>
-                            <Step key="1" title={<TitleStep text={this.props.translate.form.name}     />}  icon={this.state.formStep==0 ? <Icon type="loading" /> : false } />
-                            <Step key="2" title={<TitleStep text={this.props.translate.form.examples} />} icon={this.state.formStep==1 ? <Icon type="loading" /> : false } />
-                            <Step key="3" title={<TitleStep text={this.props.translate.form.answer}   />} icon={this.state.formStep==2 ? <Icon type="loading" /> : false } />
+                            <Step key="1" title={<TitleStep targetFormStep={0} stepCompleted={this.state.stepCompleted} goToFormStep={this.goToFormStep} text={this.props.translate.form.name}     />} icon={this.state.formStep==0 ? <Icon type="loading" /> : false } />
+                            <Step key="2" title={<TitleStep targetFormStep={1} stepCompleted={this.state.stepCompleted} goToFormStep={this.goToFormStep} text={this.props.translate.form.examples} />} icon={this.state.formStep==1 ? <Icon type="loading" /> : false } />
+                            <Step key="3" title={<TitleStep targetFormStep={2} stepCompleted={this.state.stepCompleted} goToFormStep={this.goToFormStep} text={this.props.translate.form.answer}   />} icon={this.state.formStep==2 ? <Icon type="loading" /> : false } />
                         </Steps>
                     </div>
                     <NextStepForm />

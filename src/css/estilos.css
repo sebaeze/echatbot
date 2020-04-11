@@ -99,6 +99,29 @@ header ul.ant-menu {
 .ant-carousel .slick-slide h3 {
     color: #fff;
 }
+.waiboc-drawer .ant-drawer-close {
+    border: 0.5px dotted gray ;
+    border-radius: 25px ;
+    padding: 1px 1px 1px 1px ;
+    transition: box-shadow 0.6s ;
+}
+.waiboc-drawer .ant-drawer-close:hover {
+    box-shadow: 0 0 5px #515151 ;
+}
+.waiboc-drawer .ant-drawer-close i {
+    font-size: 25px  ;
+    font-weight: 600 ;
+}
+.waiboc-intent-step {
+    font-weight: 600 ;
+    font-size: 20px ;
+}
+.waiboc-intent-step.with-link {
+    cursor: pointer ;
+}
+.waiboc-intent-step.with-link:hover {
+    text-decoration: underline ;
+}
 /*   */
 .whatsapp-icon {
     position: fixed ;
@@ -1049,6 +1072,9 @@ span.waiboc-span-emoticon:hover {
 }
 #waiboc-main-node .ant-row .ant-form-item, .waiboc-cl-form .ant-row .ant-form-item{
     margin-bottom: 5px !important ;
+}
+.waiboc-cl-form .ant-form-item-children .anticon-minus-circle-o, .waiboc-cl-form .ant-form-item-children .dynamic-delete-button {
+
 }
 /*  */
 #waiboc-main-node .fadeOut{

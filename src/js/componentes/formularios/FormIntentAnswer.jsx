@@ -3,9 +3,8 @@
 */
 import React                                             from 'react' ;
 import axios                                             from 'axios' ;
-import { Button, Form, Input, Tooltip, Icon,  Select, Upload, Spin, message  }   from 'antd'  ;
-// import Picker                                            from 'emoji-picker-react' ;
-import { Picker }                                        from 'emoji-mart' ;
+import { Button, Form, Input, Tooltip, Icon,  Select }   from 'antd'  ;
+import { Row, Col, Upload, Spin, message }               from 'antd'  ;
 import { FormDynamicInputOption }                        from './FormDynamicInputOption' ;
 import { InputTextAnswer }                               from '../input/InputTextEmojiAttachment' ;
 //
@@ -207,139 +206,151 @@ export class FormIntentAnswerBase extends React.Component {
         let arrayOptions      = this.props.data.intentAnswer.options || [] ;
         //
         return(
-            //
-                <Form >
-                    <Form.Item
-                        label={ <span>{this.props.translate.form.answerType}</span> }
-                    >
-                        {getFieldDecorator('type', {
-                            initialValue: this.props.data.intentAnswer.type||'text',
-                            rules: [{ required: true, message: this.props.translate.form.errorLanguage, whitespace: true }]
-                        })
-                        (
-                            <Select
-                                placeholder={this.props.translate.form.selectTypeOfAnswer}
-                                onChange={this.handleSelectChange}
-                                getPopupContainer={(trigger) => {
-                                    return trigger.parentNode ;
-                                }}
-                                size="large"
-                            >
-                                {
-                                    Object.values(this.answerTypes).map((elemType,idxType)=>{
-                                    return(
-                                            <Select.Option value={elemType}
-                                                key={idxType}>{this.props.translate.answertType[elemType]||elemType}</Select.Option>
-                                        )
-                                    })
-                                }
-                            </Select>
-                        )
-                        }
-                    </Form.Item>
-                    <Form.Item
-                        hasFeedback
-                        label={ <span>
-                                    Text
-                                    <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
-                                </span>}
-                    >
-                        <InputTextAnswer
-                            fieldName={"text"}
-                            form={this.props.form}
-                            errorMsg={this.props.translate.form.errorAnswerText}
-                            customStyle={{width:'450px'}}
-                            initialValue={this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||''}
-                            onChangeValue={(argEE)=>{
-                                this.props.form.setFieldsValue({ 'text': argEE.target.value||'' });
-                            }}
-                        />
-                    </Form.Item>
-                    {
-                        this.state.fieldPanel==this.answerTypes.OPTIONS ?
-                            <Form.Item
-                                hasFeedback
-                                label={ <span>
-                                            Options
-                                            <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
-                                        </span>}
-                            >
-                                <FormDynamicInputOption
-                                    form={this.props.form}
-                                    styleButton={{width:'60%'}}
-                                    textPlaceholderLabel={this.props.translate.form.optionsLabelToDisplay}
-                                    textPlaceholderValue={this.props.translate.form.optionsValueSelect}
-                                    initialValues={arrayOptions}
-                                    chatbotTraining={this.props.chatbotConfig.training}
-                                    fieldName="options"
-                                    type="array"
-                                    defaultTypefield="string"
-                                    textAdd={this.props.translate.form.textAddOption}
-                                    description={this.props.translate.form.nonValidOption}
-                                />
-                            </Form.Item>
-                            : null
-                    }
-                    {
-                        this.state.fieldPanel==this.answerTypes.API ?
-                            <Form.Item
-                                hasFeedback
-                                label={ <span>
-                                            REST API Url
-                                            <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
-                                        </span>}
-                            >
-                                {getFieldDecorator('api', {
-                                    initialValue: this.props.data.intentAnswer.api||'',
-                                    rules: [{ required: true, message: this.props.translate.form.errorAnswerApi, whitespace: true }]
-                                })
-                                (<Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />)}
-                            </Form.Item>
-                            : null
-                    }
-                    <Form.Item label={ <span>{this.props.translate.form.fileDragger}
-                                            <Tooltip  placement="bottomRight" title={this.props.translate.form.newFileClickDrag} ><Icon type="question-circle-o" /> </Tooltip>
-                                        </span>}
-                    >
-                        {getFieldDecorator('files',
-                            {
-                                valuePropName: 'fileList',
-                                getValueFromEvent: this.normFile,
-                                initialValue: filesInitialValue
-                            }
-                        )
+            <Row style={{paddingTop:'30px'}} >
+                <Col xs={0}  md={0}  lg={4}  xl={4}  xxl={4} ></Col>
+                <Col xs={24} md={24} lg={14} xl={14} xxl={14} >
+                    <Form>
+                        <Form.Item
+                            label={ <span>{this.props.translate.form.answerType}</span> }
+                            labelCol={{xs:24,md:24,lg:24,xl:24,xxl:24}}
+                            wrapperCol={{xs:24,md:24,lg:10,xl:10,xxl:10}}
+                        >
+                            {getFieldDecorator('type', {
+                                initialValue: this.props.data.intentAnswer.type||'text',
+                                rules: [{ required: true, message: this.props.translate.form.errorLanguage, whitespace: true }]
+                            })
                             (
-                            <Upload.Dragger name="files"
-                                beforeUpload={beforeUpload}
-                                onChange={this.handleChange}
-                                method="post"
-                                action="/api/files"
-                                customRequest={this.draggerCustomRequest}
-                            >
-                                <p className="ant-upload-drag-icon"><Icon type="inbox" /></p>
-                                <p className="ant-upload-text">{this.props.translate.form.newFileClickDrag}</p>
-                            </Upload.Dragger>
-                            )
-                        }
-                    </Form.Item>
-                    {
-                        this.state.flagUploading==false ?
-                            <Form.Item>
-                                <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
-                                    {this.props.translate.form.submit}
-                                </Button>
-                                <Button
-                                    style={{marginLeft:'10px'}}
-                                    onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
+                                <Select
+                                    placeholder={this.props.translate.form.selectTypeOfAnswer}
+                                    onChange={this.handleSelectChange}
+                                    getPopupContainer={(trigger) => {
+                                        return trigger.parentNode ;
+                                    }}
+                                    size="large"
                                 >
-                                    <Icon type="left" />
-                                    {this.props.translate.previous}
-                                </Button>
-                            </Form.Item>
-                            :
-                            <Spin size="large" />
-                    }
-                </Form>
+                                    {
+                                        Object.values(this.answerTypes).map((elemType,idxType)=>{
+                                        return(
+                                                <Select.Option value={elemType}
+                                                    key={idxType}>{this.props.translate.answertType[elemType]||elemType}</Select.Option>
+                                            )
+                                        })
+                                    }
+                                </Select>
+                            )
+                            }
+                        </Form.Item>
+                        <Form.Item
+                            hasFeedback
+                            label={ <span>
+                                        Text
+                                        <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                    </span>
+                            }
+                            labelCol={{xs:24,md:24,lg:24,xl:24,xxl:24}}
+                            wrapperCol={{xs:24,md:24,lg:16,xl:16,xxl:16}}
+                        >
+                            <InputTextAnswer
+                                fieldName={"text"}
+                                form={this.props.form}
+                                errorMsg={this.props.translate.form.errorAnswerText}
+                                //customStyle={{width:'450px'}}
+                                initialValue={this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||''}
+                                onChangeValue={(argEE)=>{
+                                    this.props.form.setFieldsValue({ 'text': argEE.target.value||'' });
+                                }}
+                            />
+                        </Form.Item>
+                        {
+                            this.state.fieldPanel==this.answerTypes.OPTIONS ?
+                                <Form.Item
+                                    hasFeedback
+                                    label={ <span>
+                                                Options
+                                                <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                            </span>}
+                                >
+                                    <FormDynamicInputOption
+                                        form={this.props.form}
+                                        styleButton={{width:'60%'}}
+                                        textPlaceholderLabel={this.props.translate.form.optionsLabelToDisplay}
+                                        textPlaceholderValue={this.props.translate.form.optionsValueSelect}
+                                        initialValues={arrayOptions}
+                                        chatbotTraining={this.props.chatbotConfig.training}
+                                        fieldName="options"
+                                        type="array"
+                                        defaultTypefield="string"
+                                        textAdd={this.props.translate.form.textAddOption}
+                                        description={this.props.translate.form.nonValidOption}
+                                    />
+                                </Form.Item>
+                                : null
+                        }
+                        {
+                            this.state.fieldPanel==this.answerTypes.API ?
+                                <Form.Item
+                                    hasFeedback
+                                    label={ <span>
+                                                REST API Url
+                                                <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                            </span>}
+                                >
+                                    {getFieldDecorator('api', {
+                                        initialValue: this.props.data.intentAnswer.api||'',
+                                        rules: [{ required: true, message: this.props.translate.form.errorAnswerApi, whitespace: true }]
+                                    })
+                                    (<Input allowClear size="large" ref={(argRef)=>{argRef.focus();}} />)}
+                                </Form.Item>
+                                : null
+                        }
+                        <Form.Item label={ <span>{this.props.translate.form.fileDragger}
+                                                <Tooltip  placement="bottomRight" title={this.props.translate.form.newFileClickDrag} ><Icon type="question-circle-o" /> </Tooltip>
+                                            </span>
+                                    }
+                                    wrapperCol={{xs:24,md:24,lg:16,xl:16,xxl:16}}
+                        >
+                            {getFieldDecorator('files',
+                                {
+                                    valuePropName: 'fileList',
+                                    getValueFromEvent: this.normFile,
+                                    initialValue: filesInitialValue
+                                }
+                            )
+                                (
+                                <Upload.Dragger name="files"
+                                    beforeUpload={beforeUpload}
+                                    onChange={this.handleChange}
+                                    method="post"
+                                    action="/api/files"
+                                    customRequest={this.draggerCustomRequest}
+                                >
+                                    <p className="ant-upload-drag-icon"><Icon type="inbox" /></p>
+                                    <p className="ant-upload-text">{this.props.translate.form.newFileClickDrag}</p>
+                                </Upload.Dragger>
+                                )
+                            }
+                        </Form.Item>
+                        {
+                            this.state.flagUploading==false
+                                ?   <Form.Item style={{paddingTop:'15px',paddingBottom:'15px'}} >
+                                        <Button type="primary" size="large" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
+                                            {this.props.translate.form.submit}
+                                        </Button>
+                                        <Button
+                                            style={{marginLeft:'10px'}}
+                                            size="large"
+                                            onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
+                                        >
+                                            <Icon type="left" />
+                                            {this.props.translate.previous}
+                                        </Button>
+                                    </Form.Item>
+                                :
+                                <Spin size="large" />
+                        }
+                    </Form>
+                </Col>
+            </Row>
         ) ;
     }
     //

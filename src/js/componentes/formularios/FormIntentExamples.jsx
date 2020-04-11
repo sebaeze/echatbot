@@ -6,6 +6,7 @@ FormIntentExamples
 */
 import React                                   from 'react' ;
 import { Form, Button, Tooltip, Icon, Spin }   from 'antd'  ;
+import { Row, Col }                            from 'antd'  ;
 import { FormDynamicInputText }                from  './FormDynamicInputText' ;
 //
 class FormIntentExamplesBase extends React.Component {
@@ -49,51 +50,55 @@ class FormIntentExamplesBase extends React.Component {
     render(){
         //
         return(
-            //
-            <Form onSubmit={(argEV)=>{argEV.preventDefault();}} >
-                <Form.Item
-                    label={ <span>{this.props.translate.form.intentExamples}
-                                <Tooltip  placement="topRight" title={this.props.translate.tooltip.intentExamples}>
-                                    <Icon type="question-circle-o" />
-                                </Tooltip>
-                            </span>
-                        }
-                >
-                    {
-                        <FormDynamicInputText
-                            form={this.props.form}
-                            textPlaceholder={this.props.translate.form.textAddIntentExample}
-                            fieldName="intentExamples"
-                            type="array"
-                            focus={true}
-                            defaultTypefield="string"
-                            textAdd={this.props.translate.form.textAddIntentExample}
-                            description={this.props.translate.form.nonValidIntentExample}
-                            translate={this.props.translate}
-                        />
-                    }
-                </Form.Item>
-                <Form.Item>
-                    {
-                        this.state.flagSpinner==true ?
-                            <Spin size="large" />
-                            :
-                            <div>
-                                <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
-                                    {this.props.translate.next}
-                                    <Icon type="right" />
-                                </Button>
-                                <Button
-                                    style={{marginLeft:'10px'}}
-                                    onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
-                                >
-                                    <Icon type="left" />
-                                    {this.props.translate.previous}
-                                </Button>
-                            </div>
-                    }
-                </Form.Item>
-            </Form>
+            <Row style={{paddingTop:'30px'}} >
+                <Col xs={0}  md={0}  lg={5}  xl={5}  xxl={5} ></Col>
+                <Col xs={24} md={24} lg={12} xl={12} xxl={12} >
+                    <Form onSubmit={(argEV)=>{argEV.preventDefault();}} >
+                        <Form.Item
+                            label={ <span>{this.props.translate.form.intentExamples}
+                                        <Tooltip  placement="topRight" title={this.props.translate.tooltip.intentExamples}>
+                                            <Icon type="question-circle-o" />
+                                        </Tooltip>
+                                    </span>
+                                }
+                        >
+                            {
+                                <FormDynamicInputText
+                                    form={this.props.form}
+                                    textPlaceholder={this.props.translate.form.textAddIntentExample}
+                                    fieldName="intentExamples"
+                                    type="array"
+                                    focus={true}
+                                    defaultTypefield="string"
+                                    textAdd={this.props.translate.form.textAddIntentExample}
+                                    description={this.props.translate.form.nonValidIntentExample}
+                                    translate={this.props.translate}
+                                />
+                            }
+                        </Form.Item>
+                        <Form.Item>
+                            {
+                                this.state.flagSpinner==true ?
+                                    <Spin size="large" />
+                                    :
+                                    <div>
+                                        <Button type="primary" size="large" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
+                                            {this.props.translate.next}
+                                            <Icon type="right" />
+                                        </Button>
+                                        <Button size="large"
+                                            style={{marginLeft:'10px'}}
+                                            onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
+                                        >
+                                            <Icon type="left" />
+                                            {this.props.translate.previous}
+                                        </Button>
+                                    </div>
+                            }
+                        </Form.Item>
+                    </Form>
+                </Col>
+            </Row>
         ) ;
     }
     //

@@ -1,8 +1,9 @@
 /*
 *
 */
-import React                   from 'react' ;
-import { Select, Form, Input, Button, Tooltip, Icon }   from 'antd'  ;
+import React                             from 'react' ;
+import { Select, Form, Input, Button }   from 'antd'  ;
+import { Row, Col, Tooltip, Icon     }   from 'antd'  ;
 //
 class FormIntentNameBase extends React.Component {
     constructor(props){
@@ -43,14 +44,6 @@ class FormIntentNameBase extends React.Component {
     //
     validateIntentName(rule, value, callback){
         try {
-            /*
-            const { form } = this.props;
-            if (value && this.state.confirmDirty) {
-              form.validateFields(['confirm'], { force: true });
-            }
-            */
-            // let flagValid = new RegExp('^([a-zA-Z0-9]+[_-])*[a-zA-Z0-9]+\.[a-zA-Z0-9]+$').test( value ) ;
-            //let flagValid = new RegExp('^([a-zA-Z0-9][_-])+$').test( value ) ;
             let flagValid = new RegExp('^[-_a-zA-Z0-9]+$').test( value ) ;
             console.log('...value: ',value,' flagValid: ',flagValid) ;
             callback();
@@ -63,61 +56,64 @@ class FormIntentNameBase extends React.Component {
         //
         const { getFieldDecorator, getFieldError } = this.props.form ;
         return(
-            //
-            <Form onSubmit={(argEV)=>{argEV.preventDefault()}} >
-                <Form.Item
-                    hasFeedback
-                    label={ <span>
-                                Intent
-                                <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.intentName} >
-                                <Icon type="question-circle-o" /> </Tooltip>
-                            </span>}
-                >
-                    {getFieldDecorator('intentName', {
-                            initialValue: this.props.data.intentName||'',
-                            suppressWarning: true ,
-                            normalize: (value)=>(value || '').toUpperCase(),
-                            rules: [
-                                { required: true, message: this.props.translate.form.errorIntentName } ,
-                                { pattern: new RegExp('^[-_a-zA-Z0-9]+$') , message: this.props.translate.form.errorIntentNameInvalid }
-                            ],
-                    })
-                    ( <Input allowClear size="large" style={{fontWeight:'600'}}
-                             disabled={this.props.flagNewIntent==true ? false : true}
-                             ref={(argRef)=>{ /*this.firstNode=argRef; */argRef.focus(); }}
-                      />
-                    )}
-                </Form.Item>
-                <Form.Item
-                    label={ <span>{this.props.translate.form.selectLanguage}</span> }
-                >
-                    {getFieldDecorator('intentLanguage', {
-                        initialValue: this.props.data.intentLanguage||'',
-                        rules: [{ required: true, message: this.props.translate.form.errorLanguage, whitespace: true }]
-                    })
-                    (
-                        <Select
-                            placeholder={this.props.translate.form.selectLanguage}
-                            onChange={this.handleSelectChange}
-                            getPopupContainer={(trigger) => {
-                                return trigger.parentNode ;
-                            }}
-                            size="large"
+            <Row style={{paddingTop:'30px'}} >
+                <Col xs={0}  md={0}  lg={5}  xl={5}  xxl={5} ></Col>
+                <Col xs={24} md={24} lg={12} xl={12} xxl={12} >
+                    <Form onSubmit={(argEV)=>{argEV.preventDefault()}} >
+                        <Form.Item
+                            hasFeedback
+                            label={ <span>
+                                        Intent
+                                        <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.intentName} >
+                                        <Icon type="question-circle-o" /> </Tooltip>
+                                    </span>}
                         >
-                            <Select.Option value="es" key="1">Español</Select.Option>
-                            <Select.Option value="en" key="2">English</Select.Option>
-                            <Select.Option value="pt" key="3">Português</Select.Option>
-                        </Select>
-                    )
-                    }
-                </Form.Item>
-                <Form.Item>
-                    <Button type="primary" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
-                        {this.props.translate.next}
-                        <Icon type="right" />
-                    </Button>
-                </Form.Item>
-            </Form>
+                            {getFieldDecorator('intentName', {
+                                    initialValue: this.props.data.intentName||'',
+                                    suppressWarning: true ,
+                                    normalize: (value)=>(value || '').toUpperCase(),
+                                    rules: [
+                                        { required: true, message: this.props.translate.form.errorIntentName } ,
+                                        { pattern: new RegExp('^[-_a-zA-Z0-9]+$') , message: this.props.translate.form.errorIntentNameInvalid }
+                                    ],
+                            })
+                            ( <Input allowClear size="large" style={{fontWeight:'600'}}
+                                    disabled={this.props.flagNewIntent==true ? false : true}
+                                    ref={(argRef)=>{ /*this.firstNode=argRef; */argRef.focus(); }}
+                            />
+                            )}
+                        </Form.Item>
+                        <Form.Item
+                            label={ <span>{this.props.translate.form.selectLanguage}</span> } >
+                            {getFieldDecorator('intentLanguage', {
+                                initialValue: this.props.data.intentLanguage||'',
+                                rules: [{ required: true, message: this.props.translate.form.errorLanguage, whitespace: true }]
+                            })
+                            (
+                                <Select
+                                    placeholder={this.props.translate.form.selectLanguage}
+                                    onChange={this.handleSelectChange}
+                                    getPopupContainer={(trigger) => {
+                                        return trigger.parentNode ;
+                                    }}
+                                    size="large"
+                                >
+                                    <Select.Option value="es" key="1">Español</Select.Option>
+                                    <Select.Option value="en" key="2">English</Select.Option>
+                                    <Select.Option value="pt" key="3">Português</Select.Option>
+                                </Select>
+                            )
+                            }
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" size="large" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
+                                {this.props.translate.next}
+                                <Icon type="right" />
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Col>
+            </Row>
         ) ;
     }
     //

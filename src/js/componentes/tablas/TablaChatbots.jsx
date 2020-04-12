@@ -4,15 +4,12 @@
 import React                                           from 'react' ;
 import { Table, Typography, Input, Button, Icon }      from 'antd'  ;
 import { Popconfirm, Row, Col, Popover, notification } from 'antd'  ;
-import { Tooltip }                                     from 'antd'  ;
 import { api }                                         from '../../api/api' ;
 import { FormNewChatbot }                              from '../formularios/FormNewChatbot' ;
 import { CuerpoEditBot  }                              from "../cuerpoPagina/CuerpoEditBot" ;
 import { copy2Clipboard, widgetCode }                  from '../../utils/utiles' ;
 import SyntaxHighlighter                               from 'react-syntax-highlighter' ;
 import { PARAMETROS }                                  from '../../utils/parametros';
-//
-const { Title } = Typography ;
 //
 export class TablaChatbots extends React.Component {
     constructor(props){
@@ -77,6 +74,11 @@ export class TablaChatbots extends React.Component {
             api.chatbot.delete(argChatbot)
                 .then((respADD)=>{
                     if ( respADD.result.length>0 ){ respADD.result=respADD.result[0]; }
+                    //
+                    let tempArrayBots = this.state.arrayChatbots.filter((elemBot)=>{ return elemBot._id!=argChatbot._id ; }) ;
+                    this.setState({arrayChatbots: tempArrayBots, flagSpinner: false}) ;
+                    //
+                    /*
                     let indexBot      = this.state.arrayChatbots.findIndex((elemState)=>{
                         return elemState._id==respADD.result._id ;
                     }) ;
@@ -92,6 +94,7 @@ export class TablaChatbots extends React.Component {
                     } else {
                         this.setState({flagSpinner: false}) ;
                     }
+                    */
                 })
                 .catch((respErr)=>{
                     console.dir(respErr) ;
@@ -129,6 +132,9 @@ export class TablaChatbots extends React.Component {
     //
     addNewChatbot(argObjChatbot){
         try {
+            //
+            
+            //
             this.setState({flagSpinner: true}) ;
             api.chatbot.add(argObjChatbot)
                 .then((respADD)=>{

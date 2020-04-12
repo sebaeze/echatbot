@@ -1,7 +1,7 @@
 /*
 *
 */
-import React                               from "react"      ;
+import React, { Suspense }                 from "react"      ;
 import ReactDOM                            from "react-dom"  ;
 import { BrowserRouter as Router, Route }  from 'react-router-dom'   ;
 import { Layout  }                         from 'antd';
@@ -13,6 +13,7 @@ import SitemapCuerpo                      from "./js/componentes/cuerpoPagina/Si
 import { CuerpoInicio }                   from "./js/componentes/cuerpoPagina/CuerpoInicio"  ;
 import { CuerpoAbout  }                   from "./js/componentes/cuerpoPagina/CuerpoAbout"   ;
 import { CuerpoPrices }                   from "./js/componentes/cuerpoPagina/CuerpoPrices"  ;
+import ChatbotHome                        from "./js/componentes/chat/ChatbotHome" ;
 import FormContacto                       from "./js/componentes/formularios/FormContacto" ;
 //
 import { languageLocale }                 from "./js/utils/utiles" ;
@@ -26,6 +27,8 @@ import './css/estilos.css' ;
 import './css/estilosContacto.css' ;
 import './css/estilosInicial.css' ;
 import './css/estilosAnimaciones.css' ;
+//
+const ChatbotWindow = React.lazy( ()=> import('./js/componentes/chat/ChatbotHome') ) ;
 //
 export class App extends React.Component {
   constructor(props){
@@ -44,6 +47,9 @@ export class App extends React.Component {
       <Layout id="waiboc-main-node"  style={{ background: '#fff',padding: '0' }}>
           <Router>
             <Encabezado translate={this.translate} />
+            <Suspense fallback={ <div style={{width:'100%',height:'30px',fontSize:'22px',zIndex:'999999',position:'fixed',top:'110px'}}>Loading...</div> } >
+              <ChatbotWindow />
+            </Suspense>
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
               <Route exact path="/"                      component={() =>        <CuerpoInicio  translate={this.translate} configuracion={configApp}   />}  />
               <Route exact path="/about"                 component={(argMach) => <CuerpoAbout   translate={this.translate} configuracion={configApp} {...argMach} />}  />

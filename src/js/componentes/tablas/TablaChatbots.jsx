@@ -306,6 +306,7 @@ export class TablaChatbots extends React.Component {
             arrayDatos = this.state.arrayChatbots.map((elemE,idxE)=>{
                 return({
                     ...elemE,
+                    botName: elemE.botName||'',
                     key: idxE
                 }) ;
             }) ;
@@ -315,6 +316,7 @@ export class TablaChatbots extends React.Component {
                     // arrayDatos.push( elemTC ) ;
                     arrayDatos.push({
                         ...elemTC,
+                        botName: elemTC.botName||'',
                         key: idxE
                     }) ;
                 }

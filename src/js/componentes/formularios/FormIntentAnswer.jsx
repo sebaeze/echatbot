@@ -243,18 +243,22 @@ export class FormIntentAnswerBase extends React.Component {
                         <Form.Item
                             hasFeedback
                             label={ <span>
-                                        Text
-                                        <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                        <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} >
+                                            {this.props.translate.tooltip.answerSimpleText}
+                                            <span className="waiboc-icon" >
+                                                <Icon type="question-circle-o" />
+                                            </span>
+                                        </Tooltip>
                                     </span>
                             }
                             labelCol={{xs:24,md:24,lg:24,xl:24,xxl:24}}
-                            wrapperCol={{xs:24,md:24,lg:16,xl:16,xxl:16}}
+                            wrapperCol={{xs:24,md:20,lg: 16,xl: 16,xxl: 16}}
                         >
                             <InputTextAnswer
                                 fieldName={"text"}
                                 form={this.props.form}
                                 errorMsg={this.props.translate.form.errorAnswerText}
-                                //customStyle={{width:'450px'}}
+                                customStyle={{width:'100%'}}
                                 initialValue={this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||''}
                                 onChangeValue={(argEE)=>{
                                     this.props.form.setFieldsValue({ 'text': argEE.target.value||'' });

@@ -75,7 +75,7 @@ export class InputTextAnswer extends React.Component {
                                     <Input.TextArea
                                         allowClear
                                         size="large"
-                                        rows={1}
+                                        rows={5}
                                         style={{width:'85%',display:'inline-block',marginTop:'3px',marginBottom:'3px', marginLeft:'3px', marginRight:'3px'}}
                                         autoSize
                                         onChange={onChangeValue ? onChangeValue : null}
@@ -108,7 +108,7 @@ export class InputTextAnswer extends React.Component {
                 <div style={{width:'100%',marginTop:'2px'}}>
                 {
                     this.state.flagPicker==true ?
-                        <Picker onSelect={this.onEmojiClick} title={null}
+                        <Picker onSelect={this.onEmojiClick} title={""}
                                 i18n={(this.props.translate && this.props.translate.i18n) ? this.props.translate.i18n : {} }
                         />
                         : null

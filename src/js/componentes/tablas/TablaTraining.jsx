@@ -35,14 +35,14 @@ export class TablaTraining extends React.Component {
             intentNewModify: false,
             textBusqueda: '',
             chatbotConfig: this.props.chatbotConfig,
-            arrayTraining: Object.values(this.props.chatbotConfig.training),
+            arrayTraining:  this.props.chatbotConfig.training ? Object.values(this.props.chatbotConfig.training) : [],
             columnas: this.parseColumns()
         } ;
     }
     //
     static getDerivedStateFromProps(newProps, state) {
         if ( state.flagCachedProps==false ){
-            let tempArrayTraining = Object.values(newProps.chatbotConfig.training) ;
+            let tempArrayTraining = newProps.chatbotConfig.training ? Object.values(newProps.chatbotConfig.training) : [] ;
             tempArrayTraining = tempArrayTraining.map((elemTT,elemIDD)=>{
                 return {...elemTT,key: elemIDD}
             }) ;
@@ -59,6 +59,7 @@ export class TablaTraining extends React.Component {
                 intentNewModify:{
                     intentName: argRowIntent.entity ,
                     intentLanguage: argRowIntent.language||'es' ,
+                    intentDescription: argRowIntent.description||'' ,
                     intentExamples: argRowIntent.examples ,
                     intentDomain: argRowIntent.domain ,
                     intentAnswer: argRowIntent.answer
@@ -213,6 +214,7 @@ export class TablaTraining extends React.Component {
         let tempNewIntent = {
             answer: argNewIntent.intentAnswer,
             domain: argNewIntent.domain||'default',
+            description: argNewIntent.intentDescription||'',
             examples: argNewIntent.intentExamples||argNewIntent.examples||[],
             entity: argNewIntent.intentName,
             timestamp_last_update: moment( new Date() ).tz("America/Argentina/Buenos_Aires").format()
@@ -334,7 +336,7 @@ export class TablaTraining extends React.Component {
                             <Button onClick={(argEE)=>{
                                                     argEE.preventDefault() ;
                                                     console.log('....TablaTraining:: new intent::  falseeeeeeee') ;
-                                                    this.setState({modalIntentVisible: true, modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
+                                                    this.setState({modalIntentVisible: true, modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentDescription:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
                                                 }}
                                                 type="primary" size="large"
                                                 style={{width:'90%',marginTop:'3px'}}

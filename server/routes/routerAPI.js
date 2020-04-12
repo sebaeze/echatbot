@@ -175,12 +175,6 @@ module.exports = (argConfig,argDb) => {
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });
             if ( userConAcceso ){
               delete chatbotInfo._v ; delete chatbotInfo.__v ;
-              /*
-              for ( let keyEntity in req.body.train ){
-                console.log('....VOY A BORRAR ENTITY:: keyEntity ') ;
-                delete chatbotInfo.training[ keyEntity ] ;
-              }
-              */
               chatbotInfo.train = req.body.train ;
               return updateTraining( argConfig , argDb, req.user.email, chatbotInfo, true ) ;
             } else {

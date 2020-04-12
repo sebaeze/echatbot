@@ -66,6 +66,8 @@
             "botsConfiguration":"Configuration"
         },
         "tooltip":{
+            "intentDescription":"Brief description of the intent usage",
+            "answerSimpleText":"Simple text",
             "subtitleBot":"Text or legend to display above the chatbot name",
             "intentExamples":"Add examples of user's queries",
             "intentAnswer":"Add at least 1 answer to the intent",
@@ -228,6 +230,8 @@
             "options":"Lista de opciones"
         },
         "tooltip":{
+            "intentDescription":"Pequeña description del uso de la intención",
+            "answerSimpleText":"Texto Simple",
             "subtitleBot":"Texto o leyenda a mostrar debajo del nombre del chatbot",
             "intentExamples":"Agregue ejemplos de consultas de usuarios",
             "intentName":"Defina un nombre unico para identificar la Intención",
@@ -440,6 +444,8 @@
             "botsConfiguration":"Configuração"
         },
         "tooltip":{
+            "intentDescription":"Breve descrição do uso intencional",
+            "answerSimpleText":"Texto simples ",
             "subtitleBot":"Texto ou legenda a ser exibida acima do nome do chatbot",
             "intentExamples":"Adicione exemplos de intenção",
             "intentName":"Defina um nome exclusivo para identificar a intenção",

@@ -84,6 +84,25 @@ class FormIntentNameBase extends React.Component {
                             )}
                         </Form.Item>
                         <Form.Item
+                            hasFeedback
+                            label={ <span>
+                                        <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.intentDescription} >
+                                            {this.props.translate.tooltip.intentDescription}
+                                            <span className="waiboc-icon" >
+                                                <Icon type="question-circle-o" />
+                                            </span>
+                                        </Tooltip>
+                                    </span>}
+                        >
+                            {
+                                getFieldDecorator('intentDescription', {
+                                        initialValue: this.props.data.intentName||'',
+                                        suppressWarning: true
+                                })
+                                ( <Input allowClear size="large" style={{fontWeight:'600'}} /> )
+                            }
+                        </Form.Item>
+                        <Form.Item
                             label={ <span>{this.props.translate.form.selectLanguage}</span> } >
                             {getFieldDecorator('intentLanguage', {
                                 initialValue: this.props.data.intentLanguage||'',
@@ -122,8 +141,9 @@ class FormIntentNameBase extends React.Component {
 export const FormIntentName = Form.create({ name: '',
     mapPropsToFields(props) {
         return {
-            intentName:     Form.createFormField({ value: props.data.intentName     || ''   }),
-            intentLanguage: Form.createFormField({ value: props.data.intentLanguage || 'es' })
+            intentName:        Form.createFormField({ value: props.data.intentName         || ''   }),
+            intentDescription: Form.createFormField({ value: props.data.intentDescription  || ''   }),
+            intentLanguage:    Form.createFormField({ value: props.data.intentLanguage     || 'es' })
         };
     }
 })(FormIntentNameBase);

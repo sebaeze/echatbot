@@ -100,8 +100,9 @@ export class FormDynamicInputText extends React.Component {
             <div>
                 {formItems}
                 <Form.Item {...formItemLayout}>
-                    <Button type="dashed" onClick={this.add} size="large" style={ this.props.styleButton ? this.props.styleButton : { width: '80%' }} >
-                        <Icon type="plus" /> <span style={{fontWeight:'600'}}>{this.props.textAdd} </span>
+                    <Button onClick={this.add} size="large" className="waiboc-btn-dynamic-text" >
+                        <Icon type="plus-circle" />
+                        <span style={{fontWeight:'600'}}>{this.props.textAdd} </span>
                     </Button>
                 </Form.Item>
                 <Form.Item {...formItemLayout}></Form.Item>

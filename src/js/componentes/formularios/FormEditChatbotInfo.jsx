@@ -103,53 +103,6 @@ class FormEditChatbotInfoBase extends React.Component {
                     }
                 </Form.Item>
                 <Form.Item
-                    labelCol={{ span: 8 }} wrapperCol={{ span: 11 }}
-                    label={ <span>{this.props.translate.form.accessList}
-                                <Tooltip  placement="topRight" title={this.props.translate.tooltip.chatbotAccesslist}>
-                                    <Icon type="question-circle-o" />
-                                </Tooltip>
-                            </span>
-                        }
-                >
-                    {
-                        <FormDynamicInputText
-                            form={this.props.form}
-                            styleButton={{width:'60%'}}
-                            textPlaceholder="email@mywebsite.com"
-                            dataForm={this.props.accessList}
-                            fieldName="accessList"
-                            type="array"
-                            defaultTypefield="email"
-                            textAdd={this.props.translate.form.textAddEmail}
-                            description={this.props.translate.form.nonValidAccessList}
-                        />
-                    }
-                </Form.Item>
-                <Form.Item
-                    labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}
-                    colon={false}
-                    label={ <span>
-                                {this.props.translate.form.websiteDomains}
-                                <Tooltip  placement="topRight" title={this.props.translate.tooltip.websiteDomains}>
-                                    <Icon type="question-circle-o" />
-                                </Tooltip>
-                            </span>
-                        }
-                >
-                    {
-                        <FormDynamicInputText
-                            form={this.props.form}
-                            styleButton={{width:'50%'}}
-                            textPlaceholder="www.mywebsite.com"
-                            fieldName="websiteDomains"
-                            type="array"
-                            defaultTypefield="string"
-                            textAdd={this.props.translate.form.textAddWebsite}
-                            description={this.props.translate.form.nonValidwebsiteDomains}
-                        />
-                    }
-                </Form.Item>
-                <Form.Item
                     label={ <span>{this.props.translate.form.description}</span> }
                     labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}
                     hasFeedback
@@ -186,14 +139,12 @@ class FormEditChatbotInfoBase extends React.Component {
 export const FormEditChatbotInfo = Form.create({ name: '',
     mapPropsToFields(propsForm) {
         return {
-            accessList:  Form.createFormField({ value: propsForm.chatbotConfig.accessList  }),
             botName:     Form.createFormField({ value: propsForm.chatbotConfig.botName     }),
             botSubtitle: Form.createFormField({ value: propsForm.chatbotConfig.botSubtitle }),
             language:    Form.createFormField({ value: propsForm.chatbotConfig.language    }),
             plan:        Form.createFormField({ value: propsForm.chatbotConfig.plan        }),
             botIcon:     Form.createFormField({ value: propsForm.chatbotConfig.botIcon     }),
-            description: Form.createFormField({ value: propsForm.chatbotConfig.description }),
-            websiteDomains: Form.createFormField({ value: propsForm.chatbotConfig.websiteDomains })
+            description: Form.createFormField({ value: propsForm.chatbotConfig.description })
         };
     }
 })(FormEditChatbotInfoBase);

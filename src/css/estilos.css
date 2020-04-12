@@ -55,6 +55,16 @@ header ul.ant-menu {
     padding-left: 5px ;
     padding-right: 5px ;
 }
+.waiboc-sys-icon {
+    height: 30px ;
+    line-height: 30px ;
+    vertical-align: bottom ;
+    padding: 3px 3px 3px 3px ;
+    color: #002DFF ;
+}
+.waiboc-btn-dynamic-text {
+    
+}
 .waiboc-header-submenu {
     font-weight: 600 !important ;
     font-size: 22px !important ;
@@ -632,9 +642,9 @@ p[onclick]:hover, p[onclick]:focus {
     cursor: pointer;
 }
 /*  */
-/*--------------------------------------------------------------
-# Footer
---------------------------------------------------------------*/
+#waiboc-id-edit-chatbot div.ant-tabs-tabpane {
+    padding-top: 30px ;
+}
 #waiboc-suscribe .ant-btn-lg {
     height: 45px !important ;
 }
@@ -1242,6 +1252,9 @@ span.waiboc-span-emoticon:hover {
         margin-top: 15px ;
         border: 1px solid gray ;
         padding: 2.5px 2.5px 2.5px 2.5px ;
+    }
+    #waiboc-id-edit-chatbot div.ant-tabs-tabpane {
+        padding-top: 5px ;
     }
     /*
     .waiboc-header-submenu {

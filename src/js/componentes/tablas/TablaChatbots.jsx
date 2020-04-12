@@ -5,12 +5,12 @@ import React                                           from 'react' ;
 import { Table, Typography, Input, Button, Icon }      from 'antd'  ;
 import { Popconfirm, Row, Col, Popover, notification } from 'antd'  ;
 import { Tooltip }                                     from 'antd'  ;
-import { api }                                      from '../../api/api' ;
-import { FormNewChatbot }                           from '../formularios/FormNewChatbot' ;
-import { CuerpoEditBot  }                           from "../cuerpoPagina/CuerpoEditBot" ;
-import { copy2Clipboard, widgetCode }               from '../../utils/utiles' ;
-import SyntaxHighlighter                            from 'react-syntax-highlighter' ;
-// import ReactMarkdown                                from 'react-markdown'     ;
+import { api }                                         from '../../api/api' ;
+import { FormNewChatbot }                              from '../formularios/FormNewChatbot' ;
+import { CuerpoEditBot  }                              from "../cuerpoPagina/CuerpoEditBot" ;
+import { copy2Clipboard, widgetCode }                  from '../../utils/utiles' ;
+import SyntaxHighlighter                               from 'react-syntax-highlighter' ;
+import { PARAMETROS }                                  from '../../utils/parametros';
 //
 const { Title } = Typography ;
 //
@@ -116,10 +116,14 @@ export class TablaChatbots extends React.Component {
     //
     onClickEditChatbot(argChatbot){
         try {
-            this.setState({idChatbotEdit: argChatbot._id }) ;
+            // this.setState({idChatbotEdit: argChatbot._id }) ;
+            let idChatbot       = argChatbot._id ;
+            let urlTrainchatbot = `${PARAMETROS.FRONTEND.URL_TRAIN_CHATBOT}${idChatbot}` ;
+            console.log('...urlTrainchatbot: ',urlTrainchatbot,' para: ',PARAMETROS.FRONTEND.URL_TRAIN_CHATBOT) ;
+            this.props.history.push( urlTrainchatbot ) ;
             //
         } catch(errDelChatbot){
-            console.dir(errEditChatbot) ;
+            console.dir(errDelChatbot) ;
         }
     }
     //

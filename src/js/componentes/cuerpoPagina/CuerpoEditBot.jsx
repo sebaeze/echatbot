@@ -4,9 +4,11 @@
 import React                                   from 'react' ;
 import { Tabs, Icon, Spin, Row, Col, BackTop, notification, Button }   from 'antd'  ;
 import { api }                                 from '../../api/api' ;
-import { FormEditChatbotInfo }                 from '../formularios/FormEditChatbotInfo'       ;
+import { FormEditChatbotInfo   }               from '../formularios/FormEditChatbotInfo'       ;
+import { FormChatbotAccessList }               from '../formularios/FormChatbotAccessList'     ;
 import { FormEditChatbotAppearance }           from '../formularios/FormEditChatbotAppearance' ;
 import { TablaTraining       }                 from '../tablas/TablaTraining'                  ;
+import { IconLock }                            from '../icon/IconLock' ;
 //
 const { TabPane } = Tabs ;
 //
@@ -25,7 +27,7 @@ export class CuerpoEditBot extends React.Component {
             chatbotConfig:false,
             chatbotConfigPendingSave: false
         } ;
-        this.tabs = { CONFIG: 'config', APPEARANCE: 'appearance', TRAINING: 'training', CONVERSATIONS: 'conversations' } ;
+        this.tabs = { CONFIG: 'config', APPEARANCE: 'appearance', TRAINING: 'training', CONVERSATIONS: 'conversations', SECURITY: 'SECURITY' } ;
     }
     //
     componentDidMount(){
@@ -245,6 +247,24 @@ export class CuerpoEditBot extends React.Component {
                             </span>}
                         >
                             tab 3
+                        </TabPane>
+                        <TabPane key={this.tabs.SECURITY}
+                            tab={<span>
+                                <IconLock className="waiboc-sys-icon" />
+                                {this.props.translate.form.accessList}
+                            </span>}
+                        >
+                            {
+                                this.state.chatbotConfig==false ?
+                                <Spin size="large" />
+                                :
+                                <FormChatbotAccessList
+                                    translate={this.props.translate}
+                                    chatbotConfig={{...tempChatbotConfig}}
+                                    onSubmitChanges={this.updateChatbotConfig.bind(this)}
+                                    container={this.refContainer}
+                                />
+                            }
                         </TabPane>
                     </Tabs>
             </div>

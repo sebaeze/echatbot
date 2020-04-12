@@ -13,6 +13,9 @@ export const PARAMETROS = {
         CARRITO_PENDIENTE_SINCRONIZACION: 'carritoPendiente',
         CARRITO_SINCRONIZADO: 'carritoSincronizado'
     },
+    FRONTEND: {
+        URL_TRAIN_CHATBOT: '/train/'
+    },
     BACKEND:{
         API_CONSULTAS: '/api/consultas',
         API_SUSCRIPCION: '/api/suscripcion',

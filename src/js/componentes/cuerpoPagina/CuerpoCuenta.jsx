@@ -16,10 +16,10 @@ const CuerpoAdmin = (props) => {
     //
     let outRender = {} ;
     if ( props.formType.toUpperCase()==PARAMETROS.FORM.USER_INFO.toUpperCase() ){
-        outRender = <FormUserInfo translate={props.translate} userInfo={props.userInfo} configuracion={props.configuracion} /> ;
+        outRender = <FormUserInfo history={props.history} translate={props.translate} userInfo={props.userInfo} configuracion={props.configuracion} /> ;
     } else {
         if ( props.formType.toUpperCase()==PARAMETROS.FORM.CHATBOTS.toUpperCase() ){
-            outRender = <TablaChatbots translate={props.translate} userInfo={props.userInfo} configuracion={props.configuracion} /> ;
+            outRender = <TablaChatbots history={props.history} translate={props.translate} userInfo={props.userInfo} configuracion={props.configuracion} /> ;
         }
     }
     //
@@ -131,7 +131,7 @@ export class CuerpoCuenta extends React.Component {
                 <Content>
                     <Row>
                         <Col xs={24} md={24} lg={26} xl={26} xxl={26}>
-                            <CuerpoAdmin formType={this.state.formType} translate={this.props.translate} userInfo={this.state.userInfo} configuracion={this.props.configuracion} />
+                            <CuerpoAdmin history={this.props.history} formType={this.state.formType} translate={this.props.translate} userInfo={this.state.userInfo} configuracion={this.props.configuracion} />
                         </Col>
                     </Row>
                 </Content>

@@ -141,7 +141,7 @@ class FormChatbotAccessListBase extends React.Component {
 export const FormChatbotAccessList = Form.create({ name: '',
     mapPropsToFields(propsForm) {
         return {
-            accessList:  Form.createFormField({ value: propsForm.chatbotConfig.accessList  }),
+            accessList:     Form.createFormField({ value: propsForm.chatbotConfig.accessList     }),
             websiteDomains: Form.createFormField({ value: propsForm.chatbotConfig.websiteDomains })
         };
     }

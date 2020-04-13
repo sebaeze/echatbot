@@ -2,7 +2,8 @@
 *
 */
 import React                                   from 'react' ;
-import { Tabs, Icon, Spin, Row, Col, BackTop, notification, Button }   from 'antd'  ;
+import { Tabs, Icon, Spin, Row, Col }          from 'antd'  ;
+import { notification, Button }                from 'antd'  ;
 import { api }                                 from '../../api/api' ;
 import { FormEditChatbotInfo   }               from '../formularios/FormEditChatbotInfo'       ;
 import { FormChatbotAccessList }               from '../formularios/FormChatbotAccessList'     ;
@@ -125,7 +126,7 @@ export class CuerpoEditBot extends React.Component {
         return(
             <div id="waiboc-id-edit-chatbot"
                  ref={(argRef)=>{ this.refContainer=argRef; }}
-                 style={{paddingTop:(this.props.onFinishEdit==false ? '145px' : '0px'),border:(this.props.onFinishEdit==false ? 'none':'0.6px dotted grey'),minHeight:'110vh',backgroundColor:'#F4F4F4'}}
+                 style={{paddingTop:(this.props.onFinishEdit==false ? '145px' : '0px'),minHeight:'110vh'}}
             >
                 {
                     this.props.onFinishEdit ?
@@ -142,11 +143,11 @@ export class CuerpoEditBot extends React.Component {
                         </div>
                         : null
                 }
-                    <BackTop>
-                        <div className="ant-back-top-inner"><Icon type="arrow-up" /></div>
-                    </BackTop>
                     <Tabs style={{width:'95%',marginLeft:'2%'}}
                           onChange={this.onChangeTab}
+                          type="card"
+                          // size="large"
+                          tabBarGutter={0}
                           activeKey={  activeTab() }
                     >
                         <TabPane key={this.tabs.CONFIG}

@@ -133,22 +133,48 @@ export class TablaChatbots extends React.Component {
     addNewChatbot(argObjChatbot){
         try {
             //
-            
-            //
             this.setState({flagSpinner: true}) ;
+            let newState   = { flagSpinner: false  };
+            let newChatbot = {} ;
+            //
             api.chatbot.add(argObjChatbot)
-                .then((respADD)=>{
-                    if ( respADD.length>0 ){ respADD=respADD[0]; }
-                    let tempArrayBots = this.state.arrayChatbots ;
-                    tempArrayBots.push({
-                        key:(tempArrayBots.length+1),
-                        ...respADD
-                    }) ;
-                    this.setState({arrayChatbots: tempArrayBots, flagSpinner: false}) ;
+                .then((respNewBot)=>{
+                    //
+                    newChatbot = respNewBot.length>0 ? respNewBot[0] : respNewBot ;
+                    if ( !newChatbot.training ){ newChatbot.training={} ; }
+                    if ( Object.keys(newChatbot.training).length==0 ){
+                        let tempChatbotTrain = {...newChatbot,train:[]} ;
+                        PARAMETROS.DEFAULT_INTENTS.forEach((elemIntent)=>{
+                            tempChatbotTrain.train.push({...elemIntent,idChatbot: newChatbot._id}) ;
+                        })
+                        return api.chatbot.train( tempChatbotTrain , false ) ;
+                    } else {
+                        return [] ;
+                    } ;
+                    //
+                })
+                .then((respTrain)=>{
+                    //
+                    console.log('.....respTrain: ',respTrain) ;
+                    if ( respTrain.result.length>0 ){
+                        respTrain.result.forEach((elemINT)=>{
+                            if ( Array.isArray(elemINT) && elemINT.length==1 ){ elemINT=elemINT[0]; }
+                            let keyIntent = elemINT.entity || elemINT.name ;
+                            newChatbot.training[ keyIntent ] = elemINT ;
+                        }) ;
+                    }
+                    console.log('.......newChatbot.training: ',newChatbot.training) ;
+                    //
+                    newChatbot.key         = ( this.state.arrayChatbots.length+1 ) ;
+                    newState.arrayChatbots = this.state.arrayChatbots ;
+                    newState.arrayChatbots.push({ ...newChatbot }) ;
+                    //
+                    this.setState( newState ) ;
+                    //
                 })
                 .catch((respErr)=>{
                     console.dir(respErr) ;
-                    this.setState({flagSpinner: false}) ;
+                    this.setState( newState ) ;
                 }) ;
                 //
         } catch(errAddNC){

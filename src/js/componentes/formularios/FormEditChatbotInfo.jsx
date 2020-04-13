@@ -1,9 +1,9 @@
 /*
 * FormEditChatbotInfo
 */
-import React                     from 'react' ;
-import { FormDynamicInputText }  from  './FormDynamicInputText' ;
-import { Row, Col, Tag , Form, Input, Button, Tooltip, Icon, Select, Typography  }   from 'antd'  ;
+import React                                    from 'react' ;
+import { Row, Col, Form, Input, Button }        from 'antd'  ;
+import { Tooltip, Icon, Select, Typography  }   from 'antd'  ;
 //
 const { Title } = Typography ;
 //
@@ -90,6 +90,7 @@ class FormEditChatbotInfoBase extends React.Component {
                     (
                         <Select
                             placeholder={this.props.form.selectLanguage}
+                            size="large"
                             onChange={this.handleSelectChange}
                             getPopupContainer={(trigger) => {
                                 return trigger.parentNode ;

@@ -1,7 +1,6 @@
 /*
 *
 */
-import moment                                           from 'moment-timezone'  ;
 import {PARAMETROS,opcionesPOST,obj2qryString}          from '../utils/parametros'  ;
 //
 const addNewChatbot = (argNewBot) => {

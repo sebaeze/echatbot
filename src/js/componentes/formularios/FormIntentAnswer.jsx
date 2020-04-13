@@ -212,8 +212,9 @@ export class FormIntentAnswerBase extends React.Component {
                     <Form>
                         <Form.Item
                             label={ <span>{this.props.translate.form.answerType}</span> }
-                            labelCol={{xs:24,md:24,lg:24,xl:24,xxl:24}}
-                            wrapperCol={{xs:24,md:24,lg:10,xl:10,xxl:10}}
+                            labelAlign="left"
+                            labelCol={{  xs: 24, md:24, lg:8 , xl:8 , xxl:8 }}
+                            wrapperCol={{xs: 24, md:24, lg:14, xl:14, xxl:14 }}
                         >
                             {getFieldDecorator('type', {
                                 initialValue: this.props.data.intentAnswer.type||'text',
@@ -242,17 +243,20 @@ export class FormIntentAnswerBase extends React.Component {
                         </Form.Item>
                         <Form.Item
                             hasFeedback
-                            label={ <span>
-                                        <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} >
-                                            {this.props.translate.tooltip.answerSimpleText}
-                                            <span className="waiboc-icon" >
-                                                <Icon type="question-circle-o" />
-                                            </span>
-                                        </Tooltip>
+                            label={
+                                <Tooltip    placement="bottomRight"
+                                            title={this.props.translate.tooltip.answerText}
+                                            getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                                >
+                                    {this.props.translate.tooltip.answerSimpleText}
+                                    <span className="waiboc-icon" >
+                                        <Icon type="question-circle-o" />
                                     </span>
+                                </Tooltip>
                             }
-                            labelCol={{xs:24,md:24,lg:24,xl:24,xxl:24}}
-                            wrapperCol={{xs:24,md:20,lg: 16,xl: 16,xxl: 16}}
+                            labelAlign="left"
+                            labelCol={  {xs: 24, md: 24, lg: 24, xl: 24, xxl: 24}}
+                            wrapperCol={{xs: 24, md: 20, lg: 24, xl: 24, xxl: 24}}
                         >
                             <InputTextAnswer
                                 fieldName={"text"}
@@ -271,7 +275,12 @@ export class FormIntentAnswerBase extends React.Component {
                                     hasFeedback
                                     label={ <span>
                                                 Options
-                                                <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                                <Tooltip  placement="bottomRight"
+                                                          title={this.props.translate.tooltip.answerText}
+                                                          getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                                                >
+                                                    <Icon type="question-circle-o" />
+                                                </Tooltip>
                                             </span>}
                                 >
                                     <FormDynamicInputOption
@@ -296,7 +305,12 @@ export class FormIntentAnswerBase extends React.Component {
                                     hasFeedback
                                     label={ <span>
                                                 REST API Url
-                                                <Tooltip  placement="bottomRight" title={this.props.translate.tooltip.answerText} ><Icon type="question-circle-o" /> </Tooltip>
+                                                <Tooltip    placement="bottomRight"
+                                                            title={this.props.translate.tooltip.answerText}
+                                                            getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                                                >
+                                                    <Icon type="question-circle-o" />
+                                                </Tooltip>
                                             </span>}
                                 >
                                     {getFieldDecorator('api', {
@@ -308,10 +322,16 @@ export class FormIntentAnswerBase extends React.Component {
                                 : null
                         }
                         <Form.Item label={ <span>{this.props.translate.form.fileDragger}
-                                                <Tooltip  placement="bottomRight" title={this.props.translate.form.newFileClickDrag} ><Icon type="question-circle-o" /> </Tooltip>
+                                                <Tooltip    placement="bottomRight"
+                                                            title={this.props.translate.form.newFileClickDrag}
+                                                            getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                                                >
+                                                    <Icon type="question-circle-o" />
+                                                </Tooltip>
                                             </span>
                                     }
-                                    wrapperCol={{xs:24,md:24,lg:16,xl:16,xxl:16}}
+                                    labelCol={{  xs: 24, md: 24, lg: 24, xl: 24, xxl: 24 }}
+                                    wrapperCol={{xs: 24, md: 24, lg: 22, xl: 22, xxl: 22 }}
                         >
                             {getFieldDecorator('files',
                                 {

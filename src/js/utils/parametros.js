@@ -26,7 +26,35 @@ export const PARAMETROS = {
     FORM:{
         USER_INFO: 'profile',
         CHATBOTS: 'chatbots'
-    }
+    },
+    DEFAULT_INTENTS: [
+        {
+            idChatbot: "",
+            name: "None",
+            systemDefined: true,
+            description: "Default answer for all inquiries with no match",
+            domain: "Default",
+            answer: {
+                "type":"text",
+                "text":"Lo siento, no se entendio. ¿ Puede reformular ?"
+                },
+            "examples":["None"],
+            "entity":"None"
+        },
+        {
+            idChatbot: "",
+            name: "ON_OPEN_WIDGET",
+            systemDefined: true,
+            description: "Message answer trigger when user open the chat window",
+            domain: "Default",
+            answer: {
+                "type":"text",
+                "text":"Hola"
+                },
+            "examples":["ON_OPEN_WIDGET"],
+            "entity":"ON_OPEN_WIDGET"
+        }
+    ]
 } ;
 //
 export const opcionesPOST = {

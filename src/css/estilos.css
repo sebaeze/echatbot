@@ -3,6 +3,7 @@
 */
 :root {
     --font-color-important: #002DFF ;
+    --background-dashboard-edit: #F4F4F4 ;
 }
 /*  */
 header {
@@ -16,10 +17,10 @@ header {
     width: 100% ;
 }
 header .logo {
-    width: 150px ;
+    width: 200px ;
     height: auto ;
     margin-left: 40px ;
-    margin-top: 2px;
+    margin-top: 0px;
 }
 header ul.ant-menu {
     width: 100% !important ;
@@ -58,12 +59,12 @@ header ul.ant-menu {
 .waiboc-sys-icon {
     height: 30px ;
     line-height: 30px ;
-    vertical-align: bottom ;
+    vertical-align: middle ;
     padding: 3px 3px 3px 3px ;
     color: #002DFF ;
 }
-.waiboc-btn-dynamic-text {
-    
+#idAbout {
+    background-color: var(--background-dashboard-edit) ;
 }
 .waiboc-header-submenu {
     font-weight: 600 !important ;
@@ -642,9 +643,6 @@ p[onclick]:hover, p[onclick]:focus {
     cursor: pointer;
 }
 /*  */
-#waiboc-id-edit-chatbot div.ant-tabs-tabpane {
-    padding-top: 30px ;
-}
 #waiboc-suscribe .ant-btn-lg {
     height: 45px !important ;
 }
@@ -971,6 +969,14 @@ div.react-bootstrap-table tbody tr:hover {
     border: 0.5px solid #001DFF !important ;
 }
 */
+#waiboc-id-edit-chatbot {
+    background-color: var(--background-dashboard-edit) ;
+}
+/*
+#waiboc-id-edit-chatbot div.ant-tabs-tabpane {
+    padding-top: 30px ;
+}
+*/
 #waiboc-main-node .ant-btn.btn-edit-menu {
 	height: 50px !important ;
 	font-size: 18px !important ;
@@ -987,8 +993,41 @@ div.react-bootstrap-table tbody tr:hover {
     z-index: 9999 !important ;
 }
 /*  */
+#waiboc-main-node .ant-tabs-nav-container {
+    /* border-bottom: 3px solid var(--font-color-important) ; */
+    height: 70px ;
+    padding-top: 5px ;
+}
 #waiboc-main-node .ant-tabs-nav-container .ant-tabs-tab span {
-    font-size: 22px !important ;
+    font-size: 20px !important ;
+    line-height: 50px ;
+    height: 50px ;
+    /* padding: 5px 5px 5px 5px ; */
+}
+#waiboc-main-node .ant-tabs-bar ,
+#waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab
+{
+    height: 60px ;
+    border-top-left-radius: 8px ;
+    border-top-right-radius: 8px ;
+}
+#waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab:not(.ant-tabs-tab-active) {
+    border-bottom: 3px solid var(--font-color-important) ;
+}
+#waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+    background-color: var(--background-dashboard-edit) ;
+    border-left: 3px solid var(--font-color-important) ;
+    border-top: 3px solid var(--font-color-important) ;
+    border-right: 3px solid var(--font-color-important) ;
+    border-bottom: 3px solid var(--background-dashboard-edit) !important ;
+}
+#waiboc-main-node .ant-tabs-bar {
+    /* border-bottom: 3px solid var(--font-color-important) ; */
+    margin: 0 ;
+    margin-bottom: 3px ;
+}
+#waiboc-main-node .ant-tabs .ant-tabs-top-content, .ant-tabs .ant-tabs-bottom-content {
+    padding-top: 20px ;
 }
 #waiboc-main-node span{
     font-size: 18px  ;
@@ -1171,9 +1210,11 @@ span.waiboc-span-emoticon:hover {
     font-size: 14px !important ;
     /* transition: font-size 1.6s !important ; */
 }
+/*
 #waiboc-main-node .ant-table-bordered .ant-table-tbody > tr > td:hover {
     font-weight: 600 !important ;
 }
+*/
 /*  */
 #waiboc-account .ant-menu-item .anticon + span {
     font-weight: 600 !important ;
@@ -1241,7 +1282,7 @@ span.waiboc-span-emoticon:hover {
 /*   */
 @media (max-width: 700px) {
     header .logo {
-        width: 120px ;
+        width: 170px ;
         height: auto ;
         margin-left: 20px ;
         margin-top: 1px;

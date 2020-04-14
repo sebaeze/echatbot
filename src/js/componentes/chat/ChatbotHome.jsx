@@ -2,8 +2,8 @@
 *
 */
 import React                      from 'react' ;
-// import { WaibocReactWidget }      from 'waiboc-widget-react' ;
-import { WaibocReactWidget }      from '../../../../../waiboc-widget-react/lib/index' ;
+import { WaibocReactWidget }      from 'waiboc-widget-react' ;
+// import { WaibocReactWidget }      from '../../../../../waiboc-widget-react/lib/index' ;
 //
 class ChatbotHome extends React.Component {
     //

@@ -98,7 +98,7 @@ class LinkRouter  extends React.Component {
                             </Link>
                         :   null
                 }
-                <a onClick={this.onClickLink} rel="noopener noreferrer" >
+                <a onClick={this.onClickLink} rel="noopener noreferrer" className={this.props.className ? this.props.className : ""} >
                     {this.props.children}
                 </a>
                 <HashLink   to={this.state.fullUrl} style={{display:'none'}}

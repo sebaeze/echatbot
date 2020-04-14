@@ -19,8 +19,13 @@ header {
 header .logo {
     width: 200px ;
     height: auto ;
+    display: block ;
     margin-left: 40px ;
     margin-top: 0px;
+}
+header .logo > img {
+    width: 100% ;
+    height: auto ;
 }
 header ul.ant-menu {
     width: 100% !important ;
@@ -167,9 +172,9 @@ header ul.ant-menu {
         height: auto !important ;
     }
 }
-/*   */
+/*  */
 #main .ant-carousel .slick-slide {
-    background-color: #fff !important ;
+    background-color: inherit ;
 }
 /*  */
 .a-no-hover:hover {
@@ -992,9 +997,8 @@ div.react-bootstrap-table tbody tr:hover {
 .ant-notification {
     z-index: 9999 !important ;
 }
-/*  */
+/*
 #waiboc-main-node .ant-tabs-nav-container {
-    /* border-bottom: 3px solid var(--font-color-important) ; */
     height: 70px ;
     padding-top: 5px ;
 }
@@ -1002,33 +1006,33 @@ div.react-bootstrap-table tbody tr:hover {
     font-size: 20px !important ;
     line-height: 50px ;
     height: 50px ;
-    /* padding: 5px 5px 5px 5px ; */
 }
 #waiboc-main-node .ant-tabs-bar ,
+*/
 #waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab
 {
-    height: 60px ;
+    /* height: 60px ; */
     border-top-left-radius: 8px ;
     border-top-right-radius: 8px ;
 }
 #waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab:not(.ant-tabs-tab-active) {
-    border-bottom: 3px solid var(--font-color-important) ;
+    border-bottom: 1px solid var(--font-color-important) ;
 }
 #waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
     background-color: var(--background-dashboard-edit) ;
-    border-left: 3px solid var(--font-color-important) ;
-    border-top: 3px solid var(--font-color-important) ;
-    border-right: 3px solid var(--font-color-important) ;
-    border-bottom: 3px solid var(--background-dashboard-edit) !important ;
+    border-left: 1px solid var(--font-color-important) ;
+    border-top: 1px solid var(--font-color-important) ;
+    border-right: 1px solid var(--font-color-important) ;
+    border-bottom: 1px solid var(--background-dashboard-edit) !important ;
 }
 #waiboc-main-node .ant-tabs-bar {
-    /* border-bottom: 3px solid var(--font-color-important) ; */
-    margin: 0 ;
-    margin-bottom: 3px ;
+    border-bottom: 1px solid var(--font-color-important) ;
 }
+/*
 #waiboc-main-node .ant-tabs .ant-tabs-top-content, .ant-tabs .ant-tabs-bottom-content {
     padding-top: 20px ;
 }
+*/
 #waiboc-main-node span{
     font-size: 18px  ;
 }
@@ -1189,6 +1193,7 @@ span.waiboc-span-emoticon:hover {
     cursor: pointer !important ;
     box-shadow: 0 0 5px #515151 !important ;
 }
+/*
 #waiboc-main-node .ant-tabs-tab-prev-icon-target, #waiboc-main-node .ant-tabs-tab-next-icon-target  {
     font-size: 20px !important ;
 }
@@ -1208,11 +1213,6 @@ span.waiboc-span-emoticon:hover {
 #waiboc-main-node .ant-table-bordered .ant-table-tbody > tr > td {
     font-weight: 500 !important ;
     font-size: 14px !important ;
-    /* transition: font-size 1.6s !important ; */
-}
-/*
-#waiboc-main-node .ant-table-bordered .ant-table-tbody > tr > td:hover {
-    font-weight: 600 !important ;
 }
 */
 /*  */
@@ -1232,6 +1232,18 @@ span.waiboc-span-emoticon:hover {
     font-size: 25px !important;
     /* background-color:white !important; */
     padding: 5px 5px 5px 5px !important;
+}
+.waiboc-tab-edit-opt a {
+    font-weight: 500 ;
+    font-size: 18px ;
+    color: #497EC0 ;
+    display: block ;
+    width: 100% ;
+}
+.waiboc-tab-list-item {
+    width: 100% ;
+    display: block ;
+    font-size: 14px ;
 }
 .waiboc-tab-id-name {
     cursor: pointer ;
@@ -1279,8 +1291,51 @@ span.waiboc-span-emoticon:hover {
     text-decoration: underline !important ;
     background-color: #1890FF  !important ;
 }
+/*  */
+.bg-inicial {
+    background-color: yellow ;
+    width: 100% !important ;
+    height: 200px !important ;
+    overflow: hidden ;
+    /*
+    background: linear-gradient(to bottom left,transparent 49.8%,#E0E6E5 50%) top /100% 35%,
+                linear-gradient(to top left,transparent 49.8%,#E0E6E5 50%) bottom/100% 35%,
+                linear-gradient(#E0E6E5,#E0E6E5) center/100% 30%;
+    background-repeat: repeat, repeat, repeat;
+    background-repeat: no-repeat;
+    */
+    background: rgb(130,150,244);
+    background: linear-gradient(0deg, rgba(130,150,244,1) 0%, rgba(254,254,254,1) 81%);
+  }
+  .bg-azul {
+    background-color: yellow ;
+    width: 100% !important ;
+    height: 100% !important ;
+    overflow: hidden ;
+    background:
+      linear-gradient(to bottom right,transparent 50.8%,#EBF2FE 50%) top /100% 150%,
+      linear-gradient(to top right,transparent 15%,#EBF2FE 15%) bottom/110% 60%;
+    background-repeat: repeat, repeat, repeat ;
+    background-repeat: no-repeat ;
+  }
+  .chat-line-home {
+    font-Size: 22px ;
+    font-Weight: 600 ;
+    color: #fff;
+    letter-spacing: 0.015rem;
+    background: #49B6F9 ;
+    border-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+    border-bottom-right-radius: 0;
+    text-align: left;
+    display: block;
+    height: 70px ;
+    line-height: 50px ;
+    padding: 10px 10px 10px 10px ;
+}
 /*   */
 @media (max-width: 700px) {
+    /*  */
     header .logo {
         width: 170px ;
         height: auto ;
@@ -1294,19 +1349,28 @@ span.waiboc-span-emoticon:hover {
         border: 1px solid gray ;
         padding: 2.5px 2.5px 2.5px 2.5px ;
     }
+    /*
     #waiboc-id-edit-chatbot div.ant-tabs-tabpane {
         padding-top: 5px ;
     }
-    /*
-    .waiboc-header-submenu {
-        width: 97% !important ;
-        margin-top: 40px !important  ;
-        margin-left: 1.5% !important ;
-    }
-    .waiboc-header-submenu ul {
-        background-color: #f7f7f7 !important ;
-        font-weight: 600 !important ;
-    }
     */
+    .chat-line-home {
+        font-Size: 18px ;
+        font-Weight: 500 ;
+        /* padding: 5px 10px 5px 10px ; */
+        /*
+        padding-left: 10px ;
+        padding-top: 10px ;
+        padding-bottom: 10px ;
+        */
+        height: 60px ;
+        line-height: 25px ;
+        vertical-align: middle ;
+    }
+    #waiboc-main-node i.ant-tabs-tab-prev-icon-target, #waiboc-main-node  i.ant-tabs-tab-next-icon-target {
+        font-size: 22px ;
+        font-weight: 600 ;
+    }
+    /*  */
 }
 /*   */

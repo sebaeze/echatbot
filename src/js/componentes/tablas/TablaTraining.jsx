@@ -108,26 +108,27 @@ export class TablaTraining extends React.Component {
                                         <u>{text}</u>
                                     </span>
                                     <br/>
-                                    <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
-                                        onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
-                                    >
-                                        <Icon type="edit" style={{color:'green'}}/>
-                                        <span style={{marginLeft:'7px'}} >{this.props.translate.edit}</span>
-                                    </a>
-                                    {
-                                        argRow.systemDefined==true
-                                            ?   <span style={{fontSize:'12px',color:'red',width:'100%',display:'block'}} >{this.props.translate.form.systemDefinedDelete}</span>
-                                            :   <Popconfirm placement="topRight" title={this.props.translate.form.deleteEntityConfirmation}
-                                                    onConfirm={()=>{this.onClickDeleteIntent(argRow)}}
-                                                    okText={this.props.translate.yes} cancelText="No"
-                                                >
-                                                    <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}} >
-                                                        <h2>{argRow.systemDefined}</h2>
-                                                        <Icon type="delete" style={{color:'red'}}/>
-                                                        <span style={{marginLeft:'7px'}} >{this.props.translate.delete}</span>
-                                                    </a>
-                                                </Popconfirm>
-                                    }
+                                    <div className="waiboc-tab-edit-opt"  >
+                                        <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
+                                            onClick={(argEE)=>{argEE.preventDefault();this.onClickEditIntent(argRow);}}
+                                        >
+                                            <Icon type="edit" style={{color:'green'}}/>
+                                            <span style={{marginLeft:'7px'}} >{this.props.translate.edit}</span>
+                                        </a>
+                                        {
+                                            argRow.systemDefined==true
+                                                ?   <span style={{fontSize:'12px',color:'red',width:'100%',display:'block'}} >{this.props.translate.form.systemDefinedDelete}</span>
+                                                :   <Popconfirm placement="topRight" title={this.props.translate.form.deleteEntityConfirmation}
+                                                        onConfirm={()=>{this.onClickDeleteIntent(argRow)}}
+                                                        okText={this.props.translate.yes} cancelText="No"
+                                                    >
+                                                        <a >
+                                                            <Icon type="delete" style={{color:'red'}}/>
+                                                            <span style={{marginLeft:'7px'}} >{this.props.translate.delete}</span>
+                                                        </a>
+                                                    </Popconfirm>
+                                        }
+                                    </div>
                                 </div>
                         )},
                         defaultSortOrder: 'descend', sorter: (a, b) => a.entity.localeCompare(b.entity)
@@ -168,6 +169,26 @@ export class TablaTraining extends React.Component {
                     dataIndex:'usageQuantity', key:'usageQuantity',
                     render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
                     defaultSortOrder: 'descend', sorter: (a, b) => a.usageQuantity-b.usageQuantity
+                },
+                {title: this.props.translate.table.language ,width: 150,
+                    dataIndex:'language', key:'language',
+                    render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
+                    defaultSortOrder: 'descend', sorter: (a, b) => a.language.localeCompare(b.language)
+                },
+                {title: this.props.translate.table.language ,width: 150,
+                    dataIndex:'searchText', key:'searchText',
+                    render: (ObjSearchText) => {
+                        let tempText = [] ;
+                        for ( let keyEl in ObjSearchText ){
+                            let qtyText = ObjSearchText[keyEl] ;
+                            tempText.push( <div key={keyEl} className="waiboc-tab-list-item" >{qtyText} - {keyEl}</div> ) ;
+                        } ;
+                        //
+                        return(
+                            <div style={{fontWeight:'600',fontSize:'18px'}}>{tempText}</div>
+                        )
+                    }
+                    // defaultSortOrder: 'descend' , sorter: (a, b) => a.language.localeCompare(b.language)
                 },
                 {title: this.props.translate.table.answer       ,
                         dataIndex:'answer',key:'answer',width: 400,
@@ -217,6 +238,7 @@ export class TablaTraining extends React.Component {
             description: argNewIntent.intentDescription||'',
             examples: argNewIntent.intentExamples||argNewIntent.examples||[],
             entity: argNewIntent.intentName,
+            language: argNewIntent.intentLanguage ||'',
             timestamp_last_update: moment( new Date() ).tz("America/Argentina/Buenos_Aires").format()
         };
         let tempArrayTraining = this.state.arrayTraining ;
@@ -296,6 +318,8 @@ export class TablaTraining extends React.Component {
                 return {
                     ...elemTC,
                     key: elemIdx,
+                    language: elemTC.language||'es',
+                    searchText: elemTC.searchText || {},
                     systemDefined: tempsystemDefined
                 } ;
             }) ;
@@ -307,6 +331,8 @@ export class TablaTraining extends React.Component {
                     arrayDatos.push( {
                         ...elemTC,
                         key: elemIdx,
+                        language: elemTC.language||'es',
+                        searchText: elemTC.searchText || {},
                         systemDefined: tempsystemDefined
                     } ) ;
                 }
@@ -325,36 +351,34 @@ export class TablaTraining extends React.Component {
                 />
                 <div style={{width:'100%',marginTop:'20px',marginBottom:'15px'}}>
                     <Row>
-                        <Col xs={24}  md={24}  lg={8} xl={8} xxl={8}>
+                        <Col xs={24}  md={24}  lg={9} xl={9} xxl={9}>
                             <Input placeholder={this.props.translate.search}
                                 onChange={this.onChangeSearch}
                                 style={{height:'42px',width:'90%'}}
                             />
                         </Col>
-                        <Col xs={0}   md={0}   lg={1} xl={1} xxl={1}></Col>
-                        <Col xs={24}  md={24}  lg={5} xl={5} xxl={5}>
-                            <Button onClick={(argEE)=>{
-                                                    argEE.preventDefault() ;
-                                                    console.log('....TablaTraining:: new intent::  falseeeeeeee') ;
-                                                    this.setState({modalIntentVisible: true, modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentDescription:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
-                                                }}
-                                                type="primary" size="large"
-                                                style={{width:'90%',marginTop:'3px'}}
-                            >
-                            {this.props.translate.form.newIntent}
-                            </Button>
-                        </Col>
-                        <Col xs={0} md={0} lg={1} xl={1} xxl={1} ></Col>
-                        <Col xs={24}  md={24}  lg={5} xl={5} xxl={5}>
-                            {
-                                this.state.flagWidgetTest==false ?
-                                    <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({flagWidgetTest: true});}}
-                                            type="primary" size="large" style={{width:'90%',marginTop:'3px',backgroundColor:'#8B6BEC'}}
-                                    >
-                                        {this.props.translate.form.testChatbot}
-                                    </Button>
-                                    : null
-                            }
+                        <Col xs={23}  md={23}  lg={10} xl={10} xxl={10}>
+                            <Button.Group size="large" >
+                                <Button onClick={(argEE)=>{
+                                                        argEE.preventDefault() ;
+                                                        console.log('....TablaTraining:: new intent::  falseeeeeeee') ;
+                                                        this.setState({modalIntentVisible: true, modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentDescription:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
+                                                    }}
+                                                    type="primary"
+                                                    style={{marginTop:'3px'}}
+                                >
+                                {this.props.translate.form.newIntent}
+                                </Button>
+                                {
+                                    this.state.flagWidgetTest==false ?
+                                        <Button onClick={(argEE)=>{argEE.preventDefault(); this.setState({flagWidgetTest: true});}}
+                                                type="primary" style={{marginTop:'3px',backgroundColor:'#8B6BEC'}}
+                                        >
+                                            {this.props.translate.form.testChatbot}
+                                        </Button>
+                                        : null
+                                }
+                            </Button.Group>
                         </Col>
                     </Row>
                 </div>

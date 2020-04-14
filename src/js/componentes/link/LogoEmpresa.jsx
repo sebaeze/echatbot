@@ -22,9 +22,8 @@ export class LogoEmpresa extends React.Component {
     //
     render(){
         return(
-            <LinkRouter  url={"/"} >
+            <LinkRouter  url={"/"} className="logo" >
                 <img src={ "/img/logo.waiboc.transparent.png" }
-                    className="logo"
                     alt="logo"
                 />
             </LinkRouter>

@@ -25,7 +25,6 @@ const  { Content }   = Layout ;
 import 'antd/dist/antd.css' ;
 import './css/estilos.css' ;
 import './css/estilosContacto.css' ;
-import './css/estilosInicial.css' ;
 import './css/estilosAnimaciones.css' ;
 //
 const ChatbotWindow = React.lazy( ()=> import('./js/componentes/chat/ChatbotHome') ) ;

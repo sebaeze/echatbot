@@ -8,8 +8,6 @@ import QueueAnim                  from 'rc-queue-anim';
 import TweenOne                   from 'rc-tween-one';
 import { AnimacionLink }          from './AnimacionLink' ;
 //
-import '../../../css/estilosInicial.css' ;
-//
 const { Text, Title } = Typography ;
 //
 const { Element } = BannerAnim;

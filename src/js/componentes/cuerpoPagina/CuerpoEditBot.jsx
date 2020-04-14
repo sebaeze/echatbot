@@ -119,7 +119,7 @@ export class CuerpoEditBot extends React.Component {
         }
         //
         let styleCloseIcon = this.props.configuracion.isMobile==true ?
-                                {position:'fixed'   ,top:'90px',left:'50px', backgroundColor:'white', border:'0.5px dotted gray'}
+                                {position:'fixed'   ,top:'70px',left:'50px', backgroundColor:'white', border:'0.5px dotted gray'}
                                 :
                                 {position:'absolute',top:'5px' ,right:'5px', backgroundColor:'white', border:'0.5px dotted gray'} ;
         //
@@ -143,7 +143,7 @@ export class CuerpoEditBot extends React.Component {
                         </div>
                         : null
                 }
-                    <Tabs style={{width:'95%',marginLeft:'2%'}}
+                    <Tabs style={{width:'95%',marginLeft:'2%',paddingTop:'20px'}}
                           onChange={this.onChangeTab}
                           type="card"
                           // size="large"

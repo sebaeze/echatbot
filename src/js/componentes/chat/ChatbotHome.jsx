@@ -2,7 +2,8 @@
 *
 */
 import React                      from 'react' ;
-import { WaibocReactWidget }      from 'waiboc-widget-react' ;
+// import { WaibocReactWidget }      from 'waiboc-widget-react' ;
+import { WaibocReactWidget }      from '../../../../../waiboc-widget-react/lib/index' ;
 //
 class ChatbotHome extends React.Component {
     //
@@ -16,7 +17,7 @@ class ChatbotHome extends React.Component {
     componentDidMount(){
         setTimeout(() => {
             this.setState({ flagShow: true }) ;
-        }, 6000 );
+        }, 6000 ) ;
     }
     //
     render(){
@@ -25,7 +26,7 @@ class ChatbotHome extends React.Component {
             <WaibocReactWidget
                 idAgent={ __ID_WIDGET__ }
                 backEndServer={ __URL_WIDGET__ }
-                options={{fontSize:'30px'}}
+                // options={false}
             />
         ) ;
         //

@@ -43,9 +43,7 @@ export class CuerpoInicio extends React.Component {
               <Fade left >
                 <CuerpoAbout   translate={this.props.translate} configuracion={this.props.configuracion} />
               </Fade>
-              <Fade right >
-                <CuerpoPrices  translate={this.props.translate} configuracion={this.props.configuracion} />}
-              </Fade>
+              <CuerpoPrices  translate={this.props.translate} configuracion={this.props.configuracion} />}
               <Fade left >
                 <FormContacto translate={this.props.translate} configuracion={this.props.configuracion} customStyle={{marginTop:'110px'}} />
               </Fade>

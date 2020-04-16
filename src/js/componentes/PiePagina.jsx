@@ -27,7 +27,7 @@ class PiePagina extends Component {
     //
     return (
         //
-        <footer id="waiboc-footer" style={{zIndex:'100',marginTop:'10px',boxShadow:'0 -8px -6px -6px black'}}>
+        <footer id="waiboc-footer" style={{zIndex:'100',boxShadow:'0 -8px -6px -6px black'}}>
           <Row style={{minHeight:'85%'}} >
               <Col xs={1}  md={1}  xl={1}></Col>
               <Col xs={23} md={23} xl={7}>

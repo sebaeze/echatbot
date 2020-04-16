@@ -4,8 +4,6 @@
 import React                        from 'react' ;
 import { Row, Col }                 from 'antd'  ;
 //
-import '../../../css/estilosCuerpo.css' ;
-//
 export class CuerpoLogin extends React.Component {
     constructor(props){
         super(props) ;

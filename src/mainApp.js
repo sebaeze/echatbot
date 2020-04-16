@@ -24,7 +24,6 @@ const  { Content }   = Layout ;
 //
 import 'antd/dist/antd.css' ;
 import './css/estilos.css' ;
-import './css/estilosCuerpo.css' ;
 import './css/estilosContacto.css' ;
 import './css/estilosAnimaciones.css' ;
 //

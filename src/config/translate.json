@@ -3,6 +3,7 @@
         "navigation":{
             "home":"Home"
         },
+        "contactUsTitle":"Leave us your any inquire or proposal.",
         "integration":"Integration",
         "copied":"Successfully copied to clipboard",
         "checkWidgetCode":"Link to Widget",
@@ -153,6 +154,7 @@
         },
         "cognitiveAnalytics":"Cognitive Analytics",
         "plan":{
+            "chatbotTrainingSupport":"Support in Chatbot Training",
             "beta":"100 Mensajes gratis x Mes",
             "customMsg":"Plan based on your needs",
             "messagesXmonth":"Messages x month",
@@ -171,6 +173,7 @@
         "navigation":{
             "home":"Inicio"
         },
+        "contactUsTitle":"Dejanos cualquier duda o propuesta.",
         "integration":"Integración",
         "copied":"Copiado al portapapeles",
         "checkWidgetCode":"Enlace a Widget",
@@ -320,6 +323,7 @@
         "cognitiveAnalytics":"Analisis Cognitivo",
         "betaPlanLeyend":"Por el momento, solo contamos con el plan Beta, el cual consiste en 600 mensajes gratis x mes.\n Si te interesa el servicio, ponete en contacto a travez del formulario de contacto",
         "plan":{
+            "chatbotTrainingSupport":"Soporte en entrenamiento de Chatbot",
             "beta":"100 Mensajes gratis x Mes",
             "customMsg":"Plan a medida",
             "messagesXmonth":"Mensajes x Mes",
@@ -356,7 +360,26 @@
             {
                 "title":"Chatbot en la nube",
                 "description":"El servicio no requiere de hosting adicional",
-                "image": ["/img/cloud-transparent.png"],
+                "image": [
+                    {
+                        "src":"/img/cloud-transparent.png",
+                        "style":{
+                            "width":"80%",
+                            "height":"auto",
+                            "position": "absolute"
+                        }
+                    },
+                    {
+                        "src":"/img/CHATBOT.TRANSPARENT.png",
+                        "style":{
+                            "width":"25%",
+                            "height":"auto",
+                            "position": "absolute",
+                            "marginLeft":"30%",
+                            "marginTop":"12%"
+                        }
+                    }
+                ],
                 "text":[
                     "Se crea el chatbot en segundos",
                     "Se lo entrena",
@@ -364,12 +387,22 @@
                 ]
             },
             {
-                "title":"Facil y simple de usar",
-                "description":"En pocos pasos, ya puede tener su chatbot funcionando",
+                "title":"Pago por Consumo",
+                "description":"Se cobrara por cantidad de mensajes respondidos",
+                "image":[
+                    {
+                        "src":"/img/payAsYouGo.png",
+                        "style":{
+                            "width":"80%",
+                            "height":"auto",
+                            "position": "absolute"
+                        }
+                    }
+                ],
                 "text":[
-                    "💻 Registrese ",
-                    "🤖 Genere y entrene el bot",
-                    "💬 Copie el link del widget en su pagina "
+                    "Crea una cuenta y chatbots gratis",
+                    "Utiliza nuestras herramientas para entrenar y testear",
+                    "A fin de mes, pagas por cantidad de mensajes respondidos en tu sitio web"
                 ]
             }
         ]
@@ -378,6 +411,7 @@
         "navigation":{
             "home":"Inicio"
         },
+        "contactUsTitle":"Deixe-nos qualquer dúvida ou proposta.",
         "integration":"Integração",
         "copied":"Copiado com êxito para a área de transferência",
         "checkWidgetCode":"Link para o Widget",
@@ -526,6 +560,7 @@
             "action":"Ação"
         },
         "plan":{
+            "chatbotTrainingSupport":"Suporte no treinamento do Chatbot",
             "messagesXmonth":"Mensagens x mês",
             "customMsg":"Plano elaborado para atender às suas necessidades",
             "free":"Gratuito",

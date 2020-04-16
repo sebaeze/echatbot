@@ -5,8 +5,6 @@ import React                            from 'react' ;
 import { Typography, Row, Col, Icon }   from 'antd'  ;
 import Fade                             from 'react-reveal/Fade'  ;
 //
-import '../../../css/estilosCuerpo.css' ;
-//
 const { Title, Text }   = Typography ;
 //
 export class CuerpoPrices extends React.Component {

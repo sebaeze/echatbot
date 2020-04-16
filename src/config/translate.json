@@ -189,7 +189,7 @@
         "services":"Servicios",
         "prices":"Precios",
         "news":"Novedades",
-        "login":"Iniciar Session",
+        "login":"Iniciar Sesión",
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
         "help":"Ayuda",
@@ -346,23 +346,21 @@
         "homeHeader":{
             "title":"Chatbot para tu sitio web",
             "text":[
-                "Implementa un chatbot de forma rápida y facíl",
+                "Implementa un chatbot rápido y facíl",
                 "Mejora la atención y el tiempo de respuesta a tus clientes",
-                "Reduzca la carga laboral en la mesa de ayuda",
-                "Panel de control con metricas de consultas en tu sitio web"
+                "Reduzca la carga laboral en la mesa de ayuda"
             ],
             "ourProposal":"Nuestra Propuesta"
         },
         "HomeWhy":[
             {
                 "title":"Chatbot en la nube",
-                "description":"El servicio se encuentra en la nube, por ello no requiere de implementación adicional en su hosting",
-                "image": false,
+                "description":"El servicio no requiere de hosting adicional",
+                "image": ["/img/cloud-transparent.png"],
                 "text":[
-                    "Nuestro servicio cuenta con:",
-                    "🛠️ Herramientas para entrenar el chatbot",
-                    "💬 Widget para implementar ventana de chat en su sitio web",
-                    "📊 Panel de control para analisis y metricas"
+                    "Se crea el chatbot en segundos",
+                    "Se lo entrena",
+                    "Se copia / pega el link del widget en el sitio web"
                 ]
             },
             {

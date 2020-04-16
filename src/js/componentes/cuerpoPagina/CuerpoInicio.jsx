@@ -30,23 +30,14 @@ export class CuerpoInicio extends React.Component {
                                 configuracion={this.props.configuracion}
                                 siguienteDiv={this.idDivWhyUs}
               />
-              <Fade right >
-                <div style={{minHeight: '100vh',backgroundColor:'white', zIndex:'999'}} >
-                  <InicioPorque  translate={this.props.translate}
-                                configuracion={this.props.configuracion}
-                                id={this.idDivWhyUs}
-                                siguienteDiv={"contact"}
-                                //flagShowDiv={ this.state.showDivPorque }
-                  />
-                </div>
-              </Fade>
-              <Fade left >
-                <CuerpoAbout   translate={this.props.translate} configuracion={this.props.configuracion} />
-              </Fade>
+              <InicioPorque  translate={this.props.translate}
+                            configuracion={this.props.configuracion}
+                            id={this.idDivWhyUs}
+                            siguienteDiv={"contact"}
+              />
+              <CuerpoAbout   translate={this.props.translate} configuracion={this.props.configuracion} />
               <CuerpoPrices  translate={this.props.translate} configuracion={this.props.configuracion} />}
-              <Fade left >
-                <FormContacto translate={this.props.translate} configuracion={this.props.configuracion} customStyle={{marginTop:'110px'}} />
-              </Fade>
+              <FormContacto translate={this.props.translate} configuracion={this.props.configuracion} customStyle={{marginTop:'110px'}} />
           </div>
       )
       //

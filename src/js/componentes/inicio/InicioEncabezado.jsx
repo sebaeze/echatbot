@@ -12,8 +12,8 @@ export class InicioEncabezado extends React.Component {
         super(props) ;
         this.state = {
             arrayPaginas: [
-                <PageBgChatbot     key="1" translate={this.props.translate} configuracion={this.props.configuracion}  />,
-                <PageBgWebsiteDev  key="2" translate={this.props.translate} configuracion={this.props.configuracion}  />
+                <PageBgChatbot     key="1" siguienteDiv={this.props.siguienteDiv} translate={this.props.translate} configuracion={this.props.configuracion}  />,
+                <PageBgWebsiteDev  key="2" siguienteDiv={this.props.siguienteDiv} configuracion={this.props.configuracion}  />
             ]
         } ;
         this.setRefCarousel = this.setRefCarousel.bind(this) ;
@@ -30,7 +30,7 @@ export class InicioEncabezado extends React.Component {
         //
         return(
             <div id={this.props.id} style={{minHeight:'100vh'}} className="bg-inicial" >
-                <Row style={ this.props.configuracion.isMobile==true ? {} : {paddingTop:'50px'}}>
+                <Row>
                     <Row>
                         <Col xs={0}  md={0}   lg={1}  xl={1}  xxl={1}></Col>
                         <Col xs={24} md={24}  lg={22} xl={22} xxl={22}>

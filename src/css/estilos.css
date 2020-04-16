@@ -5,6 +5,9 @@
     --font-color-important: #002DFF ;
     --background-dashboard-edit: #F4F4F4 ;
 }
+body, html {
+    font-size: 18px ;
+}
 /*  */
 header {
     padding: 0 !important ;
@@ -81,6 +84,55 @@ header ul.ant-menu {
 }
 .waiboc-header-submenu ul {
     min-height: 150px !important ;
+}
+.waiboc-home-row-actions {
+    line-height: 80px ;
+    padding-top: 20px ;
+    display: inline-block ;
+}
+.waiboc-home-row-actions .waiboc-btn-action {
+    width: 250px ;
+    background-color: transparent ;
+    border-width: 0px ;
+    box-shadow: none ;
+    text-align: center ;
+    font-size: 22px ;
+    font-weight: 600 ;
+    line-height: 26px ;
+    padding: 5px 5px 5px 5px ;
+    color: var(--font-color-important) ;
+    display: inline-block ;
+    position: relative ;
+    float: left ;
+}
+.waiboc-home-row-actions .waiboc-btn-action span {
+    width: 100% ;
+}
+.waiboc-home-row-actions .waiboc-btn-action span:hover {
+    text-decoration: underline ;
+}
+.waiboc-home-whyus {
+    min-height: 100vh ;
+    padding-top:  5px ;
+    background: rgb(204,210,240);
+    background: linear-gradient(0deg, rgba(204,210,240,1) 4%, rgba(131,151,244,1) 100%);
+}
+.waiboc-home-whyus h1.ant-typography {
+    color: white ;
+    font-size: 45px ;
+    line-height: 49px ;
+}
+.waiboc-home-whyus h3.ant-typography {
+    font-size: 28px ;
+    line-height: 32px ;
+}
+.waiboc-home-whyus .sub-title {
+    font-size: 28px ;
+    line-height: 32px ;
+}
+.waiboc-home-whyus .line-detail {
+    font-size: 20px ;
+    line-height: 24px ;
 }
 /*   */
 .ant-menu-item > a, .ant-menu-item > span {
@@ -1034,9 +1086,11 @@ div.react-bootstrap-table tbody tr:hover {
     padding-top: 20px ;
 }
 */
+/*
 #waiboc-main-node span{
     font-size: 18px  ;
 }
+*/
 #waiboc-main-node span.emoji,  .waiboc-drawer span.emoji {
     position: relative !important ;
     margin-left: 5px !important ;
@@ -1354,16 +1408,17 @@ span.waiboc-span-emoticon:hover {
     padding: 3px 3px 3px 3px ;
 }
 span.chat-line-home.title {
-    margin-top: 40px !important ;
+    margin-top: 50px !important ;
     font-size: 60px !important ;
     line-height: 65px !important ;
     height: 180px !important;
     text-align: center ;
 }
 span.chat-line-home.sub-title {
-    font-size: 30px !important ;
-    line-height: 35px !important ;
-    
+    font-size: 20px !important ;
+    line-height: 28px !important ;
+    /* color: rgb(92, 89, 89)153, 149, 149) ; */
+    color: #5E5959 ;
 }
 /*   */
 @media (max-width: 700px) {
@@ -1414,6 +1469,9 @@ span.chat-line-home.sub-title {
         font-size: 20px !important ;
         line-height: 25px !important ;
         text-align: center !important ;
+    }
+    .waiboc-home-row-actions {
+        padding-top: 5px ;
     }
     /*  */
 }

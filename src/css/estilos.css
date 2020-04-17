@@ -140,7 +140,7 @@ header ul.ant-menu {
     background-color: yellow ;
     overflow: hidden ;
     background: rgb(218,236,248);
-background: linear-gradient(2deg, rgba(218,236,248,1) 22%, rgba(241,244,241,1) 82%, rgba(204,210,240,1) 95%);
+    background: linear-gradient(2deg, rgba(218,236,248,1) 22%, rgba(241,244,241,1) 82%, rgba(204,210,240,1) 95%);
 }
 .waiboc-home-prices .plan-price {
     font-size: 40px ;
@@ -410,10 +410,6 @@ div {
     font-weight: 600 ;
 }
 .box-plan .waiboc-plan-description {
-    /*
-    width: 80% ;
-    text-align: center ;
-    */
     padding-left: 10px ;
     display: inline-block ;
     height: 100% ;
@@ -1620,6 +1616,19 @@ span.chat-line-home.sub-title {
     .waiboc-home-whyus {
         min-height: 100vh ;
         padding-top: 0px ;
+    }
+    .waiboc-home-prices .plan-price {
+        font-size: 25px ;
+        font-weight: 400 ;
+        text-align: center ;
+        vertical-align: middle ;
+    }
+    .box-plan .waiboc-plan-description {
+        padding-left: 10px ;
+        display: inline-block ;
+        font-size: 18px ;
+        line-height: 20px ;
+        vertical-align: left ;
     }
     /*  */
 }

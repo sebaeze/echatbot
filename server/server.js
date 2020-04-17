@@ -14,7 +14,7 @@ const https            = require('https') ;
 const path             = require('path')  ;
 const fs               = require('fs')    ;
 //
-import { bases as dbClass }    from 'echatbot-mongodb' ;
+import { bases as dbClass }    from '@sebaeze/echatbot-mongodb' ;
 import { routesApp }           from './routes/routerServer' ;
 import configuracionApp        from './config/general.json'  ;
 //

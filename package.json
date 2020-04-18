@@ -2,6 +2,20 @@
   "name": "echatbot",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "build:ssr": "webpack    --mode production   --config ./build_config/weback-ssr-home.js",
+    "build:home": "webpack   --mode production   --config ./build_config/webpack-prod-website.js",
+    "build:admin": "webpack  --mode production   --config ./build_config/webpack-prod-admin.js",
+    "react:test": "webpack   --mode development  --config ./build_config/webpack-dev-test.js",
+    "start": "babel-node ./server/server.js",
+    "buildProd": "export AMBIENTE=produccion && npm run build && npm run buildAdmin",
+    "startProd": "export AMBIENTE=produccion && babel-node ./server/server.js",
+    "postinstall": "npm install git+ssh://git@github.com/sebaeze/echatbot-mongodb.git",
+    "start:node": "nodemon --exec babel-node ./server/server.js",
+    "start:home": "webpack-dev-server --config ./build_config/webpack-dev-website.js",
+    "start:admin": "webpack-dev-server --config ./build_config/webpack-dev-admin.js",
+    "start:test": "webpack-dev-server --config ./build_config/webpack-dev-test.js"
+  },
   "dependencies": {
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
@@ -73,20 +87,6 @@
     "url-loader": "^2.0.0",
     "waiboc-widget-react": "^1.0.16",
     "webpack": "^4.30.0"
-  },
-  "scripts": {
-    "build:ssr": "webpack   --mode production   --config ./build_config/weback-ssr-home.js",
-    "build:home": "webpack   --mode production   --config ./build_config/webpack-prod-website.js",
-    "build:admin": "webpack  --mode production    --config ./build_config/webpack-prod-admin.js",
-    "react:test": "webpack   --mode development  --config ./build_config/webpack-dev-test.js",
-    "start": "babel-node ./server/server.js",
-    "buildProd": "export AMBIENTE=produccion && npm run build && npm run buildAdmin",
-    "startProd": "export AMBIENTE=produccion && babel-node ./server/server.js",
-    "postinstall": "npm install git+ssh://git@github.com/sebaeze/echatbot-mongodb.git",
-    "start:node": "nodemon --exec babel-node ./server/server.js",
-    "start:home": "webpack-dev-server --config ./build_config/webpack-dev-website.js",
-    "start:admin": "webpack-dev-server --config ./build_config/webpack-dev-admin.js",
-    "start:test": "webpack-dev-server --config ./build_config/webpack-dev-test.js"
   },
   "browserslist": [
     ">0.2%",

@@ -92,10 +92,12 @@ module.exports = {
         maxInitialRequests: Infinity,
         minSize: 0,
         cacheGroups: {
+          /*
           reactVendor: {
             test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
             name: "reactvendor"
           },
+          */
           utilityVendor: {
             test: /[\\/]node_modules[\\/](lodash|moment|moment-timezone)[\\/]/,
             name: "utilityVendor"

@@ -181,6 +181,7 @@ export class TablaTraining extends React.Component {
                         let tempText = [] ;
                         for ( let keyEl in ObjSearchText ){
                             let qtyText = ObjSearchText[keyEl] ;
+                            if ( typeof qtyText=="object" ){ qtyText=JSON.stringify(qtyText); }
                             tempText.push( <div key={keyEl} className="waiboc-tab-list-item" >{qtyText} - {keyEl}</div> ) ;
                         } ;
                         //
@@ -188,7 +189,6 @@ export class TablaTraining extends React.Component {
                             <div style={{fontWeight:'600',fontSize:'18px'}}>{tempText}</div>
                         )
                     }
-                    // defaultSortOrder: 'descend' , sorter: (a, b) => a.language.localeCompare(b.language)
                 },
                 {title: this.props.translate.table.answer       ,
                         dataIndex:'answer',key:'answer',width: 400,
@@ -320,7 +320,9 @@ export class TablaTraining extends React.Component {
                     key: elemIdx,
                     language: elemTC.language||'es',
                     searchText: elemTC.searchText || {},
-                    systemDefined: tempsystemDefined
+                    systemDefined: tempsystemDefined,
+                    usageQuantity: elemTC.usageQuantity||0,
+                    entity: elemTC.entity||""
                 } ;
             }) ;
         } else {
@@ -333,12 +335,15 @@ export class TablaTraining extends React.Component {
                         key: elemIdx,
                         language: elemTC.language||'es',
                         searchText: elemTC.searchText || {},
-                        systemDefined: tempsystemDefined
+                        systemDefined: tempsystemDefined,
+                        usageQuantity: elemTC.usageQuantity||0,
+                        entity: elemTC.entity||""
                     } ) ;
                 }
             }) ;
         }
         //
+        console.log('....renrder::table:: ',arrayDatos) ;
         return(
             <div>
                 <FormNewIntent  onAccept={this.onAcceptNewIntent}

@@ -8,7 +8,7 @@ import FormContacto                       from "../formularios/FormContacto"   ;
 import { InicioEncabezado }               from  '../inicio/InicioEncabezado'   ;
 import { InicioPorque  }                  from  '../inicio/InicioPorque'       ;
 //
-export class CuerpoInicio extends React.Component {
+class CuerpoInicio extends React.Component {
   constructor(props) {
     super(props)  ;
     this.idDivWhyUs    = "waiboc-header-whyus" ;
@@ -36,4 +36,6 @@ export class CuerpoInicio extends React.Component {
       //
     }
   }
+//
+export default CuerpoInicio ;
 //

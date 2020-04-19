@@ -169,6 +169,90 @@
             "Don't lose sells",
             "Monitor your clients needs",
             "Improve your eCommerce using the potential of AI"
+        ],
+        "homeAbout":[
+            {
+                "title":"About us",
+                "text":[
+                    "We are a new team but with long experience in development and maintenance of business software"
+                ]
+            },
+            {
+                "title":"Virtual Assistants",
+                "text":[
+                    "Virtual Assistants or Chatbot are becoming a fundamental element for eCommerce, ",
+                    "quickly attending the visits of potential clients or retaining, through quick responses  ",
+                    "and client satisfaction"
+                ]
+            }
+        ],
+        "homeHeader":{
+            "title":"Chatbot for your website",
+            "text":[
+                "Implement a chatbot quickly and easily",
+                "Improve customer service and response time",
+                "Reduce the workload at the help desk"
+            ],
+            "ourProposal":"Our proposal"
+        },
+        "homeWebsitDev":{
+            "title":"Website or eCommerce for your business",
+            "text":[
+                "We develop your website or eCommerce",
+                "We advise you on the digitization of your business",
+                "Contact us and we will schedule a meeting"
+            ],
+            "ourProposal":"Our proposal"
+        },
+        "HomeWhy":[
+            {
+                "title":"Chatbot en la nube",
+                "description":"El servicio no requiere de hosting adicional",
+                "image": [
+                    {
+                        "src":"/img/cloud-transparent.png",
+                        "style":{
+                            "width":"80%",
+                            "height":"auto",
+                            "position": "absolute"
+                        }
+                    },
+                    {
+                        "src":"/img/CHATBOT.TRANSPARENT.png",
+                        "style":{
+                            "width":"25%",
+                            "height":"auto",
+                            "position": "absolute",
+                            "marginLeft":"30%",
+                            "marginTop":"12%"
+                        }
+                    }
+                ],
+                "text":[
+                    "Se crea el chatbot en segundos",
+                    "Se lo entrena",
+                    "Se copia / pega el link del widget en el sitio web"
+                ]
+            },
+            {
+                "title":"Pago por Consumo",
+                "description":"Se cobrara por cantidad de mensajes respondidos",
+                "image":[
+                    {
+                        "src":"/img/payAsYouGo.png",
+                        "style":{
+                            "width":"80%",
+                            "height":"auto",
+                            "position": "absolute"
+                        }
+                    }
+                ],
+                "text":[
+                    "Crea una cuenta y chatbots gratis",
+                    "Utiliza nuestras herramientas para entrenar y testear",
+                    "A fin de mes, pagas por cantidad de mensajes respondidos en tu sitio web"
+                ]
+            }
         ]
     },
     "ES":{
@@ -357,6 +441,15 @@
                 "Implementa un chatbot rápido y facíl",
                 "Mejora la atención y el tiempo de respuesta a tus clientes",
                 "Reduzca la carga laboral en la mesa de ayuda"
+            ],
+            "ourProposal":"Nuestra Propuesta"
+        },
+        "homeWebsitDev":{
+            "title":"Página web o tienda para tu negocio",
+            "text":[
+                "Desarrollamos tu página web o tienda",
+                "Te asesoramos en la digitalización de tu negocio",
+                "Contáctanos y agendamos una reunión"
             ],
             "ourProposal":"Nuestra Propuesta"
         },

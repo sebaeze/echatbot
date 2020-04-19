@@ -13,7 +13,7 @@ export class InicioEncabezado extends React.Component {
         this.state = {
             arrayPaginas: [
                 <PageBgChatbot     key="1" siguienteDiv={this.props.siguienteDiv} translate={this.props.translate} configuracion={this.props.configuracion}  />,
-                <PageBgWebsiteDev  key="2" siguienteDiv={this.props.siguienteDiv} configuracion={this.props.configuracion}  />
+                <PageBgWebsiteDev  key="2" siguienteDiv={this.props.siguienteDiv} translate={this.props.translate} configuracion={this.props.configuracion}  />
             ]
         } ;
         this.setRefCarousel = this.setRefCarousel.bind(this) ;

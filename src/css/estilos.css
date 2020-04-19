@@ -1623,6 +1623,9 @@ span.chat-line-home.sub-title {
         text-align: center ;
         vertical-align: middle ;
     }
+    .waiboc-home-web-dev {
+        padding-top: 30px ;
+    }
     .box-plan .waiboc-plan-description {
         padding-left: 10px ;
         display: inline-block ;

@@ -3,7 +3,7 @@
 */
 import React                               from 'react' ;
 import { CustomReply, WaibocReactWidget }  from 'waiboc-widget-react' ;
-/// import { CustomReply, WaibocReactWidget }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
+// import { CustomReply, WaibocReactWidget }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
 //
 export class TestChatbotWidget extends React.Component {
     constructor(props){

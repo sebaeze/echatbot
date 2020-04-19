@@ -22,8 +22,8 @@ export class FormIntentAnswerBase extends React.Component {
         this.answerTypes        = {
             API:'api',
             TEXT:'text',
-            CAROUSEL:'carousel',
-            OPTIONS:'options'
+            CAROUSEL:'carousel'
+            //OPTIONS:'options'
             //,IMAGE:'image'
         } ;
         this.state              = {
@@ -33,7 +33,7 @@ export class FormIntentAnswerBase extends React.Component {
         } ;
         this.inputText          = false ;
     }
-    //
+    /*
     static getDerivedStateFromProps(newProps, state) {
         if ( newProps.data.type!=state.fieldPanel ){
             let newDerivedState = {
@@ -43,7 +43,8 @@ export class FormIntentAnswerBase extends React.Component {
         } else {
             return false ;
         }
-    }
+    } 
+    */
     //
     normFile(e){
         console.log('Upload event:', e);
@@ -269,36 +270,28 @@ export class FormIntentAnswerBase extends React.Component {
                                 }}
                             />
                         </Form.Item>
-                        {
-                            this.state.fieldPanel==this.answerTypes.OPTIONS ?
-                                <Form.Item
-                                    hasFeedback
-                                    label={ <span>
-                                                Options
-                                                <Tooltip  placement="bottomRight"
-                                                          title={this.props.translate.tooltip.answerText}
-                                                          getPopupContainer={(trigger) => { return trigger.parentNode ; }}
-                                                >
-                                                    <Icon type="question-circle-o" />
-                                                </Tooltip>
-                                            </span>}
-                                >
-                                    <FormDynamicInputOption
-                                        form={this.props.form}
-                                        styleButton={{width:'60%'}}
-                                        textPlaceholderLabel={this.props.translate.form.optionsLabelToDisplay}
-                                        textPlaceholderValue={this.props.translate.form.optionsValueSelect}
-                                        initialValues={arrayOptions}
-                                        chatbotTraining={this.props.chatbotConfig.training}
-                                        fieldName="options"
-                                        type="array"
-                                        defaultTypefield="string"
-                                        textAdd={this.props.translate.form.textAddOption}
-                                        description={this.props.translate.form.nonValidOption}
-                                    />
-                                </Form.Item>
-                                : null
-                        }
+                        <Form.Item hasFeedback
+                            label={ <Tooltip  placement="bottomRight"
+                                        title={this.props.translate.tooltip.answerOptions}
+                                        getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                                    >
+                                        {this.props.translate.form.formNewAnswerOptions} <Icon type="question-circle-o" />
+                                    </Tooltip> }
+                        >
+                            <FormDynamicInputOption
+                                form={this.props.form}
+                                styleButton={{width:'60%'}}
+                                textPlaceholderLabel={this.props.translate.form.optionsLabelToDisplay}
+                                textPlaceholderValue={this.props.translate.form.optionsValueSelect}
+                                initialValues={arrayOptions}
+                                chatbotTraining={this.props.chatbotConfig.training}
+                                fieldName="options"
+                                type="array"
+                                defaultTypefield="string"
+                                textAdd={this.props.translate.form.textAddOption}
+                                description={this.props.translate.form.nonValidOption}
+                            />
+                        </Form.Item>
                         {
                             this.state.fieldPanel==this.answerTypes.API ?
                                 <Form.Item

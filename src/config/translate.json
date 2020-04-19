@@ -67,6 +67,7 @@
             "botsConfiguration":"Configuration"
         },
         "tooltip":{
+            "answerOptions":"Describe the option to show to the user",
             "intentDescription":"Brief description of the intent usage",
             "answerSimpleText":"Simple text",
             "subtitleBot":"Text or legend to display above the chatbot name",
@@ -94,6 +95,7 @@
             "action":"Action"
         },
         "form":{
+            "formNewAnswerOptions":"Name to display in the option",
             "systemDefinedDelete":"It can't be deleted. System Defined",
             "optionsValueSelect":"Selecione uma intenção",
             "optionsLabelToDisplay":"Option name to display",
@@ -233,6 +235,7 @@
             "options":"Lista de opciones"
         },
         "tooltip":{
+            "answerOptions":"Describa al usuario la opción",
             "intentDescription":"Pequeña description del uso de la intención",
             "answerSimpleText":"Texto Simple",
             "subtitleBot":"Texto o leyenda a mostrar debajo del nombre del chatbot",
@@ -259,6 +262,7 @@
             "action":"Acción"
         },
         "form":{
+            "formNewAnswerOptions":"Nombre de la opción que visualizara el usuario",
             "systemDefinedDelete":"No puede borrarse. Definida por sistema.",
             "optionsValueSelect":"Eljia una intención",
             "optionsLabelToDisplay":"Nombre de apción a mostrar",
@@ -476,6 +480,7 @@
             "botsConfiguration":"Configuração"
         },
         "tooltip":{
+            "answerOptions":"Descreva a opção para mostrar ao usuário",
             "intentDescription":"Breve descrição do uso intencional",
             "answerSimpleText":"Texto simples ",
             "subtitleBot":"Texto ou legenda a ser exibida acima do nome do chatbot",
@@ -486,6 +491,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
+            "formNewAnswerOptions":"Nome a ser exibido na opção",
             "systemDefinedDelete":"Não pode ser excluído. Definido pelo sistema.",
             "optionsValueSelect":"",
             "optionsLabelToDisplay":"Nome da opção a ser exibida",

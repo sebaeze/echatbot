@@ -6,6 +6,7 @@ import { Table, Input, Button, notification, Icon }        from 'antd'  ;
 import { Row, Col, Tag, Popconfirm, Popover }              from 'antd'  ;
 import moment                                              from 'moment-timezone'     ;
 import { CustomReply }                                     from 'waiboc-widget-react' ;
+// import { CustomReply }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
 import { TestChatbotWidget }                               from '../chat/TestChatbotWidget'    ;
@@ -343,7 +344,6 @@ export class TablaTraining extends React.Component {
             }) ;
         }
         //
-        console.log('....renrder::table:: ',arrayDatos) ;
         return(
             <div>
                 <FormNewIntent  onAccept={this.onAcceptNewIntent}

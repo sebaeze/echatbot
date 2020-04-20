@@ -201,18 +201,23 @@ header ul.ant-menu {
 .ant-carousel .slick-slide h3 {
     color: #fff;
 }
+.waiboc-drawer .ant-drawer-close i {
+    font-size: 20px ;
+    font-weight: 600 ;
+}
 .waiboc-drawer .ant-drawer-close {
     border: 0.5px dotted gray ;
-    border-radius: 25px ;
+    border-radius: 20px ;
+    height: 30px ;
+    width: 30px ;
+    line-height: 30px ;
     padding: 1px 1px 1px 1px ;
     transition: box-shadow 0.6s ;
+    top: 10px ;
+    right: 10px ;
 }
 .waiboc-drawer .ant-drawer-close:hover {
     box-shadow: 0 0 5px #515151 ;
-}
-.waiboc-drawer .ant-drawer-close i {
-    font-size: 25px  ;
-    font-weight: 600 ;
 }
 .waiboc-intent-step {
     font-weight: 600 ;
@@ -1265,6 +1270,10 @@ div.react-bootstrap-table tbody tr:hover {
     font-size: 18px !important ;
 }
 */
+.waiboc-form-label {
+    font-weight: 600 ;
+    font-size: 20px ;
+}
 .waiboc-cl-form .emoji-mart-category .emoji-mart-emoji span:hover {
     cursor:  pointer !important ;
 }
@@ -1321,7 +1330,8 @@ span.waiboc-span-emoticon:hover {
     margin-bottom: 5px !important ;
 }
 .waiboc-cl-form .ant-form-item-children .anticon-minus-circle-o, .waiboc-cl-form .ant-form-item-children .dynamic-delete-button {
-
+    margin-left: 2px !important ;
+    font-size: 20px ;
 }
 /*  */
 #waiboc-main-node .fadeOut{
@@ -1456,6 +1466,15 @@ span.waiboc-span-emoticon:hover {
     font-weight: 600 !important ;
 }
 /*   */
+.waiboc-drawer h2.ant-typography {
+    width: 100% ;
+    text-align: center ;
+    color: var(--font-color-important) ;
+}
+.waiboc-drawer h2 i.anticon {
+    color: var(--font-color-important) ;
+    font-size: 16px ;
+}
 .waiboc-drawer ul.ant-menu {
     /* border: 0.1px solid #1890FF !important ; */
     border-radius: 3px ;

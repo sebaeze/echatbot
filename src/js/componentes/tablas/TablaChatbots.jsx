@@ -19,7 +19,8 @@ export class TablaChatbots extends React.Component {
         this.onChange       = this.onChange.bind(this)     ;
         this.onChangeSearch = this.onChangeSearch.bind(this) ;
         this.parseColumns   = this.parseColumns.bind(this) ;
-        this.addNewChatbot  = this.addNewChatbot.bind(this) ;
+        this.addNewChatbot           = this.addNewChatbot.bind(this)           ;
+        this.onAcceptNewChatbot      = this.onAcceptNewChatbot.bind(this)      ;
         this.onClickTrainChatbot     = this.onClickTrainChatbot.bind(this)     ;
         this.onClickEditChatbot      = this.onClickEditChatbot.bind(this)      ;
         this.onClickDeleteChatbot    = this.onClickDeleteChatbot.bind(this)    ;
@@ -130,10 +131,19 @@ export class TablaChatbots extends React.Component {
         }
     }
     //
+    onAcceptNewChatbot(argSel){
+        try {
+            let tempNewCBot = { ...argSel, idUser: this.state.userInfo.email } ;
+            this.addNewChatbot(tempNewCBot) ;
+        } catch(errOANC){
+            console.dir(errOANC) ;
+        }
+    } ;
+    //
     addNewChatbot(argObjChatbot){
         try {
             //
-            this.setState({flagSpinner: true}) ;
+            this.setState({flagSpinner: true, modalVisible: false}) ;
             let newState   = { flagSpinner: false  };
             let newChatbot = {} ;
             //
@@ -405,25 +415,12 @@ export class TablaChatbots extends React.Component {
                                     scroll={{ x: 1500 }}
                                 />
                             </Row>
-                            {
-                                this.state.modalVisible==true ?
-                                    <FormNewChatbot
-                                        modalVisible={this.state.modalVisible}
-                                        translate={this.props.translate}
-                                        onCancelModal={this.onCancelModal}
-                                        sel={
-                                            (argSel)=>{
-                                                this.setState({modalVisible: false }) ;
-                                                let tempNewCBot = {
-                                                    ...argSel,
-                                                    idUser: this.state.userInfo.email
-                                                } ;
-                                                this.addNewChatbot(tempNewCBot) ;
-                                            }
-                                        }
-                                    />
-                                    : null
-                            }
+                            <FormNewChatbot
+                                modalVisible={this.state.modalVisible}
+                                translate={this.props.translate}
+                                onCancelModal={this.onCancelModal}
+                                sel={this.onAcceptNewChatbot}
+                            />
                         </div>
                 }
             </div>

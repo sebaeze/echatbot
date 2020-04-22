@@ -2,11 +2,9 @@
 *
 */
 import React                              from 'react' ;
-import { Row, Col, Typography, Button }           from 'antd'  ;
+import { Row, Col }                       from 'antd'  ;
 import { withRouter }                     from "react-router-dom" ;
-import { AnimacionLink }                  from '../animacion/AnimacionLink' ;
-//
-const { Title } = Typography ;
+import { ActionButtons }                  from './ActionButtons'  ;
 //
 class PageHeaderChatbot  extends  React.Component {
     //
@@ -42,21 +40,7 @@ class PageHeaderChatbot  extends  React.Component {
                                     })
                                 }
                             </Row>
-                            <Row className="waiboc-home-row-actions" >
-                                <Button type="primary" size="large" className="waiboc-btn-action"
-                                        onClick={(argEV)=>{argEV.preventDefault();location.href="/account";}}
-                                >
-                                    {this.props.translate.login}
-                                </Button>
-                                <AnimacionLink texto={
-                                                <Button type="primary" size="large" className="waiboc-btn-action" >
-                                                    {this.props.translate.moreInfo}
-                                                </Button>
-                                            }
-                                            offset={130}
-                                            siguienteDiv={this.props.siguienteDiv}
-                                />
-                            </Row>
+                            <ActionButtons translate={this.props.translate} siguienteDiv={this.props.siguienteDiv} />
                         </Col>
                     </Row>
             </Row>

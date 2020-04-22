@@ -5,7 +5,7 @@ import React                                              from 'react' ;
 import { Row, Col, Typography, Button }                   from 'antd'  ;
 // import VisibilitySensor                                   from 'react-visibility-sensor' ;
 import Fade                                               from 'react-reveal/Fade'  ;
-import { AnimacionLink }                                  from '../animacion/AnimacionLink' ;
+import { ActionButtons }                                  from '../pages/ActionButtons'  ;
 //
 const { Title } =  Typography ;
 const WhyElement = (props) => {
@@ -46,21 +46,7 @@ const WhyElement = (props) => {
             <Row>
                 <Col xs={1} md={1} lg={1} xl={1} xxl={1} ></Col>
                 <Col xs={22} md={22} lg={18} xl={18} xxl={18} >
-                    <Row className="waiboc-home-row-actions" >
-                        <Button type="primary" size="large" className="waiboc-btn-action"
-                                onClick={(argEV)=>{argEV.preventDefault();location.href="/account";}}
-                        >
-                            {props.translate.login}
-                        </Button>
-                        <AnimacionLink texto={
-                                        <Button type="primary" size="large" className="waiboc-btn-action" >
-                                            {props.translate.moreInfo}
-                                        </Button>
-                                    }
-                                    offset={130}
-                                    siguienteDiv={props.nextId}
-                        />
-                    </Row>
+                    <ActionButtons translate={props.translate} siguienteDiv={props.siguienteDiv} />
                 </Col>
             </Row>
         </div>
@@ -106,6 +92,7 @@ export class InicioPorque extends React.Component {
                             currentId: this.props.id+"_"+whyIdx ,
                             nextId: (this.props.translate.HomeWhy.length==(whyIdx+1)) ? this.props.siguienteDiv : this.props.id+"_"+(whyIdx+1)
                         };
+                        elemProps.siguienteDiv = elemProps.nextId ;
                         return( <WhyElement key={whyIdx} why={elemWhy} {...elemProps}  /> )
                     })
                 }

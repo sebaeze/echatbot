@@ -1,7 +1,8 @@
 /*
 *
 */
-import { Row, Button }          from 'antd' ;
+import React                    from 'react' ;
+import { Row, Button }          from 'antd'  ;
 import { AnimacionLink }        from '../animacion/AnimacionLink' ;
 //
 const onClickRedirectAccount = (argEE) => {

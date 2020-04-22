@@ -2,38 +2,35 @@
 * FormNewChatbot
 */
 import React                     from 'react' ;
-import { FormDynamicInputText }  from  './FormDynamicInputText' ;
-import { Row, Col, Tag , Form, Input, Button, Tooltip, Icon, Drawer, Select, Typography }   from 'antd'  ;
+import { Row, Col, Form, Input, Button, Tooltip, Icon, Drawer, Select, Typography }   from 'antd'  ;
 //
 const { Title } = Typography ;
-//
 class FormNewChatbotWithModal extends React.Component {
     constructor(props){
         super(props) ;
         this.firstNode          = false ;
-        this.state              = {flagSpinner:false, modalVisible: this.props.modalVisible, enviadoOk:false, accessList:{} } ;
+        this.inputNameRef       = false ;
+        this.state              = { flagSpinner:false, modalVisible: this.props.modalVisible, enviadoOk:false, accessList:{} } ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
+        this.closeDrawer        = this.closeDrawer.bind(this) ;
         this.onAcceptNewChatbot = this.onAcceptNewChatbot.bind(this) ;
-    }
-    //
-    componentDidMount(){
-        const { resetFields } = this.props.form ;
-        resetFields({names:['botSubtitle','botIcon','botSubtitle','description']}) ;
     }
     //
     static getDerivedStateFromProps(newProps, state) {
         if ( newProps.modalVisible!=state.modalVisible ){
             let newDerivedState = {
                 modalVisible: newProps.modalVisible
-                /*
-                flagNewIntent: newProps.flagNewIntent,
-                dataNewIntent: newProps.modalVisible==true ? {...newProps.data} : {...INTENT_DEF}
-                */
             } ;
             return {...newDerivedState} ;
         } else {
             return false ;
         }
+    }
+    //
+    closeDrawer(argEE){
+        if ( argEE && argEE.preventDefault ){ argEE.preventDefault(); }
+        this.props.form.resetFields() ;
+        this.props.onCancelModal() ;
     }
     //
     handleSelectChange(value){
@@ -56,7 +53,7 @@ class FormNewChatbotWithModal extends React.Component {
                     }, 700 ) ;
               } else {
                   let tempValues = this.props.form.getFieldsValue() ;
-                  if ( tempValues.websiteDomains.length>0 ){
+                  if ( tempValues.websiteDomains && tempValues.websiteDomains.length>0 ){
                       for ( let ixws=0; ixws<tempValues.websiteDomains.length; ixws++ ){
                           let tempUrl = tempValues.websiteDomains[ixws] ;
                           let posBus  = tempUrl.toUpperCase().indexOf('WWW.') ;
@@ -85,42 +82,28 @@ class FormNewChatbotWithModal extends React.Component {
     }
     //
     render(){
-        //
-        const { getFieldDecorator, resetFields, getFieldsError, getFieldError } = this.props.form ;
-        let estiloForm  = this.state.flagPantContacto==true ? {marginTop:'80px'} : {} ;
-        /*
-            <Modal
-                title={
-                    <Title level={2} style={{textAlign:'center'}}>{this.props.translate.newChatbot}</Title>
-                }
-                maskClosable={false}
-                style={{border:'0.5px dotted gray',marginTop:'25px',zIndex:'9992'}}
-                visible={this.state.modalVisible}
-                onOk={this.onAcceptNewChatbot}
-                onCancel={(argEC)=>{resetFields(); this.props.onCancelModal(argEC);}}
-                //okButtonProps={!hasErrors(getFieldsError())}
-                cancelButtonProps={{ disabled: false }}
-            >
-        */
+        const { getFieldDecorator, resetFields } = this.props.form ;
         return(
             <Drawer
                 title={ <Title level={2} > <Icon type="edit" /> <u>{this.props.translate.newChatbot}</u> </Title> }
-                width={ (window.innerWidth<797) ? '99%' : '70%' }
-                placement="left"
-                closable={true}
+                width={ (window.innerWidth<797) ? '99%' : '60%' }
+                destroyOnClose={true}
+                placement="right"
+                closable={false}
                 className="waiboc-drawer"
-                style={{border:'0.5px dotted gray',marginTop:'25px',zIndex:'9992'}}
-                bodyStyle={{paddingTop:'0'}}
+                style={{border:'0.5px dotted gray',marginTop:'1px',zIndex:'9992'}}
+                bodyStyle={{paddingTop: (window.innerWidth<797) ? '5px' : '50px' }}
                 headerStyle={{padding:'5px 5px 5px 5px'}}
                 visible={this.state.modalVisible}
-                onCancel={(argEC)=>{this.props.onCancelModal(argEC);}}
-                onClose={(argEC)=>{this.props.onCancelModal(argEC);}}
-                footer={null}
+                onCancel={this.closeDrawer}
+                onClose={this.closeDrawer}
             >
-                <Form  className="waiboc-cl-form" onSubmit={(argEV)=>{argEV.preventDefault()}} style={ {...estiloForm} } >
+                <Form  className="waiboc-cl-form" onSubmit={(argEV)=>{argEV.preventDefault()}} >
                         <Row >
                             <Form.Item
                                 hasFeedback
+                                labelCol={{xs:24,md:24,lg:8,xl:8,xxl:8}}
+                                wrapperCol={{xs:24,md:24,lg:12,xl:12,xxl:12}}
                                 label={ <Tooltip className="waiboc-form-label" placement="bottomRight" title={this.props.translate.tooltip.chatbotName} >
                                             Chatbot {this.props.translate.form.name}
                                             <Icon type="question-circle-o" />
@@ -128,14 +111,23 @@ class FormNewChatbotWithModal extends React.Component {
                                     }
                             >
                                 {getFieldDecorator('botName', { rules: [{ required: true, message: 'Please, write a name for the Bot', whitespace: true }], })
-                                (<Input allowClear className="waiboc-cl-names" size="large" ref={(argRef)=>{ argRef.focus(); }} />)}
+                                ( <Input    allowClear autoFocus className="waiboc-cl-names" size="large"
+                                            ref={
+                                                (argRef)=>{
+                                                    if ( argRef && this.inputNameRef==false ){
+                                                        this.inputNameRef = argRef ;
+                                                        setTimeout(() => argRef.focus(), 0) ;
+                                                    }
+                                                }
+                                            }
+                                 /> )}
                             </Form.Item>
                         </Row>
                         <Row >
                             <Form.Item
                                 label={ <span className="waiboc-form-label" >{this.props.translate.form.selectLanguage}</span> }
-                                labelCol={{xs:24, md: 24, lg: 24, xl: 24, xxl: 24}}
-                                wrapperCol={{xs:24, md: 24, lg: 10, xl: 10, xxl: 10}}
+                                labelCol={{xs:24,md:24,lg:8,xl:8,xxl:8}}
+                                wrapperCol={{xs:24,md:24,lg:12,xl:8,xxl:8}}
                             >
                                 {getFieldDecorator('language', { rules: [{ required: true, message: 'Please, choose the language', whitespace: true }], })
                                 (
@@ -154,68 +146,26 @@ class FormNewChatbotWithModal extends React.Component {
                                 }
                             </Form.Item>
                         </Row>
-                        <Row style={{marginTop:'5px'}}>
-                            <Form.Item
-                                label={ <Tooltip className="waiboc-form-label"  placement="topRight" title={this.props.translate.tooltip.chatbotAccesslist}>
-                                            {this.props.translate.form.accessList}
-                                            <Icon type="question-circle-o" />
-                                        </Tooltip>
-                                    }
-                                labelCol={{xs:24, md: 24, lg: 24, xl: 24, xxl: 24}}
-                                wrapperCol={{xs:24, md: 24, lg: 16, xl: 16, xxl: 16}}
-                            >
-                                {
-                                    <FormDynamicInputText
-                                        form={this.props.form}
-                                        textPlaceholder="email@mywebsite.com"
-                                        fieldName="accessList"
-                                        type="array"
-                                        defaultTypefield="email"
-                                        textAdd={this.props.translate.form.textAddEmail}
-                                        description={this.props.translate.form.nonValidAccessList}
-                                    />
-                                }
-                            </Form.Item>
-                        </Row>
-                        <Row style={{marginTop:'5px'}}>
-                            <Form.Item
-                                label={ <Tooltip className="waiboc-form-label"  placement="topRight" title={this.props.translate.tooltip.websiteDomains}>
-                                            {this.props.translate.form.websiteDomains}
-                                            <Icon type="question-circle-o" />
-                                        </Tooltip>
-                                    }
-                            >
-                                {
-                                    <FormDynamicInputText
-                                        form={this.props.form}
-                                        textPlaceholder="www.mywebsite.com"
-                                        fieldName="websiteDomains"
-                                        type="array"
-                                        defaultTypefield="string"
-                                        textAdd={this.props.translate.form.textAddWebsite}
-                                        description={this.props.translate.form.nonValidwebsiteDomains}
-                                    />
-                                }
-                            </Form.Item>
-                        </Row>
-                        <Form.Item  label={ <span className="waiboc-form-label"  >{this.props.translate.form.description}</span> } hasFeedback >
+                        <Form.Item
+                            label={ <span className="waiboc-form-label"  >{this.props.translate.form.description}</span> } hasFeedback
+                            labelCol={{xs:24,md:24,lg:8,xl:8,xxl:8}}
+                            wrapperCol={{xs:24,md:24,lg:14,xl:14,xxl:14}}
+                        >
                             {getFieldDecorator('description', { rules: [{ required: true, message: 'Please, add a brief description of the Bot', whitespace: true }], })
                             (<Input.TextArea />)}
                         </Form.Item>
                         <Form.Item>
-                            <Button.Group size="large" >
-                                <Button type="primary" onClick={this.onAcceptNewChatbot}>
-                                    Accept
-                                </Button>
-                                <Button onClick={ (argEC)=>{resetFields(); this.props.onCancelModal(argEC);} }>
-                                    Cancel
-                                </Button>
-                            </Button.Group>
-                        </Form.Item>
-                        <Form.Item>
-                            {
-                                this.state.enviadoOk==true    ? <Icon type="smile" style={{fontSize:'35px',marginLeft:'25px'}} theme="twoTone" twoToneColor="#52c41a" /> : null
-                            }
+                            <Col xs={24} md={24} lg={8} xl={8} xxl={8} ></Col>
+                            <Col xs={24} md={24} lg={12} xl={12} xxl={12}  >
+                                <Button.Group size="large" >
+                                    <Button type="primary" onClick={this.onAcceptNewChatbot}>
+                                        {this.props.translate.accept}
+                                    </Button>
+                                    <Button onClick={this.closeDrawer} >
+                                        {this.props.translate.cancel}
+                                    </Button>
+                                </Button.Group>
+                            </Col>
                         </Form.Item>
                 </Form>
             </Drawer>
@@ -238,6 +188,4 @@ export const FormNewChatbot = Form.create({ name: '',
         };
     }
 })(FormNewChatbotWithModal);
-//
-//export default WrappedFormNewChatbot ;
 //

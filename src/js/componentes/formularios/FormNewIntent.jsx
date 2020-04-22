@@ -135,6 +135,7 @@ export class FormNewIntent extends React.Component {
                         </div>
                     </div>
                 }
+                destroyOnClose={true}
                 width={ (window.innerWidth<797) ? '99%' : '80%' }
                 placement="right"
                 closable={true}

@@ -264,6 +264,7 @@ export class FormIntentAnswerBase extends React.Component {
                                 form={this.props.form}
                                 errorMsg={this.props.translate.form.errorAnswerText}
                                 customStyle={{width:'100%'}}
+                                focus={true}
                                 initialValue={this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||''}
                                 onChangeValue={(argEE)=>{
                                     this.props.form.setFieldsValue({ 'text': argEE.target.value||'' });

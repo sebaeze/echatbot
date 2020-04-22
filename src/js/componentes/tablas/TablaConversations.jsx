@@ -1,24 +1,30 @@
 /*
-* TablaTraining
+* TablaConversations
 */
 import React                                               from 'react' ;
 import { Table, Input, Button, notification, Icon }        from 'antd'  ;
 import { Row, Col, Tag, Popconfirm, Popover }              from 'antd'  ;
 import moment                                              from 'moment-timezone'     ;
 import { CustomReply }                                     from 'waiboc-widget-react' ;
-//import { CustomReply }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
+// import { CustomReply }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
 import { TestChatbotWidget }                               from '../chat/TestChatbotWidget'    ;
+import { ChatAnswerExample }                               from '../chat/ChatAnswerExample'    ;
 //
-export class TablaTraining extends React.Component {
+/*
+if ( !window.waiboc ){ console.log('...ERROR: Failed to install Waiboc widget ***'); throw new Error("Waiboc widget failed"); }
+const { CustomReply }   = window.waiboc ;
+*/
+//
+export class TablaConversations extends React.Component {
     constructor(props){
         super(props) ;
-        this.onChange               = this.onChange.bind(this) ;
-        this.parseColumns           = this.parseColumns.bind(this)   ;
-        this.onChangeSearch         = this.onChangeSearch.bind(this) ;
+        console.log('...tabla conversations:: props: ',this.props) ;
+        this.onChange       = this.onChange.bind(this) ;
+        this.parseColumns   = this.parseColumns.bind(this)   ;
+        this.onChangeSearch = this.onChangeSearch.bind(this) ;
         this.onAcceptNewIntent      = this.onAcceptNewIntent.bind(this) ;
-        this.onClickNewIntent       = this.onClickNewIntent.bind(this)  ;
         this.onClickEditIntent      = this.onClickEditIntent.bind(this) ;
         this.onClickDeleteIntent    = this.onClickDeleteIntent.bind(this) ;
         this.saveChangesTotraining = this.saveChangesTotraining.bind(this) ;
@@ -46,17 +52,6 @@ export class TablaTraining extends React.Component {
         } else {
             return false ;
         }
-    }
-    //
-    onClickNewIntent(argEE){
-        if ( argEE && argEE.preventDefault){ argEE.preventDefault(); }
-        this.setState({
-            modalIntentVisible: true,
-            modalNewIntent: true,
-            intentNewModify: {
-                intentName:'',intentLanguage:'',intentDescription:'',intentExamples:[],intentDomain:'',intentAnswer:{}
-            }
-        }) ;
     }
     //
     onClickEditIntent(argRowIntent){
@@ -217,13 +212,6 @@ export class TablaTraining extends React.Component {
                         render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{moment(text).fromNow()}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
                 }
-                /*
-                ,{title: this.props.translate.table.domain ,
-                        width: 200,dataIndex:'domain', key:'domain',
-                        render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
-                }
-                */
             ] ;
             //
         } catch(errPC){
@@ -262,7 +250,7 @@ export class TablaTraining extends React.Component {
             tempNewIntent.creation_ts   = moment( new Date() ).tz("America/Argentina/Buenos_Aires").format() ;
             tempArrayTraining.push( tempNewIntent ) ;
         }
-        this.setState({arrayTraining: tempArrayTraining, modalIntentVisible: false, intentNewModify: false}) ;
+        this.setState({arrayTraining:tempArrayTraining,modalIntentVisible: false, intentNewModify: false}) ;
         this.saveChangesTotraining(tempNewIntent) ;
         //
       } catch(errNI){
@@ -320,6 +308,7 @@ export class TablaTraining extends React.Component {
         let arrayDatos = [] ;
         if ( this.state.textBusqueda.length==0 ){
             arrayDatos = this.state.arrayTraining.map((elemTC,elemIdx)=>{
+                // console.log('....elemTC.systemDefined: ',elemTC.systemDefined) ;
                 let tempsystemDefined = (typeof elemTC.systemDefined=="undefined") ? false : elemTC.systemDefined ;
                 return {
                     ...elemTC,
@@ -334,6 +323,7 @@ export class TablaTraining extends React.Component {
         } else {
             this.state.arrayTraining.forEach((elemTC,elemIdx)=>{
                 if ( Object.values(elemTC).join("").toUpperCase().indexOf(this.state.textBusqueda.toUpperCase())!=-1 ){
+                    // console.log('....elemTC.systemDefined: ',elemTC.systemDefined) ;
                     let tempsystemDefined = (typeof elemTC.systemDefined=="undefined") ? false : elemTC.systemDefined ;
                     arrayDatos.push( {
                         ...elemTC,
@@ -368,7 +358,14 @@ export class TablaTraining extends React.Component {
                         </Col>
                         <Col xs={23}  md={23}  lg={10} xl={10} xxl={10}>
                             <Button.Group size="large" >
-                                <Button onClick={this.onClickNewIntent}  type="primary" style={{marginTop:'3px'}} >
+                                <Button onClick={(argEE)=>{
+                                                        argEE.preventDefault() ;
+                                                        console.log('....TablaConversations:: new intent::  falseeeeeeee') ;
+                                                        this.setState({modalIntentVisible: true, modalNewIntent: true, intentNewModify: {intentName:'',intentLanguage:'',intentDescription:'',intentExamples:[],intentDomain:'',intentAnswer:{}}});
+                                                    }}
+                                                    type="primary"
+                                                    style={{marginTop:'3px'}}
+                                >
                                 {this.props.translate.form.newIntent}
                                 </Button>
                                 {
@@ -399,6 +396,7 @@ export class TablaTraining extends React.Component {
                 {
                     this.state.flagWidgetTest==true ?
                             <TestChatbotWidget
+                                //idAgent={this.props.chatbotConfig._id}
                                 chatbotConfig={this.state.chatbotConfig}
                                 onWindowClose={()=>{this.setState({flagWidgetTest: false});}}
                             />

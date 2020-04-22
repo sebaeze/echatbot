@@ -3,6 +3,7 @@
         "navigation":{
             "home":"Home"
         },
+        "accept":"Accept",
         "contactUsTitle":"Leave us your any inquire or proposal.",
         "integration":"Integration",
         "copied":"Successfully copied to clipboard",
@@ -259,6 +260,7 @@
         "navigation":{
             "home":"Inicio"
         },
+        "accept":"Aceptar",
         "contactUsTitle":"Dejanos cualquier duda o propuesta.",
         "integration":"Integración",
         "copied":"Copiado al portapapeles",
@@ -508,6 +510,7 @@
         "navigation":{
             "home":"Inicio"
         },
+        "accept":"Acceitar",
         "contactUsTitle":"Deixe-nos qualquer dúvida ou proposta.",
         "integration":"Integração",
         "copied":"Copiado com êxito para a área de transferência",

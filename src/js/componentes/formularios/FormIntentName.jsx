@@ -9,6 +9,7 @@ class FormIntentNameBase extends React.Component {
     constructor(props){
         super(props) ;
         this.state                = {flagSpinner:false} ;
+        this.inputNameRef         = false ;
         this.validateIntentName   = this.validateIntentName.bind(this)   ;
         this.handleSelectChange   = this.handleSelectChange.bind(this)   ;
         this.onSubmitForm         = this.onSubmitForm.bind(this) ;
@@ -79,7 +80,16 @@ class FormIntentNameBase extends React.Component {
                             })
                             ( <Input allowClear size="large" style={{fontWeight:'600'}}
                                     disabled={this.props.flagNewIntent==true ? false : true}
-                                    ref={(argRef)=>{ if ( argRef && (window.innerWidth>797) ){ argRef.focus(); } }}
+                                    ref={
+                                        (argRef)=>{
+                                            if ( argRef && this.inputNameRef==false ){
+                                                this.inputNameRef = argRef ;
+                                                if ( window.innerWidth>797 ){
+                                                    setTimeout(() => argRef.focus(), 0) ;
+                                                }
+                                            }
+                                        }
+                                    }
                             />
                             )}
                         </Form.Item>

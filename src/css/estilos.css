@@ -278,7 +278,7 @@ header ul.ant-menu {
     font-weight: 600 !important ;
 }
 .ant-popover, .ant-modal-wrap, .ant-tooltip {
-    z-index: 9991 !important ;
+    z-index: 9993 !important ;
 }
 a:hover {
     text-decoration: none ;
@@ -1271,8 +1271,8 @@ div.react-bootstrap-table tbody tr:hover {
 }
 */
 .waiboc-form-label {
-    font-weight: 600 ;
-    font-size: 20px ;
+    font-weight: 500 ;
+    font-size: 18px ;
 }
 .waiboc-cl-form .emoji-mart-category .emoji-mart-emoji span:hover {
     cursor:  pointer !important ;
@@ -1469,7 +1469,12 @@ span.waiboc-span-emoticon:hover {
 .waiboc-drawer h2.ant-typography {
     width: 100% ;
     text-align: center ;
-    color: var(--font-color-important) ;
+    font-size: 20px ;
+    line-height: 40px ;
+    height: 40px ;
+    font-weight: 600 ;
+    padding: 0 ;
+    /* color: var(--font-color-important) ; */
 }
 .waiboc-drawer h2 i.anticon {
     color: var(--font-color-important) ;

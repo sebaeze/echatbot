@@ -165,7 +165,6 @@ export class TablaChatbots extends React.Component {
                 })
                 .then((respTrain)=>{
                     //
-                    console.log('.....respTrain: ',respTrain) ;
                     if ( respTrain.result.length>0 ){
                         respTrain.result.forEach((elemINT)=>{
                             if ( Array.isArray(elemINT) && elemINT.length==1 ){ elemINT=elemINT[0]; }
@@ -173,13 +172,14 @@ export class TablaChatbots extends React.Component {
                             newChatbot.training[ keyIntent ] = elemINT ;
                         }) ;
                     }
-                    console.log('.......newChatbot.training: ',newChatbot.training) ;
                     //
                     newChatbot.key         = ( this.state.arrayChatbots.length+1 ) ;
                     newState.arrayChatbots = this.state.arrayChatbots ;
                     newState.arrayChatbots.push({ ...newChatbot }) ;
                     //
                     this.setState( newState ) ;
+                    console.log('....voy a edit:: newChatbot: ',newChatbot ) ;
+                    this.onClickEditChatbot({ _id: newChatbot._id }) ;
                     //
                 })
                 .catch((respErr)=>{
@@ -226,19 +226,19 @@ export class TablaChatbots extends React.Component {
                             <div>
                                 <div style={{width:'100%',alignContent:'center'}} >
                                     <a style={{paddingLeft:'5px',fontWeight:'600',fontSize:'20px',color:'#497EC0'}}
-                                        onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
+                                        onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot({_id: argRow._id});}}
                                     >
                                         <u>{argRow.botName}</u>
                                     </a>
                                 </div>
                                 <a style={{paddingLeft:'5px',width:'100%',fontWeight:'600',fontSize:'18px',color:'#497EC0'}}
-                                      onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
+                                      onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot({_id: argRow._id});}}
                                 >
                                     {text}
                                 </a>
                                 <br/>
                                 <a style={{fontWeight:'500',fontSize:'18px',color:'#497EC0'}}
-                                    onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot(argRow);}}
+                                    onClick={(argEE)=>{argEE.preventDefault();this.onClickEditChatbot({_id: argRow._id});}}
                                 >
                                     <Icon type="edit" style={{color:'green'}}/>
                                     <span style={{marginLeft:'7px'}} >{this.props.translate.edit}</span>
@@ -338,7 +338,7 @@ export class TablaChatbots extends React.Component {
     //
     onCancelModal(argEC){
         try {
-            argEC.preventDefault() ;
+            if ( argEC && argEC.preventDefault ){ argEC.preventDefault() ; }
             this.setState({modalVisible: false}) ;
         } catch(errOCM){
             console.dir(errOCM) ;

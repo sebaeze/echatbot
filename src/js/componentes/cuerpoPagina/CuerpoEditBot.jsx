@@ -9,6 +9,7 @@ import { FormEditChatbotInfo   }               from '../formularios/FormEditChat
 import { FormChatbotAccessList }               from '../formularios/FormChatbotAccessList'     ;
 import { FormEditChatbotAppearance }           from '../formularios/FormEditChatbotAppearance' ;
 import { TablaTraining       }                 from '../tablas/TablaTraining'                  ;
+import { TablaConversations  }                 from '../tablas/TablaConversations'             ;
 import { IconLock }                            from '../icon/IconLock' ;
 //
 const { TabPane } = Tabs ;
@@ -247,7 +248,7 @@ export class CuerpoEditBot extends React.Component {
                                 {this.props.translate.form.conversations}
                             </span>}
                         >
-                            tab 3
+                            <TablaConversations idChatbot={tempChatbotConfig._id} />
                         </TabPane>
                         <TabPane key={this.tabs.SECURITY}
                             tab={<span>

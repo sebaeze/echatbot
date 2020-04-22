@@ -16,6 +16,7 @@ export class InputTextAnswer extends React.Component {
         this.inputText     = false ;
         this.state = {
             flagPicker: false ,
+            focus: this.props.focus ? this.props.focus : false,
             textAreaValue: ''
         } ;
     }
@@ -79,17 +80,19 @@ export class InputTextAnswer extends React.Component {
                                         style={{width:'85%',display:'inline-block',marginTop:'3px',marginBottom:'3px', marginLeft:'3px', marginRight:'3px'}}
                                         autoSize
                                         onChange={onChangeValue ? onChangeValue : null}
-                                        ref={(argRef)=>{
-                                            if ( argRef ){
-                                                if (this.textRef==false){
-                                                    argRef.focus() ;
-                                                    this.textRef=argRef;
+                                        ref={
+                                            (argRef)=>{
+                                                if ( argRef && this.textRef==false ){
+                                                    this.textRef = argRef ;
+                                                    if ( window.innerWidth>797 ){
+                                                        setTimeout(() => argRef.focus(), 0) ;
+                                                    }
                                                     let tempTextArea = ReactDOM.findDOMNode( argRef ) ;
                                                     this.textRef     = tempTextArea.querySelectorAll('textarea') ;
                                                     if ( this.textRef.length>0 ){ this.textRef=this.textRef[0]; }
-                                                } ;
+                                                }
                                             }
-                                        }}
+                                        }
                                     />
                                 )
                         }

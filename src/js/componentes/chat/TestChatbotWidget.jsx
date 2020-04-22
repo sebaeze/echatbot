@@ -2,8 +2,8 @@
 *
 */
 import React                               from 'react' ;
-import { CustomReply, WaibocReactWidget }  from 'waiboc-widget-react' ;
-// import { CustomReply, WaibocReactWidget }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
+import { WaibocReactWidget }               from 'waiboc-widget-react' ;
+// import { WaibocReactWidget }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
 //
 export class TestChatbotWidget extends React.Component {
     constructor(props){
@@ -73,6 +73,7 @@ export class TestChatbotWidget extends React.Component {
             <WaibocReactWidget
                 idAgent={this.state.chatbotConfig._id}
                 backEndServer={ __URL_WIDGET__ }
+                launcher={false}
                 options={{...this.state.chatbotConfig.options}}
             />
         )

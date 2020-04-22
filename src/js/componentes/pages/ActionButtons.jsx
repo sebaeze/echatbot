@@ -6,8 +6,8 @@ import { Row, Button }          from 'antd'  ;
 import { AnimacionLink }        from '../animacion/AnimacionLink' ;
 //
 const onClickRedirectAccount = (argEE) => {
-    if ( argEE && argEE.preventDefault ){ argEV.preventDefault(); }
-    location.href="/account";
+    if ( argEE && argEE.preventDefault ){ argEE.preventDefault(); }
+    window.location.href="/account";
 }
 //
 export const ActionButtons = (props) => {

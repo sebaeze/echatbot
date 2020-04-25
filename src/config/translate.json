@@ -68,6 +68,7 @@
             "botsConfiguration":"Configuration"
         },
         "tooltip":{
+            "answerText":"Basic text that will be shown always in this answer",
             "answerOptions":"Describe the option to show to the user",
             "intentDescription":"Brief description of the intent usage",
             "answerSimpleText":"Simple text",
@@ -321,6 +322,7 @@
             "options":"Lista de opciones"
         },
         "tooltip":{
+            "answerText":"Texto basico que sera mostrado siempre en esta respuesta",
             "answerOptions":"Describa al usuario la opción",
             "intentDescription":"Pequeña description del uso de la intención",
             "answerSimpleText":"Texto Simple",
@@ -576,6 +578,7 @@
             "botsConfiguration":"Configuração"
         },
         "tooltip":{
+            "answerText":"Texto básico que será mostrado sempre nesta resposta",
             "answerOptions":"Descreva a opção para mostrar ao usuário",
             "intentDescription":"Breve descrição do uso intencional",
             "answerSimpleText":"Texto simples ",

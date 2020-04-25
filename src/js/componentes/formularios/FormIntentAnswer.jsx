@@ -8,8 +8,6 @@ import { Row, Col, Upload, Spin, message }               from 'antd'  ;
 import { FormDynamicInputOption }                        from './FormDynamicInputOption' ;
 import { InputTextAnswer }                               from '../input/InputTextEmojiAttachment' ;
 //
-import 'emoji-mart/css/emoji-mart.css'
-//
 export class FormIntentAnswerBase extends React.Component {
     constructor(props){
         super(props) ;

@@ -52,9 +52,8 @@ export class FormDynamicInputOption extends React.Component {
     }
     //
     remove(k){
-        if (this.state.keys.length === 1) {
-          return;
-        }
+        //
+        if (this.state.keys.length === 0) { return; }
         let tempKeys = this.state.keys.filter(key => key !== k) ;
         this.setState({keys: tempKeys})  ;
         // this.forceUpdate() ;

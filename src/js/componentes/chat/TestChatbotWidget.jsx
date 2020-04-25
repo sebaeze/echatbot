@@ -73,7 +73,8 @@ export class TestChatbotWidget extends React.Component {
             <WaibocReactWidget
                 idAgent={this.state.chatbotConfig._id}
                 backEndServer={ __URL_WIDGET__ }
-                launcher={false}
+                // launcher={false}
+                showChatlog={false}
                 options={{...this.state.chatbotConfig.options}}
             />
         )

@@ -18,7 +18,8 @@ module.exports = (argConfig,argDb) => {
     res.set("Access-Control-Allow-Credentials", true);
     //
     try {
-      argDb.chatbot.qry( {...req.query} )
+      let qry = { ...req.query, idUser: req.user.email } ;
+      argDb.chatbot.qry( qry )
             .then(function(respUpdate){
               res.json( (respUpdate._doc||respUpdate) );
             }.bind(this))
@@ -212,7 +213,8 @@ module.exports = (argConfig,argDb) => {
     res.set("Access-Control-Allow-Credentials", true);
     //
     try {
-      argDb.chatbot.inactiveChatbot( {...req.body}, req.user.email )
+      let qry = { ...req.body, idUser: req.user.email } ;
+      argDb.chatbot.inactiveChatbot( qry, req.user.email )
             .then(function(respUpdate){
               res.json( respUpdate ) ;
             }.bind(this))

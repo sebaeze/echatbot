@@ -1236,7 +1236,10 @@ div.react-bootstrap-table tbody tr:hover {
     /* font-size: 25px !important ; */
     font-size: inherit !important ;
     cursor: pointer !important ;
-    vertical-align: bottom !important ;
+    vertical-align: top !important ;
+    display: inline-block ;
+    height: 45px ;
+    line-height: 40px ;
 }
 #waiboc-main-node .emoji-mart-emoji, #waiboc-main-node .emoji-mart-category .emoji-mart-emoji span  {
     cursor: pointer !important ;
@@ -1355,11 +1358,31 @@ span.waiboc-span-emoticon:hover {
     transition: width 5.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
 
 }
-#waiboc-main-node .fadeEmojiIn{
+#waiboc-main-node .fadeEmojiIn {
     opacity: 1 !important ;
     width: 110% !important ;
     transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s ;
 }
+.waiboc-emoji-wrapper {
+    position: absolute ;
+    z-index: 99999 ;
+    display: block ;
+    visibility: visible;
+    opacity:1;
+    transition: visibility 1.5s, opacity 1.5s ease-in ;
+}
+.waiboc-emoji-wrapper .emoji-mart {
+    display: block ;
+    visibility: visible;
+    opacity:1;
+    transition: visibility 1.5s, opacity 1.5s ease-in ;
+    /* transition: all 2.15s ease-in; */
+}
+/*
+.waiboc-emoji-wrapper .emoji-mart {
+    display: none ;visibility: hidden;
+}
+*/
 #waiboc-main-node .btn-continuar {
     border: 1px dashed grey ;
     border-radius: 25px ;

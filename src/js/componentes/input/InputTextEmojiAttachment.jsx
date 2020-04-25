@@ -19,6 +19,7 @@ export class InputTextAnswer extends React.Component {
             focus: this.props.focus ? this.props.focus : false,
             textAreaValue: ''
         } ;
+        this.onClickTogglePicker = this.onClickTogglePicker.bind(this) ;
     }
     //
     onEmojiClick(argEmoji){
@@ -34,15 +35,29 @@ export class InputTextAnswer extends React.Component {
             this.textRef.value    = tempNewValue ;
             this.textRef.selectionStart = start + ( argEmoji.native.length || 1 ) ;
             this.textRef.selectionEnd   = end + ( argEmoji.native.length || 1 )   ;
+            //
+            let objUpdater = {} ;
+            objUpdater[ this.props.fieldName ] = this.textRef.value ;
+            this.props.form.setFieldsValue( objUpdater ) ;
+            this.textRef.focus() ;
+            //
         } catch(errOEC){
             console.log('....ERROR:: OnEmojiclick:: errOEC: ',errOEC) ;
         }
     }
     //
+    onClickTogglePicker(argEEV){
+        argEEV.preventDefault() ;
+        let tempFlagEmo = !this.state.flagPicker ;
+        this.textRef.focus() ;
+        this.setState( {flagPicker: tempFlagEmo} ) ;
+    } ;
+    //
     render(){
         //
-        const { customStyle, customStyleTextare, customClassName, onChangeValue } = this.props ;
+        const { customStyle, customStyleTextare, onChangeValue } = this.props ;
         const { getFieldDecorator } = this.props.form ;
+        const i18nTranslate = (this.props.translate && this.props.translate.i18n) ? this.props.translate.i18n : {}  ;
         //
         let styleWrapper      = customStyle ?
                                     {...customStyle,display:'inline-block', position:'relative'}
@@ -58,12 +73,8 @@ export class InputTextAnswer extends React.Component {
                 <div style={styleWrapper}>
                     <div style={{width:'100%',position:'relative', backgroundColor:'#f0f0f0', fontSize:'25px'}}>
                         <span   style={{position:'relative' }}
-                                onClick={(argEEV)=>{
-                                    argEEV.preventDefault() ;
-                                    let tempFlagEmo = !this.state.flagPicker ;
-                                    this.setState( {flagPicker: tempFlagEmo} ) ;
-                                }}
-                                className={ "emoji " + (this.state.flagPicker==true ? "fadeEmojiOut" : "fadeEmojiIn") }
+                                onClick={this.onClickTogglePicker}
+                                className={ "emoji " + (this.state.flagPicker==true ? "fadeEmojiIn" : "fadeEmojiOut") }
                         >
                             { this.state.flagPicker==true ? "⌨️" : "😀" }
                         </span>
@@ -85,11 +96,17 @@ export class InputTextAnswer extends React.Component {
                                                 if ( argRef && this.textRef==false ){
                                                     this.textRef = argRef ;
                                                     if ( window.innerWidth>797 ){
-                                                        setTimeout(() => argRef.focus(), 0) ;
+                                                        let tempTextArea = ReactDOM.findDOMNode( argRef ) ;
+                                                        this.textRef     = tempTextArea.querySelectorAll('textarea') ;
+                                                        if ( this.textRef.length>0 ){ this.textRef=this.textRef[0]; }
+                                                        setTimeout(() => {
+                                                            argRef.focus() ;
+                                                            if ( this.textRef.value.length>0 && this.textRef.selectionStart!=undefined ){
+                                                                this.textRef.selectionStart = this.textRef.value.length ;
+                                                                this.textRef.selectionEnd = this.textRef.value.length ;
+                                                            }
+                                                        }, 0) ;
                                                     }
-                                                    let tempTextArea = ReactDOM.findDOMNode( argRef ) ;
-                                                    this.textRef     = tempTextArea.querySelectorAll('textarea') ;
-                                                    if ( this.textRef.length>0 ){ this.textRef=this.textRef[0]; }
                                                 }
                                             }
                                         }
@@ -108,14 +125,17 @@ export class InputTextAnswer extends React.Component {
                         </span>
                     </div>
                 </div>
-                <div style={{width:'100%',marginTop:'2px'}}>
-                {
-                    this.state.flagPicker==true ?
-                        <Picker onSelect={this.onEmojiClick} title={""}
-                                i18n={(this.props.translate && this.props.translate.i18n) ? this.props.translate.i18n : {} }
-                        />
-                        : null
-                }
+                <div    style={{width:'100%',marginTop:'2px'}}
+                        className={ "waiboc-emoji-wrapper " }
+                        style={ (this.state.flagPicker==true ? {} : {opacity:'0 ',display: 'none', visibility: 'hidden'}) }
+                >
+                    <Picker onSelect={this.onEmojiClick}
+                            title={""}
+                            set={'google'}
+                            theme={'dark'}
+                            style={ (this.state.flagPicker==true ? {} : {opacity:'0 ',display: 'none', visibility: 'hidden'}) }
+                            i18n={i18nTranslate}
+                    />
                 </div>
             </Form.Item>
         )

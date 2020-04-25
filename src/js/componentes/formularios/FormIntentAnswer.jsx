@@ -247,8 +247,8 @@ export class FormIntentAnswerBase extends React.Component {
                                             title={this.props.translate.tooltip.answerText}
                                             getPopupContainer={(trigger) => { return trigger.parentNode ; }}
                                 >
-                                    {this.props.translate.tooltip.answerSimpleText}
                                     <span className="waiboc-icon" >
+                                        {this.props.translate.tooltip.answerSimpleText}
                                         <Icon type="question-circle-o" />
                                     </span>
                                 </Tooltip>

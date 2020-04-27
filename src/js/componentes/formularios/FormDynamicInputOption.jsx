@@ -19,6 +19,7 @@ export class FormDynamicInputOption extends React.Component {
             flagFocusInput: false,
             labels: [],
             values: [],
+            arrayOptions: [],
             initialValues: this.props.initialValues || [],
             keys: this.props.initialValues.length>0 ? this.props.initialValues.map((elem,elemKey)=>{ return elemKey; }) : [],
             focus: this.props.focus ? this.props.focus : false
@@ -30,12 +31,22 @@ export class FormDynamicInputOption extends React.Component {
         //this.state.keys = [] ;
         //
         let fieldArrayValues       = this.props.form.getFieldValue( this.props.fieldName ) || [] ;
-        let tempKeys               = fieldArrayValues.map((elem,index)=>{ return index; }) ;
-        /*
-        console.log('.....Didmount:: tempKeys: ') ;
-        console.dir(tempKeys) ;
-        */
-        this.setState({keys: tempKeys}) ;
+        let newState = {
+            keys: fieldArrayValues.map((elem,index)=>{ return index; }),
+            arrayOptions: []
+        } ;
+        //
+        newState.arrayOptions = Object.values(this.props.chatbotTraining).map((elemEntity,idxEntity)=>{
+            return({
+                key: elemEntity.entity,
+                name: elemEntity.entity
+            })
+        }) ;
+        newState.arrayOptions = newState.arrayOptions.sort((a,b)=>{
+            return a.name.localeCompare(b.name) ;
+        }) ;
+        //
+        this.setState( newState ) ;
         //
     }
     //
@@ -97,6 +108,7 @@ export class FormDynamicInputOption extends React.Component {
                                     required={true}
                                     key={"this.props.fieldName_"+k+"_label"}
                                     hasFeedback
+                                    style={{padding:'5px 5px 5px 5px '}}
                                 >
                                     {
                                         getFieldDecorator(`${this.props.fieldName}[${k}].label`,
@@ -110,19 +122,19 @@ export class FormDynamicInputOption extends React.Component {
                                             }, ],
                                         })
                                         (
-                                            <Input placeholder={this.props.textPlaceholderLabel} size="large" style={{ width: '80%' }}
+                                            <Input placeholder={this.props.textPlaceholderLabel} size="large"
                                                 ref={(argRef)=>{ if ( this.state.flagFocusInput==true ){ argRef.focus();} }}
                                             />
                                         )}
-                                    { this.state.keys.length > 0 ? ( <Icon style={{marginLeft:'10px'}} className="dynamic-delete-button" type="minus-circle-o" onClick={() => this.remove(k)} /> ) : null}
                                 </Form.Item>
                             </Col>
-                            <Col xs={24} md={24} lg={11} xl={11} xxl={11} key={"this.props.fieldName_"+k+"_value"} >
+                            <Col xs={22} md={22} lg={11} xl={11} xxl={11} key={"this.props.fieldName_"+k+"_value"} >
                                 <Form.Item
                                     //{...formItemLayout}
                                     required={true}
                                     key={"this.props.fieldName_"+k+"_value"}
                                     hasFeedback
+                                    style={{padding:'5px 5px 5px 5px '}}
                                 >
                                     {
                                         getFieldDecorator(
@@ -142,14 +154,19 @@ export class FormDynamicInputOption extends React.Component {
                                                         this.props.form.setFieldsValue( objDummy );
                                                     }
                                                 }
+                                                showSearch
+                                                filterOption={(input, option) =>{
+                                                    let flagReturn = option.key.toUpperCase().indexOf(input.toUpperCase())!=-1 ;
+                                                    return(flagReturn);
+                                                }}
                                                 getPopupContainer={(trigger) => { return trigger.parentNode ; }}
                                                 size="large"
                                             >
                                                 {
-                                                    Object.values(this.props.chatbotTraining).map((elemEntity,idxEntity)=>{
+                                                    this.state.arrayOptions.map((elemEntity,idxEntity)=>{
                                                             return(
-                                                                <Select.Option value={elemEntity.entity} key={idxEntity}>
-                                                                    <b>{elemEntity.entity}</b>
+                                                                <Select.Option value={elemEntity.name} key={elemEntity.name}>
+                                                                    <b>{elemEntity.name}</b>
                                                                 </Select.Option>
                                                                 )
                                                     })
@@ -159,6 +176,11 @@ export class FormDynamicInputOption extends React.Component {
                                     }
                                 </Form.Item>
                             </Col>
+                            <Col xs={2} md={2} lg={1} xl={1} xxl={1} >
+                                <span className="waiboc-icon-del" key={k} onClick={()=>{this.remove(k);}} >
+                                    <Icon style={{marginLeft:'10px'}} key={k}  className="dynamic-delete-button" type="minus-circle-o"  />
+                                </span>
+                            </Col>
                         </Row>
                     </div>
                 )
@@ -167,9 +189,9 @@ export class FormDynamicInputOption extends React.Component {
         return (
             <div>
                 {formItems}
-                <Form.Item >
-                    <Button type="dashed" onClick={this.add} size="large" style={ this.props.styleButton ? this.props.styleButton : { width: '80%' }} >
-                        <Icon type="plus" /> <span style={{fontWeight:'600'}}>{this.props.textAdd} </span>
+                <Form.Item wrapperCol={{xs: 24, md: 24, lg: 13, xl: 13, xxl: 13}} >
+                    <Button onClick={this.add} size="large" style={ this.props.styleButton ? this.props.styleButton : { width: '80%' }} >
+                        <Icon type="plus-circle" /> <span style={{fontWeight:'600'}}>{this.props.textAdd} </span>
                     </Button>
                 </Form.Item>
             </div>

@@ -273,8 +273,24 @@ header ul.ant-menu {
 .ant-menu-horizontal > li.ant-menu-item .no-hover:hover {
     border-bottom: none !important ;
 }
-.ant-table-column-title {
-    font-size: 18px !important ;
+.waiboc-cl-form .ant-table-thead > tr {
+    padding-top: 2px ;
+    padding-bottom: 2px ;
+    height: 20px ;
+}
+/*
+.waiboc-cl-form .ant-table-thead > tr .ant-table-header-column {
+    width: 100% ;
+    text-align: center ;
+}
+.waiboc-cl-form .ant-table-thead > tr .ant-table-header-column .ant-table-column-sorters {
+    width: 100% ;
+    text-align: center ;
+}
+*/
+.waiboc-cl-form  .ant-table-column-title {
+    font-size: 16px ;
+    line-height: 20px ;
     font-weight: 600 !important ;
 }
 .ant-popover, .ant-modal-wrap, .ant-tooltip {
@@ -1332,8 +1348,50 @@ span.waiboc-span-emoticon:hover {
 #waiboc-main-node .ant-row .ant-form-item, .waiboc-cl-form .ant-row .ant-form-item{
     margin-bottom: 5px !important ;
 }
-.waiboc-cl-form .ant-form-item-children .anticon-minus-circle-o, .waiboc-cl-form .ant-form-item-children .dynamic-delete-button {
+.waiboc-uploader-avatar {
+    border: 1px dotted gray ;
+    font-size: 18px ;
+    cursor: pointer ;
+    text-align: center ;
+    padding: 5px ;
+}
+/*
+.waiboc-uploader-avatar i {
+    font-size: 18px ;
+}
+*/
+.waiboc-cl-form .anticon-plus-circle {
+    color: var(--font-color-important) ;
+}
+.waiboc-cl-form .dynamic-delete-button {
+    cursor: pointer ;
+    line-height: 40px;
+    vertical-align: middle;
+    color: red ;
+}
+.waiboc-cl-form .ant-collapse-header span {
+    font-size: 20px ;
+    line-height: 22px ;
+    font-weight: 500 ;
+}
+.waiboc-cl-form .ant-collapse-item .ant-collapse-content {
+    padding-left: 20px ;
+    padding-right: 20px ;
+}
+.waiboc-cl-form .ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
+    background-color: #e2e1e1;
+    border-radius: 5px;
+    padding: 3px;
+    transition: box-shadow 0.5s;
+}
+.waiboc-cl-form .ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow:hover {
+    box-shadow: 0 0 5px #515151 !important ;
+}
+.waiboc-cl-form .ant-form-item-children .anticon-minus-circle-o, .waiboc-cl-form .dynamic-delete-button {
     margin-left: 2px !important ;
+    font-size: 20px ;
+}
+.waiboc-cl-form i.dynamic-delete-button, .waiboc-cl-form .ant-form-item-children i.anticon-check-circle {
     font-size: 20px ;
 }
 /*  */

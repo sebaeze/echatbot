@@ -8,6 +8,7 @@ const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 const CompressionPlugin           = require('compression-webpack-plugin');
 const BrotliPlugin                = require('brotli-webpack-plugin');
+const { CleanWebpackPlugin }      = require('clean-webpack-plugin') ;
 // const BundleAnalyzerPlugin        = require('webpack-bundle-analyzer').BundleAnalyzerPlugin ;
 const APP_ID                      = require('./config.js').APP_ID ;
 //
@@ -117,6 +118,8 @@ module.exports = {
   },
   plugins: [
       // new BundleAnalyzerPlugin() ,
+      new CleanWebpackPlugin(),
+      //{  verbose: true, ['../dist'] }),
       new CopyWebpackPlugin([{from: 'src/img',to: 'img'},{from: 'src/css',to: 'css'}]),
       new webpack.DefinePlugin({
         'process.env.AMBIENTE': JSON.stringify(process.env.AMBIENTE),

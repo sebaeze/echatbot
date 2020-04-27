@@ -136,7 +136,7 @@ export class FormNewIntent extends React.Component {
                     </div>
                 }
                 destroyOnClose={true}
-                width={ (window.innerWidth<797) ? '99%' : '80%' }
+                width={ (window.innerWidth<797) ? '99%' : '70%' }
                 placement="right"
                 closable={true}
                 className="waiboc-drawer"

@@ -71,7 +71,7 @@ export class InputTextAnswer extends React.Component {
         return(
             <Form.Item hasFeedback >
                 <div style={styleWrapper}>
-                    <div style={{width:'100%',position:'relative', backgroundColor:'#f0f0f0', fontSize:'25px'}}>
+                    <div style={{width:'100%',position:'relative', fontSize:'25px' /* backgroundColor:'#f0f0f0', */  }}>
                         <span   style={{position:'relative' }}
                                 onClick={this.onClickTogglePicker}
                                 className={ "emoji " + (this.state.flagPicker==true ? "fadeEmojiIn" : "fadeEmojiOut") }

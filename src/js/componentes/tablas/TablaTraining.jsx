@@ -294,6 +294,7 @@ export class TablaTraining extends React.Component {
               notification[type]({
                   //message: <h1>holaaa</h1>,
                   top: 180,
+                  duration: 2000,
                   description: <h2>{argText}</h2>
               });
             } ;

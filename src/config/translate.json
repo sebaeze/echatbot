@@ -97,7 +97,10 @@
             "action":"Action"
         },
         "form":{
-            "formNewAnswerOptions":"Name to display in the option",
+            "placeholderImagenDescription":"Description",
+            "placeholderImagenUr":"https://wwww.url-example.com/example",
+            "newFileDescription":"Add a description",
+            "formNewAnswerOptions":"List Options",
             "systemDefinedDelete":"It can't be deleted. System Defined",
             "optionsValueSelect":"Selecione uma intenção",
             "optionsLabelToDisplay":"Option name to display",
@@ -136,6 +139,7 @@
             "accessList":"Access List",
             "nonValidAccessList":"Input  valid email",
             "textAddOption":"Add Option",
+            "textAddAttachment":"Add Attachment",
             "nonValidOption":"Please, complete the label and value fields",
             "textAddEmail":"Add Email",
             "textAddWebsite":"Add Website",
@@ -350,7 +354,10 @@
             "action":"Acción"
         },
         "form":{
-            "formNewAnswerOptions":"Nombre de la opción que visualizara el usuario",
+            "placeholderImagenDescription":"Descripcion",
+            "placeholderImagenUr":"https://wwww.url-example.com/example",
+            "newFileDescription":"Agregar descripción",
+            "formNewAnswerOptions":"Lista de opciones",
             "systemDefinedDelete":"No puede borrarse. Definida por sistema.",
             "optionsValueSelect":"Eljia una intención",
             "optionsLabelToDisplay":"Nombre de apción a mostrar",
@@ -361,7 +368,7 @@
             "deleteChatbotConfirmation":"¿ Esta seguro de borrar el Chatbot ?",
             "deleteEntityConfirmation":"¿ Esta seguro de borrar la Intenciòn ?",
             "fileSize1MBError":"Tamaño de archivo debe ser menor a 1MB",
-            "fileDragger":"Agregar imágenes, archivos de texto, xls, etc.",
+            "fileDragger":"Agregar Archivos ( jpg, png, gif, mp4, txt, pdf, xls, xlsx )",
             "newFileClickDrag":"Haga clic o arrastre el archivo a esta área para cargar",
             "newsletter":"Suscribirse",
             "testChatbot":"Testear Chatbot",
@@ -387,6 +394,7 @@
             "nonValidwebsiteDomains":"Ingrese un dominio valido",
             "accessList":"List de accesos",
             "textAddOption":"Agregar Opción",
+            "textAddAttachment":"Agregar Archivo",
             "nonValidOption":"Por favor, agregue una etiqueta y un valor valido",
             "nonValidAccessList":"Ingrese un email valido",
             "textAddEmail":"Agregar Email",
@@ -590,7 +598,10 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
-            "formNewAnswerOptions":"Nome a ser exibido na opção",
+            "placeholderImagenDescription":"Descrição",
+            "placeholderImagenUr":"https://wwww.url-example.com/example",
+            "newFileDescription":"Adicione uma descrição",
+            "formNewAnswerOptions":"Opções de lista",
             "systemDefinedDelete":"Não pode ser excluído. Definido pelo sistema.",
             "optionsValueSelect":"",
             "optionsLabelToDisplay":"Nome da opção a ser exibida",
@@ -628,6 +639,7 @@
             "accessList":"Lista de acessos",
             "nonValidAccessList":"Inserir email válido",
             "textAddOption":"Adicionar opção",
+            "textAddAttachment":"Juntar anexo",
             "nonValidOption":"Por favor, preencha os campos de rótulo e valor",
             "textAddEmail":"Adicionar Email",
             "textAddWebsite":"Adicionar Website",

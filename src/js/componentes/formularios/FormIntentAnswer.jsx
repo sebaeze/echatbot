@@ -2,34 +2,28 @@
 * FormIntentAnswer
 */
 import React                                             from 'react' ;
-import axios                                             from 'axios' ;
 import { Button, Form, Input, Tooltip, Icon,  Select }   from 'antd'  ;
-import { Row, Col, Upload, Spin, message }               from 'antd'  ;
+import { Row, Col, Spin, Collapse }                      from 'antd'  ;
 import { FormDynamicInputOption }                        from './FormDynamicInputOption' ;
+import { FormDynamicAttachment  }                        from './FormDynamicAttachment'  ;
 import { InputTextAnswer }                               from '../input/InputTextEmojiAttachment' ;
 //
 export class FormIntentAnswerBase extends React.Component {
     constructor(props){
         super(props) ;
         this.firstNode            = false ;
-        this.normFile             = this.normFile.bind(this) ;
         this.handleSelectChange   = this.handleSelectChange.bind(this) ;
-        this.handleChange         = this.handleChange.bind(this) ;
-        this.onEmojiClick         = this.onEmojiClick.bind(this) ;
-        this.draggerCustomRequest = this.draggerCustomRequest.bind(this) ;
         this.answerTypes        = {
             API:'api',
             TEXT:'text',
             CAROUSEL:'carousel'
-            //OPTIONS:'options'
-            //,IMAGE:'image'
         } ;
         this.state              = {
             flagSpinner:false,
-            fieldPanel: this.props.data.intentAnswer.type || this.answerTypes.TEXT,
-            flagUploading: false
+            fieldPanel: this.props.data.intentAnswer.type || this.answerTypes.TEXT
         } ;
         this.inputText          = false ;
+        this.onSubmitForm       = this.onSubmitForm.bind(this) ;
     }
     /*
     static getDerivedStateFromProps(newProps, state) {
@@ -41,84 +35,13 @@ export class FormIntentAnswerBase extends React.Component {
         } else {
             return false ;
         }
-    } 
+    }
     */
     //
-    normFile(e){
-        console.log('Upload event:', e);
-        if (Array.isArray(e)) {
-            return e;
-        }
-        return e && e.fileList;
-    };
-    //
-    handleChange(info){
-        //
-        console.log('....handleChange:: info: ',info) ;
-        //
-        if (info.file.status === 'uploading') {
-          //this.setState({ loading: true });
-          return;
-        }
-        /*
-        if (info.file.status === 'done') {
-          // Get this url from response in real world.
-          getBase64(info.file.originFileObj, imageUrl =>
-            this.setState({
-              imageUrl,
-              loading: false,
-            }),
-          );
-        }
-        */
-    };
-    //
-    draggerCustomRequest(argCR){
+    onSubmitForm(argEE){
         try {
-            this.setState({flagUploading: true}) ;
-            let fr = new FileReader() ;
-            fr.readAsDataURL( argCR.file );
-            fr.onerror = (errFR) => { console.log('...ERROR: FR: ',errFR) ; throw errFR; } ;
-            fr.onload  = () => {
-                let reqOptions = {
-                    url: "/api/files",
-                    method: 'POST',
-                    withCredentials: true,
-                    data: {
-                        idChatbot: this.props.chatbotConfig._id,
-                        name: argCR.file.name ,
-                        size: argCR.file.size ,
-                        type: argCR.file.type ,
-                        lastModified: argCR.file.lastModified ,
-                        data: fr.result
-                    }
-                } ;
-                axios( reqOptions )
-                    .then((respAXios)=>{
-                        let tempFiles = this.props.form.getFieldValue('files') || [] ;
-                        let indFile   = tempFiles.findIndex((elemFF)=>{ return elemFF.name==respAXios.data.name ; }) ;
-                        respAXios.data.uid = respAXios.data._id ;
-                        respAXios.data.key = respAXios.data._id ;
-                        if ( indFile!=-1 ){
-                            tempFiles[ indFile ]   = respAXios.data ;
-                        } else {
-                            tempFiles.push( respAXios.data  ) ;
-                        }
-                        this.props.form.setFieldsValue({ 'files': tempFiles });
-                        this.setState({flagUploading: false}) ;
-                    })
-                    .catch((errText)=>{
-                        console.log('...ERROR: errText:: ',errText) ;
-                        this.setState({flagUploading: false}) ;
-                    })
-            } ;
-        } catch(errDCR){
-            console.log('...ERROR: Dragger:: CustomRequest:: errDCR: ',errDCR) ;
-        }
-    }
-    //
-    onSubmitForm(){
-        try {
+            //
+            if ( argEE && argEE.preventDefault ){ argEE.preventDefault(); }
             //
             this.setState({flagSpinner:true}) ;
             this.props.form.validateFields({ force: true }, (error) => {
@@ -129,7 +52,10 @@ export class FormIntentAnswerBase extends React.Component {
                         this.setState({flagSpinner:false }) ;
                     }, 700 ) ;
               } else {
+                  //
                   let tempFields    = this.props.form.getFieldsValue() ;
+                  console.log('...tempFields: ',tempFields) ;
+                  //
                   let tempOutAnswer = {} ;
                   for ( let keyF in tempFields ){
                       let valField = tempFields[keyF] ;
@@ -173,197 +99,169 @@ export class FormIntentAnswerBase extends React.Component {
         if ( value ){
             this.setState({fieldPanel: value})
         }
-    };
-    //
-    onEmojiClick(argEmoji){
-        try {
-            let tempNewValue = this.props.form.getFieldValue("text") || "" ;
-            tempNewValue     = tempNewValue + argEmoji.native ;
-            this.props.form.setFieldsValue({ text: tempNewValue });
-        } catch(errOEC){
-            console.log('....ERROR:: OnEmojiclick:: errOEC: ',errOEC) ;
-        }
-    }
+    } ;
     //
     render(){
         //
-        const { getFieldDecorator, getFieldsValue } = this.props.form ;
-        const beforeUpload = (argFile,fileList) => {
-            const isSizeOk = argFile.size<1024001 ;
-            if ( !isSizeOk ) {
-              message.error( this.props.translate.form.fileSize1MBError );
-              message.status = "error" ;
-              argFile.status   = 'error' ;
-              argFile.response = this.props.translate.form.fileSize1MBError  ;
-            }
-            return isSizeOk ;
-        }
+        const { getFieldDecorator } = this.props.form ;
+        let arrayOptions            = this.props.data.intentAnswer.options || [] ;
+        let addPropsPanel           = {style:{ background:'white', border: 'none', paddingLeft:'10px', paddingRight:'10px' }} ;
         //
-        let filesInitialValue = (this.props.data.intentAnswer.files && Array.isArray(this.props.data.intentAnswer.files)) ? this.props.data.intentAnswer.files.map((elemFIL,fileInd)=>{
-            return {...elemFIL,key: fileInd, uid: fileInd}
-        }) : [] ;
-        let arrayOptions      = this.props.data.intentAnswer.options || [] ;
-        //
+        console.log('...this.props.data: ',this.props.data) ;
         return(
             <Row style={{paddingTop:'30px'}} >
-                <Col xs={0}  md={0}  lg={4}  xl={4}  xxl={4} ></Col>
-                <Col xs={24} md={24} lg={14} xl={14} xxl={14} >
+                <Col xs={0}  md={0}  lg={2}  xl={2}  xxl={2} ></Col>
+                <Col xs={24} md={24} lg={20} xl={20} xxl={20} >
                     <Form>
-                        <Form.Item
-                            label={ <span>{this.props.translate.form.answerType}</span> }
-                            labelAlign="left"
-                            labelCol={{  xs: 24, md:24, lg:8 , xl:8 , xxl:8 }}
-                            wrapperCol={{xs: 24, md:24, lg:14, xl:14, xxl:14 }}
-                        >
-                            {getFieldDecorator('type', {
-                                initialValue: this.props.data.intentAnswer.type||'text',
-                                rules: [{ required: true, message: this.props.translate.form.errorLanguage, whitespace: true }]
-                            })
-                            (
-                                <Select
-                                    placeholder={this.props.translate.form.selectTypeOfAnswer}
-                                    onChange={this.handleSelectChange}
-                                    getPopupContainer={(trigger) => {
-                                        return trigger.parentNode ;
-                                    }}
-                                    size="large"
-                                >
-                                    {
-                                        Object.values(this.answerTypes).map((elemType,idxType)=>{
-                                        return(
-                                                <Select.Option value={elemType}
-                                                    key={idxType}>{this.props.translate.answertType[elemType]||elemType}</Select.Option>
-                                            )
-                                        })
-                                    }
-                                </Select>
-                            )
-                            }
-                        </Form.Item>
-                        <Form.Item
-                            hasFeedback
-                            label={
-                                <Tooltip    placement="bottomRight"
-                                            title={this.props.translate.tooltip.answerText}
-                                            getPopupContainer={(trigger) => { return trigger.parentNode ; }}
-                                >
-                                    <span className="waiboc-icon" >
-                                        {this.props.translate.tooltip.answerSimpleText}
-                                        <Icon type="question-circle-o" />
-                                    </span>
-                                </Tooltip>
-                            }
-                            labelAlign="left"
-                            labelCol={  {xs: 24, md: 24, lg: 24, xl: 24, xxl: 24}}
-                            wrapperCol={{xs: 24, md: 20, lg: 24, xl: 24, xxl: 24}}
-                        >
-                            <InputTextAnswer
-                                fieldName={"text"}
-                                form={this.props.form}
-                                errorMsg={this.props.translate.form.errorAnswerText}
-                                customStyle={{width:'100%'}}
-                                focus={true}
-                                initialValue={this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||''}
-                                onChangeValue={(argEE)=>{
-                                    this.props.form.setFieldsValue({ 'text': argEE.target.value||'' });
-                                }}
-                            />
-                        </Form.Item>
-                        <Form.Item hasFeedback
-                            label={ <Tooltip  placement="bottomRight"
-                                        title={this.props.translate.tooltip.answerOptions}
-                                        getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                    <Collapse bordered={false} accordion={false} >
+                        <Collapse.Panel key={"1"} {...addPropsPanel} header={<span>{this.props.translate.form.answerType}</span>} >
+                            <Form.Item
+                                label={false}
+                                labelAlign="left"
+                                labelCol={{  xs: 24, md:24, lg:8 , xl:8 , xxl:8 }}
+                                wrapperCol={{xs: 24, md:24, lg:14, xl:14, xxl:14 }}
+                            >
+                                {getFieldDecorator('type', {
+                                    initialValue: this.props.data.intentAnswer.type||'text',
+                                    rules: [{ required: true, message: this.props.translate.form.errorLanguage, whitespace: true }]
+                                })
+                                (
+                                    <Select
+                                        placeholder={this.props.translate.form.selectTypeOfAnswer}
+                                        onChange={this.handleSelectChange}
+                                        getPopupContainer={(trigger) => {
+                                            return trigger.parentNode ;
+                                        }}
+                                        size="large"
                                     >
-                                        {this.props.translate.form.formNewAnswerOptions} <Icon type="question-circle-o" />
-                                    </Tooltip> }
-                        >
-                            <FormDynamicInputOption
-                                form={this.props.form}
-                                styleButton={{width:'60%'}}
-                                textPlaceholderLabel={this.props.translate.form.optionsLabelToDisplay}
-                                textPlaceholderValue={this.props.translate.form.optionsValueSelect}
-                                initialValues={arrayOptions}
-                                chatbotTraining={this.props.chatbotConfig.training}
-                                fieldName="options"
-                                type="array"
-                                defaultTypefield="string"
-                                textAdd={this.props.translate.form.textAddOption}
-                                description={this.props.translate.form.nonValidOption}
-                            />
-                        </Form.Item>
-                        {
-                            this.state.fieldPanel==this.answerTypes.API ?
-                                <Form.Item
-                                    hasFeedback
-                                    label={ <span>
-                                                REST API Url
-                                                <Tooltip    placement="bottomRight"
+                                        {
+                                            Object.values(this.answerTypes).map((elemType,idxType)=>{
+                                            return(
+                                                    <Select.Option value={elemType}
+                                                        key={idxType}>{this.props.translate.answertType[elemType]||elemType}</Select.Option>
+                                                )
+                                            })
+                                        }
+                                    </Select>
+                                )
+                                }
+                            </Form.Item>
+                        </Collapse.Panel>
+                        <Collapse.Panel key={"2"}  {...addPropsPanel}
+                                        header={<Tooltip    placement="topRight"
                                                             title={this.props.translate.tooltip.answerText}
                                                             getPopupContainer={(trigger) => { return trigger.parentNode ; }}
                                                 >
+                                                    {this.props.translate.tooltip.answerSimpleText}
+                                                    <span className="waiboc-icon" >
+                                                        <Icon type="question-circle-o" />
+                                                    </span>
+                                                </Tooltip>}
+                        >
+                            <Form.Item
+                                hasFeedback
+                                label={ false }
+                                labelAlign="left"
+                                labelCol={  {xs: 24, md: 24, lg: 24, xl: 24, xxl: 24}}
+                                wrapperCol={{xs: 24, md: 20, lg: 24, xl: 24, xxl: 24}}
+                            >
+                                <InputTextAnswer
+                                    fieldName={"text"}
+                                    form={this.props.form}
+                                    errorMsg={this.props.translate.form.errorAnswerText}
+                                    customStyle={{width:'100%'}}
+                                    focus={true}
+                                    initialValue={this.props.data.intentAnswer.text||this.props.data.intentAnswer.answer||''}
+                                    onChangeValue={(argEE)=>{
+                                        this.props.form.setFieldsValue({ 'text': argEE.target.value||'' });
+                                    }}
+                                />
+                            </Form.Item>
+                        </Collapse.Panel>
+                        <Collapse.Panel key={"3"}  {...addPropsPanel}
+                                        header={<Tooltip  placement="topRight"
+                                                    title={this.props.translate.tooltip.answerOptions}
+                                                    getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                                                >
+                                                    {this.props.translate.form.formNewAnswerOptions} <Icon type="question-circle-o" />
+                                                </Tooltip>}
+                        >
+                            <Form.Item hasFeedback label={ false } >
+                                <FormDynamicInputOption
+                                    form={this.props.form}
+                                    styleButton={{width:'60%'}}
+                                    textPlaceholderLabel={this.props.translate.form.optionsLabelToDisplay}
+                                    textPlaceholderValue={this.props.translate.form.optionsValueSelect}
+                                    initialValues={arrayOptions}
+                                    chatbotTraining={this.props.chatbotConfig.training}
+                                    fieldName="options"
+                                    type="array"
+                                    defaultTypefield="string"
+                                    textAdd={this.props.translate.form.textAddOption}
+                                    description={this.props.translate.form.nonValidOption}
+                                />
+                            </Form.Item>
+                        </Collapse.Panel>
+                        <Collapse.Panel key={"4"}  {...addPropsPanel}
+                                        header={<Tooltip    placement="topRight"
+                                                            title={this.props.translate.tooltip.answerText}
+                                                            getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                                                >
+                                                    REST API Url
                                                     <Icon type="question-circle-o" />
-                                                </Tooltip>
-                                            </span>}
-                                >
-                                    {getFieldDecorator('api', {
-                                        initialValue: this.props.data.intentAnswer.api||'',
-                                        rules: [{ required: true, message: this.props.translate.form.errorAnswerApi, whitespace: true }]
-                                    })
-                                    (<Input allowClear size="large" ref={(argRef)=>{ if ( argRef && (window.innerWidth>797) ){ argRef.focus(); } }} />)}
-                                </Form.Item>
-                                : null
-                        }
-                        <Form.Item label={ <span>{this.props.translate.form.fileDragger}
-                                                <Tooltip    placement="bottomRight"
+                                                </Tooltip>}
+                        >
+                            <Form.Item
+                                hasFeedback
+                                label={ false }
+                            >
+                                {getFieldDecorator('api', {
+                                    initialValue: this.props.data.intentAnswer.api||'',
+                                    rules: [{ required: false, message: this.props.translate.form.errorAnswerApi, whitespace: true }]
+                                })
+                                (<Input allowClear size="large" ref={(argRef)=>{ if ( argRef && (window.innerWidth>797) ){ argRef.focus(); } }} />)}
+                            </Form.Item>
+                        </Collapse.Panel>
+                        <Collapse.Panel key={"5"}  {...addPropsPanel}
+                                        header={<Tooltip    placement="topRight"
                                                             title={this.props.translate.form.newFileClickDrag}
                                                             getPopupContainer={(trigger) => { return trigger.parentNode ; }}
                                                 >
+                                                    {this.props.translate.form.fileDragger}
                                                     <Icon type="question-circle-o" />
-                                                </Tooltip>
-                                            </span>
-                                    }
-                                    labelCol={{  xs: 24, md: 24, lg: 24, xl: 24, xxl: 24 }}
-                                    wrapperCol={{xs: 24, md: 24, lg: 22, xl: 22, xxl: 22 }}
+                                                </Tooltip>}
                         >
-                            {getFieldDecorator('files',
-                                {
-                                    valuePropName: 'fileList',
-                                    getValueFromEvent: this.normFile,
-                                    initialValue: filesInitialValue
-                                }
-                            )
-                                (
-                                <Upload.Dragger name="files"
-                                    beforeUpload={beforeUpload}
-                                    onChange={this.handleChange}
-                                    method="post"
-                                    action="/api/files"
-                                    customRequest={this.draggerCustomRequest}
-                                >
-                                    <p className="ant-upload-drag-icon"><Icon type="inbox" /></p>
-                                    <p className="ant-upload-text">{this.props.translate.form.newFileClickDrag}</p>
-                                </Upload.Dragger>
-                                )
-                            }
+                            <Form.Item label={ false } >
+                                <FormDynamicAttachment
+                                    form={this.props.form}
+                                    styleButton={{width:'60%'}}
+                                    textPlaceholderFile={this.props.translate.form.newFileClickDrag}
+                                    textPlaceholderLabel={this.props.translate.form.newFileDescription}
+                                    files={this.props.data.intentAnswer.files||[]}
+                                    idChatbot={this.props.chatbotConfig._id}
+                                    fieldName="files"
+                                    type="array"
+                                    defaultTypefield="string"
+                                    translate={this.props.translate}
+                                    textAdd={this.props.translate.form.textAddAttachment}
+                                    description={this.props.translate.form.nonValidOption}
+                                />
+                            </Form.Item>
+                        </Collapse.Panel>
+                        </Collapse>
+                        <Form.Item style={{paddingTop:'15px',paddingBottom:'15px',paddingLeft:'30px' }} >
+                            <Button type="primary" size="large" onClick={this.onSubmitForm} >
+                                {this.props.translate.form.submit}
+                            </Button>
+                            <Button
+                                style={{marginLeft:'10px'}}
+                                size="large"
+                                onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
+                            >
+                                <Icon type="left" />
+                                {this.props.translate.previous}
+                            </Button>
                         </Form.Item>
-                        {
-                            this.state.flagUploading==false
-                                ?   <Form.Item style={{paddingTop:'15px',paddingBottom:'15px'}} >
-                                        <Button type="primary" size="large" onClick={(argEC)=>{argEC.preventDefault();this.onSubmitForm(); }} >
-                                            {this.props.translate.form.submit}
-                                        </Button>
-                                        <Button
-                                            style={{marginLeft:'10px'}}
-                                            size="large"
-                                            onClick={(argEC)=>{argEC.preventDefault();this.props.prev(); }}
-                                        >
-                                            <Icon type="left" />
-                                            {this.props.translate.previous}
-                                        </Button>
-                                    </Form.Item>
-                                :
-                                <Spin size="large" />
-                        }
                     </Form>
                 </Col>
             </Row>
@@ -375,6 +273,7 @@ export class FormIntentAnswerBase extends React.Component {
 //
 export const FormIntentAnswer = Form.create({ name: '',
     mapPropsToFields(props) {
+        console.log('.....props.data.intentAnswer: ',props.data.intentAnswer) ;
         return {
             intentAnswer: Form.createFormField({ value: props.data.intentAnswer || {} })
         };

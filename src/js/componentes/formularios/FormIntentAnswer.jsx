@@ -107,7 +107,6 @@ export class FormIntentAnswerBase extends React.Component {
         let arrayOptions            = this.props.data.intentAnswer.options || [] ;
         let addPropsPanel           = {style:{ background:'white', border: 'none', paddingLeft:'10px', paddingRight:'10px' }} ;
         //
-        console.log('...this.props.data: ',this.props.data) ;
         return(
             <Row style={{paddingTop:'30px'}} >
                 <Col xs={0}  md={0}  lg={2}  xl={2}  xxl={2} ></Col>
@@ -273,9 +272,11 @@ export class FormIntentAnswerBase extends React.Component {
 //
 export const FormIntentAnswer = Form.create({ name: '',
     mapPropsToFields(props) {
-        console.log('.....props.data.intentAnswer: ',props.data.intentAnswer) ;
         return {
-            intentAnswer: Form.createFormField({ value: props.data.intentAnswer || {} })
+            intentAnswer:    Form.createFormField({ value: props.data.intentAnswer         || {} }),
+            files:           Form.createFormField({ value: props.data.intentAnswer.files   || [] }),
+            options:         Form.createFormField({ value: props.data.intentAnswer.options || [] }),
+            fileDisplayType: Form.createFormField({ value: props.data.intentAnswer.fileDisplayType || "carousel" })
         };
     }
 })(FormIntentAnswerBase);

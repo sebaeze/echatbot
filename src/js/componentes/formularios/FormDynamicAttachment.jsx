@@ -43,39 +43,22 @@ export class FormDynamicAttachment extends React.Component {
     //
     componentDidMount(){
         //
-        let tempFiles = this.props.form.getFieldValue('files') || [] ;
-        console.log('.....didMount:: tempFiles: ',tempFiles) ;
-        //
+        let tempFiles = this.props.form.getFieldValue( this.props.fieldName ) || [] ;
         let newState = { keys: [], files: [], descriptions: [], urlLink: [] } ;
         for ( let fileInd=0; fileInd<tempFiles.length; fileInd++ ){
             newState.keys.push( fileInd ) ;
             newState.files.push({
-                ...tempFiles[elemFIL],
+                ...tempFiles[fileInd],
                 key: fileInd,
                 uid: fileInd
             }) ;
-            newState.descriptions.push( tempFiles[elemFIL].description||"" ) ;
-            newState.urlLink.push( tempFiles[elemFIL].urlLink||"" ) ;
+            newState.descriptions.push( tempFiles[fileInd].description||"" ) ;
+            newState.urlLink.push( tempFiles[fileInd].urlLink||"" ) ;
         } ;
         //
         this.setState( newState ) ;
         //
     }
-    /*
-    static getDerivedStateFromProps(newProps, state) {
-        if ( newProps.files.length!=state.files.length ){
-            let newState = {
-                keys: newProps.files.map((elem,index)=>{ return index; }),
-                files: (newProps.files && Array.isArray(newProps.files)) ? newProps.files.map((elemFIL,fileInd)=>{
-                    return {...elemFIL,key: fileInd, uid: fileInd}
-                }) : []
-            } ;
-            return newState ;
-        } else {
-            return false ;
-        }
-    }
-    */
     //
     beforeUpload(argFile,fileList){
         const isSizeOk = argFile.size<2048001 ;
@@ -120,8 +103,6 @@ export class FormDynamicAttachment extends React.Component {
     draggerCustomRequest(argKey,argCR){
         try {
             //
-            console.log('....dragger:: argKey: ',argKey,' desc: ',this.state.descriptions[argKey],';') ;
-            //
             this.setState({flagUploading: true}) ;
             let fr = new FileReader() ;
             fr.readAsDataURL( argCR.file );
@@ -145,7 +126,7 @@ export class FormDynamicAttachment extends React.Component {
                 } ;
                 axios( reqOptions )
                     .then((respAXios)=>{
-                        let tempFiles = this.props.form.getFieldValue('files') || [] ;
+                        let tempFiles = this.props.form.getFieldValue( this.props.fieldName ) || [] ;
                         let indFile   = tempFiles.findIndex((elemFF)=>{ return elemFF.name==respAXios.data.name ; }) ;
                         respAXios.data.uid = respAXios.data._id ;
                         respAXios.data.key = respAXios.data._id ;
@@ -159,13 +140,16 @@ export class FormDynamicAttachment extends React.Component {
                         } else {
                             tempFiles.push( respAXios.data  ) ;
                         }
-                        console.log('....voy a hacer setFieldValue:: tempFiles: ',tempFiles) ;
-                        this.props.form.setFieldsValue({ 'files': tempFiles });
+                        //
+                        let obj2Update = {} ;
+                        obj2Update[ this.props.fieldName ] = tempFiles ;
+                        this.props.form.setFieldsValue( obj2Update );
                         let newState = {
                             flagUploading: false,
                             files: tempFiles
                         } ;
                         this.setState( newState ) ;
+                        //
                     })
                     .catch((errText)=>{
                         console.log('...ERROR: errText:: ',errText) ;

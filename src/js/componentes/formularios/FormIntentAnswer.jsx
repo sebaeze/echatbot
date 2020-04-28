@@ -25,18 +25,6 @@ export class FormIntentAnswerBase extends React.Component {
         this.inputText          = false ;
         this.onSubmitForm       = this.onSubmitForm.bind(this) ;
     }
-    /*
-    static getDerivedStateFromProps(newProps, state) {
-        if ( newProps.data.type!=state.fieldPanel ){
-            let newDerivedState = {
-                fieldPanel: newProps.data.intentAnswer.type || false
-            } ;
-            return {...newDerivedState} ;
-        } else {
-            return false ;
-        }
-    }
-    */
     //
     onSubmitForm(argEE){
         try {
@@ -54,33 +42,16 @@ export class FormIntentAnswerBase extends React.Component {
               } else {
                   //
                   let tempFields    = this.props.form.getFieldsValue() ;
-                  console.log('...tempFields: ',tempFields) ;
-                  //
                   let tempOutAnswer = {} ;
                   for ( let keyF in tempFields ){
                       let valField = tempFields[keyF] ;
                       tempOutAnswer[keyF] = valField ;
                   }
-                  /*
-                  if ( tempOutAnswer.files ){
-                      let tempFiles       = tempOutAnswer.files ;
-                      let tempArrPromises = [] ;
-                      tempOutAnswer.files = [] ;
-                      for ( let indF=0; indF<tempFiles.length; indF++ ){
-                          let objFile = tempFiles[ indF ] ;
-                      }
-
-                  } else {
-                    this.props.onSubmitOk( {intentAnswer: tempOutAnswer} ) ;
-                  }
-                  */
                   //
                   if ( tempOutAnswer.files && tempOutAnswer.files.length>0 ){
-                      console.log('.....(A) tempOutAnswer.files: ',tempOutAnswer.files) ;
                     tempOutAnswer.files = tempOutAnswer.files.filter((elemFF)=>{
                         return elemFF.status!="error"  ;
                     }) ;
-                    console.log('.....(B) tempOutAnswer.files: ',tempOutAnswer.files) ;
                   }
                   //
                   this.props.onSubmitOk( {intentAnswer: tempOutAnswer} ) ;
@@ -113,7 +84,7 @@ export class FormIntentAnswerBase extends React.Component {
                 <Col xs={24} md={24} lg={20} xl={20} xxl={20} >
                     <Form>
                     <Collapse bordered={false} accordion={false} >
-                        <Collapse.Panel key={"1"} {...addPropsPanel} header={<span>{this.props.translate.form.answerType}</span>} >
+                        <Collapse.Panel forceRender={true} key={"1"} {...addPropsPanel} header={<span>{this.props.translate.form.answerType}</span>} >
                             <Form.Item
                                 label={false}
                                 labelAlign="left"
@@ -146,7 +117,7 @@ export class FormIntentAnswerBase extends React.Component {
                                 }
                             </Form.Item>
                         </Collapse.Panel>
-                        <Collapse.Panel key={"2"}  {...addPropsPanel}
+                        <Collapse.Panel forceRender={true} key={"2"}  {...addPropsPanel}
                                         header={<Tooltip    placement="topRight"
                                                             title={this.props.translate.tooltip.answerText}
                                                             getPopupContainer={(trigger) => { return trigger.parentNode ; }}
@@ -177,7 +148,7 @@ export class FormIntentAnswerBase extends React.Component {
                                 />
                             </Form.Item>
                         </Collapse.Panel>
-                        <Collapse.Panel key={"3"}  {...addPropsPanel}
+                        <Collapse.Panel forceRender={true} key={"3"}  {...addPropsPanel}
                                         header={<Tooltip  placement="topRight"
                                                     title={this.props.translate.tooltip.answerOptions}
                                                     getPopupContainer={(trigger) => { return trigger.parentNode ; }}
@@ -201,7 +172,7 @@ export class FormIntentAnswerBase extends React.Component {
                                 />
                             </Form.Item>
                         </Collapse.Panel>
-                        <Collapse.Panel key={"4"}  {...addPropsPanel}
+                        <Collapse.Panel forceRender={true} key={"4"}  {...addPropsPanel}
                                         header={<Tooltip    placement="topRight"
                                                             title={this.props.translate.tooltip.answerText}
                                                             getPopupContainer={(trigger) => { return trigger.parentNode ; }}
@@ -221,7 +192,7 @@ export class FormIntentAnswerBase extends React.Component {
                                 (<Input allowClear size="large" ref={(argRef)=>{ if ( argRef && (window.innerWidth>797) ){ argRef.focus(); } }} />)}
                             </Form.Item>
                         </Collapse.Panel>
-                        <Collapse.Panel key={"5"}  {...addPropsPanel}
+                        <Collapse.Panel forceRender={true} key={"5"}  {...addPropsPanel}
                                         header={<Tooltip    placement="topRight"
                                                             title={this.props.translate.form.newFileClickDrag}
                                                             getPopupContainer={(trigger) => { return trigger.parentNode ; }}
@@ -270,7 +241,7 @@ export class FormIntentAnswerBase extends React.Component {
 } ;
 
 //
-export const FormIntentAnswer = Form.create({ name: '',
+export const FormIntentAnswer = Form.create({ name: 'formIntentAnswer',
     mapPropsToFields(props) {
         return {
             intentAnswer:    Form.createFormField({ value: props.data.intentAnswer         || {} }),

@@ -10,30 +10,28 @@ import { CustomReply }                                       from 'waiboc-widget
 export class FormDynamicInputOption extends React.Component {
     constructor(props){
         super(props) ;
-        this.nodeFocus    = false ;
-        this.add          = this.add.bind(this) ;
-        this.remove       = this.remove.bind(this) ;
-        this.handleSelectChange   = this.handleSelectChange.bind(this) ;
         this.state        = {
-            // keys:[],
             flagFocusInput: false,
             labels: [],
             values: [],
             arrayOptions: [],
-            initialValues: this.props.initialValues || [],
-            keys: this.props.initialValues.length>0 ? this.props.initialValues.map((elem,elemKey)=>{ return elemKey; }) : [],
+            initialValues: [],    // this.props.initialValues || [],
+            keys: [],             // this.props.initialValues.length>0 ? this.props.initialValues.map((elem,elemKey)=>{ return elemKey; }) : [],
             focus: this.props.focus ? this.props.focus : false
         } ;
+        this.nodeFocus            = false ;
+        this.add                  = this.add.bind(this) ;
+        this.remove               = this.remove.bind(this) ;
+        this.handleSelectChange   = this.handleSelectChange.bind(this) ;
     }
     //
     componentDidMount(){
-        // this.id   = 0 ;
-        //this.state.keys = [] ;
         //
         let fieldArrayValues       = this.props.form.getFieldValue( this.props.fieldName ) || [] ;
         let newState = {
             keys: fieldArrayValues.map((elem,index)=>{ return index; }),
-            arrayOptions: []
+            arrayOptions: [],
+            initialValues: fieldArrayValues
         } ;
         //
         newState.arrayOptions = Object.values(this.props.chatbotTraining).map((elemEntity,idxEntity)=>{
@@ -42,6 +40,7 @@ export class FormDynamicInputOption extends React.Component {
                 name: elemEntity.entity
             })
         }) ;
+        //
         newState.arrayOptions = newState.arrayOptions.sort((a,b)=>{
             return a.name.localeCompare(b.name) ;
         }) ;
@@ -49,7 +48,7 @@ export class FormDynamicInputOption extends React.Component {
         this.setState( newState ) ;
         //
     }
-    //
+    /*
     static getDerivedStateFromProps(newProps, state) {
         if ( newProps.initialValues.length!=state.initialValues.length ){
             let newState = {
@@ -61,26 +60,22 @@ export class FormDynamicInputOption extends React.Component {
             return false ;
         }
     }
+    */
     //
     remove(k){
         //
         if (this.state.keys.length === 0) { return; }
         let tempKeys = this.state.keys.filter(key => key !== k) ;
         this.setState({keys: tempKeys})  ;
-        // this.forceUpdate() ;
-        // this.setState({keys: tempKeys })
+        //
     };
     //
     add(){
     //
-    // let tempId   = this.state.ids++ ;
-    //let tempKeys = this.state.keys.concat( tempId );
     let tempKeys = this.state.keys.concat( this.state.keys.length );
     this.setState({keys: tempKeys, flagFocusInput: true })  ;
-    // this.forceUpdate() ;
-    //  this.setState({keys: tempKeys }) ;
-    };
     //
+    } ;
     //
     handleSelectChange(value){
         this.props.form.setFieldsValue({
@@ -93,9 +88,8 @@ export class FormDynamicInputOption extends React.Component {
     //
     render(){
         //
-        const { getFieldDecorator, getFieldValue, getFieldsValue } = this.props.form ;
-        //
-        const formItemLayout = { labelCol: { xs: { span: 24 }, sm: { span: 4 }, }, wrapperCol: { xs: { span: 24 }, sm: { span: 20 }, md:{span:6}, lg:{span:6}, xl:{span:6}, xxl:{span:6} } };
+        const { getFieldDecorator } = this.props.form ;
+        if ( !Array.isArray(this.state.initialValues) ){ console.log('...this.state.initialValues no es array'); throw new Error("Invalid initial value"); }
         //
         const formItems      = this.state.keys.map((k, index) => {
                 let tempInitialObject = (this.state.initialValues[k] && typeof this.state.initialValues[k]=='object') ? this.state.initialValues[k] : {label:'',value: false} ;

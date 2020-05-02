@@ -296,10 +296,12 @@ header ul.ant-menu {
 .ant-popover, .ant-modal-wrap, .ant-tooltip {
     z-index: 9993 !important ;
 }
+/*
 a:hover {
     text-decoration: none ;
     border-bottom: 0.5px dotted grey ;
 }
+*/
 /*  */
 .btn-link {
     color: rgba(0, 0, 0, 0.85) !important ;
@@ -442,13 +444,13 @@ div {
     border-radius: 25px ;
     transition: all 1s;
     border: 0.2px dotted grey !important ;
-    width: 180px ;
-    height: 160px  ;
+    width: 140px ;
+    height: 120px  ;
     transition: all 0.5s;
 }
 .img-login-oauth:hover {
-    width: 200px !important ;
-    height: 180px !important ;
+    width: 160px !important ;
+    height: 140px !important ;
     border: 0.5px solid grey !important ;
 }
 @media screen and (max-width: 700px) and (min-width: 10px) {
@@ -1658,6 +1660,21 @@ span.chat-line-home.sub-title {
     line-height: 28px !important ;
     /* color: rgb(92, 89, 89)153, 149, 149) ; */
     color: #5E5959 ;
+}
+.waiboc-form-login .ant-input-lg {
+    font-size: 20px ;
+    line-height: 25px ;
+}
+.forget-password {
+    font-size: 18px ;
+    line-height: 25px ;
+    font-weight: 600;
+    width: 100% ;
+    text-align: end ;
+    /* style={{width:'100%',textAlign:'end',padding:'5px 5px 5px 5px',fontSize:'600'}} */
+}
+.forget-password a:hover {
+    text-decoration: underline ;
 }
 /*   */
 @media (max-width: 700px) {

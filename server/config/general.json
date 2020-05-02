@@ -3,11 +3,22 @@
     "descripcion":"Waiboc servicios digitales y asistentes virtuales / chatbots",
     "urlEmpresa":"https://www.Waiboc.com",
     "email":{
-        "emailEmpresa":"sebaeze@gmail.com",
-        "emailSoporte":"sebaeze@gmail.com",
-        "emailGateway":"jym.all.graphics.email@gmail.com",
-        "passwordEmailGateway":"!ZXCasdqwe123",
-        "nombreMuestraEmailGateway":"Waiboc backend"
+        "dev":{
+            "service":"gmail",
+            "emailEmpresa":"sebaeze@gmail.com",
+            "emailSoporte":"sebaeze@gmail.com",
+            "emailGateway":"jym.all.graphics.email@gmail.com",
+            "passwordEmailGateway":"!ZXCasdqwe123",
+            "nombreMuestraEmailGateway":"Waiboc DEV backend"
+        },
+        "produccion":{
+            "service":"gmail",
+            "emailEmpresa":"sebaeze@gmail.com",
+            "emailSoporte":"sebaeze@gmail.com",
+            "emailGateway":"jym.all.graphics.email@gmail.com",
+            "passwordEmailGateway":"!ZXCasdqwe123",
+            "nombreMuestraEmailGateway":"Waiboc backend"
+        }
     },
     "database":{
         "dev":{

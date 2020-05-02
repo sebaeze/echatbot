@@ -59,7 +59,6 @@ class LinkRouter  extends React.Component {
     // <LinkWithHash {...this.state} ref={this.refHashLink} >{this.props.children}</LinkWithHash>
     onClickLink(argEE){
         try {
-            console.log('...process.env.APP_ID: ',process.env.APP_ID,' target: ',this.state.targetApp,' url: ',this.state.fullUrl) ;
             // if ( process.env.APP_ID==PARAMETROS.APP_ID.HOME ){
             if ( process.env.APP_ID==this.state.targetApp ){
                 //console.log('....hashash: ',this.state.hasHash,' hash: ',this.state.hash,' url: ',this.state.url,' pathna: ',window.location.pathname) ;

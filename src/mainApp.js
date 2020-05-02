@@ -55,13 +55,13 @@ export class App extends React.Component {
             <Encabezado translate={this.translate} />
             <ChatbotWindow />
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
-              <Route exact path="/"                      component={() =>        <HomePage      translate={this.translate} configuracion={configApp}   />}  />
-              <Route exact path="/about"                 component={(argMach) => <CuerpoAbout   translate={this.translate} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/contact"               component={(argMach) => <FormContacto  translate={this.translate} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/error"                 component={(argMach) => <CuerpoAbout   translate={this.translate} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/services"              component={(argMach) => <CuerpoAbout   translate={this.translate} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/prices"                component={(argMach) => <CuerpoPrices  translate={this.translate} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/404"                   component={(argMach) => <NoEncontrado404  translate={this.translate} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/"                            component={() =>        <HomePage      translate={this.translate} configuracion={configApp}   />}  />
+              <Route exact path="/about"                       component={(argMach) => <CuerpoAbout   translate={this.translate} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/contact"                     component={(argMach) => <FormContacto  translate={this.translate} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/error"                       component={(argMach) => <CuerpoAbout   translate={this.translate} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/services"                    component={(argMach) => <CuerpoAbout   translate={this.translate} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/prices"                      component={(argMach) => <CuerpoPrices  translate={this.translate} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/404"                         component={(argMach) => <NoEncontrado404  translate={this.translate} configuracion={configApp} {...argMach} />}  />
             </Content>
             <PiePagina translate={this.translate} configuracion={configApp} />
           </Router>

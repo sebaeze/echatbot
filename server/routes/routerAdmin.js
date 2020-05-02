@@ -31,16 +31,18 @@ module.exports = (argConfig,argDb) => {
     res.render( 'admin.html', tempMetatags ) ;
     //
   });
-  /*
-  router.get('/auth', function(req, res) {
+  //
+  router.get(['/account/:seccion/:email/:id'], function(req, res) {
     res.set('access-Control-Allow-Origin', '*');
     res.set('access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Credentials", true);
     //
-    res.render( 'admin.html', {...defaultMetatags} ) ;
+    const metatagsAdmin   = argConfig.metaTags[String(req.originalUrl).toLowerCase()]  || argConfig.metaTags.admin || {} ;
+    let tempMetatags      = Object.assign({...defaultMetatags},{...metatagsAdmin}) ;
+    // tempMetatags.globalTituloPagina = "Account" ;
+    res.render( 'admin.html', tempMetatags ) ;
     //
   });
-  */
   //
   return router ;
 } ;

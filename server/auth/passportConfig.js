@@ -3,7 +3,9 @@
 */
 const passport            = require('passport') ;
 const router              = require('express').Router()   ;
-const path                = require('path')     ;
+const LocalStrategy       = require('passport-local').Strategy  ;
+//
+import { APP_GLOBALES }                         from '../config/variablesGlobales' ;
 //
 const configPassportApp = (argConfigPassport,argApp, argDb) => {
   //
@@ -71,6 +73,108 @@ const configPassportApp = (argConfigPassport,argApp, argDb) => {
     passport.deserializeUser(function(user, done) { done(null, user) ; });
     //
   }
+  // Local Strategy -> '/auth/local/login'
+  //
+  try {
+    passport.use(
+    new LocalStrategy( { usernameField: 'email', passwordField: 'password',passReqToCallback: true },
+      function(req, username, argPassword, done) {
+        let newRegExt = new RegExp( username, "i" ) ;
+        argDb.usuarios.get({ email: newRegExt })
+          .then((userInfo)=>{
+          if ( userInfo.length==0 ){
+            req.authError = {
+              resultCode: APP_GLOBALES.RESULT_CODES.USER_EMAIL_DO_NOT_EXIST,
+              result: "Email existe pero password es invalida"
+            } ;
+            return done(null, false );
+          } else {
+            userInfo = userInfo[0] ;
+            if ( userInfo.password==argPassword ){
+              return done(null, userInfo );
+            } else {
+              req.authError = {
+                resultCode: APP_GLOBALES.RESULT_CODES.USER_PASSWORD_INVALID,
+                result: "Password es invalida"
+              } ;
+              try {
+                return done(null, false );
+              } catch(errDone){
+                console.log('....error done: ',errDone) ;
+              }
+            }
+          }
+        })
+        .catch((resuErr)=>{
+          console.log('....ERROR find user: ',resuErr) ;
+          return done(null, false ) ;
+        })
+        //
+      }
+  ));
+  //
+  passport.serializeUser(function(user, done) {
+    done(null, user)   ;
+  });
+  passport.deserializeUser(function(user, done) {
+    done(null, user) ;
+  });
+  //
+  // router.post( '/local/login' , passport.authenticate('local', { successRedirect: '/api/account/user', failureRedirect: '/auth/local/failure', failureFlash: true} ) ) ;
+  router.post( '/local/login' ,
+      function(req,res,next){
+        //
+        // console.log('..../local/login: body: ',req.body) ;
+        //
+        if ( req.body.flagNewUser==true ){
+          let tempNewUSer = {
+            _id: req.body.email,
+            ...req.body
+          }
+          argDb.usuarios.add( tempNewUSer )
+            .then((respNewUser)=>{
+              next() ;
+            })
+            .catch((errNU)=>{
+              console.log('...errNU: ',errNU) ;
+              next() ;
+            })
+        } else {
+          next();
+        }
+      },
+      passport.authenticate('local',{ failWithError: true }),
+      function(req,res,next){
+        if(req.autherror) {
+          res.json({...req.authError}) ;
+      } else {
+          res.redirect('/api/account/user') ;
+      }
+    },
+    function(err, req, res, next) {
+      // Handle error
+      // console.log('....(E) local:: req.autherror: ',req.authError,' err: ',err) ;
+      //res.status(401).send({ success: false, message: err, desc: req.authError })
+      res.status(200) ;
+      res.json({...req.authError}) ;
+      //
+    }
+  ) ;
+  //
+  router.get('/local/failure',function(req,res,next){
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', '*');
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("credentials","same-origin") ;
+    //
+    console.log('...req.authError: ',req.authError) ;
+    res.json({...req.authError}) ;
+    //
+  }) ;
+  //
+} catch(errNN){
+  console.log('...errNN: ',errNN) ;
+}
   //
   argApp.use( passport.initialize() ) ;
   argApp.use( passport.session()    ) ;

@@ -92,6 +92,31 @@ const getUserInfo = () => {
     }) ;
 } ;
 //
+const loginUser = ( argUserInfo ) => {
+    return new Promise(function(respOk,respRech){
+        try {
+            //
+            let postOpt = {...opcionesPOST} ;
+            postOpt.method = 'POST' ;
+            postOpt.body   = JSON.stringify(argUserInfo) ;
+            //
+            fetch( PARAMETROS.BACKEND.API_ACCOUNT_LOGIN ,postOpt)
+            .then(function(response){
+                if (response.status>=200 & response.status<=400) {
+                    return response.json() ;
+                } else {
+                    throw new Error("ERROR: loginUser:: Http Status: "+response.status+'.') ;
+                }
+            })
+            .then((argJson     ) => { respOk(argJson) ; })
+            .catch((respRechaz ) => { respRech(respRechaz) ; }) ;
+            //
+        } catch(errGAU){
+            respRech(errGAU) ;
+        }
+    }) ;
+} ;
+//
 const logoutAccount = () => {
         try {
             //
@@ -104,10 +129,63 @@ const logoutAccount = () => {
         }
 } ;
 //
+const passwordReset = ( argUserInfo ) => {
+    return new Promise(function(respOk,respRech){
+        try {
+            //
+            let postOpt = {...opcionesPOST} ;
+            postOpt.method = 'POST' ;
+            postOpt.body   = JSON.stringify(argUserInfo) ;
+            //
+            fetch( PARAMETROS.BACKEND.API_ACCOUNT_FORGOT_PASSWORD ,postOpt)
+            .then(function(response){
+                if (response.status>=200 & response.status<=400) {
+                    return response.json() ;
+                } else {
+                    throw new Error("ERROR: forgotPassword:: Http Status: "+response.status+'.') ;
+                }
+            })
+            .then((argJson     ) => { respOk(argJson) ; })
+            .catch((respRechaz ) => { respRech(respRechaz) ; }) ;
+            //
+        } catch(errGAU){
+            respRech(errGAU) ;
+        }
+    }) ;
+} ;
+//
+const passwordChange = ( argUserInfo ) => {
+    return new Promise(function(respOk,respRech){
+        try {
+            //
+            let postOpt = {...opcionesPOST} ;
+            postOpt.method = 'POST' ;
+            postOpt.body   = JSON.stringify(argUserInfo) ;
+            //
+            fetch( PARAMETROS.BACKEND.API_ACCOUNT_UPDATE_PASSWORD ,postOpt)
+            .then(function(response){
+                if (response.status>=200 & response.status<=400) {
+                    return response.json() ;
+                } else {
+                    throw new Error("ERROR: forgotPassword:: Http Status: "+response.status+'.') ;
+                }
+            })
+            .then((argJson     ) => { respOk(argJson) ; })
+            .catch((respRechaz ) => { respRech(respRechaz) ; }) ;
+            //
+        } catch(errGAU){
+            respRech(errGAU) ;
+        }
+    }) ;
+} ;
+//
 export const account = {
     update: updateAccount,
     getAccount: getAccount,
     getUserInfo: getUserInfo,
-    logout: logoutAccount
+    loginUser: loginUser,
+    logout: logoutAccount,
+    passwordReset: passwordReset,
+    passwordChange: passwordChange
 } ;
 //

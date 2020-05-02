@@ -13,6 +13,7 @@ import { CuerpoLogin   }                   from "./js/componentes/cuerpoPagina/C
 import { CuerpoCuenta  }                   from "./js/componentes/cuerpoPagina/CuerpoCuenta" ;
 import { CuerpoTrain   }                   from "./js/componentes/cuerpoPagina/CuerpoTrain" ;
 import { CuerpoEditBot }                   from "./js/componentes/cuerpoPagina/CuerpoEditBot" ;
+import { CuerpoReset }                     from "./js/componentes/cuerpoPagina/CuerpoReset"   ;
 //
 import { languageLocale }                  from "./js/utils/utiles" ;
 //
@@ -42,14 +43,22 @@ export class App extends React.Component {
           <Router>
             <Encabezado translate={{...this.translate}} />
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
-              <Route exact path="/account"               component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/account/:seccion"      component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/bots"                  component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/login"                 component={(argMach) => <CuerpoLogin   translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/users"                 component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/train/:idChatbot"      component={(argMach) => <CuerpoTrain   translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/edit/:idChatbot"       component={(argMach) => <CuerpoEditBot translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
-              <Route exact path="/404"                   component={(argMach) => <NoEncontrado404  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/account"                      component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/account/:seccion"             component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/account/reset/:email/:token"  component={
+                                                                  (matchProps) =>
+                                                                    <CuerpoReset {...matchProps}
+                                                                      translate={{...this.translate}}
+                                                                      configuracion={configApp}
+                                                                      flagLoginAlone={true}
+                                                                    /> }
+                                                                />
+              <Route exact path="/bots"                        component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/login"                       component={(argMach) => <CuerpoLogin   translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/users"                       component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/train/:idChatbot"            component={(argMach) => <CuerpoTrain   translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/edit/:idChatbot"             component={(argMach) => <CuerpoEditBot translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
+              <Route exact path="/404"                         component={(argMach) => <NoEncontrado404  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
             </Content>
             <PiePagina translate={{...this.translate}} configuracion={configApp} />
           </Router>

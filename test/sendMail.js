@@ -4,18 +4,19 @@
 // const enviarEmail          = require('../server/lib/emailEnviar').email ;
 const nodemailer     = require('nodemailer') ;
 const transporter    = nodemailer.createTransport({
-    host: 'mail.waiboc.com',
+    // host: 'mail.waiboc.com',
+    host: 'localhost',
     // port: 587,
-    port: 25,
-    // port: 143 ,
+    // port: 25,
+    port: 25 ,
     secure: false ,
     auth: {
-      /*
         user: "info@waiboc.com",
         pass: "!ZXCasdqwe123"
-      */
+     /*
       user: "info",
-        pass: "qaz11qaz"
+      pass: "qaz11qaz"
+      */
     },
     tls:{
         rejectUnauthorized: false

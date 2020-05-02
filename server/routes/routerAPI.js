@@ -5,6 +5,9 @@ const router            = require('express').Router()   ;
 const path              = require('path')  ;
 const moment            = require('moment-timezone')     ;
 //
+import { enviarEmail as emailSMTP }             from '../lib/emailSMTP'      ;
+import { APP_GLOBALES }                         from '../config/variablesGlobales' ;
+//
 import { updateTraining, addNewFilesToChatbot, saveNewFileToChatbot }    from './utilRoutes/utilRouteChatbot' ;
 //
 module.exports = (argConfig,argDb) => {
@@ -335,6 +338,149 @@ module.exports = (argConfig,argDb) => {
       res.json(errRe) ;
     }
   });
+  //
+  //
+  router.get('/account/user', function(req, res) {
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    try{
+      //
+      if ( req.user ){
+        //console.log('....user:: ',req.user) ;
+        res.json({
+          resultCode: 0,
+          result: {
+            email: req.user.email,
+            nombre: req.user.nombre||false,
+            apellido: req.user.apellido||false,
+            fotos: req.user.fotos||false,
+            id: req.user._id||false,
+            provider: req.user.provider||false,
+            celular: req.user.celular||'',
+            fullNombre: req.user.fullNombre||'',
+            seguridad: req.user.seguridad||false,
+            pais: req.user.seguridad||'',
+            provincia: req.user.provincia||'',
+            ciudad: req.user.ciudad||'',
+            ordenes: req.user.ordenes||[]
+          }
+        }) ;
+      } else {
+        res.json({
+          resultCode: APP_GLOBALES.RESULT_CODES.USER_NOT_LOGGED ,
+          result: {}
+        }) ;
+      }
+      //
+    } catch(errRe){
+      res.status(500) ;
+      res.json(errRe) ;
+    }
+  });
+  //
+  router.post('/auth/passwordupdate',function(req,res,next){
+    try {
+      //
+      let newResponse = {} ;
+      let newRegExt = new RegExp( req.body.email, "i" ) ;
+      argDb.usuarios.get( { email: newRegExt } )
+        .then((respDb)=>{
+          if ( respDb.length>0 ){ respDb=respDb[0]; }
+          if ( respDb.length==0 ){
+            newResponse = {
+              resultCode: APP_GLOBALES.RESULT_CODES.USER_EMAIL_DO_NOT_EXIST,
+              result:{error:"Email not found"}
+            }
+            return  newResponse ;
+          } else {
+            if ( respDb.password==req.body.token ){
+              return argDb.usuarios.updatePassword({flagReset: false, _id: respDb._id, oldLog: respDb.log||[], newPassword: req.body.password })
+                .then((respOk)=>{
+                  newResponse = {
+                    resultCode: APP_GLOBALES.RESULT_CODES.OK,
+                    result:{msg: `Password actualizada` }
+                  }
+                  return  newResponse ;
+                })
+                .catch((respErr)=>{
+                  newResponse = {
+                    resultCode: APP_GLOBALES.RESULT_CODES.ERROR_INTERNO,
+                    result:{ error: respErr }
+                  }
+                  return  newResponse ;
+                })
+            } else {
+              console.log('...p :',respDb.password,' tok: ',req.body.token) ;
+              newResponse = {
+                resultCode: APP_GLOBALES.RESULT_CODES.USER_INVALID_TOKEN,
+                result:{error: `Token invalido: ${req.body.token}` }
+              }
+              return  newResponse ;
+            }
+          }
+        })
+        .then((respUpdte)=>{
+          res.json( respUpdte ) ;
+        })
+        .catch((errDb)=>{
+          res.status(500) ;
+          res.json({error: errDb}) ;
+        })
+      //
+    } catch(errPswReset){
+      console.dir(errPswReset) ;
+      res.status(500) ;
+      res.json(errPswReset) ;
+    }
+  }) ;
+  //
+  router.post('/auth/passwordreset',function(req,res,next){
+    try {
+      //
+      // let smtpMsg = `<p style="font-weight:bold;font-size:18px;"></p><pre>Utilize el siguiente link para recuperar su password => ${urlLink} </pre>` ;
+      //
+      let newResponse = {} ;
+      let newRegExt = new RegExp( req.body.emailReset, "i" ) ;
+      argDb.usuarios.get({email: newRegExt })
+        .then((respDb)=>{
+          if ( respDb.length>0 ){ respDb=respDb[0]; }
+          if ( respDb.length==0 ){
+            return false ;
+          } else {
+            return argDb.usuarios.updatePassword({flagReset:true, _id: respDb._id, oldLog: respDb.log||[]}) ;
+          }
+        })
+        .then((respPsw)=>{
+          let urlLink             =   ( typeof argConfig.urlEmpresa[ process.env.AMBIENTE||"DEV" ]=="undefined"
+                                            ? req.protocol+"://"+req.get('host')+"/"
+                                            : argConfig.urlEmpresa[ process.env.AMBIENTE||"DEV" ]
+                                      )
+                                     + `account/reset/${respPsw._id}/${respPsw.password}` ;
+          console.log('....reset: urlLink: ',urlLink,' req: ',req.protocol,req.get('X-Forwarded-Protocol'),req.get('host'),req.originalUrl) ;
+          newResponse.resultCode = respPsw==false ? APP_GLOBALES.RESULT_CODES.USER_EMAIL_DO_NOT_EXIST : APP_GLOBALES.RESULT_CODES.OK ;
+          newResponse.result     = respPsw==false ? "" : { _id: respPsw._id } ; // token: respPsw.password,url: `/auth/reset/${respPsw._id}/${respPsw.password}` } ;
+          //
+          return emailSMTP({...argConfig},"Password Reset",req.body.emailReset,
+          `<p style="font-weight:bold;font-size:18px;"></p><pre>Continue por el siguiente link para recuperar la password => ${urlLink} </pre>`
+              )
+          //
+        })
+        .then((respPswDB)=>{
+          res.json(newResponse) ;
+        })
+        .catch((errDb)=>{
+          res.status(500) ;
+          res.json({error: errDb}) ;
+        })
+      //
+    } catch(errPswReset){
+      console.dir(errPswReset) ;
+      res.status(500) ;
+      res.json(errPswReset) ;
+    }
+  }) ;
   //
   return router ;
 } ;

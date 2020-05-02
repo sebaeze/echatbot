@@ -65,6 +65,7 @@
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
+    "passport-local": "^1.0.0",
     "passport-mercadolibre": "0.0.2",
     "path": "^0.12.7",
     "rc-banner-anim": "^2.4.2",

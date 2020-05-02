@@ -97,6 +97,10 @@
             "action":"Action"
         },
         "form":{
+            "personalInfo":"Personal Information",
+            "buttonChangePassword":"Update Password",
+            "forgetPassword":"Forgot my password",
+            "buttonGetPassword":"Get password",
             "placeholderImagenDescription":"Description",
             "placeholderImagenUr":"https://wwww.url-example.com/example",
             "newFileDescription":"Add a description",
@@ -354,6 +358,10 @@
             "action":"Acción"
         },
         "form":{
+            "personalInfo":"Tus Datos",
+            "buttonChangePassword":"Actualizar Password",
+            "forgetPassword":"Olvidé mi clave",
+            "buttonGetPassword":"Recuperar password",
             "placeholderImagenDescription":"Descripcion",
             "placeholderImagenUr":"https://wwww.url-example.com/example",
             "newFileDescription":"Agregar descripción",
@@ -598,6 +606,10 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
+            "personalInfo":"Informação pessoal",
+            "buttonChangePassword":"Atualizar Senha",
+            "forgetPassword":"Esqueci minha senha",
+            "buttonGetPassword":"Pegue a senha",
             "placeholderImagenDescription":"Descrição",
             "placeholderImagenUr":"https://wwww.url-example.com/example",
             "newFileDescription":"Adicione uma descrição",

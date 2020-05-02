@@ -6,9 +6,9 @@ import { APP_ID }      from '../../../build_config/config' ;
 export const PARAMETROS = {
     APP_ID: { ...APP_ID },
     SESSION:{
-        USUARIO:'USER_SESSION',
+        USUARIO:'WAIBOC_USER_SESSION',
         TIEMPO_SINCRONIZACION_MINUTOS: 30,
-        CARRITO: 'carrito',
+        CARRITO: 'WAIBOC_CART',
         CARRITO_ESTADO_INICIAL: 'INICIAL',
         CARRITO_PENDIENTE_SINCRONIZACION: 'carritoPendiente',
         CARRITO_SINCRONIZADO: 'carritoSincronizado'
@@ -20,7 +20,14 @@ export const PARAMETROS = {
         API_CONSULTAS: '/api/consultas',
         API_SUSCRIPCION: '/api/suscripcion',
         API_CHATBOT_UPDATE: '/api/chatbot',
-        API_CHATBOT_TRAIN: '/api/train'
+        API_CHATBOT_TRAIN: '/api/train',
+        API_ACCOUNT_INFO: '/api/account/user',
+        API_ACCOUNT_LOGIN: '/auth/local/login',
+        API_ACCOUNT_LOGOUT: '/auth/logout',
+        API_ACCOUNT_FORGOT_PASSWORD: '/api/auth/passwordreset',
+        API_ACCOUNT_UPDATE_PASSWORD: '/api/auth/passwordupdate',
+        API_NOTIFICATIONS_LATEST: '/api/notifications/latest',
+        API_QUERY_SUSCRIPCIONES: '/api/users/subscriptions'
 
     },
     FORM:{

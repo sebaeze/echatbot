@@ -124,26 +124,29 @@ export class CuerpoEditBot extends React.Component {
                                 :
                                 {position:'absolute',top:'5px' ,right:'5px', backgroundColor:'white', border:'0.5px dotted gray'} ;
         //
+        /*
+        {
+            this.props.onFinishEdit ?
+                <div style={styleCloseIcon}>
+                    <Icon type="close-square" className="waiboc-close-icon"
+                            onClick={(argEC)=>{
+                                argEC.preventDefault() ;
+                                if (window.location.hash && String(window.location.hash).length>0){
+                                    window.location.hash='';
+                                }
+                                this.props.onFinishEdit() ;
+                            }}
+                    />
+                </div>
+                : null
+        }
+        */
+        //
         return(
             <div id="waiboc-id-edit-chatbot"
                  ref={(argRef)=>{ this.refContainer=argRef; }}
                  style={{paddingTop:(this.props.onFinishEdit==false ? '145px' : '0px'),minHeight:'110vh'}}
             >
-                {
-                    this.props.onFinishEdit ?
-                        <div style={styleCloseIcon}>
-                            <Icon type="close-square" className="waiboc-close-icon"
-                                    onClick={(argEC)=>{
-                                        argEC.preventDefault() ;
-                                        if (window.location.hash && String(window.location.hash).length>0){
-                                            window.location.hash='';
-                                        }
-                                        this.props.onFinishEdit() ;
-                                    }}
-                            />
-                        </div>
-                        : null
-                }
                     <Tabs style={{width:'95%',marginLeft:'2%',paddingTop:'20px'}}
                           onChange={this.onChangeTab}
                           type="card"

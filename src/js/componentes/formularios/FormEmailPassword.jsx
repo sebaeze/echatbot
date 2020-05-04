@@ -32,6 +32,7 @@ class FormEmailPasswordBase extends React.Component {
         this.onChangeInput        = this.onChangeInput.bind(this)  ;
         this.onSubmitFormNewUser  = this.onSubmitFormNewUser.bind(this)  ;
         this.onSubmitGetPassword  = this.onSubmitGetPassword.bind(this)  ;
+        this.onPressEnterInp      = this.onPressEnterInp.bind(this)      ;
         // this.onFocus              = this.onFocus.bind(this) ;
         // this.refFocus             = false ;
     } ;
@@ -47,6 +48,20 @@ class FormEmailPasswordBase extends React.Component {
         }
     }
     */
+    //
+    onPressEnterInp(argEE){
+        try {
+            if ( argEE && argEE.preventDefault ){ argEE.preventDefault(); }
+            if ( argEE.target.name ){
+                let objUpdate = {} ;
+                objUpdate[ argEE.target.name ] = argEE.target.value||'' ;
+                this.props.form.setFieldsValue( objUpdate ) ;
+                this.onSubmitForm() ;
+            }
+        } catch(errPE){
+            console.dir(errPE) ;
+        }
+    }
     //
     onChangeInput(argEC){
         try {
@@ -105,7 +120,7 @@ class FormEmailPasswordBase extends React.Component {
             this.setState({flagSpinner:true}) ;
             // api.debug.display( 'onSubmitForm:: tempValores: ',tempValores,' this.state.fields: ',this.state.fields ) ;
             //
-            this.props.form.validateFields({ force: true }, (error) => {
+            this.props.form.validateFieldsAndScroll({ force: true }, (error) => {
               if (error) {
                   console.log('...error: ',error) ,
                   // api.debug.display( 'onSubmitForm:: error: ',error ) ;
@@ -197,7 +212,7 @@ class FormEmailPasswordBase extends React.Component {
                   //
               } ;
             }) ;
-            //
+            // 
         } catch(errNU){
             console.log('...errNU: ',errNU) ;
         }
@@ -224,10 +239,7 @@ class FormEmailPasswordBase extends React.Component {
     render(){
         //
         const { getFieldDecorator }   = this.props.form ;
-        // let formItemsProps = (window.innerWidth>796) ? {hasFeedback:true} : {} ;
         let formItemsProps = {hasFeedback:true} ;
-        // api.debug.display( '........formEmailPassword:: render: fieldvalues: ',this.props.form.getFieldsValue() ) ;
-        // api.debug.display( '........formEmailPassword:: render: state: ',this.state ) ;
         //
         return(
             <Row className="waiboc-form-login" >
@@ -248,9 +260,10 @@ class FormEmailPasswordBase extends React.Component {
                         })
                         (
                             <Input placeholder="Tu Email" size="large"
+                                name="email"
                                 ref={(argReg)=>{ if ( argReg && this.refEmail==false ){argReg.focus(); this.refEmail=argReg;} }}
                                 style={{height:'60px',boxShadow:'0 7px 6px -6px #999999'}}   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                onPressEnter={this.onSubmitForm}
+                                onPressEnter={this.onPressEnterInp}
                                 onBlur={this.onChangeEmail}
                                 />
                         )
@@ -269,9 +282,9 @@ class FormEmailPasswordBase extends React.Component {
                         }
                         )
                         (
-                            <Input.Password  placeholder="Password"  size="large"
+                            <Input.Password  placeholder="Password"  size="large" name="password"
                                              style={{height:'60px',boxShadow:'0 7px 6px -6px #999999'}} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                             onPressEnter={this.onSubmitForm}
+                                             onPressEnter={this.onPressEnterInp}
                                              onBlur={this.onChangePass}
                             />
                         )
@@ -295,8 +308,9 @@ class FormEmailPasswordBase extends React.Component {
                                             rules: [ { required: true, suppressWarning: true,type: 'string', message: 'Por favor, complete con su nombre.' } ]
                                         })
                                         (
-                                            <Input placeholder="Tu Nombre"  size="large" name="nombre" className="waiboc-ec-form-input"
+                                            <Input placeholder="Tu Nombre"  name="nombre" size="large" name="nombre" className="waiboc-ec-form-input"
                                                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                                onPressEnter={this.onPressEnterInp}
                                                 onBlur={this.onChangeInput}
                                                 />
                                         )
@@ -312,8 +326,9 @@ class FormEmailPasswordBase extends React.Component {
                                             rules: [ { required: true, suppressWarning: true,type: 'string', message: 'Por favor, complete con su apellido.' } ]
                                         })
                                         (
-                                            <Input placeholder="Tu Apellido" size="large" name="apellido" className="waiboc-ec-form-input"
+                                            <Input placeholder="Tu Apellido" name="apellido" size="large" name="apellido" className="waiboc-ec-form-input"
                                                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                                onPressEnter={this.onPressEnterInp}
                                                 onBlur={this.onChangeInput}
                                                 />
                                         )

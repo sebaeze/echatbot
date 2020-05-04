@@ -7,6 +7,7 @@ const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 const APP_ID                      = require('./config.js').APP_ID ;
+const ASSET_PATH                  = process.env.ASSET_PATH || '/';
 //
 // import { HASH_VERSION }      from './defineHash' ;
 const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
@@ -16,7 +17,8 @@ module.exports = {
   entry: './src/mainApp.js',
   output: {
     filename: 'mainApp.js',
-    path: path.join(__dirname, '../dist')
+    path: path.join(__dirname, '../dist'),
+    publicPath: ASSET_PATH
   },
   module:{
 	   rules: [

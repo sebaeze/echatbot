@@ -60,6 +60,7 @@ class LinkRouter  extends React.Component {
     onClickLink(argEE){
         try {
             // if ( process.env.APP_ID==PARAMETROS.APP_ID.HOME ){
+            if ( argEE && argEE.preventDefault ){ argEE.preventDefault(); }
             if ( process.env.APP_ID==this.state.targetApp ){
                 //console.log('....hashash: ',this.state.hasHash,' hash: ',this.state.hash,' url: ',this.state.url,' pathna: ',window.location.pathname) ;
                 if ( this.state.url==window.location.pathname && this.state.hasHash==true ){
@@ -97,7 +98,7 @@ class LinkRouter  extends React.Component {
                             </Link>
                         :   null
                 }
-                <a onClick={this.onClickLink} rel="noopener noreferrer" className={this.props.className ? this.props.className : ""} >
+                <a onClick={this.onClickLink} href={this.state.fullUrl} className={this.props.className ? this.props.className : ""} >
                     {this.props.children}
                 </a>
                 <HashLink   to={this.state.fullUrl} style={{display:'none'}}

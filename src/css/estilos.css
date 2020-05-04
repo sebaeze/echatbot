@@ -364,17 +364,6 @@ div {
     font-variant: tabular-nums;
 }
 */
-.bg-login {
-    background-color: yellow ;
-    width: 100% !important ;
-    height: 100% !important ;
-    overflow: hidden ;
-    background:
-        linear-gradient(to bottom right,transparent 55.8%,#EBF2FE 50%) top /100% 120%,
-        linear-gradient(to top right,transparent 15%,#EBF2FE 15%) bottom/110% 72% ;
-    background-repeat: repeat, repeat, repeat ;
-    background-repeat: no-repeat ;
-}
 /*  */
 .box-plan {
     width: 80% ;
@@ -439,26 +428,46 @@ div {
     line-height: 70px ;
     vertical-align: center ;
 }
-/*  Login */
-.img-login-oauth {
+/* */
+.waiboc-login {
+    min-height: 110vh ;
+    padding-top: 70px ;
+    width: 100% !important ;
+    height: 100% !important ;
+    overflow: hidden ;
+    background: rgb(130,150,244);
+    background: linear-gradient(0deg, rgba(130,150,244,1) 0%, rgba(254,254,254,1) 81%);
+}
+.waiboc-login .panel-oauth {
+    padding-left: 20px ;
+    padding-top: 20px ;
+}
+.waiboc-login .panel-oauth a {
+    padding-left: 10px ;
+    padding-right: 10px ;
+    cursor: pointer;
+}
+.waiboc-login .panel-oauth a img {
     border-radius: 25px ;
     transition: all 1s;
     border: 0.2px dotted grey !important ;
     width: 140px ;
     height: 120px  ;
     transition: all 0.5s;
+    cursor: pointer;
 }
-.img-login-oauth:hover {
+.waiboc-login .panel-oauth a img:hover {
     width: 160px !important ;
     height: 140px !important ;
     border: 0.5px solid grey !important ;
+    box-shadow: 0 0 5px #515151 !important ;
 }
 @media screen and (max-width: 700px) and (min-width: 10px) {
-    .img-login-oauth {
+    .waiboc-login .panel-oauth a img {
         width: 130px ;
         height: 120px ;
     }
-    .img-login-oauth:hover {
+    .waiboc-login .panel-oauth a img:hover {
         width: 150px !important ;
         height: 140px !important ;
     }
@@ -1570,6 +1579,12 @@ span.waiboc-span-emoticon:hover {
     margin-top: 5px ;
     box-shadow: 0 0 5px #515151 !important ;
 }
+/*
+.waiboc-header ul.ant-menu.menu-header-mobile li.ant-menu-item {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+*/
 .waiboc-drawer ul.ant-menu.menu-header-mobile li.ant-menu-item {
     height: 40px !important ;
     font-size: 20px !important ;

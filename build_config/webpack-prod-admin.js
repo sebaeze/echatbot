@@ -8,6 +8,7 @@ const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 const CompressionPlugin           = require('compression-webpack-plugin');
 const BrotliPlugin                = require('brotli-webpack-plugin');
 const APP_ID                      = require('./config.js').APP_ID ;
+const ASSET_PATH                  = process.env.ASSET_PATH || '/';
 //
 const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
 console.log('Hash Version: ',HASH_VERSION,';');
@@ -16,7 +17,8 @@ module.exports = {
   entry: './src/mainAdmin.js',
   output: {
     filename: 'mainAdmin.js',
-    path: path.join(__dirname, '../dist')
+    path: path.join(__dirname, '../dist'),
+    publicPath: ASSET_PATH
   },
   module:{
 	   rules: [

@@ -81,28 +81,20 @@ export class CuerpoLogin extends React.Component {
     render(){
         //
         return(
-            <div style={{paddingTop:'70px',minHeight:'110vh'}}  className="bg-inicial" >
+            <div className="waiboc-login" >
                 <div >
                     <Row style={{paddingTop:'110px'}} >
                         <Col xs={24} md={24}   lg={12} xl={12} xxl={12} >
                             <LoginUserPassword userInfo={this.state.userInfo}  onLogin={this.onFinishLogin} flagRegistrar={this.state.flagRegistrar} translate={this.props.translate} />
                         </Col>
                         <Col xs={0} md={0} lg={1} xl={1} xxl={1} ></Col>
-                        <Col xs={18} md={18} lg={2} xl={2} xxl={2} >
-                            <a href="/auth/facebook/login">
-                                <img src="/img/login-facebook.jpg"
-                                    className="img-login-oauth" alt="login-facebook"
+                        <Col xs={24} md={24} lg={10} xl={10} xxl={10} className="panel-oauth" >
+                            <a href="/auth/facebook/login" className="link-oauth" >
+                                <img src="/img/login-facebook.jpg" alt="login-facebook"
                                 />
                             </a>
-                        </Col>
-                        <Col xs={24} md={24} lg={0} xl={0} xxl={0} >
-                            <div style={{height:'10px',marginTop:'20px'}}></div>
-                        </Col>
-                        <Col xs={6} md={6} lg={1} xl={1} xxl={1} ></Col>
-                        <Col xs={18} md={17} lg={2} xl={2} xxl={2} >
                             <a href="/auth/google/login">
-                                <img src="/img/login-gmail.jpg"
-                                     className="img-login-oauth" alt="login-facebook"
+                                <img src="/img/login-gmail.jpg" alt="login-facebook"
                                 />
                             </a>
                         </Col>

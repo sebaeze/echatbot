@@ -6,7 +6,7 @@ import ReactDOM                            from "react-dom"  ;
 import { BrowserRouter as Router, Route }  from 'react-router-dom'   ;
 import { Layout, Skeleton  }               from 'antd';
 //
-import { Encabezado }                     from "./js/componentes/Encabezado" ;
+// import Encabezado                         from "./js/componentes/Encabezado" ;
 import PiePagina                          from "./js/componentes/PiePagina"  ;
 import {NoEncontrado404}                  from "./js/componentes/cuerpoPagina/NoEncontrado404"  ;
 import SitemapCuerpo                      from "./js/componentes/cuerpoPagina/SitemapCuerpo"    ;
@@ -29,12 +29,13 @@ import './css/estilosAnimaciones.css' ;
 //
 //
 const getComponent = Component => props => (
-  <Suspense fallback={ <Skeleton active  paragraph={{ rows: 11 }}  /> }>
+  <Suspense fallback={ <Skeleton active  paragraph={{ rows: 1 }}  /> }>
       <Component {...props} />
   </Suspense>
 );
-const ChatbotWindow = getComponent( React.lazy( ()=> import('./js/componentes/chat/ChatbotHome')) ) ;
-const HomePage      = getComponent( React.lazy( ()=> import('./js/componentes/cuerpoPagina/CuerpoInicio')) ) ;
+const EncabezadoLazy = getComponent( React.lazy( ()=> import('./js/componentes/Encabezado'))       ) ;
+const ChatbotWindow  = getComponent( React.lazy( ()=> import('./js/componentes/chat/ChatbotHome')) ) ;
+const HomePage       = getComponent( React.lazy( ()=> import('./js/componentes/cuerpoPagina/CuerpoInicio')) ) ;
 //
 export class App extends React.Component {
   constructor(props){
@@ -52,7 +53,7 @@ export class App extends React.Component {
     return (
       <Layout id="waiboc-main-node"  style={{ background: '#fff',padding: '0' }}>
           <Router>
-            <Encabezado translate={this.translate} />
+            <EncabezadoLazy translate={this.translate} />
             <ChatbotWindow />
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
               <Route exact path="/"                            component={() =>        <HomePage      translate={this.translate} configuracion={configApp}   />}  />

@@ -6,7 +6,7 @@ import { Icon, Input, Button, Form, Spin }          from 'antd'  ;
 import { Row, Col }                                 from 'antd'  ;
 import { api }                                      from '../../api/api' ;
 //
-const PasswordResetConfirmation = (props) => {
+const PasswordResetConfirmation = (props) =>{
     return(
         <div style={{width:'100%',height:'100%'}} >
             <Icon type="check-circle" style={{fontSize:'55px',color:'green'}} />

@@ -3,7 +3,6 @@
 */
 import React                                                    from 'react' ;
 import { Row, Col  }                                            from 'antd'  ;
-import { api }                                                  from '../../api/api' ;
 import { FormEmailPassword }                                    from './FormEmailPassword' ;
 import { FormResetPassword }                                    from './FormResetPassword' ;
 //

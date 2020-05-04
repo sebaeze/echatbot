@@ -16,7 +16,7 @@ const { Header } = Layout;
 // import 'antd/lib/menu/style/css'     ;
 // import 'antd/lib/popover/style/css'  ;
 //
-export class Encabezado extends Component {
+class Encabezado extends Component {
   constructor(props) {
     super(props) ;
     this.state       = { flagScroll:false, menuNavVisible: false, isMobile: (window.innerWidth<796), userInfo: false } ;
@@ -60,7 +60,7 @@ export class Encabezado extends Component {
   render() {
       //
       return (
-        <Header className={(this.state.flagScroll==true ? " shadow-below " : "" )} theme="light" >
+        <Header className={"waiboc-header "+(this.state.flagScroll==true ? " shadow-below " : "" )} theme="light" >
           <BackTop>
               <div className="ant-back-top-inner"><Icon type="arrow-up" /></div>
           </BackTop>
@@ -94,4 +94,6 @@ export class Encabezado extends Component {
       //
     }
   }
+//
+export default Encabezado ;
 //

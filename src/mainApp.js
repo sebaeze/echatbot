@@ -15,6 +15,7 @@ import { CuerpoAbout  }                   from "./js/componentes/cuerpoPagina/Cu
 import { CuerpoPrices }                   from "./js/componentes/cuerpoPagina/CuerpoPrices"  ;
 // import ChatbotHome                        from "./js/componentes/chat/ChatbotHome" ;
 import FormContacto                       from "./js/componentes/formularios/FormContacto" ;
+import { ErrorBoundary }                  from "./js/componentes/util/ErrorHandler" ;
 //
 import { languageLocale }                 from "./js/utils/utiles" ;
 //
@@ -72,5 +73,5 @@ export class App extends React.Component {
   //
 };
 //
-ReactDOM.render( <App />, document.getElementById("app") );
+ReactDOM.render( <ErrorBoundary><App /></ErrorBoundary> , document.getElementById("app") );
 //

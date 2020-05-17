@@ -18,6 +18,7 @@ export const PARAMETROS = {
     },
     BACKEND:{
         API_CONSULTAS: '/api/consultas',
+        API_ERROR: '/api/error/console',
         API_SUSCRIPCION: '/api/suscripcion',
         API_CHATBOT_UPDATE: '/api/chatbot',
         API_CHATBOT_TRAIN: '/api/train',

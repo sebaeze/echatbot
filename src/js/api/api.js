@@ -56,6 +56,31 @@ export const enviarConsulta = (argForm) => {
     }) ;
 } ;
 //
+export const sendError2Backend = (argError) => {
+    return new Promise(function(respOk,respRech){
+        try {
+            //
+            let strForm = JSON.stringify({...argForm}) ;
+            let postOpt = {...opcionesPOST} ;
+            postOpt.body = argError ;
+            //
+            fetch( PARAMETROS.BACKEND.API_ERROR ,postOpt)
+            .then(function(response){
+                if (response.status>=200 & response.status<=400) {
+                    return response.json() ;
+                } else {
+                    throw new Error("ERROR: sendError2Backend. Http Status: "+response.status+'.') ;
+                }
+            })
+            .then((argJson     ) => { respOk(argJson) ; })
+            .catch((respRechaz ) => { respRech(respRechaz) ; }) ;
+            //
+        } catch(errEnvCon){
+            respRech(errEnvCon) ;
+        }
+    }) ;
+} ;
+//
 export const api = {
     account: account,
     chatbot: chatbot

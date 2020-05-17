@@ -482,6 +482,19 @@ module.exports = (argConfig,argDb) => {
     }
   }) ;
   //
+  router.post('/error/console',function(req,res,next){
+    try {
+      //
+      console.log('...ERROR: ',req.body) ;
+      //
+      res.json({msg:'ok'}) ;
+      //
+    } catch(errPswReset){
+      res.status(500) ;
+      res.json(errPswReset) ;
+    }
+  }) ;
+  //
   return router ;
 } ;
 //

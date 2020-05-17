@@ -60,9 +60,8 @@ export const sendError2Backend = (argError) => {
     return new Promise(function(respOk,respRech){
         try {
             //
-            let strForm = JSON.stringify({...argForm}) ;
             let postOpt = {...opcionesPOST} ;
-            postOpt.body = argError ;
+            postOpt.body = JSON.stringify(argError) ;
             //
             fetch( PARAMETROS.BACKEND.API_ERROR ,postOpt)
             .then(function(response){

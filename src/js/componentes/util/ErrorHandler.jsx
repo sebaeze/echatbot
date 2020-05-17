@@ -13,7 +13,7 @@ export class ErrorBoundary extends React.Component {
     componentDidCatch(error, info) {
       //
       console.log('....Error handler: error: ',error,' info: ',info,';') ;
-      sendError2Backend({url: window.location.pathname,...error})
+      sendError2Backend({url: window.location.pathname,...error,...info})
         .then((resuEnd)=>{
             this.setState({ hasError: true });
         })

@@ -80,7 +80,7 @@ module.exports = {
     port: 9000,
     // open: true,
     hot: true,
-    // host: '0.0.0.0',
+    host: '0.0.0.0',
     proxy: {
         "/": "http://localhost:3000"
     },

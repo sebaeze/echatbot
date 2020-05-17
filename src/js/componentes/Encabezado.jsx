@@ -1,22 +1,19 @@
 /*
 *
 */
-import React, { Component }                          from 'react' ;
-import { Layout, Menu, Breadcrumb, Icon, Dropdown }  from 'antd'  ;
-import { Row, Col, Popover }                         from 'antd'  ;
-import { BackTop }                                   from 'antd'  ;
+import React                               from 'react' ;
+import { Layout, Icon }                    from 'antd'  ;
+import { Row, Col }                        from 'antd'  ;
+import { BackTop }                         from 'antd'  ;
 //
-import {LogoEmpresa}                       from './link/LogoEmpresa'  ;
-import { NavMenu   }                       from './menu/NavMenu'      ;
+import { LogoEmpresa }                     from './link/LogoEmpresa'  ;
+import { NavMenu    }                      from './menu/NavMenu'      ;
 import { MenuHeaderMobile   }              from './menu/MenuHeaderMobile'   ;
-import { api }                             from '../api/api' ;
+import { api, sendError2Backend }          from '../api/api' ;
 //
 const { Header } = Layout;
 //
-// import 'antd/lib/menu/style/css'     ;
-// import 'antd/lib/popover/style/css'  ;
-//
-class Encabezado extends Component {
+class Encabezado extends React.Component {
   constructor(props) {
     super(props) ;
     this.state       = { flagScroll:false, menuNavVisible: false, isMobile: (window.innerWidth<796), userInfo: false } ;
@@ -37,6 +34,13 @@ class Encabezado extends Component {
           })
           .catch((errResDM)=>{
               console.dir(errResDM) ;
+              sendError2Backend({url: window.location.pathname,comp: ' en encabezado:: DidMount',...errResDM})
+                .then((resuEnd)=>{
+                  throw errResDM ;
+                })
+                .catch((errRes)=>{
+                  throw errResDM ;
+                }) ;
           }) ;
         //
       } catch(errDM){

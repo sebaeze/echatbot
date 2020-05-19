@@ -17,8 +17,6 @@ class FormIntentExamplesBase extends React.Component {
         this.onSubmitForm         = this.onSubmitForm.bind(this) ;
     }
     //
-    componentDidMount(){}
-    //
     handleSelectChange(value){
         this.props.form.setFieldsValue({
             intentLanguage: value
@@ -70,6 +68,7 @@ class FormIntentExamplesBase extends React.Component {
                                     type="array"
                                     focus={ (window.innerWidth>797) ? true : false }
                                     defaultTypefield="string"
+                                    disabled={this.props.data.systemDefined==true ? true : false}
                                     textAdd={this.props.translate.form.textAddIntentExample}
                                     description={this.props.translate.form.nonValidIntentExample}
                                     translate={this.props.translate}

@@ -84,39 +84,6 @@ export class FormIntentAnswerBase extends React.Component {
                 <Col xs={24} md={24} lg={20} xl={20} xxl={20} >
                     <Form>
                     <Collapse bordered={false} accordion={false} >
-                        <Collapse.Panel forceRender={true} key={"1"} {...addPropsPanel} header={<span>{this.props.translate.form.answerType}</span>} >
-                            <Form.Item
-                                label={false}
-                                labelAlign="left"
-                                labelCol={{  xs: 24, md:24, lg:8 , xl:8 , xxl:8 }}
-                                wrapperCol={{xs: 24, md:24, lg:14, xl:14, xxl:14 }}
-                            >
-                                {getFieldDecorator('type', {
-                                    initialValue: this.props.data.intentAnswer.type||'text',
-                                    rules: [{ required: true, message: this.props.translate.form.errorLanguage, whitespace: true }]
-                                })
-                                (
-                                    <Select
-                                        placeholder={this.props.translate.form.selectTypeOfAnswer}
-                                        onChange={this.handleSelectChange}
-                                        getPopupContainer={(trigger) => {
-                                            return trigger.parentNode ;
-                                        }}
-                                        size="large"
-                                    >
-                                        {
-                                            Object.values(this.answerTypes).map((elemType,idxType)=>{
-                                            return(
-                                                    <Select.Option value={elemType}
-                                                        key={idxType}>{this.props.translate.answertType[elemType]||elemType}</Select.Option>
-                                                )
-                                            })
-                                        }
-                                    </Select>
-                                )
-                                }
-                            </Form.Item>
-                        </Collapse.Panel>
                         <Collapse.Panel forceRender={true} key={"2"}  {...addPropsPanel}
                                         header={<Tooltip    placement="topRight"
                                                             title={this.props.translate.tooltip.answerText}
@@ -148,30 +115,6 @@ export class FormIntentAnswerBase extends React.Component {
                                 />
                             </Form.Item>
                         </Collapse.Panel>
-                        <Collapse.Panel forceRender={true} key={"3"}  {...addPropsPanel}
-                                        header={<Tooltip  placement="topRight"
-                                                    title={this.props.translate.tooltip.answerOptions}
-                                                    getPopupContainer={(trigger) => { return trigger.parentNode ; }}
-                                                >
-                                                    {this.props.translate.form.formNewAnswerOptions} <Icon type="question-circle-o" />
-                                                </Tooltip>}
-                        >
-                            <Form.Item hasFeedback label={ false } >
-                                <FormDynamicInputOption
-                                    form={this.props.form}
-                                    styleButton={{width:'60%'}}
-                                    textPlaceholderLabel={this.props.translate.form.optionsLabelToDisplay}
-                                    textPlaceholderValue={this.props.translate.form.optionsValueSelect}
-                                    initialValues={arrayOptions}
-                                    chatbotTraining={this.props.chatbotConfig.training}
-                                    fieldName="options"
-                                    type="array"
-                                    defaultTypefield="string"
-                                    textAdd={this.props.translate.form.textAddOption}
-                                    description={this.props.translate.form.nonValidOption}
-                                />
-                            </Form.Item>
-                        </Collapse.Panel>
                         <Collapse.Panel forceRender={true} key={"4"}  {...addPropsPanel}
                                         header={<Tooltip    placement="topRight"
                                                             title={this.props.translate.tooltip.answerText}
@@ -197,7 +140,7 @@ export class FormIntentAnswerBase extends React.Component {
                                                             title={this.props.translate.form.newFileClickDrag}
                                                             getPopupContainer={(trigger) => { return trigger.parentNode ; }}
                                                 >
-                                                    {this.props.translate.form.fileDragger}
+                                                    {this.props.translate.form.fileDragger} 
                                                     <Icon type="question-circle-o" />
                                                 </Tooltip>}
                         >
@@ -214,6 +157,30 @@ export class FormIntentAnswerBase extends React.Component {
                                     defaultTypefield="string"
                                     translate={this.props.translate}
                                     textAdd={this.props.translate.form.textAddAttachment}
+                                    description={this.props.translate.form.nonValidOption}
+                                />
+                            </Form.Item>
+                        </Collapse.Panel>
+                        <Collapse.Panel forceRender={true} key={"3"}  {...addPropsPanel}
+                                        header={<Tooltip  placement="topRight"
+                                                    title={this.props.translate.tooltip.answerOptions}
+                                                    getPopupContainer={(trigger) => { return trigger.parentNode ; }}
+                                                >
+                                                    {this.props.translate.form.formNewAnswerOptions} <Icon type="question-circle-o" />
+                                                </Tooltip>}
+                        >
+                            <Form.Item hasFeedback label={ false } >
+                                <FormDynamicInputOption
+                                    form={this.props.form}
+                                    styleButton={{width:'60%'}}
+                                    textPlaceholderLabel={this.props.translate.form.optionsLabelToDisplay}
+                                    textPlaceholderValue={this.props.translate.form.optionsValueSelect}
+                                    initialValues={arrayOptions}
+                                    chatbotTraining={this.props.chatbotConfig.training}
+                                    fieldName="options"
+                                    type="array"
+                                    defaultTypefield="string"
+                                    textAdd={this.props.translate.form.textAddOption}
                                     description={this.props.translate.form.nonValidOption}
                                 />
                             </Form.Item>

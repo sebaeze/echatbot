@@ -10,7 +10,7 @@ import { Drawer }                           from 'antd'  ;
 //
 const { Step  }  = Steps      ;
 const { Title }  = Typography ;
-const INTENT_DEF = {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{} } ;
+const INTENT_DEF = {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}, systemDefined: false } ;
 //
 const TitleStep = (props) => {
     //
@@ -41,8 +41,6 @@ export class FormNewIntent extends React.Component {
         this.onPrevStep         = this.onPrevStep.bind(this) ;
         this.goToFormStep       = this.goToFormStep.bind(this) ;
     }
-    //
-    componentDidMount(){}
     //
     static getDerivedStateFromProps(newProps, state) {
         if ( newProps.modalVisible!=state.modalVisible ){

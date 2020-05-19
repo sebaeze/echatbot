@@ -1399,8 +1399,13 @@ span.waiboc-span-emoticon:hover {
     box-shadow: 0 0 5px #515151 !important ;
 }
 .waiboc-cl-form .ant-form-item-children .anticon-minus-circle-o, .waiboc-cl-form .dynamic-delete-button {
-    margin-left: 2px !important ;
-    font-size: 20px ;
+    margin-left: 10px !important ;
+    display: inline-block ;
+    width: 3% ;
+    font-size: 20px;
+    line-height: 30px;
+    vertical-align: bottom;
+    padding-bottom: 2px;
 }
 .waiboc-cl-form i.dynamic-delete-button, .waiboc-cl-form .ant-form-item-children i.anticon-check-circle {
     font-size: 20px ;

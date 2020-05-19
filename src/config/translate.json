@@ -376,7 +376,7 @@
             "deleteChatbotConfirmation":"¿ Esta seguro de borrar el Chatbot ?",
             "deleteEntityConfirmation":"¿ Esta seguro de borrar la Intenciòn ?",
             "fileSize1MBError":"Tamaño de archivo debe ser menor a 1MB",
-            "fileDragger":"Agregar Archivos ( jpg, png, gif, mp4, txt, pdf, xls, xlsx )",
+            "fileDragger":"Archivos ( jpg, png, gif, mp4, txt, pdf, xls, xlsx )",
             "newFileClickDrag":"Haga clic o arrastre el archivo a esta área para cargar",
             "newsletter":"Suscribirse",
             "testChatbot":"Testear Chatbot",

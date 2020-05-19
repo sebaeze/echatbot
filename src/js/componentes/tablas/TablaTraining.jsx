@@ -54,7 +54,7 @@ export class TablaTraining extends React.Component {
             modalIntentVisible: true,
             modalNewIntent: true,
             intentNewModify: {
-                intentName:'',intentLanguage:'',intentDescription:'',intentExamples:[],intentDomain:'',intentAnswer:{}
+                intentName:'',intentLanguage:'',intentDescription:'',intentExamples:[],intentDomain:'',intentAnswer:{}, systemDefined:false
             }
         }) ;
     }
@@ -69,7 +69,8 @@ export class TablaTraining extends React.Component {
                     intentDescription: argRowIntent.description||'' ,
                     intentExamples: argRowIntent.examples ,
                     intentDomain: argRowIntent.domain ,
-                    intentAnswer: argRowIntent.answer
+                    intentAnswer: argRowIntent.answer ,
+                    systemDefined: argRowIntent.systemDefined
                 },
                 modalIntentVisible: true,
                 modalNewIntent: false

@@ -73,7 +73,7 @@ module.exports = {
     modules: [ path.join(__dirname,'../node_modules') ]
   },
   devServer: {
-    port: 9001,
+    port: 9002,
     // open: true,
     // hot: true,
     proxy: {

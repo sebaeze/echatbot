@@ -19,7 +19,7 @@ console.log('Hash Version: ',HASH_VERSION,';');
 module.exports = {
   entry: './src/mainApp.js',
   output: {
-    filename: 'mainApp.js',
+    filename: 'mainApp.[contenthash].js',
     path: path.join(__dirname, '../dist'),
     publicPath: ASSET_PATH
   },
@@ -92,7 +92,8 @@ module.exports = {
   */
   optimization: {
     runtimeChunk: 'single',
-      splitChunks: {
+    moduleIds: 'hashed',
+    splitChunks: {
         chunks: 'all',
         maxInitialRequests: Infinity,
         minSize: 0,
@@ -150,6 +151,9 @@ module.exports = {
         hash:true
       }),
       new HtmlWebpackPrefixPlugin(),
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 5
+      }),
       new CompressionPlugin({
           filename: '[path].gz[query]',
           algorithm: 'gzip',

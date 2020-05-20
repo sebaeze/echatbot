@@ -1699,6 +1699,15 @@ span.chat-line-home.sub-title {
 .forget-password a:hover {
     text-decoration: underline ;
 }
+.waiboc-screen-demo {
+    padding: 10px ;
+}
+.waiboc-screen-demo .rcw-widget-container.rcw-opened {
+    position: relative ;
+}
+.waiboc-screen-demo .rcw-messages-container {
+    min-height: 150px ;
+}
 /*   */
 @media (max-width: 700px) {
     /*  */

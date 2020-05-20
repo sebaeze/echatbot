@@ -1,16 +1,17 @@
 /*
 *
 */
-import React, { Suspense }                 from "react"      ;
+import React                               from "react"      ;
 import ReactDOM                            from "react-dom"  ;
 import { BrowserRouter as Router, Route }  from 'react-router-dom'   ;
-import { Layout, Skeleton }                from 'antd';
+import { Layout }                          from 'antd';
 //
+import { getComponent }                    from './js/componentes/util/LazyComponent' ;
 // import { Encabezado }                      from "./js/componentes/Encabezado" ;
 import PiePagina                           from "./js/componentes/PiePagina"  ;
 import { NoEncontrado404 }                 from "./js/componentes/cuerpoPagina/NoEncontrado404"  ;
-import { CuerpoLogin   }                   from "./js/componentes/cuerpoPagina/CuerpoLogin"  ;
-import { CuerpoCuenta  }                   from "./js/componentes/cuerpoPagina/CuerpoCuenta" ;
+import { CuerpoLogin   }                   from "./js/componentes/cuerpoPagina/CuerpoLogin" ;
+import { CuerpoCuenta  }                   from "./js/componentes/cuerpoPagina/CuerpoCuenta";
 import { CuerpoTrain   }                   from "./js/componentes/cuerpoPagina/CuerpoTrain" ;
 import { CuerpoEditBot }                   from "./js/componentes/cuerpoPagina/CuerpoEditBot" ;
 import { CuerpoReset }                     from "./js/componentes/cuerpoPagina/CuerpoReset"   ;
@@ -24,12 +25,7 @@ import './css/estilosContacto.css' ;
 import './css/estilosAnimaciones.css' ;
 //
 const  { Content }   = Layout ;
-const getComponent   = Component => props => (
-  <Suspense fallback={ <Skeleton active  paragraph={{ rows: 1 }}  /> }>
-      <Component {...props} />
-  </Suspense>
-);
-const EncabezadoLazy = getComponent( React.lazy( ()=> import('./js/componentes/Encabezado'))       ) ;
+const EncabezadoLazy = getComponent( React.lazy( ()=> import('./js/componentes/Encabezado')), { rows: 1 }) ;
 //
 export class App extends React.Component {
   constructor(props){

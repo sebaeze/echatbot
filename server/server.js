@@ -9,6 +9,7 @@ const session          = require('express-session') ;
 const MongoStore       = require('connect-mongo')(session);
 const utiles           = require('./lib/utiles').Utilitarios() ;
 const mustacheExpress  = require('mustache-express') ;
+const APP_AMBIENTES    = require('../build_config/config.js').APP_AMBIENTES ;
 //
 const https            = require('https') ;
 const path             = require('path')  ;
@@ -22,11 +23,11 @@ if ( process.env.GLOBAL_GOOGLE_ANALYTICS ){
   configuracionApp.metaTags.default.GLOBAL_GOOGLE_ANALYTICS = process.env.GLOBAL_GOOGLE_ANALYTICS ;
 }
 //
-if ( !process.env.AMBIENTE ){ process.env.AMBIENTE='dev'; }
+if ( !process.env.AMBIENTE ){ process.env.AMBIENTE=APP_AMBIENTES.DEVELOPMENT; }
 process.env.AMBIENTE = String(process.env.AMBIENTE).trim() ;
 console.log('\n *** AMBIENTE: "'+process.env.AMBIENTE+'" \n') ;
 //
-let configDb = configuracionApp.database[process.env.AMBIENTE ||'dev'] ;
+let configDb = configuracionApp.database[process.env.AMBIENTE || APP_AMBIENTES.DEVELOPMENT ] ;
 const db               = dbClass( configDb ) ;
 //
 const configPassport   = require( './auth/passportConfig'  ).passportConfig ;
@@ -46,7 +47,7 @@ app.disable('etag');
 //
 // app.enable('trust proxy');
 //
-if ( process.env.AMBIENTE=='produccion' ){
+if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ){
   app.use(
         require('express-naked-redirect')({
           subDomain: 'www',
@@ -62,7 +63,7 @@ try {
     app.all('*', function(req, res, next) {
       //
       var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
-      if ( process.env.AMBIENTE=='produccion' && String(hhost).toUpperCase().indexOf('WAIBOC.COM')==-1 ){
+      if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION && String(hhost).toUpperCase().indexOf('WAIBOC.COM')==-1 ){
           console.log('\n\n ***************** \n *** (B) ALGUN LOGI HIZO REDIRECT \n hhost: '+hhost+' \n****************** ');
           res.redirect('https://www.google.com/' ) ;
           console.log('...ya deberia haber echo redirect aca....  ') ;
@@ -83,7 +84,7 @@ try {
         collection:'sessionswebsite'
       })
     }));
-    let passportConfigured = configPassport(  configuracionApp.passport[process.env.AMBIENTE||'dev'] , app, db )  ;
+    let passportConfigured = configPassport(  configuracionApp.passport[process.env.AMBIENTE||APP_AMBIENTES.DEVELOPMENT] , app, db )  ;
     //
     routesApp(app,configuracionApp,db,passportConfigured)
       .then((finRutas)=>{
@@ -99,7 +100,7 @@ try {
       })
       .then((finEngine)=>{
         app.use( finEngine.rutaErrores ) ;
-        if ( process.env.AMBIENTE=='produccion' ){
+        if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ){
             var httpPort = 80 ;
             const http   = express() ;
             //

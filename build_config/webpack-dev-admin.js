@@ -5,16 +5,18 @@ const path                        = require('path');
 const webpack                     = require("webpack");
 const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
+const APP_AMBIENTES               = require('./config.js').APP_AMBIENTES ;
 const APP_ID                      = require('./config.js').APP_ID ;
 const ASSET_PATH                  = process.env.ASSET_PATH || '/';
 //
 const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
+let hashType                      = process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ? '.[contenthash]' : '' ;
 console.log('Hash Version: ',HASH_VERSION,';');
 //
 module.exports = {
   entry: './src/mainAdmin.js',
   output: {
-    filename: 'mainAdmin.js',
+    filename: `waiboc.admin${hashType}.js`,
     path: path.join(__dirname, '../dist'),
     publicPath: ASSET_PATH
   },

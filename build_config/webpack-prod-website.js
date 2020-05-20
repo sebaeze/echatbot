@@ -9,17 +9,18 @@ const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 const CompressionPlugin           = require('compression-webpack-plugin');
 const BrotliPlugin                = require('brotli-webpack-plugin');
 const { CleanWebpackPlugin }      = require('clean-webpack-plugin') ;
-// const BundleAnalyzerPlugin        = require('webpack-bundle-analyzer').BundleAnalyzerPlugin ;
+const APP_AMBIENTES               = require('./config.js').APP_AMBIENTES ;
 const APP_ID                      = require('./config.js').APP_ID ;
 const ASSET_PATH                  = process.env.ASSET_PATH || '/';
 //
 const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
+let hashType                      = process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ? '.[contenthash]' : '' ;
 console.log('Hash Version: ',HASH_VERSION,';');
 //
 module.exports = {
   entry: './src/mainApp.js',
   output: {
-    filename: 'mainApp.[contenthash].js',
+    filename: `waiboc.home${hashType}.js`,
     path: path.join(__dirname, '../dist'),
     publicPath: ASSET_PATH
   },

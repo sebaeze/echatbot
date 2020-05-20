@@ -3,13 +3,15 @@
 */
 import React                                               from 'react' ;
 import { Table, Input, Button, notification, Icon }        from 'antd'  ;
-import { Row, Col, Tag, Popconfirm, Popover }              from 'antd'  ;
+import { Row, Col, Popconfirm, Popover }                   from 'antd'  ;
 import moment                                              from 'moment-timezone'     ;
 import { CustomReply }                                     from 'waiboc-widget-react' ;
 //import { CustomReply }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
 import { TestChatbotWidget }                               from '../chat/TestChatbotWidget'    ;
+import { TextoExpandClose  }                               from '../texto/TextoExpandClose'    ;
+import { arrayTags }                                       from '../texto/ArrayTags'           ;
 //
 export class TablaTraining extends React.Component {
     constructor(props){
@@ -99,7 +101,6 @@ export class TablaTraining extends React.Component {
     //
     parseColumns(){
         let outCols   = [] ;
-        let tagColors = ['geekblue','blue','volcano','lime','gold','magenta','purple'] ;
         //
         let tempLang = navigator.language || navigator.languages[0] || 'es' ;
         moment.locale(tempLang) ;
@@ -156,22 +157,10 @@ export class TablaTraining extends React.Component {
                 {title: this.props.translate.table.examples ,width: 250,
                         dataIndex:'examples', key:'examples',
                         render: (text) => {
-                            let tempTT = Array.isArray(text)==true ?
-                                        text.map((elemTT,idxTT)=>{
-                                            let idxColor = idxTT<tagColors.length ? idxTT : (idxTT % tagColors.length) ;
-                                            let color    = tagColors[ idxColor ] ;
-                                            return (
-                                                <span key={idxTT} style={{fontWeight:'500',display:'block',width:'100%'}} >
-                                                    <Tag color={color}>{elemTT}</Tag>
-                                                </span>
-                                            )
-                                        })
-                                        : text ;
+                            let tempTT = arrayTags(text) ;
                             return(
-                                <div>
-                                    {tempTT}
-                                </div>
-                              )}
+                                <TextoExpandClose text={tempTT} rows={3} translate={this.props.translate}  />
+                            )}
                 },
                 {title: this.props.translate.table.usageQuantity ,width: 150,
                     dataIndex:'usageQuantity', key:'usageQuantity',
@@ -183,18 +172,21 @@ export class TablaTraining extends React.Component {
                     render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
                     defaultSortOrder: 'descend', sorter: (a, b) => a.language.localeCompare(b.language)
                 },
-                {title: this.props.translate.table.language ,width: 150,
+                {title: this.props.translate.table.searchText ,width: 150,
                     dataIndex:'searchText', key:'searchText',
-                    render: (ObjSearchText) => {
-                        let tempText = [] ;
-                        for ( let keyEl in ObjSearchText ){
-                            let qtyText = ObjSearchText[keyEl] ;
+                    render: (searchText) => {
+                        /*
+                        let tempText  = [] ;
+                        for ( let keyEl in searchText ){
+                            let qtyText = searchText[keyEl] ;
                             if ( typeof qtyText=="object" ){ qtyText=JSON.stringify(qtyText); }
                             tempText.push( <div key={keyEl} className="waiboc-tab-list-item" >{qtyText} - {keyEl}</div> ) ;
                         } ;
-                        //
+                        console.log('...voy a paragraphhh') ;
+                        */
+                        let tempText = arrayTags( Object.keys(searchText)  ) ;
                         return(
-                            <div style={{fontWeight:'600',fontSize:'18px'}}>{tempText}</div>
+                            <TextoExpandClose text={tempText} rows={3} translate={this.props.translate}  />
                         )
                     }
                 },
@@ -218,13 +210,6 @@ export class TablaTraining extends React.Component {
                         render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{moment(text).fromNow()}</span>,
                         defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
                 }
-                /*
-                ,{title: this.props.translate.table.domain ,
-                        width: 200,dataIndex:'domain', key:'domain',
-                        render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
-                }
-                */
             ] ;
             //
         } catch(errPC){

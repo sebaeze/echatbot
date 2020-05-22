@@ -15,6 +15,7 @@ class FormEditChatbotAppearanceBase extends React.Component {
             flagSpinner:false,
             modalVisible: this.props.modalVisible,
             enviadoOk:false,
+            flagPickUpColor: false,
             accessList:{},
             customStyleChat: {},
             botInfo: {}
@@ -23,6 +24,7 @@ class FormEditChatbotAppearanceBase extends React.Component {
         this.handleKeyboard     = this.handleKeyboard.bind(this)   ;
         this.submitFormChanges  = this.submitFormChanges.bind(this)  ;
         this.handleSelectChange = this.handleSelectChange.bind(this) ;
+        this.togglePickUpcolor = this.togglePickUpcolor.bind(this) ;
         this.handleChangeComplete = this.handleChangeComplete.bind(this) ;
     }
     //
@@ -68,6 +70,10 @@ class FormEditChatbotAppearanceBase extends React.Component {
             language: value
         });
     };
+    //
+    togglePickUpcolor(){
+        this.setState({ flagPickUpColor: !this.state.flagPickUpColor }) ;
+    }
     //
     handleKeyboard(event){
         try {
@@ -143,12 +149,30 @@ class FormEditChatbotAppearanceBase extends React.Component {
                                                 { rules: [{ required: true, message: this.props.translate.form.senderPlaceholder, whitespace: true }], })
                             (<Input allowClear size="large" className="waiboc-cl-names" name="senderPlaceholder" onChange={this.onChangeInp}  ref={(argRef)=>{ argRef.focus(); }} />)}
                         </Form.Item>
-                        <Row>
-                            <SketchPicker
-                                // color={ '#fff' }
-                                onChange={ this.handleChangeComplete }
-                                onChangeComplete={ this.handleChangeComplete }
-                            />
+                        <Row style={{fontSize:'20px',padding:'15px'}} >
+                            <Col xs={2} md={2} lg={4} xl={4} xxl={4} ></Col>
+                            <Col xs={16} md={16} lg={14} xl={14} xxl={14} >
+                                {
+                                    this.state.flagPickUpColor==true
+                                        ?   <div>
+                                                <a onClick={this.togglePickUpcolor} >
+                                                    <Icon type="close"  style={{color:'red',fontSize:'25px',marginRight:'10px'}} />
+                                                    {this.props.translate.i18n.close}
+                                                </a>
+                                                <div style={{position:'absolute',zIndex:'99999'}}>
+                                                    <SketchPicker
+                                                        // color={ '#fff' }
+                                                        // onChange={ this.handleChangeComplete }
+                                                        onChangeComplete={ this.handleChangeComplete }
+                                                    />
+                                                </div>
+                                            </div>
+                                        :   <a onClick={this.togglePickUpcolor} >
+                                                <Icon type="bg-colors"  style={{fontSize:'25px',marginRight:'10px'}} />
+                                                {this.props.translate.form.pickUpColorHeader}
+                                            </a>
+                                }
+                            </Col>
                         </Row>
                         <Row style={{marginTop:'10px'}}>
                             <Col xs={1} md={1} lg={8} xl={8} xxl={8}></Col>

@@ -66,6 +66,7 @@
             "websiteDomains":"Input the url of your website / s, for example: www.mywebsite.com"
         },
         "form":{
+            "pickUpColorHeader":"Pick Up a background Color for header",
             "personalInfo":"Personal Information",
             "buttonChangePassword":"Update Password",
             "forgetPassword":"Forgot my password",
@@ -364,6 +365,7 @@
             "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: www.mywebsite.com"
         },
         "form":{
+            "pickUpColorHeader":"Seleccione el color para el encabezado",
             "personalInfo":"Tus Datos",
             "buttonChangePassword":"Actualizar Password",
             "forgetPassword":"Olvidé mi clave",
@@ -631,6 +633,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
+            "pickUpColorHeader":"Escolha uma cor de plano de fundo para o cabeçalho",
             "personalInfo":"Informação pessoal",
             "buttonChangePassword":"Atualizar Senha",
             "forgetPassword":"Esqueci minha senha",

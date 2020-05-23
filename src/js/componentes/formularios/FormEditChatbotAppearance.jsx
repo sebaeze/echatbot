@@ -117,6 +117,35 @@ class FormEditChatbotAppearanceBase extends React.Component {
                             {getFieldDecorator('cssStyle')
                             (<Input allowClear size="large" style={{display:'none'}} />)}
                         </Form.Item>
+                        <Row style={{fontSize:'20px',padding:'15px'}} >
+                            <Col span={8} ></Col>
+                            <Col span={12} >
+                                {
+                                    this.state.flagPickUpColor==true
+                                        ?   <div>
+                                                <Button size="large" className="waiboc-btn-pickup-color" onClick={this.togglePickUpcolor} >
+                                                    <span>
+                                                        <Icon type="close"  style={{color:'red',fontSize:'25px',marginRight:'10px'}} />
+                                                        {this.props.translate.i18n.close}
+                                                    </span>
+                                                </Button>
+                                                <div style={{position:'absolute',zIndex:'99999'}}>
+                                                    <SketchPicker
+                                                        // color={ '#fff' }
+                                                        // onChange={ this.handleChangeComplete }
+                                                        onChangeComplete={ this.handleChangeComplete }
+                                                    />
+                                                </div>
+                                            </div>
+                                        :   <Button size="large" className="waiboc-btn-pickup-color"  onClick={this.togglePickUpcolor} >
+                                                <span>
+                                                    <Icon type="bg-colors"  style={{fontSize:'25px',marginRight:'10px'}} />
+                                                    {this.props.translate.form.pickUpColorHeader}
+                                                </span>
+                                            </Button>
+                                }
+                            </Col>
+                        </Row>
                         <Form.Item
                             labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}
                             hasFeedback
@@ -149,31 +178,6 @@ class FormEditChatbotAppearanceBase extends React.Component {
                                                 { rules: [{ required: true, message: this.props.translate.form.senderPlaceholder, whitespace: true }], })
                             (<Input allowClear size="large" className="waiboc-cl-names" name="senderPlaceholder" onChange={this.onChangeInp}  ref={(argRef)=>{ argRef.focus(); }} />)}
                         </Form.Item>
-                        <Row style={{fontSize:'20px',padding:'15px'}} >
-                            <Col xs={2} md={2} lg={4} xl={4} xxl={4} ></Col>
-                            <Col xs={16} md={16} lg={14} xl={14} xxl={14} >
-                                {
-                                    this.state.flagPickUpColor==true
-                                        ?   <div>
-                                                <a onClick={this.togglePickUpcolor} >
-                                                    <Icon type="close"  style={{color:'red',fontSize:'25px',marginRight:'10px'}} />
-                                                    {this.props.translate.i18n.close}
-                                                </a>
-                                                <div style={{position:'absolute',zIndex:'99999'}}>
-                                                    <SketchPicker
-                                                        // color={ '#fff' }
-                                                        // onChange={ this.handleChangeComplete }
-                                                        onChangeComplete={ this.handleChangeComplete }
-                                                    />
-                                                </div>
-                                            </div>
-                                        :   <a onClick={this.togglePickUpcolor} >
-                                                <Icon type="bg-colors"  style={{fontSize:'25px',marginRight:'10px'}} />
-                                                {this.props.translate.form.pickUpColorHeader}
-                                            </a>
-                                }
-                            </Col>
-                        </Row>
                         <Row style={{marginTop:'10px'}}>
                             <Col xs={1} md={1} lg={8} xl={8} xxl={8}></Col>
                             <Col xs={18} md={18} lg={10} xl={8} xll={8} >

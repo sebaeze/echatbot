@@ -75,6 +75,21 @@ header ul.ant-menu {
 #idAbout {
     background-color: var(--background-dashboard-edit) ;
 }
+.waiboc-btn-pickup-color {
+    padding: 10px ;
+    font-size: 18px ;
+    line-height: 22px ;
+    height: 40px ;
+    font-weight: 600 ;
+}
+.waiboc-btn-pickup-color i {
+    color: var(--font-color-important) ;
+}
+.waiboc-btn-pickup-color span {
+    font-size: 18px ;
+    line-height: 22px ;
+    font-weight: 500 ;
+}
 .waiboc-header-submenu {
     font-weight: 600 !important ;
     font-size: 22px !important ;

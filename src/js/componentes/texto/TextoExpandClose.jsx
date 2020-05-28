@@ -9,11 +9,12 @@ const { Paragraph } = Typography ;
 export const TextoExpandClose = (props) => {
     try {
         //
+        const { className } = props ;
         const [expandable, setExpandable] = useState(true) ;
         const toggle = () => setExpandable(p => !p);
         //
         return(
-            <div>
+            <div className={className} >
                 <Paragraph ellipsis={{ rows: (props.rows ? props.rows : 2), expandable }} >
                     {props.text}
                 </Paragraph>

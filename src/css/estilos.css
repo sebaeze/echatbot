@@ -72,6 +72,10 @@ header ul.ant-menu {
     padding: 3px 3px 3px 3px ;
     color: #002DFF ;
 }
+.waiboc-tab-expand-text {
+    font-size: 18px ;
+    font-weight: 500 ;
+}
 #idAbout {
     background-color: var(--background-dashboard-edit) ;
 }
@@ -1239,11 +1243,15 @@ div.react-bootstrap-table tbody tr:hover {
     height: 70px ;
     padding-top: 5px ;
 }
+*/
 #waiboc-main-node .ant-tabs-nav-container .ant-tabs-tab span {
     font-size: 20px !important ;
+    /*
     line-height: 50px ;
     height: 50px ;
+    */
 }
+/*
 #waiboc-main-node .ant-tabs-bar ,
 */
 #waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab
@@ -1338,6 +1346,10 @@ div.react-bootstrap-table tbody tr:hover {
     font-weight: 600 !important ;
     font-size: 20px !important ;
     color: rgb(73, 126, 192) ;
+}
+.waiboc-cl-form .form-label {
+    font-size: 20px ;
+    font-weight: 600 ;
 }
 .waiboc-cl-input-with-emoticon .ant-input-lg {
     padding-left: 50px !important ;

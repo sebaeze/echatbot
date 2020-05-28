@@ -123,18 +123,10 @@ module.exports = (argConfig,argDb) => {
     //
     try {
       //
-      /*
-      addNewFilesToChatbot( argDb, req.body, argConfig )
-          .then((resuTrain)=>{
-            req.body.train = resuTrain.train ;
-            return argDb.chatbot.qry( {_id: req.body._id} ) ;
-          })
-          */
-      // console.log('....req.body: ',req.body) ;
+      console.log('...req.body.train: ',req.body.train) ;
       argDb.chatbot.qry( {_id: req.body._id} )
           .then(function(chatbotInfo){
             if ( chatbotInfo.length && chatbotInfo.length>0 ){ chatbotInfo=chatbotInfo[0]; }
-            // console.log('....chatbotInfo.accessList: ',chatbotInfo.accessList) ;
             let userConAcceso = !Array.isArray(chatbotInfo.accessList) ? false : chatbotInfo.accessList.find((elemEmail)=>{ return String(elemEmail).toUpperCase()==String(req.user.email).toUpperCase() ; });
             if ( userConAcceso ){
              chatbotInfo.idChatbot = req.body._id || chatbotInfo.idChatbot ;
@@ -196,6 +188,64 @@ module.exports = (argConfig,argDb) => {
           }.bind(this))
           .catch(function(respErr){
             console.log('.....ERROR: TRAIN CHATBOT: -> ') ;
+            console.dir(respErr) ;
+            res.status(500) ;
+            res.json(respErr) ;
+          }.bind(this)) ;
+      //
+    } catch(errGetBots){
+      console.dir(errGetBots) ;
+      res.status(500) ;
+      res.json(errGetBots) ;
+    }
+    //
+  }) ;
+  //
+  router.get('/slot/query',autenticado,function(req,res,next){
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    //
+    try {
+      argDb.slots.qry( req.query )
+          .then(function(resuSlot){
+            res.json({
+              resultCode: 0,
+              data: resuSlot
+            }) ;
+          }.bind(this))
+          .catch(function(respErr){
+            console.log('.....ERROR: QUERY SLOT -> ') ;
+            console.dir(respErr) ;
+            res.status(500) ;
+            res.json(respErr) ;
+          }.bind(this)) ;
+      //
+    } catch(errGetBots){
+      console.dir(errGetBots) ;
+      res.status(500) ;
+      res.json(errGetBots) ;
+    }
+    //
+  }) ;
+  //
+  router.post('/slot/update',autenticado,function(req,res,next){
+    res.set('Access-Control-Allow-Headers','*');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', '*');
+    res.set("Access-Control-Allow-Credentials", true);
+    //
+    try {
+      argDb.slots.add( req.body )
+          .then(function(resuSlot){
+            res.json({
+              resultCode: 0,
+              data: resuSlot
+            }) ;
+          }.bind(this))
+          .catch(function(respErr){
+            console.log('.....ERROR: UPDATE SLOT -> ') ;
             console.dir(respErr) ;
             res.status(500) ;
             res.json(respErr) ;

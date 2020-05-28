@@ -4,6 +4,10 @@
             "home":"Home"
         },
         "table":{
+            "slotName":"Slot Name",
+            "botAsk":"Bot Ask",
+            "slotFilling":"Slots Filling",
+            "userSay":"User Say",
             "searchText":"User Wrote",
             "systemDefined":"System",
             "lastUpdate":"Last Update",
@@ -66,6 +70,11 @@
             "websiteDomains":"Input the url of your website / s, for example: www.mywebsite.com"
         },
         "form":{
+            "errorInvalidSlotName":"Invalid Slot Name, just accept numbers and letters",
+            "botSlotQuestion":"Question to ask to the user",
+            "errorSlotQuestion":"Complete the question to Ask to user",
+            "errorSlotName":"Complete the Slot parameter name",
+            "newSlot":"New Slot",
             "pickUpColorHeader":"Pick Up a background Color for header",
             "personalInfo":"Personal Information",
             "buttonChangePassword":"Update Password",
@@ -274,6 +283,10 @@
             "home":"Inicio"
         },
         "table":{
+            "slotName":"Nombre de Slot",
+            "botAsk":"Bot Pregunta",
+            "slotFilling":"Slots / Parámetros",
+            "userSay":"Usuario Dice",
             "searchText":"Usuario Escribió",
             "systemDefined":"Sistema",
             "lastUpdate":"Última Modificación",
@@ -365,6 +378,11 @@
             "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: www.mywebsite.com"
         },
         "form":{
+            "errorInvalidSlotName":"Nombre Invalido. Solo se aceptan números y letras",
+            "botSlotQuestion":"Pregunta para hacer al usuario",
+            "errorSlotQuestion":"Complete la pregunta a hacer al usuario",
+            "errorSlotName":"Complete el nombre del Slot",
+            "newSlot":"Nuevo Slot",
             "pickUpColorHeader":"Seleccione el color para el encabezado",
             "personalInfo":"Tus Datos",
             "buttonChangePassword":"Actualizar Password",
@@ -537,6 +555,10 @@
             "home":"Inicio"
         },
         "table":{
+            "slotName":"Nombre do Slot",
+            "botAsk":"Bot Pregunta",
+            "slotFilling":"Slots Filling",
+            "userSay":"Usuário diz",
             "searchText":"Usuário escreveu",
             "systemDefined":"Sistema",
             "lastUpdate":"Última atualização",
@@ -633,6 +655,11 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
+            "errorInvalidSlotName":"Nome de slot inválido, basta aceitar números e letras",
+            "botSlotQuestion":"Pergunta a fazer ao usuário",
+            "errorSlotQuestion":"Complete a pergunta para Perguntar ao usuário",
+            "errorSlotName":"Preencha o nome do parâmetro Slot",
+            "newSlot":"Nuevo Slot",
             "pickUpColorHeader":"Escolha uma cor de plano de fundo para o cabeçalho",
             "personalInfo":"Informação pessoal",
             "buttonChangePassword":"Atualizar Senha",

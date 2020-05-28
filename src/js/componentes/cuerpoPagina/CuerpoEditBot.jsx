@@ -8,6 +8,7 @@ import { api }                                 from '../../api/api' ;
 import { FormEditChatbotInfo   }               from '../formularios/FormEditChatbotInfo'       ;
 import { FormChatbotAccessList }               from '../formularios/FormChatbotAccessList'     ;
 import { FormEditChatbotAppearance }           from '../formularios/FormEditChatbotAppearance' ;
+import { TablaSlots }                          from '../tablas/TablaSlots'                        ;
 import { TablaTraining       }                 from '../tablas/TablaTraining'                  ;
 import { TablaConversations  }                 from '../tablas/TablaConversations'             ;
 import { IconLock }                            from '../icon/IconLock' ;
@@ -29,7 +30,7 @@ export class CuerpoEditBot extends React.Component {
             chatbotConfig:false,
             chatbotConfigPendingSave: false
         } ;
-        this.tabs = { CONFIG: 'config', APPEARANCE: 'appearance', TRAINING: 'training', CONVERSATIONS: 'conversations', SECURITY: 'SECURITY' } ;
+        this.tabs = { CONFIG: 'config', APPEARANCE: 'appearance', TRAINING: 'training', SLOTS: 'slots', CONVERSATIONS: 'conversations', SECURITY: 'SECURITY' } ;
     }
     //
     componentDidMount(){
@@ -76,9 +77,8 @@ export class CuerpoEditBot extends React.Component {
             //
             const openNotificationWithIcon = (type,argText) => {
                 notification[type]({
-                    //message: <h1>putooo</h1>,
                     description: <h2>{argText}</h2>
-                });
+                }) ;
             } ;
             //
             api.chatbot.add( tempUpdateBot )
@@ -240,6 +240,30 @@ export class CuerpoEditBot extends React.Component {
                                             chatbotConfig={{...tempChatbotConfig}}
                                             onSubmitChanges={this.updateChatbotConfig.bind(this)}
                                             container={this.refContainer}
+                                        />
+                                    }
+                                </Col>
+                            </Row>
+                        </TabPane>
+                        <TabPane key={this.tabs.SLOTS}
+                            tab={<span>
+                                <Icon type="message" theme="twoTone" />
+                                {this.props.translate.table.slotFilling}
+                            </span>}
+                        >
+                            <Row>
+                                <Col xs={1}  md={1}  lg={1}  xl={1}  xxl={1}></Col>
+                                <Col xs={22} md={22} lg={24} xl={24} xxl={24}>
+                                    {
+                                        this.state.chatbotConfig==false ?
+                                        <Spin size="large" />
+                                        :
+                                        <TablaSlots
+                                            translate={this.props.translate}
+                                            idChatbot={tempChatbotConfig._id}
+                                            chatbotConfig={tempChatbotConfig}
+                                            // onSubmitChanges={this.updateChatbotConfig.bind(this)}
+                                            // container={this.refContainer}
                                         />
                                     }
                                 </Col>

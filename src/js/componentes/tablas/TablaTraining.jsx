@@ -6,7 +6,7 @@ import { Table, Input, Button, notification, Icon }        from 'antd'  ;
 import { Row, Col, Popconfirm, Popover }                   from 'antd'  ;
 import moment                                              from 'moment-timezone'     ;
 import { CustomReply }                                     from 'waiboc-widget-react' ;
-//import { CustomReply }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
+//   import { CustomReply }  from '../../../../../waiboc-widget-react/lib/index'  ;// 'waiboc-widget-react' ;
 import { api }                                             from '../../api/api' ;
 import { FormNewIntent }                                   from '../formularios/FormNewIntent' ;
 import { TestChatbotWidget }                               from '../chat/TestChatbotWidget'    ;
@@ -143,7 +143,6 @@ export class TablaTraining extends React.Component {
                         defaultSortOrder: 'descend', sorter: (a, b) => a.entity.localeCompare(b.entity)
                 },
                 {title: this.props.translate.table.systemDefined     ,width: 120,dataIndex:'systemDefined',key:'systemDefined',
-                        defaultSortOrder: 'descend',
                         render: text => {
                             let tempText = text==true ? this.props.translate.yes : "No" ;
                             return(
@@ -154,7 +153,7 @@ export class TablaTraining extends React.Component {
                         },
                         sorter: (a, b) => a.systemDefined - b.systemDefined
                 } ,
-                {title: this.props.translate.table.examples ,width: 250,
+                {title: this.props.translate.table.userSay ,width: 250,
                         dataIndex:'examples', key:'examples',
                         render: (text) => {
                             let tempTT = arrayTags(text) ;
@@ -165,25 +164,16 @@ export class TablaTraining extends React.Component {
                 {title: this.props.translate.table.usageQuantity ,width: 150,
                     dataIndex:'usageQuantity', key:'usageQuantity',
                     render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
-                    defaultSortOrder: 'descend', sorter: (a, b) => a.usageQuantity-b.usageQuantity
+                    sorter: (a, b) => a.usageQuantity-b.usageQuantity
                 },
                 {title: this.props.translate.table.language ,width: 150,
                     dataIndex:'language', key:'language',
                     render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{text}</span>,
-                    defaultSortOrder: 'descend', sorter: (a, b) => a.language.localeCompare(b.language)
+                    sorter: (a, b) => a.language.localeCompare(b.language)
                 },
                 {title: this.props.translate.table.searchText ,width: 150,
                     dataIndex:'searchText', key:'searchText',
                     render: (searchText) => {
-                        /*
-                        let tempText  = [] ;
-                        for ( let keyEl in searchText ){
-                            let qtyText = searchText[keyEl] ;
-                            if ( typeof qtyText=="object" ){ qtyText=JSON.stringify(qtyText); }
-                            tempText.push( <div key={keyEl} className="waiboc-tab-list-item" >{qtyText} - {keyEl}</div> ) ;
-                        } ;
-                        console.log('...voy a paragraphhh') ;
-                        */
                         let tempText = arrayTags( Object.keys(searchText)  ) ;
                         return(
                             <TextoExpandClose text={tempText} rows={3} translate={this.props.translate}  />
@@ -196,7 +186,7 @@ export class TablaTraining extends React.Component {
                             <div style={{width:'100%',marginTop:'10px'}}>
                                 <Popover trigger="hover"
                                         content={ <CustomReply datos={{output: text}} flagTimestamp={false} /> }
-                                        style={{width:'200px',height:'200px'}}
+                                        style={{width:'100px',height:'100px'}}
                                 >
                                     <span className="waiboc-tab-answer-example" >
                                         <span style={{marginRight:'10px'}} >💬</span>
@@ -208,7 +198,7 @@ export class TablaTraining extends React.Component {
                 {title: this.props.translate.table.lastUpdate ,
                         dataIndex:'timestamp_last_update', key:'timestamp_last_update',width: 250,
                         render: (text) => <span style={{fontWeight:'600',fontSize:'18px'}}>{moment(text).fromNow()}</span>,
-                        defaultSortOrder: 'descend', sorter: (a, b) => a.domain.localeCompare(b.domain)
+                        sorter: (a, b) => a.timestamp_last_update.localeCompare(b.timestamp_last_update)
                 }
             ] ;
             //
@@ -278,9 +268,7 @@ export class TablaTraining extends React.Component {
             //
             const openNotificationWithIcon = (type,argText) => {
               notification[type]({
-                  //message: <h1>holaaa</h1>,
                   top: 180,
-                  duration: 200,
                   description: <h2>{argText}</h2>
               });
             } ;
@@ -396,4 +384,4 @@ export class TablaTraining extends React.Component {
     }
     //
 } ;
-//idxColor:
+//

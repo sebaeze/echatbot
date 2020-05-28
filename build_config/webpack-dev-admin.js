@@ -97,7 +97,8 @@ module.exports = {
         'process.env.APP_ID': JSON.stringify( APP_ID.ADMIN ),
         '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),
         '__URL_WIDGET__': JSON.stringify(HASH_VERSION.URLbackend),
-        '__ID_WIDGET__': JSON.stringify(HASH_VERSION.IDwidget)
+        '__ID_WIDGET__': JSON.stringify(HASH_VERSION.IDwidget),
+        'process.env.DEBUG': JSON.stringify("WAIBOC:*")
       }),
       new HtmlWebpackPlugin({
         __HASH_BUILD__: HASH_VERSION.hashVersion ,

@@ -116,7 +116,8 @@ module.exports = {
         'process.env.APP_ID': JSON.stringify( APP_ID.HOME ),
         '__HASH_BUILD__': JSON.stringify(HASH_VERSION.hashVersion),
         '__URL_WIDGET__': JSON.stringify(HASH_VERSION.URLbackend),
-        '__ID_WIDGET__': JSON.stringify(HASH_VERSION.IDwidget)
+        '__ID_WIDGET__': JSON.stringify(HASH_VERSION.IDwidget),
+        'process.env.DEBUG': JSON.stringify("WAIBOC:*")
       }),
       new webpack.DefinePlugin({ "BACKEND_URL":"http://localhost:3000" })
     ]

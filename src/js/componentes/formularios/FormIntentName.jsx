@@ -76,7 +76,7 @@ class FormIntentNameBase extends React.Component {
                                     rules: [
                                         { required: true, message: this.props.translate.form.errorIntentName } ,
                                         { pattern: new RegExp('^[-_a-zA-Z0-9]+$') , message: this.props.translate.form.errorIntentNameInvalid }
-                                    ],
+                                    ]
                             })
                             ( <Input allowClear size="large" style={{fontWeight:'600'}}
                                     disabled={this.props.flagNewIntent==true ? false : true}

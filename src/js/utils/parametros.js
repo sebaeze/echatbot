@@ -22,6 +22,8 @@ export const PARAMETROS = {
         API_SUSCRIPCION: '/api/suscripcion',
         API_CHATBOT_UPDATE: '/api/chatbot',
         API_CHATBOT_TRAIN: '/api/train',
+        API_CHATBOT_QUERY_SLOT:  '/api/slot/query',
+        API_CHATBOT_UPDATE_SLOT: '/api/slot/update',
         API_ACCOUNT_INFO: '/api/account/user',
         API_ACCOUNT_LOGIN: '/auth/local/login',
         API_ACCOUNT_LOGOUT: '/auth/logout',

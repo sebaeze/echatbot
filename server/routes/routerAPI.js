@@ -123,7 +123,6 @@ module.exports = (argConfig,argDb) => {
     //
     try {
       //
-      console.log('...req.body.train: ',req.body.train) ;
       argDb.chatbot.qry( {_id: req.body._id} )
           .then(function(chatbotInfo){
             if ( chatbotInfo.length && chatbotInfo.length>0 ){ chatbotInfo=chatbotInfo[0]; }

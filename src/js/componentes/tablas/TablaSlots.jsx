@@ -2,12 +2,13 @@
 *
 */
 import React                                               from 'react' ;
-import { Table, Input, Button, notification, Icon }        from 'antd'  ;
-import { Row, Col, Popconfirm, Popover }                   from 'antd'  ;
+import { Table, Input, Button, notification }        from 'antd'  ;
+import { Row, Col  }                                 from 'antd'  ;
 import moment                                              from 'moment-timezone'  ;
 import { columnsSlots }                                    from './columns/columnsSlots' ;
 import { FormEditNewSlot }                                 from '../formularios/FormEditNewSlot' ;
 import { api }                                             from '../../api/api'    ;
+import { searchTextInArray }                               from '../util/searchTable' ;
 import { STATUS_SLOT }                                     from '@sebaeze/echatbot-mongodb/dist/data/STATUS_SLOT'
 //
 const openNotificationWithIcon = (type,argText) => {
@@ -27,19 +28,22 @@ export class TablaSlots extends React.Component {
             flagSpinner: false,
             modalSlotVisible: false,
             slotNewModify: false,
+            flagSelection: this.props.flagSelection ,
             id: props.idChatbot||"",
             textBusqueda: '',
-            arraySlots:  []
+            arraySlots:  [] ,
+            selectedRowsKeys: []
         } ;
         this.onChange               = this.onChange.bind(this) ;
         this.onCloseModal           = this.onCloseModal.bind(this)   ;
         this.onChangeSearch         = this.onChangeSearch.bind(this) ;
         this.onClickNewSlot         = this.onClickNewSlot.bind(this)  ;
-        this.onAcceptNewSlot        = this.onAcceptNewSlot.bind(this) ;
+        this.onUpdateSlot           = this.onUpdateSlot.bind(this) ;
         this.onClickEditSlot        = this.onClickEditSlot.bind(this) ;
         this.onClickDeleteSlot      = this.onClickDeleteSlot.bind(this) ;
-        log('..constructor: props: ',props.idChatbot) ;
+        this.onChangeRowSelection   = this.onChangeRowSelection.bind(this) ;
         this.columnas = columnsSlots({  translate: props.translate,
+                                        flagSelection: this.state.flagSelection,
                                         onClickEditSlot: this.onClickEditSlot,
                                         onClickDeleteSlot: this.onClickDeleteSlot
                                     }) ;
@@ -47,12 +51,26 @@ export class TablaSlots extends React.Component {
     //
     static getDerivedStateFromProps(newProps, state) {
         if ( state.flagCachedProps==false || newProps.idChatbot!=state.idChatbot ){
-            log('..getDerivedStateFromProps: props: ',newProps.idChatbot) ;
             let newState = {
                 flagCachedProps: false,
+                flagSelection: newProps.flagSelection ,
                 idChatbot: newProps.idChatbot,
                 arraySlots: []
             } ;
+            //
+            if ( newProps.arraySlots && newProps.arraySlots.length>0 ){
+                newState.arraySlots      = newProps.arraySlots ;
+                newState.flagCachedProps = true ;
+            }
+            //
+            if ( newProps.data && newProps.data.slots ){
+                newState.selectedRowsKeys = newProps.data.slots.map((elemSlot)=>{
+                                                return elemSlot.name ;
+                                            }) ;
+            } else {
+                newState.selectedRowsKeys = [] ;
+            }
+            //
             return newState ;
         } else {
             return false ;
@@ -60,13 +78,18 @@ export class TablaSlots extends React.Component {
     }
     //
     componentDidMount(){
-        log('..componentDidMount: props: ',this.props) ;
         try {
             if ( this.state.flagCachedProps==false ){
                 this.setState({ flagSpinner: true }) ;
                 api.chatbot.qrySlots({ idChatbot: this.props.idChatbot, status: STATUS_SLOT.ACTIVE })
                     .then((arrSlots)=>{
-                        this.setState({ arraySlots: arrSlots, flagSpinner: false, flagCachedProps: true }) ;
+                        this.props.onUpdateSlots( arrSlots ) ;
+                        let arrayKeysSelected = ( this.props.data && this.props.data.slots )
+                                                    ? this.props.data.slots.map((elemSlot)=>{
+                                                        return elemSlot.name ;
+                                                    })
+                                                    : [] ;
+                        this.setState({ arraySlots: arrSlots, flagSpinner: false, flagCachedProps: true, selectedRowsKeys: arrayKeysSelected }) ;
                     })
                     .catch((errQ)=>{
                         this.setState({ flagSpinner: false }) ;
@@ -85,7 +108,7 @@ export class TablaSlots extends React.Component {
         this.setState({modalSlotVisible:false})
     }
     //
-    onAcceptNewSlot(argNewSlot){
+    onUpdateSlot(argNewSlot){
         try {
           //
           let tempNewIntent = {
@@ -114,6 +137,7 @@ export class TablaSlots extends React.Component {
                     } else {
                         tempArrSlots.push( respSlot ) ;
                     }
+                    this.props.onUpdateSlots( tempArrSlots ) ;
                     this.setState({ flagSpinner: false, arraySlots: tempArrSlots, modalSlotVisible:false }) ;
                     //
                 }
@@ -202,39 +226,35 @@ export class TablaSlots extends React.Component {
         this.setState({ pagination: pagination });
     }
     //
+    onChangeRowSelection( argSelectedRowKeys, selectedRows){
+        if ( this.props.onSelectSlots ){
+            this.props.onSelectSlots( selectedRows ) ;
+        }
+        this.setState({ selectedRowsKeys: argSelectedRowKeys }) ;
+    }
+    //
     render(){
         //
-        let arrayDatos = [] ;
-        if ( this.state.textBusqueda.length==0 ){
-            arrayDatos = this.state.arraySlots.map((elemTC,elemIdx)=>{
-                return {
-                    ...elemTC,
-                    key: elemIdx,
-                    language: elemTC.language||'es'
-                } ;
-            }) ;
-        } else {
-            this.state.arraySlots.forEach((elemTC,elemIdx)=>{
-                if ( Object.values(elemTC).join("").toUpperCase().indexOf(this.state.textBusqueda.toUpperCase())!=-1 ){
-                    arrayDatos.push( {
-                        ...elemTC,
-                        key: elemIdx,
-                        language: elemTC.language||'es'
-                    } ) ;
-                }
-            }) ;
+        let arrayDatos = searchTextInArray( this.state.arraySlots, this.state.textBusqueda, "name" ) ;
+        //
+        let extraPropsTable = {} ;
+        if ( this.state.flagSelection==true ){
+            extraPropsTable.rowSelection = {
+                onChange: this.onChangeRowSelection,
+                selectedRowKeys: this.state.selectedRowsKeys
+            } ;
         }
         //
         return(
             <div className="waiboc-cl-form" >
-                <FormEditNewSlot onAccept={this.onAcceptNewSlot}
+                <FormEditNewSlot onAccept={this.onUpdateSlot}
                                 data={this.state.slotNewModify}
                                 onCancel={this.onCloseModal}
                                 modalVisible={this.state.modalSlotVisible}
                                 flagNewSlot={this.state.modalNewSlot}
                                 translate={this.props.translate}
                 />
-                <div style={{width:'100%',marginTop:'20px',marginBottom:'15px'}}>
+                <div style={{width:'100%',marginTop:'15px',marginBottom:'15px'}}>
                     <Row>
                         <Col xs={24}  md={24}  lg={9} xl={9} xxl={9}>
                             <Input placeholder={this.props.translate.search}
@@ -262,6 +282,7 @@ export class TablaSlots extends React.Component {
                     bordered
                     locale={this.props.translate}
                     scroll={{ x: 1500 }}
+                    {...extraPropsTable}
                 />
             </div>
         )

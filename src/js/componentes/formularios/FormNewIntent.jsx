@@ -2,27 +2,29 @@
 * FormNewIntent
 */
 import React                                from 'react' ;
-import { FormIntentName   }                 from './FormIntentName'     ;
-import { FormIntentExamples }               from './FormIntentExamples' ;
-import { FormIntentAnswer }                 from './FormIntentAnswer'   ;
-import { Typography, Steps, Icon }          from 'antd'  ;
+import {  Steps, Icon }                     from 'antd'  ;
 import { Drawer }                           from 'antd'  ;
+import { TitleStep, NextStepFormIntent }    from './steps/StepsEditIntent' ;
 //
+const log        = require('debug')('WAIBOC:FormNewStep') ;
 const { Step  }  = Steps      ;
-const { Title }  = Typography ;
 const INTENT_DEF = {intentName:'',intentLanguage:'',intentExamples:[],intentDomain:'',intentAnswer:{}, systemDefined: false } ;
 //
-const TitleStep = (props) => {
-    //
-    let spanProps = { className: "waiboc-intent-step" } ;
-    let flagTargetCompleted = props.stepCompleted[ String(props.targetFormStep) ] || false ;
-    if ( flagTargetCompleted==true ){
-        spanProps.className = "waiboc-intent-step with-link" ;
-        spanProps.onClick   = ()=>{ props.goToFormStep({ targetFormStep: props.targetFormStep }) } ;
-    }
-    //
-    return( <span {...spanProps} > {props.text} </span> ) ;
-    //
+const DrawerTitle = (props) => {
+    return(
+        <div style={{width:'100%',color:'#012EFF', fontSize:'26px',fontWeight:'600'}} >
+            <div style={{marginLeft:'35%',height:'50px',lineHeight:'50px'}} >
+                <Icon type="edit" style={{color:'green'}}/>
+                <span style={{marginLeft:'1%',color:'#012EFF',textAlign:'center',padding:'5px 5px 5px 5px', marginBottom:'0'}} >
+                    {
+                    props.flagNewIntent==true
+                        ?   props.translate.newIntent
+                        :   props.dataNewIntent.intentName||props.dataNewIntent.entity
+                    }
+                </span>
+            </div>
+        </div>
+    )
 } ;
 //
 export class FormNewIntent extends React.Component {
@@ -34,12 +36,15 @@ export class FormNewIntent extends React.Component {
             flagNewIntent: this.props.flagNewIntent,
             enviadoOk:false,
             dataNewIntent: this.props.data!=false ? {...this.props.data} : {...INTENT_DEF},
-            stepCompleted:  this.props.flagNewIntent==true ? {"0": false, "1": false, "2":false } : {"0": true, "1": true, "2": true },
+            stepCompleted:  this.props.flagNewIntent==true ? {"0": false, "1": false, "2":false, "3":false } : {"0": true, "1": true, "2": true, "3":true },
             formStep: 0,
+            arraySlots: []
         } ;
+        this.MAX_KEY_STEPS      = ( Object.keys(this.state.stepCompleted).length - 1 )  ;
         this.onNextStep         = this.onNextStep.bind(this) ;
         this.onPrevStep         = this.onPrevStep.bind(this) ;
-        this.goToFormStep       = this.goToFormStep.bind(this) ;
+        this.goToFormStep       = this.goToFormStep.bind(this)  ;
+        this.onUpdateSlots      = this.onUpdateSlots.bind(this) ;
     }
     //
     static getDerivedStateFromProps(newProps, state) {
@@ -81,7 +86,8 @@ export class FormNewIntent extends React.Component {
                 stepCompleted: tempStepCompleted,
                 formStep: this.state.formStep+1
             }
-            if ( newState.formStep>2 ){
+            // if ( newState.formStep>3 ){
+            if ( newState.formStep>this.MAX_KEY_STEPS ){
                 this.props.onAccept( {...newState.dataNewIntent} ) ;
                 newState.dataNewIntent = {...INTENT_DEF} ;
                 newState.formStep = 0 ;
@@ -102,59 +108,47 @@ export class FormNewIntent extends React.Component {
         this.setState(newState) ;
     }
     //
+    onUpdateSlots(argSlots){
+        this.setState({ arraySlots: argSlots }) ;
+    }
+    //
     render(){
-        //
-        const NextStepForm    = (props) => {
-            return(
-                this.state.formStep==0 ?
-                    <FormIntentName translate={this.props.translate} flagNewIntent={this.state.flagNewIntent} data={{...this.state.dataNewIntent}} chatbotConfig={this.props.chatbotConfig} onSubmitOk={this.onNextStep} prev={this.onPrevStep} />
-                    :
-                    this.state.formStep==1 ?
-                        <FormIntentExamples translate={this.props.translate} data={{...this.state.dataNewIntent}} chatbotConfig={this.props.chatbotConfig} onSubmitOk={this.onNextStep} prev={this.onPrevStep}  />
-                        :
-                        <FormIntentAnswer   translate={this.props.translate} data={{...this.state.dataNewIntent}} chatbotConfig={this.props.chatbotConfig} onSubmitOk={this.onNextStep} prev={this.onPrevStep}  />
-            )
-        }
         //
         return(
             //
             <Drawer
-                title={
-                    <div style={{width:'100%',color:'#012EFF', fontSize:'26px',fontWeight:'600'}} >
-                        <div style={{marginLeft:'35%',height:'50px',lineHeight:'50px'}} >
-                            <Icon type="edit" style={{color:'green'}}/>
-                            <span style={{marginLeft:'1%',color:'#012EFF',textAlign:'center',padding:'5px 5px 5px 5px', marginBottom:'0'}} >
-                                {
-                                this.state.flagNewIntent==true
-                                    ?   this.props.translate.newIntent
-                                    :   this.state.dataNewIntent.intentName||this.state.dataNewIntent.entity
-                                }
-                            </span>
-                        </div>
-                    </div>
-                }
+                title={ <DrawerTitle  flagNewIntent={this.state.flagNewIntent} translate={this.props.translate} dataNewIntent={this.state.dataNewIntent} /> }
                 destroyOnClose={true}
                 width={ (window.innerWidth<797) ? '99%' : '70%' }
                 placement="right"
                 closable={true}
                 className="waiboc-drawer"
-                style={{border:'0.5px dotted gray',marginTop:'25px',zIndex:'9992'}}
+                style={{border:'0.5px dotted gray', marginTop:'25px',zIndex:'9992'}}
                 bodyStyle={{paddingTop:'0'}}
                 headerStyle={{padding:'5px 5px 5px 5px'}}
                 visible={this.state.modalVisible}
-                onCancel={(argEC)=>{this.props.onCancelModal(argEC);}}
-                onClose={(argEC)=>{this.props.onCancelModal(argEC);}}
+                onCancel={this.props.onCancelModal}
+                onClose={this.props.onCancelModal}
                 footer={null}
             >
                 <div className="waiboc-cl-form" >
                     <div style={{marginTop:'20px',marginBottom:'10px'}}>
                         <Steps current={this.state.formStep}>
                             <Step key="1" title={<TitleStep targetFormStep={0} stepCompleted={this.state.stepCompleted} goToFormStep={this.goToFormStep} text={this.props.translate.form.name}     />} icon={this.state.formStep==0 ? <Icon type="loading" /> : false } />
-                            <Step key="2" title={<TitleStep targetFormStep={1} stepCompleted={this.state.stepCompleted} goToFormStep={this.goToFormStep} text={this.props.translate.form.examples} />} icon={this.state.formStep==1 ? <Icon type="loading" /> : false } />
-                            <Step key="3" title={<TitleStep targetFormStep={2} stepCompleted={this.state.stepCompleted} goToFormStep={this.goToFormStep} text={this.props.translate.form.answer}   />} icon={this.state.formStep==2 ? <Icon type="loading" /> : false } />
+                            <Step key="3" title={<TitleStep targetFormStep={1} stepCompleted={this.state.stepCompleted} goToFormStep={this.goToFormStep} text={this.props.translate.form.slots}    />} icon={this.state.formStep==2 ? <Icon type="loading" /> : false } />
+                            <Step key="2" title={<TitleStep targetFormStep={2} stepCompleted={this.state.stepCompleted} goToFormStep={this.goToFormStep} text={this.props.translate.form.examples} />} icon={this.state.formStep==1 ? <Icon type="loading" /> : false } />
+                            <Step key="4" title={<TitleStep targetFormStep={3} stepCompleted={this.state.stepCompleted} goToFormStep={this.goToFormStep} text={this.props.translate.form.answer}   />} icon={this.state.formStep==3 ? <Icon type="loading" /> : false } />
                         </Steps>
                     </div>
-                    <NextStepForm />
+                    <NextStepFormIntent
+                            formStep={this.state.formStep} translate={this.props.translate} flagNewIntent={this.state.flagNewIntent}
+                            data={this.state.dataNewIntent}
+                            chatbotConfig={this.props.chatbotConfig}
+                            onSubmitOk={this.onNextStep}
+                            onUpdateSlots={this.props.onUpdateSlots}
+                            arraySlots={this.props.arraySlots}
+                            prev={this.onPrevStep}
+                        />
                 </div>
             </Drawer>
         ) ;

@@ -6,7 +6,7 @@ import { Select, Form, Input, Button }   from 'antd'  ;
 import { Row, Col, Tooltip, Icon     }   from 'antd'  ;
 //
 class FormIntentNameBase extends React.Component {
-    constructor(props){
+    constructor( props){
         super(props) ;
         this.state                = {flagSpinner:false} ;
         this.inputNameRef         = false ;

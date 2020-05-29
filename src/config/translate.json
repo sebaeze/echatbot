@@ -70,6 +70,7 @@
             "websiteDomains":"Input the url of your website / s, for example: www.mywebsite.com"
         },
         "form":{
+            "slots":"Slots",
             "errorInvalidSlotName":"Invalid Slot Name, just accept numbers and letters",
             "botSlotQuestion":"Question to ask to the user",
             "errorSlotQuestion":"Complete the question to Ask to user",
@@ -378,6 +379,7 @@
             "websiteDomains":"Ingrese la url del website a utilizar el chatbot, por ejemplo: www.mywebsite.com"
         },
         "form":{
+            "slots":"Variables / Slots",
             "errorInvalidSlotName":"Nombre Invalido. Solo se aceptan números y letras",
             "botSlotQuestion":"Pregunta para hacer al usuario",
             "errorSlotQuestion":"Complete la pregunta a hacer al usuario",
@@ -655,6 +657,7 @@
             "websiteDomains":"Insira o URL do (s) seu (s) site (s), por exemplo: www.mywebsite.com"
         },
         "form":{
+            "slots":"Slots",
             "errorInvalidSlotName":"Nome de slot inválido, basta aceitar números e letras",
             "botSlotQuestion":"Pergunta a fazer ao usuário",
             "errorSlotQuestion":"Complete a pergunta para Perguntar ao usuário",

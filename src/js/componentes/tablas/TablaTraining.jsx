@@ -16,13 +16,14 @@ import { arrayTags }                                       from '../texto/ArrayT
 export class TablaTraining extends React.Component {
     constructor(props){
         super(props) ;
-        this.onChange               = this.onChange.bind(this) ;
+        this.onChange               = this.onChange.bind(this)  ;
         this.parseColumns           = this.parseColumns.bind(this)   ;
         this.onChangeSearch         = this.onChangeSearch.bind(this) ;
         this.onAcceptNewIntent      = this.onAcceptNewIntent.bind(this) ;
         this.onClickNewIntent       = this.onClickNewIntent.bind(this)  ;
         this.onClickEditIntent      = this.onClickEditIntent.bind(this) ;
-        this.onClickDeleteIntent    = this.onClickDeleteIntent.bind(this) ;
+        this.onClickDeleteIntent    = this.onClickDeleteIntent.bind(this)  ;
+        this.closeModalEditIntent   = this.closeModalEditIntent.bind(this) ;
         this.saveChangesTotraining = this.saveChangesTotraining.bind(this) ;
         this.state = {
             flagWidgetTest: false,
@@ -50,13 +51,17 @@ export class TablaTraining extends React.Component {
         }
     }
     //
+    closeModalEditIntent(){
+        this.setState({modalIntentVisible:false})
+    }
+    //
     onClickNewIntent(argEE){
         if ( argEE && argEE.preventDefault){ argEE.preventDefault(); }
         this.setState({
             modalIntentVisible: true,
             modalNewIntent: true,
             intentNewModify: {
-                intentName:'',intentLanguage:'',intentDescription:'',intentExamples:[],intentDomain:'',intentAnswer:{}, systemDefined:false
+                intentName:'',intentLanguage:'',slots: [], intentDescription:'',intentExamples:[],intentDomain:'',intentAnswer:{}, systemDefined:false
             }
         }) ;
     }
@@ -72,7 +77,8 @@ export class TablaTraining extends React.Component {
                     intentExamples: argRowIntent.examples ,
                     intentDomain: argRowIntent.domain ,
                     intentAnswer: argRowIntent.answer ,
-                    systemDefined: argRowIntent.systemDefined
+                    systemDefined: argRowIntent.systemDefined,
+                    slots: argRowIntent.slots || []
                 },
                 modalIntentVisible: true,
                 modalNewIntent: false
@@ -222,6 +228,7 @@ export class TablaTraining extends React.Component {
             examples: argNewIntent.intentExamples||argNewIntent.examples||[],
             entity: argNewIntent.intentName,
             language: argNewIntent.intentLanguage ||'',
+            slots: argNewIntent.slots || [] ,
             timestamp_last_update: moment( new Date() ).tz("America/Argentina/Buenos_Aires").format()
         };
         let tempArrayTraining = this.state.arrayTraining ;
@@ -330,8 +337,10 @@ export class TablaTraining extends React.Component {
                                 chatbotConfig={this.props.chatbotConfig}
                                 modalVisible={this.state.modalIntentVisible}
                                 flagNewIntent={this.state.modalNewIntent}
-                                onCancelModal={(argEE)=>{argEE.preventDefault();this.setState({modalIntentVisible:false})}}
+                                onCancelModal={this.closeModalEditIntent}
                                 translate={this.props.translate}
+                                arraySlots={this.props.arraySlots}
+                                onUpdateSlots={this.props.onUpdateSlots}
                 />
                 <div style={{width:'100%',marginTop:'20px',marginBottom:'15px'}}>
                     <Row>

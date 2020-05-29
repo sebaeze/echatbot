@@ -8,12 +8,13 @@ import { api }                                 from '../../api/api' ;
 import { FormEditChatbotInfo   }               from '../formularios/FormEditChatbotInfo'       ;
 import { FormChatbotAccessList }               from '../formularios/FormChatbotAccessList'     ;
 import { FormEditChatbotAppearance }           from '../formularios/FormEditChatbotAppearance' ;
-import { TablaSlots }                          from '../tablas/TablaSlots'                        ;
+import { TablaSlots }                          from '../tablas/TablaSlots'                     ;
 import { TablaTraining       }                 from '../tablas/TablaTraining'                  ;
 import { TablaConversations  }                 from '../tablas/TablaConversations'             ;
 import { IconLock }                            from '../icon/IconLock' ;
 //
 const { TabPane } = Tabs ;
+const log         = require('debug')('WAIBOC:CuerpoEditBot') ;
 //
 export class CuerpoEditBot extends React.Component {
     constructor(props){
@@ -28,9 +29,11 @@ export class CuerpoEditBot extends React.Component {
             flagSpinner: false,
             flagCachedProps: false,
             chatbotConfig:false,
-            chatbotConfigPendingSave: false
+            chatbotConfigPendingSave: false,
+            arraySlots: []
         } ;
         this.tabs = { CONFIG: 'config', APPEARANCE: 'appearance', TRAINING: 'training', SLOTS: 'slots', CONVERSATIONS: 'conversations', SECURITY: 'SECURITY' } ;
+        this.onUpdateSlots = this.onUpdateSlots.bind(this) ;
     }
     //
     componentDidMount(){
@@ -42,7 +45,7 @@ export class CuerpoEditBot extends React.Component {
                     .then((respUserInfo)=>{
                         if ( respUserInfo.length>0 ){respUserInfo=respUserInfo[0]; }
                         tempUserInfo = respUserInfo ;
-                        return api.chatbot.qry({_id: this.state.idChatbot, idUser: tempUserInfo.email}) ;
+                        return api.chatbot.qry({_id: this.state.idChatbot, slots: false ,idUser: tempUserInfo.email}) ;
                     })
                     .then((respQry)=>{
                         if ( respQry.length>0 ){ respQry=respQry[0]; }
@@ -97,6 +100,10 @@ export class CuerpoEditBot extends React.Component {
         }
     }
     //
+    onUpdateSlots(argArrSlots){
+        this.setState({ arraySlots: argArrSlots }) ;
+    }
+    //
     onChangeTab(argNextTab){
         try {
             if ( String(window.location.hash).toUpperCase().indexOf(argNextTab.toUpperCase())==-1 ){
@@ -118,29 +125,6 @@ export class CuerpoEditBot extends React.Component {
             }
             return outTab ;
         }
-        //
-        let styleCloseIcon = this.props.configuracion.isMobile==true ?
-                                {position:'fixed'   ,top:'70px',left:'50px', backgroundColor:'white', border:'0.5px dotted gray'}
-                                :
-                                {position:'absolute',top:'5px' ,right:'5px', backgroundColor:'white', border:'0.5px dotted gray'} ;
-        //
-        /*
-        {
-            this.props.onFinishEdit ?
-                <div style={styleCloseIcon}>
-                    <Icon type="close-square" className="waiboc-close-icon"
-                            onClick={(argEC)=>{
-                                argEC.preventDefault() ;
-                                if (window.location.hash && String(window.location.hash).length>0){
-                                    window.location.hash='';
-                                }
-                                this.props.onFinishEdit() ;
-                            }}
-                    />
-                </div>
-                : null
-        }
-        */
         //
         return(
             <div id="waiboc-id-edit-chatbot"
@@ -222,6 +206,30 @@ export class CuerpoEditBot extends React.Component {
                                 </Col>
                             </Row>
                         </TabPane>
+                        <TabPane key={this.tabs.SLOTS}
+                            tab={<span>
+                                <Icon type="message" theme="twoTone" />
+                                {this.props.translate.table.slotFilling}
+                            </span>}
+                        >
+                            <Row>
+                                <Col xs={1}  md={1}  lg={1}  xl={1}  xxl={1}></Col>
+                                <Col xs={22} md={22} lg={24} xl={24} xxl={24}>
+                                    {
+                                        this.state.chatbotConfig==false ?
+                                        <Spin size="large" />
+                                        :
+                                        <TablaSlots
+                                            translate={this.props.translate}
+                                            idChatbot={tempChatbotConfig._id}
+                                            chatbotConfig={tempChatbotConfig}
+                                            flagSelection={false}
+                                            onUpdateSlots={this.onUpdateSlots}
+                                        />
+                                    }
+                                </Col>
+                            </Row>
+                        </TabPane>
                         <TabPane key={this.tabs.TRAINING}
                             tab={<span>
                                 <Icon type="message" theme="twoTone" />
@@ -240,30 +248,8 @@ export class CuerpoEditBot extends React.Component {
                                             chatbotConfig={{...tempChatbotConfig}}
                                             onSubmitChanges={this.updateChatbotConfig.bind(this)}
                                             container={this.refContainer}
-                                        />
-                                    }
-                                </Col>
-                            </Row>
-                        </TabPane>
-                        <TabPane key={this.tabs.SLOTS}
-                            tab={<span>
-                                <Icon type="message" theme="twoTone" />
-                                {this.props.translate.table.slotFilling}
-                            </span>}
-                        >
-                            <Row>
-                                <Col xs={1}  md={1}  lg={1}  xl={1}  xxl={1}></Col>
-                                <Col xs={22} md={22} lg={24} xl={24} xxl={24}>
-                                    {
-                                        this.state.chatbotConfig==false ?
-                                        <Spin size="large" />
-                                        :
-                                        <TablaSlots
-                                            translate={this.props.translate}
-                                            idChatbot={tempChatbotConfig._id}
-                                            chatbotConfig={tempChatbotConfig}
-                                            // onSubmitChanges={this.updateChatbotConfig.bind(this)}
-                                            // container={this.refContainer}
+                                            arraySlots={this.state.arraySlots}
+                                            onUpdateSlots={this.onUpdateSlots}
                                         />
                                     }
                                 </Col>

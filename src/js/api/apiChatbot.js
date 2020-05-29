@@ -166,7 +166,8 @@ const qryChatbots = (argQry) => {
             let opcionesFetch = {...opcionesPOST} ;
             delete opcionesFetch.body ;
             opcionesFetch.method = 'GET' ;
-            let tempUrl = '/api/chatbot' + obj2qryString(argQry) ;
+            // let tempUrl = '/api/chatbot' + obj2qryString(argQry) ;
+            let tempUrl = PARAMETROS.BACKEND.API_CHATBOT_QUERY + obj2qryString(argQry) ;
             //
             fetch(tempUrl ,opcionesFetch )
                 .then((respFetch)=>{

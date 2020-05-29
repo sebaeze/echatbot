@@ -20,6 +20,7 @@ export const PARAMETROS = {
         API_CONSULTAS: '/api/consultas',
         API_ERROR: '/api/error/console',
         API_SUSCRIPCION: '/api/suscripcion',
+        API_CHATBOT_QUERY: '/api/chatbot',
         API_CHATBOT_UPDATE: '/api/chatbot',
         API_CHATBOT_TRAIN: '/api/train',
         API_CHATBOT_QUERY_SLOT:  '/api/slot/query',

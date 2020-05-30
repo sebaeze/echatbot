@@ -162,8 +162,8 @@ export class TablaSlots extends React.Component {
                 status: STATUS_SLOT.DELETED,
                 ts_last_update: moment( new Date() ).tz("America/Argentina/Buenos_Aires").format()
             } ;
-            delete tempNewIntent._v ;
-            delete tempNewIntent.__v ;
+            delete tempDeleteSlot._v ;
+            delete tempDeleteSlot.__v ;
             //
             this.setState({ flagSpinner: true }) ;
             api.chatbot.updateSlot( tempDeleteSlot )

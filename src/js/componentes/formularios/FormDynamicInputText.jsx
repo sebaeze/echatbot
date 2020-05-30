@@ -24,7 +24,7 @@ export class FormDynamicInputText extends React.Component {
     setRefButton(argRef){
         if ( argRef && this.refButtonMore==false && this.props.focus && this.props.focus==true ){
             this.refButtonMore = argRef ;
-            console.log('...oy a hacer focus:: this.refButtonMore: ',this.refButtonMore) ;
+            // console.log('...oy a hacer focus:: this.refButtonMore: ',this.refButtonMore) ;
             setTimeout(() => {
                 this.refButtonMore.focus() ;
             }, 0);

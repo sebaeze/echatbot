@@ -2,8 +2,25 @@
 *
 */
 import React                                    from 'react' ;
-import { Carousel, Row, Col }                   from 'antd'  ;
-import { IconArrows }                           from '../icon/IconArrows'     ;
+import { Carousel }                             from 'antd'  ;
+//
+import '../../../css/iconArrows.css' ;
+//
+const CarouselArrowPrev = ( props ) => {
+    return(
+        <div className="custom-arrow prev" onClick={props.onClick}  style={props.visible==true ? {} : {display:'none'} } >
+            {"<"}
+        </div>
+    )
+} ;
+//
+const CarouselArrowNext = ( props ) => {
+    return(
+        <div className="custom-arrow next" onClick={props.onClick} style={props.visible==true ? {} : {display:'none'} } >
+            {">"}
+        </div>
+    )
+} ;
 //
 export class CarouselImagenes extends React.Component {
     //
@@ -13,18 +30,21 @@ export class CarouselImagenes extends React.Component {
         this.state = {
             currentSlide: 0,
             refCarousel: false,
+            visible: false ,
             styleArrows: {...tempStyle, transition: 'all 0.3s ease-in-out',display:'none'}
+            //styleArrows: {...tempStyle, transition: 'all 0.3s ease-in-out',display:'none'}
         } ;
         //
         this.onMouseOverCarousel = this.onMouseOverCarousel.bind(this) ;
         this.onMouseOutCarousel  = this.onMouseOutCarousel.bind(this)  ;
+        //
         this.carouselSettings = {
             className: "slider variable-width",
             // dots: true,
             // lazyLoad : true,
             //edgeFriction: 1,
             infinite: false,
-            arrows: false,
+            arrows: true,
             centerMode: (window.innerWidth<797) ? false : true,
             centerPadding: '60px',
             variableWidth: (window.innerWidth<797) ? false : true,
@@ -37,8 +57,9 @@ export class CarouselImagenes extends React.Component {
             slidesToShow: 1,
             // slidesToScroll: 1,
             afterChange: current => {this.setState({ currentSlide: current })},
-            // prevArrow: <SlickArrowLeft />,
-            // nextArrow: <SlickArrowRight />,
+            prevArrow: <CarouselArrowPrev visible={this.state.visible} />,
+            nextArrow: <CarouselArrowNext visible={this.state.visible} />,
+            //
             focusOnSelect: false,
             draggable: false
           };
@@ -53,9 +74,7 @@ export class CarouselImagenes extends React.Component {
     onMouseOverCarousel(argEE){
         try {
             if ( argEE && argEE.preventDefault  ){ argEE.preventDefault(); }
-            let { styleArrows } = this.state ;
-            styleArrows.display = 'block' ;
-            this.setState({styleArrows: styleArrows}) ;
+            this.setState({ visible: true }) ;
         } catch(errOMO){
             console.log('...ERROR: errOMO: ',errOMO) ;
         }
@@ -64,9 +83,7 @@ export class CarouselImagenes extends React.Component {
     onMouseOutCarousel(argEE){
         try {
             if ( argEE && argEE.preventDefault  ){ argEE.preventDefault(); }
-            let { styleArrows } = this.state ;
-            styleArrows.display = 'none' ;
-            this.setState({styleArrows: styleArrows}) ;
+           this.setState({ visible: false }) ;
         } catch(errOMO){
             console.log('...ERROR: errOMO: ',errOMO) ;
         }
@@ -88,39 +105,26 @@ export class CarouselImagenes extends React.Component {
             tempSettings.centerMode   = true  ;
         }
         //
+        tempSettings.prevArrow = <CarouselArrowPrev visible={this.state.visible} /> ;
+        tempSettings.nextArrow = <CarouselArrowNext visible={this.state.visible} /> ;
+        //
         return(
             <div className="waiboc-carousel" onMouseEnter={this.onMouseOverCarousel} onMouseLeave={this.onMouseOutCarousel} >
-                <Carousel {...tempSettings}
-                    ref={
-                    (argRef)=>{
-                        if ( argRef && this.state.refCarousel==false ){
-                            // console.log('..........CarouselIMGGg:: render:: argRef: ',argRef) ;
-                            this.setState({refCarousel:argRef}) ;
+                <div style={{width:'100%'}} >
+                    <Carousel {...tempSettings}
+                        ref={
+                        (argRef)=>{
+                            if ( argRef && this.state.refCarousel==false ){
+                                this.setState({refCarousel:argRef}) ;
+                            }
                         }
-                    }
-                    }
-                >
-                    {
-                        this.props.data
-                    }
-                </Carousel>
-                {
-                    (this.state.refCarousel!=false && this.props.data.length>1)
-                        ?   <IconArrows   type="default"
-                                    onClickPrev={
-                                            (propsNNN)=>{
-                                                console.log('...propsNNN: ',propsNNN) ;
-                                                this.state.refCarousel.prev()
-                                            }
-                                    }
-                                    styleArrows={this.state.styleArrows}
-                                    infinite={this.carouselSettings.infinite}
-                                    onClickNext={()=>{this.state.refCarousel.next()}}
-                                    currentSlide={this.state.currentSlide}
-                                    countSlide={this.props.data.length}
-                            />
-                        :   null
-                }
+                        }
+                    >
+                        {
+                            this.props.data
+                        }
+                    </Carousel>
+                </div>
             </div>
         )
     }

@@ -47,12 +47,14 @@ const getAccount = () => {
     }) ;
 } ;
 //
-const getUserInfo = () => {
+const getUserInfo = ( flagForzar=false ) => {
     return new Promise(function(respOk,respRech){
         try {
             //
             let tempTs = moment().format() ;
             let outUserSession = ls( PARAMETROS.SESSION.USUARIO ) || false ;
+            if ( flagForzar==true ){ outUserSession=false; }
+            //
             if ( outUserSession==false ){
                 let opcionesFetch = {...opcionesPOST} ;
                 opcionesFetch.method = 'GET' ;
@@ -183,8 +185,8 @@ export const account = {
     update: updateAccount,
     getAccount: getAccount,
     getUserInfo: getUserInfo,
-    loginUser: loginUser,
-    logout: logoutAccount,
+    loginUser: loginUser ,
+    logout: logoutAccount ,
     passwordReset: passwordReset,
     passwordChange: passwordChange
 } ;

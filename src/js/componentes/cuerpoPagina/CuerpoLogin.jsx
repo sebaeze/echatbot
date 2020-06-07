@@ -25,6 +25,13 @@ const LoginUserPassword = (props) => {
                             />
             </Row>
             : <UserLogged   userInfo={props.userInfo}  /> ;
+    //
+    if ( props.userInfo!=false ){
+        setTimeout(() => {
+            props.onLogin( props.userInfo )  ;
+        }, 2000 );
+    }
+    //
     return( outLogging ) ;
 }
 //
@@ -42,7 +49,7 @@ export class CuerpoLogin extends React.Component {
     //
     componentDidMount(){
         //
-        api.account.getUserInfo()
+        api.account.getUserInfo( true )
             .then((userInfo)=>{
                 if ( userInfo!=false ){
                     this.setState({userInfo:userInfo}) ;

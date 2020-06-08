@@ -8,16 +8,22 @@ import '../../../css/iconArrows.css' ;
 //
 const CarouselArrowPrev = ( props ) => {
     return(
-        <div className="custom-arrow prev" onClick={props.onClick}  style={props.visible==true ? {} : {display:'none'} } >
-            {"<"}
+        //<div className="custom-arrow prev" onClick={props.onClick}  style={props.visible==true ? {} : {display:'none'} } >
+        <div    className="custom-arrow prev" onClick={props.onClick}
+                style={props.visible==true ? {visibility: 'visible', opacity:'1'} : {visibility: 'hidden', opacity:'0'} }
+        >
+            <img src="/img/ARROW-PREV.png" style={{width:'80px',height:'65px',margin:'5px'}} />
         </div>
     )
 } ;
 //
 const CarouselArrowNext = ( props ) => {
     return(
-        <div className="custom-arrow next" onClick={props.onClick} style={props.visible==true ? {} : {display:'none'} } >
-            {">"}
+        // <div className="custom-arrow next" onClick={props.onClick} style={props.visible==true ? {} : {display:'none'} } >
+        <div    className="custom-arrow next" onClick={props.onClick}
+                style={props.visible==true ? {visibility: 'visible', opacity:'1'} : {visibility: 'hidden', opacity:'0'} }
+        >
+            <img src="/img/ARROW-NEXT.png" style={{width:'80px',height:'65px',margin:'5px'}} />
         </div>
     )
 } ;
@@ -31,6 +37,7 @@ export class CarouselImagenes extends React.Component {
             currentSlide: 0,
             refCarousel: false,
             visible: false ,
+            // visible: true ,
             styleArrows: {...tempStyle, transition: 'all 0.3s ease-in-out',display:'none'}
             //styleArrows: {...tempStyle, transition: 'all 0.3s ease-in-out',display:'none'}
         } ;
@@ -83,7 +90,7 @@ export class CarouselImagenes extends React.Component {
     onMouseOutCarousel(argEE){
         try {
             if ( argEE && argEE.preventDefault  ){ argEE.preventDefault(); }
-           this.setState({ visible: false }) ;
+            this.setState({ visible: false }) ;
         } catch(errOMO){
             console.log('...ERROR: errOMO: ',errOMO) ;
         }
@@ -109,7 +116,7 @@ export class CarouselImagenes extends React.Component {
         tempSettings.nextArrow = <CarouselArrowNext visible={this.state.visible} /> ;
         //
         return(
-            <div className="waiboc-carousel" onMouseEnter={this.onMouseOverCarousel} onMouseLeave={this.onMouseOutCarousel} >
+            <div className="waiboc-website-carousel" onMouseEnter={this.onMouseOverCarousel} onMouseLeave={this.onMouseOutCarousel} >
                 <div style={{width:'100%'}} >
                     <Carousel {...tempSettings}
                         ref={

@@ -1,16 +1,16 @@
 /*
 *
 */
-.waiboc-carousel {
+.waiboc-website-carousel {
     margin-top: 5px ;
     margin-bottom: 5px ;
     padding: 5px ;
 }
-.waiboc-carousel .waiboc-slide-panel .waiboc-slide-imag {
+.waiboc-website-carousel .waiboc-slide-panel .waiboc-slide-imag {
     height: 200px ;
     width: auto ;
 }
-.waiboc-carousel .waiboc-slide-panel .description {
+.waiboc-website-carousel .waiboc-slide-panel .description {
     position: relative ;
     display: block ;
     /* bottom: 0px ; */
@@ -25,87 +25,84 @@
     background: #00000017;
     transition: all 0.6s ease 0.2s ;
 }
-.waiboc-carousel .waiboc-slide-panel .description:hover {
+.waiboc-website-carousel .waiboc-slide-panel .description:hover {
     box-shadow: 0px 0px 5px 0px #111 ;
 }
-.waiboc-carousel .ant-carousel .slick-dots li button {
+.waiboc-website-carousel .ant-carousel .slick-dots li button {
     position: relative;
     z-index: 99999 ;
     height: 15px ;
     border-radius: 5px ;
 }
-.ant-carousel {
+.waiboc-website-carousel  .ant-carousel {
     z-index: 99999 !important ;
 }
-.waiboc-carousel .custom-arrow {
+.waiboc-website-carousel .custom-arrow {
     font-size: 90px ;
     line-height: 94px ;
     height: 100px ;
-    width: 94px ;
+    width: 100px ;
     padding: 0 ;
     padding-bottom: 40px ;
     border-radius: 50px ;
     top: 45% ;
     font-weight: 900 ;
     z-index: 99999 ;
-    display: block ;
     position: absolute ;
     cursor: pointer ;
+    display: block ;
+    /*
     opacity: 0.6 ;
     background: #00000017;
     transition: all 0.6s ease 0.2s ;
+    */
+    visibility: visible ;
+    opacity: 1 ;
+    /*  */
+    -webkit-transition: opacity 1600ms, visibility 1600ms;
+    transition: opacity 1600ms, visibility 1600ms;
+    /*  */
 }
-.waiboc-carousel .custom-arrow:hover {
+/*
+.waiboc-website-carousel .custom-arrow:hover {
     box-shadow: 0px 0px 15px 0px #111;
     opacity: 1 ;
 }
-.waiboc-carousel .custom-arrow.prev {
-    left: 0px ;
-    padding-left: 10px ;
+*/
+.waiboc-website-carousel .custom-arrow.prev {
+    left: 5px ;
+    /* padding-left: 10px ;*/
 }
-.waiboc-carousel .custom-arrow.next {
-    right: 0px ;
-    padding-left: 20px ;
+.waiboc-website-carousel .custom-arrow.next {
+    right: 5px ;
+    /* padding-left: 20px ; */
 }
 /*  */
-.carousel-arrows-links {
-    /*
-    position: absolute ;
-    width: 100% ;
-    top:0% ;
-    */
+.waiboc-website-carousel .carousel-arrows-links {
     height: 100% ;
     z-index: 99009 ;
     position: relative ;
     display: inline-block ;
 }
-.carousel-arrows {
+.waiboc-website-carousel  .carousel-arrows {
    width: 80px ;
    height: 80px ;
    top: 55% ;
-   /* border-radius: 45px ; */
-   /* position: absolute ;
-   top: 50% ;
-   margin-top: -31px ; */
    cursor: pointer;
    z-index: 9900 ;
    opacity: 0.6 ;
    transition:all .6s ease 0s ;
-   background: #00000017;
    border-radius: 50px ;
    position: relative ;
-    display: inline-block ;
-   /* display: none ; */
+   display: inline-block ;
+   /* background: #00000017; */
 }
-.carousel-arrows:hover {
+/*
+.waiboc-website-carousel .carousel-arrows:hover {
     box-shadow: 0px 0px 15px 0px #111;
     opacity: 1 ;
-    /* display: block ; */
-    /*
-    background-color:gray;
-    opacity: 0.4 ;
-    */
 }
+*/
 .arrow-left {
     width: 45px ;
     height: 45px ;
@@ -136,28 +133,9 @@
     position: relative ;
     display: inline-block ;
 }
-.carousel-arrows-prev {
-   position: absolute;
-   /*justify-content: center !important;
-   align-content: center !important;
-   align-content: center !important;
-   */
-   padding-left: 10px !important ;
-   padding-top: 20px !important ;
-   /* left: 3px ;
-   padding-top: 15px;
-   padding-left: 25px;
-   height: 100% ; */
-}
-.carousel-arrows-next {
-   position: absolute;
-   right: 20px ;
-   padding-top: 15px;
-   padding-left: 0px;
-}
 @media (max-width: 700px) {
     /*  */
-    .waiboc-carousel .custom-arrow {
+    .waiboc-website-carousel .custom-arrow {
         font-size: 50px ;
         line-height: 54px ;
         height: 54px ;

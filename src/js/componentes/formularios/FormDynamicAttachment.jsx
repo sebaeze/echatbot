@@ -165,9 +165,18 @@ export class FormDynamicAttachment extends React.Component {
         //
         if (this.state.keys.length === 0) { return; }
         let tempKeys = this.state.keys.filter(key => key !== k) ;
+        //
+        let tempFiles = this.props.form.getFieldValue( this.props.fieldName ) || [] ;
+        console.log('....voy a borrar:: K: ',k,' files:: ',tempFiles) ;
+        if ( tempFiles.length>0 ){
+            let obj2Update = {} ;
+            obj2Update[ this.props.fieldName ] = tempFiles.filter((elem,index)=>{ return index!=k ; }) ;
+            console.log('....obj2Update: ',obj2Update,';') ;
+            this.props.form.setFieldsValue( obj2Update );
+        }
+        //
         this.setState({keys: tempKeys})  ;
-        // this.forceUpdate() ;
-        // this.setState({keys: tempKeys })
+        //
     };
     //
     add(){
@@ -206,6 +215,10 @@ export class FormDynamicAttachment extends React.Component {
     render(){
         //
         const { getFieldDecorator } = this.props.form;
+        /*
+        let tempFiles = this.props.form.getFieldValue( this.props.fieldName ) || [] ;
+        console.log('....tempFiles: ',tempFiles) ;
+        */
         //
         const formItems      = this.state.keys.map((k, index) => {
             let relativePath      = (this.state.files[k] && this.state.files[k].relativePath) ? this.state.files[k].relativePath : false ;

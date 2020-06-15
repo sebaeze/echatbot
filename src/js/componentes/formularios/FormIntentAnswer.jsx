@@ -140,7 +140,7 @@ export class FormIntentAnswerBase extends React.Component {
                                                             title={this.props.translate.form.newFileClickDrag}
                                                             getPopupContainer={(trigger) => { return trigger.parentNode ; }}
                                                 >
-                                                    {this.props.translate.form.fileDragger} 
+                                                    {this.props.translate.form.fileDragger}
                                                     <Icon type="question-circle-o" />
                                                 </Tooltip>}
                         >

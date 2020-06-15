@@ -83,8 +83,9 @@ class LinkRouter  extends React.Component {
     //
     render(){
         try {
+            const { wrapperClassname } = this.props ;
             return(
-                <div rel="noopener noreferrer"  >
+                <div rel="noopener noreferrer" className={wrapperClassname} >
                     {
                         this.state.hasHash
                             ?   <Link style={{display:'none'}} ease={"easeOutCirc"} offsetTop={80} toHash={false} to={ this.state.hash }

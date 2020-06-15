@@ -5,12 +5,22 @@ import React                              from 'react' ;
 import { Row, Col }                       from 'antd'  ;
 import { withRouter }                     from "react-router-dom" ;
 import { ActionButtons }                  from './ActionButtons'  ;
+import { FormEmailHome }                  from '../formularios/FormEmailHome' ;
 //
 class PageHeaderChatbot  extends  React.Component {
     //
     constructor(props){
         super(props) ;
+        this.onEnterEmail = this.onEnterEmail.bind(this) ;
     } ;
+    //
+    onEnterEmail(argEE){
+        try {
+            console.log('...onEnterEmail') ;
+        } catch(errOEE){
+            console.log('...ERROR: ',errOEE) ;
+        }
+    }
     //
     render(){
         /*
@@ -18,20 +28,21 @@ class PageHeaderChatbot  extends  React.Component {
     {this.props.translate.homeHeader.title}
 </Title>
         */
+       // className="waiboc-home-email-in"
         return(
-            <Row style={{backgroundColor:'inherit'}} >
+            <Row style={{backgroundColor:'inherit'}}  >
                     <Row>
-                        <Col xs={0}  md={0} lg={11} xl={11} xxl={11} >
+                        <Col xs={0}  md={0} lg={11} xl={11} xxl={11}  >
+                            <FormEmailHome onEnter={this.onEnterEmail} translate={this.props.translate} />
                         </Col>
                         <Col xs={1}  md={1}  lg={0}  xl={0}  xxl={0} ></Col>
                         <Col xs={22} md={22} lg={12} xl={12} xxl={12} >
-                            <Row>
+                            <Row >
                                 <div key={"title"} >
                                     <span className={"chat-line-home title fadeIn"} >{this.props.translate.homeHeader.title}</span>
                                 </div>
                                 {
                                     this.props.translate.homeHeader.text.map((elemText,elemIdx)=>{
-                                        // let tempClassN = elemIdx==0 ? "chat-line-home title fadeIn" : "chat-line-home sub-title fadeIn" ;
                                         return(
                                             <div key={elemIdx} >
                                                 <span className={"chat-line-home sub-title fadeIn"} >{elemText}</span>
@@ -40,7 +51,7 @@ class PageHeaderChatbot  extends  React.Component {
                                     })
                                 }
                             </Row>
-                            <ActionButtons translate={this.props.translate} siguienteDiv={this.props.siguienteDiv} />
+                            <ActionButtons showLoginButton={false} translate={this.props.translate} siguienteDiv={this.props.siguienteDiv} />
                         </Col>
                     </Row>
             </Row>

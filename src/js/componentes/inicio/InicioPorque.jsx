@@ -46,7 +46,7 @@ const WhyElement = (props) => {
             <Row>
                 <Col xs={1} md={1} lg={1} xl={1} xxl={1} ></Col>
                 <Col xs={22} md={22} lg={18} xl={18} xxl={18} >
-                    <ActionButtons translate={props.translate} siguienteDiv={props.siguienteDiv} />
+                    <ActionButtons showLoginButton={true} translate={props.translate} siguienteDiv={props.siguienteDiv} />
                 </Col>
             </Row>
         </div>

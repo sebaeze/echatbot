@@ -10,9 +10,9 @@ const LoginBody = (props) => {
     let outBody = <div></div>  ;
     try {
         if ( props.flagForgotPassword==true ){
-            outBody = <FormResetPassword resetUrl={props.resetUrl} flagSpinner={props.flagSpinner} onAccept={props.onAccept} onSubmitGetPassword={props.onSubmitGetPassword} translate={props.translate} /> ;
+            outBody = <FormResetPassword emailUser={props.emailUser} resetUrl={props.resetUrl} flagSpinner={props.flagSpinner} onAccept={props.onAccept} onSubmitGetPassword={props.onSubmitGetPassword} translate={props.translate} /> ;
         } else {
-            outBody = <FormEmailPassword flagRegistrar={props.flagRegistrar} onFinishReset={props.onFinishReset} flagSpinner={props.flagSpinner} onAccept={props.onAccept} translate={props.translate} forgetMyPassword={props.forgetMyPassword} /> ;
+            outBody = <FormEmailPassword emailUser={props.emailUser} flagRegistrar={props.flagRegistrar} onFinishReset={props.onFinishReset} flagSpinner={props.flagSpinner} onAccept={props.onAccept} translate={props.translate} forgetMyPassword={props.forgetMyPassword} /> ;
         }
     } catch(errLB){
         console.log('...errLB: ',errLB) ;
@@ -82,6 +82,7 @@ export class FormLogin extends React.Component {
                                 forgetMyPassword={this.forgetMyPassword}
                                 onFinishReset={this.onFinishReset}
                                 flagForgotPassword={this.state.flagForgotPassword}
+                                emailUser={this.props.emailUser}
                         />
                 </Col>
             </Row>

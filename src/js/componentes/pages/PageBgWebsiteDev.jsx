@@ -37,7 +37,7 @@ class PageBgWebsiteDev  extends  React.Component {
                                     })
                                 }
                             </Row>
-                            <ActionButtons translate={this.props.translate} siguienteDiv={this.props.siguienteDiv} />
+                            <ActionButtons showLoginButton={true} translate={this.props.translate} siguienteDiv={this.props.siguienteDiv} />
                         </Col>
                         <Col xs={0}  md={0} lg={11} xl={11} xxl={11} >
                         </Col>

@@ -49,6 +49,12 @@ class FormEmailPasswordBase extends React.Component {
     }
     */
     //
+    componentDidMount(){
+        if ( this.props.emailUser && this.props.emailUser!=false ){
+            this.props.form.setFieldsValue({ email: this.props.emailUser }) ;
+        }
+    }
+    //
     onPressEnterInp(argEE){
         try {
             if ( argEE && argEE.preventDefault ){ argEE.preventDefault(); }

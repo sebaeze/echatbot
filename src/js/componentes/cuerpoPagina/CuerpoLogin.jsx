@@ -22,6 +22,7 @@ const LoginUserPassword = (props) => {
                 <FormLogin  flagRegistrar={props.flagRegistrar}
                             onLogin={props.onLogin}
                             translate={props.translate}
+                            emailUser={props.emailUser}
                             />
             </Row>
             : <UserLogged   userInfo={props.userInfo}  /> ;
@@ -39,6 +40,7 @@ export class CuerpoLogin extends React.Component {
     constructor(props){
         super(props) ;
         this.state  = {
+            emailUser: false,
             userInfo: false,
             flagLoginAlone: this.props.flagLoginAlone ? this.props.flagLoginAlone : false,
             flagRegistrar: this.props.flagRegistrar ? this.props.flagRegistrar : false,
@@ -49,15 +51,20 @@ export class CuerpoLogin extends React.Component {
     //
     componentDidMount(){
         //
-        api.account.getUserInfo( true )
-            .then((userInfo)=>{
-                if ( userInfo!=false ){
-                    this.setState({userInfo:userInfo}) ;
-                }
-            })
-            .catch((respErr)=>{
-                console.log('...respErr: ',respErr) ;
-            })
+        let emailFromHome = new URLSearchParams(window.location.search).get('email') || false ;
+        if ( emailFromHome ){
+            this.setState({ emailUser: emailFromHome }) ;
+        } else {
+            api.account.getUserInfo( true )
+                .then((userInfo)=>{
+                    if ( userInfo!=false ){
+                        this.setState({userInfo:userInfo}) ;
+                    }
+                })
+                .catch((respErr)=>{
+                    console.log('...respErr: ',respErr) ;
+                })
+        }
         //
     }
     //
@@ -92,7 +99,7 @@ export class CuerpoLogin extends React.Component {
                 <div >
                     <Row style={{paddingTop:'110px'}} >
                         <Col xs={24} md={24}   lg={12} xl={12} xxl={12} >
-                            <LoginUserPassword userInfo={this.state.userInfo}  onLogin={this.onFinishLogin} flagRegistrar={this.state.flagRegistrar} translate={this.props.translate} />
+                            <LoginUserPassword emailUser={this.state.emailUser} userInfo={this.state.userInfo} onLogin={this.onFinishLogin} flagRegistrar={this.state.flagRegistrar} translate={this.props.translate} />
                         </Col>
                         <Col xs={0} md={0} lg={1} xl={1} xxl={1} ></Col>
                         <Col xs={24} md={24} lg={10} xl={10} xxl={10} className="panel-oauth" >

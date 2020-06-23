@@ -124,6 +124,9 @@ header ul.ant-menu {
     position: relative ;
     float: left ;
 }
+.waiboc-home-row-actions .waiboc-btn-action.active {
+    background-color: var(--font-color-important) ;
+}
 .waiboc-home-row-actions .waiboc-btn-action span {
     width: 100% ;
 }
@@ -384,6 +387,9 @@ div {
 }
 */
 /*  */
+#waiboc-main-node .box-home-bg {
+    min-height: 400px ;
+}
 .box-plan {
     width: 80% ;
     border: 1px solid grey ;
@@ -1472,8 +1478,16 @@ span.waiboc-span-emoticon:hover {
     z-index: 99999 ;
     display: block ;
     visibility: visible;
+    /*
     opacity:1;
     transition: visibility 1.5s, opacity 1.5s ease-in ;
+    */
+    /*  */
+    visibility: visible ;
+    opacity: 1 ;
+    -webkit-transition: opacity 1600ms, visibility 1600ms;
+    transition: opacity 1600ms, visibility 1600ms;
+    /*  */
 }
 .waiboc-emoji-wrapper .emoji-mart {
     display: block ;
@@ -1481,6 +1495,9 @@ span.waiboc-span-emoticon:hover {
     opacity:1;
     transition: visibility 1.5s, opacity 1.5s ease-in ;
     /* transition: all 2.15s ease-in; */
+}
+.waiboc-emoji-wrapper .emoji-mart-category .emoji-mart-emoji span {
+    cursor: pointer ;
 }
 /*
 .waiboc-emoji-wrapper .emoji-mart {
@@ -1641,7 +1658,9 @@ span.waiboc-span-emoticon:hover {
 .bg-inicial {
     background-color: yellow ;
     width: 100% !important ;
-    height: 200px !important ;
+    /* height: 200px !important ; */
+    min-height: 400px ;
+    height: 90vh ;
     overflow: hidden ;
     /*
     background: linear-gradient(to bottom left,transparent 49.8%,#E0E6E5 50%) top /100% 35%,

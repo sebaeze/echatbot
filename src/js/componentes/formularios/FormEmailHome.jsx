@@ -68,8 +68,10 @@ export class FormEmailHome extends React.Component {
                 </Button>
             </LinkRouter>
         */
+        let extraStyle = this.props.bottomBlock==true ? {position:'absolute',bottom:'70px'} : {} ;
+        //
         return(
-            <div className={"waiboc-home-email-in"}  >
+            <div className={"waiboc-home-email-in"} style={extraStyle} >
                 <div>
                     <Input
                         ref={ (argREf)=>{ if (argREf && this.inputEmail==false ){ this.inputEmail = argREf ; } } }
@@ -81,7 +83,10 @@ export class FormEmailHome extends React.Component {
                         onChange={this.onChangeEmail}
                         placeholder={this.props.translate.form.placeholderEmailHome}
                         suffix={
-                            <Button ref={(argRef)=>{this.refButton=argRef;}} type="primary" size="large" className="waiboc-home-button-try-free" onClick={this.onClickEmailTry} >
+                            <Button ref={(argRef)=>{this.refButton=argRef;}} type="primary" size="large"
+                                    className="waiboc-home-button-try-free"
+                                    onClick={this.onClickEmailTry}
+                            >
                                 {this.props.translate.homeTryUs}
                             </Button>
                         }

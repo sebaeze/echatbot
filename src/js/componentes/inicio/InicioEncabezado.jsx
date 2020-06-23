@@ -29,14 +29,15 @@ export class InicioEncabezado extends React.Component {
     render(){
         //
         return(
-            <div id={this.props.id} style={{minHeight:'100vh'}} className="bg-inicial" >
+            <div id={this.props.id} className="bg-inicial" >
                 <Row>
                     <Row>
                         <Col xs={0}  md={0}   lg={1}  xl={1}  xxl={1}></Col>
-                        <Col xs={24} md={24}  lg={22} xl={22} xxl={22}>
+                        <Col xs={24} md={24}  lg={22} xl={22} xxl={22} style={{height:'90vh'}} >
                             <CarouselImagenes
                                 settings={{ infinite:true, autoplay: false, autoplaySpeed: 5000,centerMode:false,variableWidth:false}}
                                 styleArrows={{background:'none',opacity:'0.2'}}
+                                customStyle={{height:'600px'}}
                                 ref={this.setRefCarousel}
                                 data={this.state.arrayPaginas}
                             />

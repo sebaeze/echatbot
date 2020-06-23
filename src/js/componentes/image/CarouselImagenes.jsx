@@ -105,6 +105,7 @@ export class CarouselImagenes extends React.Component {
     //
     render(){
         //
+        const { customStyle } = this.props ;
         let tempSettings = {...this.carouselSettings} ;
         if ( this.props.data.length<2 ){
             tempSettings.autoplay     = false ;
@@ -116,7 +117,7 @@ export class CarouselImagenes extends React.Component {
         tempSettings.nextArrow = <CarouselArrowNext visible={this.state.visible} /> ;
         //
         return(
-            <div className="waiboc-website-carousel" onMouseEnter={this.onMouseOverCarousel} onMouseLeave={this.onMouseOutCarousel} >
+            <div className="waiboc-website-carousel" style={customStyle} onMouseEnter={this.onMouseOverCarousel} onMouseLeave={this.onMouseOutCarousel} >
                 <div style={{width:'100%'}} >
                     <Carousel {...tempSettings}
                         ref={

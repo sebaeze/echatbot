@@ -73,16 +73,17 @@ export class FormLogin extends React.Component {
             <Row className="waiboc-cl-form" >
                 <Col xs={1}  md={1}  lg={1}  xl={1} xxl={1} ></Col>
                 <Col xs={22} md={22} lg={22} xl={22} xxl={22} >
-                        <LoginBody flagSpinner={this.state.flagSpinner}
+                        <LoginBody
+                                flagSpinner={this.state.flagSpinner}
                                 flagRegistrar={this.props.flagRegistrar}
-                                onAccept={this.onAcceptUserPassword}
                                 onSubmitGetPassword={this.onSubmitGetPassword}
                                 translate={this.props.translate}
                                 resetUrl={this.state.resetUrl}
-                                forgetMyPassword={this.forgetMyPassword}
-                                onFinishReset={this.onFinishReset}
                                 flagForgotPassword={this.state.flagForgotPassword}
                                 emailUser={this.props.emailUser}
+                                onAccept={this.onAcceptUserPassword}
+                                forgetMyPassword={this.forgetMyPassword}
+                                onFinishReset={this.onFinishReset}
                         />
                 </Col>
             </Row>

@@ -197,7 +197,7 @@ export class TablaConversations extends React.Component {
                         render: (text) =>
                             <div style={{width:'100%',marginTop:'10px'}}>
                                 <Popover trigger="hover"
-                                        content={ <CustomReply datos={{output: text}} flagTimestamp={false} /> }
+                                        content={  <CustomReply datos={{output: text}} flagTimestamp={false} /> }
                                         style={{width:'200px',height:'200px'}}
                                 >
                                     <span className="waiboc-tab-answer-example" >

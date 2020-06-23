@@ -167,11 +167,9 @@ export class FormDynamicAttachment extends React.Component {
         let tempKeys = this.state.keys.filter(key => key !== k) ;
         //
         let tempFiles = this.props.form.getFieldValue( this.props.fieldName ) || [] ;
-        console.log('....voy a borrar:: K: ',k,' files:: ',tempFiles) ;
         if ( tempFiles.length>0 ){
             let obj2Update = {} ;
             obj2Update[ this.props.fieldName ] = tempFiles.filter((elem,index)=>{ return index!=k ; }) ;
-            console.log('....obj2Update: ',obj2Update,';') ;
             this.props.form.setFieldsValue( obj2Update );
         }
         //

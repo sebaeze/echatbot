@@ -16,10 +16,6 @@ class FormEmailPasswordBase extends React.Component {
         this.state = {
             flagSpinner: this.props.flagSpinner ? this.props.flagSpinner : false ,
             flagRegistration: tempFlagRegistrar,
-            /*
-            buttonTypeNew: tempFlagRegistrar==true   ? "primary" : "dashed",
-            buttonTypeLogin: tempFlagRegistrar==true ? "dashed"  : "primary",
-            */
             fields:{}
         }
         this.refEmail      = false ;
@@ -48,12 +44,13 @@ class FormEmailPasswordBase extends React.Component {
         }
     }
     */
-    //
+    /*
     componentDidMount(){
         if ( this.props.emailUser && this.props.emailUser!=false ){
-            this.props.form.setFieldsValue({ email: this.props.emailUser }) ;
+            this.setState({ emailUser: this.props.emailUser }) ;
         }
     }
+    */
     //
     onPressEnterInp(argEE){
         try {
@@ -218,7 +215,7 @@ class FormEmailPasswordBase extends React.Component {
                   //
               } ;
             }) ;
-            // 
+            //
         } catch(errNU){
             console.log('...errNU: ',errNU) ;
         }
@@ -246,125 +243,128 @@ class FormEmailPasswordBase extends React.Component {
         //
         const { getFieldDecorator }   = this.props.form ;
         let formItemsProps = {hasFeedback:true} ;
+        let initEmail      = ( this.props.emailUser && this.props.emailUser!=false )
+                                ?   this.props.emailUser
+                                :   this.state.fields.email ? this.state.fields.email : "" ;
         //
         return(
             <Row className="waiboc-form-login" >
                 <Col xs={0}  md={0}  lg={4}  xl={4}  xxl={4} ></Col>
                 <Col xs={24} md={24} lg={20} xl={20} xxl={20} >
-                <Form>
-                <Row>
-                    <h2 style={{width:'100%',textAlign:'center'}} ><u>Ingresé email y password</u></h2>
-                </Row>
-                <Form.Item key="form-item-inp-email-p" {...formItemsProps} >
-                    {
-                        getFieldDecorator('email', {
-                            suppressWarning: true,
-                            trigger: 'onBlur',
-                            valuePropName: 'defaultValue',
-                            initialValue: this.state.fields.email ? this.state.fields.email : "",
-                            rules: [ { required: true, suppressWarning: true,type: 'email', message: 'Email incorrecto.' } ]
-                        })
-                        (
-                            <Input placeholder="Tu Email" size="large"
-                                name="email"
-                                ref={(argReg)=>{ if ( argReg && this.refEmail==false ){argReg.focus(); this.refEmail=argReg;} }}
-                                style={{height:'60px',boxShadow:'0 7px 6px -6px #999999'}}   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                onPressEnter={this.onPressEnterInp}
-                                onBlur={this.onChangeEmail}
-                                />
-                        )
-                    }
-                </Form.Item>
-                <Form.Item key="form-item-inp-psw"  {...formItemsProps}  >
-                    {
-                        getFieldDecorator('password', {
-                            valuePropName: 'defaultValue',
-                            initialValue: this.state.fields.password ? this.state.fields.password : "",
-                            suppressWarning: true,
-                            trigger: 'onBlur',
-                            rules: [
-                                { required:true, suppressWarning: true, message: 'Por favor, ingrese la password.' }
-                            ],
+                    <Form>
+                        <Row>
+                            <h2 style={{width:'100%',textAlign:'center'}} ><u>Ingresé email y password</u></h2>
+                        </Row>
+                        <Form.Item key="form-item-inp-email-p" {...formItemsProps} >
+                            {
+                                getFieldDecorator('email', {
+                                    suppressWarning: true,
+                                    // trigger: 'onBlur',
+                                    //valuePropName: 'defaultValue',
+                                    initialValue: initEmail ,
+                                    rules: [ { required: true, suppressWarning: true,type: 'email', message: 'Email incorrecto.' } ]
+                                })
+                                (
+                                    <Input placeholder="Tu Email" size="large"
+                                        name="email"
+                                        ref={(argReg)=>{ if ( argReg && this.refEmail==false ){argReg.focus(); this.refEmail=argReg;} }}
+                                        style={{height:'60px',boxShadow:'0 7px 6px -6px #999999'}}   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        onPressEnter={this.onPressEnterInp}
+                                        //onBlur={this.onChangeEmail}
+                                        />
+                                )
+                            }
+                        </Form.Item>
+                        <Form.Item key="form-item-inp-psw"  {...formItemsProps}  >
+                            {
+                                getFieldDecorator('password', {
+                                   //// valuePropName: 'defaultValue',
+                                    initialValue: this.state.fields.password ? this.state.fields.password : "",
+                                    suppressWarning: true,
+                                    // trigger: 'onBlur',
+                                    rules: [
+                                        { required:true, suppressWarning: true, message: 'Por favor, ingrese la password.' }
+                                    ],
+                                }
+                                )
+                                (
+                                    <Input.Password  placeholder="Password"  size="large" name="password"
+                                                    style={{height:'60px',boxShadow:'0 7px 6px -6px #999999'}} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                                    onPressEnter={this.onPressEnterInp}
+                                                    //onBlur={this.onChangePass}
+                                    />
+                                )
+                            }
+                        </Form.Item>
+                        {
+                            this.state.flagRegistration==false
+                                ?   <Row key="row-forget-psw"  >
+                                        <div className="forget-password">
+                                            <a onClick={this.props.forgetMyPassword} >{this.props.translate.form.forgetPassword}</a>
+                                        </div>
+                                    </Row>
+                                :   <div>
+                                        <Form.Item key="form-item-inp-nombre-p" {...formItemsProps} >
+                                            {
+                                                getFieldDecorator('nombre', {
+                                                    suppressWarning: true,
+                                                    // trigger: 'onBlur',
+                                                   // valuePropName: 'defaultValue',
+                                                    initialValue: this.state.fields.nombre ? this.state.fields.nombre : "",
+                                                    rules: [ { required: true, suppressWarning: true,type: 'string', message: 'Por favor, complete con su nombre.' } ]
+                                                })
+                                                (
+                                                    <Input placeholder="Tu Nombre"  name="nombre" size="large" name="nombre" className="waiboc-ec-form-input"
+                                                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                                        onPressEnter={this.onPressEnterInp}
+                                                        //onBlur={this.onChangeInput}
+                                                        />
+                                                )
+                                            }
+                                        </Form.Item>
+                                        <Form.Item key="form-item-inp-apellido-p" {...formItemsProps} >
+                                            {
+                                                getFieldDecorator('apellido', {
+                                                    suppressWarning: true,
+                                                    // trigger: 'onBlur',
+                                                   // valuePropName: 'defaultValue',
+                                                    initialValue: this.state.fields.apellido ? this.state.fields.apellido : "",
+                                                    rules: [ { required: true, suppressWarning: true,type: 'string', message: 'Por favor, complete con su apellido.' } ]
+                                                })
+                                                (
+                                                    <Input placeholder="Tu Apellido" name="apellido" size="large" name="apellido" className="waiboc-ec-form-input"
+                                                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                                        onPressEnter={this.onPressEnterInp}
+                                                        //onBlur={this.onChangeInput}
+                                                        />
+                                                )
+                                            }
+                                        </Form.Item>
+                                        <FormPhoneNumber key="form-item-inp-celular" {...formItemsProps} form={this.props.form} onChangeInput={this.onChangeInput} initialValue={this.state.fields.celular}  />
+                                        <Form.Item>
+                                            <Button key="for-item-button-sign-up"  type="primary" onClick={this.onSubmitFormNewUser} style={{marginTop:'10px'}} >
+                                                Registrarme
+                                            </Button>
+                                        </Form.Item>
+                                    </div>
                         }
-                        )
-                        (
-                            <Input.Password  placeholder="Password"  size="large" name="password"
-                                             style={{height:'60px',boxShadow:'0 7px 6px -6px #999999'}} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                             onPressEnter={this.onPressEnterInp}
-                                             onBlur={this.onChangePass}
-                            />
-                        )
-                    }
-                </Form.Item>
-                {
-                    this.state.flagRegistration==false
-                        ?   <Row key="row-forget-psw"  >
-                                <div className="forget-password">
-                                    <a onClick={this.props.forgetMyPassword} >{this.props.translate.form.forgetPassword}</a>
-                                </div>
-                            </Row>
-                        :   <div>
-                                <Form.Item key="form-item-inp-nombre-p" {...formItemsProps} >
-                                    {
-                                        getFieldDecorator('nombre', {
-                                            suppressWarning: true,
-                                            trigger: 'onBlur',
-                                            valuePropName: 'defaultValue',
-                                            initialValue: this.state.fields.nombre ? this.state.fields.nombre : "",
-                                            rules: [ { required: true, suppressWarning: true,type: 'string', message: 'Por favor, complete con su nombre.' } ]
-                                        })
-                                        (
-                                            <Input placeholder="Tu Nombre"  name="nombre" size="large" name="nombre" className="waiboc-ec-form-input"
-                                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                                onPressEnter={this.onPressEnterInp}
-                                                onBlur={this.onChangeInput}
-                                                />
-                                        )
-                                    }
-                                </Form.Item>
-                                <Form.Item key="form-item-inp-apellido-p" {...formItemsProps} >
-                                    {
-                                        getFieldDecorator('apellido', {
-                                            suppressWarning: true,
-                                            trigger: 'onBlur',
-                                            valuePropName: 'defaultValue',
-                                            initialValue: this.state.fields.apellido ? this.state.fields.apellido : "",
-                                            rules: [ { required: true, suppressWarning: true,type: 'string', message: 'Por favor, complete con su apellido.' } ]
-                                        })
-                                        (
-                                            <Input placeholder="Tu Apellido" name="apellido" size="large" name="apellido" className="waiboc-ec-form-input"
-                                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                                onPressEnter={this.onPressEnterInp}
-                                                onBlur={this.onChangeInput}
-                                                />
-                                        )
-                                    }
-                                </Form.Item>
-                                <FormPhoneNumber key="form-item-inp-celular" {...formItemsProps} form={this.props.form} onChangeInput={this.onChangeInput} initialValue={this.state.fields.celular}  />
-                                <Form.Item>
-                                    <Button key="for-item-button-sign-up"  type="primary" onClick={this.onSubmitFormNewUser} style={{marginTop:'10px'}} >
-                                        Registrarme
-                                    </Button>
-                                </Form.Item>
-                            </div>
-                }
-                <Form.Item key="form-item-btn-sub"  >
-                    {
-                        this.state.flagSpinner==true
-                            ?   <Spin size="large"   />
-                            :   this.state.flagRegistration==false
-                                ?   <Button.Group size="large" key="for-item-button-group" >
-                                        <Button key="for-item-button-ing"      type={"primary"} onClick={this.onSubmitForm}   >
-                                            Ingresar
-                                        </Button>
-                                        <Button key="for-item-button-sign-up"   onClick={()=>{this.setState({flagRegistration: true})}} >
-                                            Soy Nuevo
-                                        </Button>
-                                    </Button.Group>
-                                : null
-                    }
-                </Form.Item>
-            </Form>
+                        <Form.Item key="form-item-btn-sub"  >
+                            {
+                                this.state.flagSpinner==true
+                                    ?   <Spin size="large"   />
+                                    :   this.state.flagRegistration==false
+                                        ?   <Button.Group size="large" key="for-item-button-group" >
+                                                <Button key="for-item-button-ing"      type={"primary"} onClick={this.onSubmitForm}   >
+                                                    Ingresar
+                                                </Button>
+                                                <Button key="for-item-button-sign-up"   onClick={()=>{this.setState({flagRegistration: true})}} >
+                                                    Soy Nuevo
+                                                </Button>
+                                            </Button.Group>
+                                        : null
+                            }
+                        </Form.Item>
+                    </Form>
                 </Col>
             </Row>
         )
@@ -373,12 +373,11 @@ class FormEmailPasswordBase extends React.Component {
 } ;
 //
 export const FormEmailPassword = Form.create({name: 'FormEmailPassword'
-    /*
-    ,mapPropsToFields(props) {
-        // api.debug.display( 'mapPropsToFields:: props: ',props ) ;
-        // return false ;
+        /* ,mapPropsToFields(props) {
+        //
+        //
         return {
-            email:        Form.createFormField({ value: '' }),
+            email:        Form.createFormField({ value: emailUsr }),
             password:     Form.createFormField({ value: '' })
         };
     }

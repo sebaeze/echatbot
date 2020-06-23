@@ -18,7 +18,7 @@ class CuerpoInicio extends React.Component {
   render() {
     //
     return (
-          <div id="main" style={{paddingTop:'70px',minHeight: '100vh'}} >
+          <div id="main" style={{paddingTop:'70px',minHeight: '100vh'}}  >
               <InicioEncabezado translate={this.props.translate}
                                 id="waiboc-header-ini"
                                 configuracion={this.props.configuracion}

@@ -11,6 +11,7 @@ const onClickRedirectAccount = (argEE) => {
 }
 //
 export const ActionButtons = (props) => {
+    let extraClassname = props.showLoginButton==true ? "" : "active" ;
     return(
         <Row className="waiboc-home-row-actions" >
             {
@@ -21,7 +22,7 @@ export const ActionButtons = (props) => {
                     :   null
             }
             <AnimacionLink texto={
-                            <Button type="primary" size="large" className="waiboc-btn-action" >
+                            <Button type="primary" size="large" className={`waiboc-btn-action ${extraClassname}`} >
                                 {props.translate.moreInfo}
                             </Button>
                         }

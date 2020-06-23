@@ -32,11 +32,13 @@ class PageHeaderChatbot  extends  React.Component {
         return(
             <Row style={{backgroundColor:'inherit'}}  >
                     <Row>
-                        <Col xs={0}  md={0} lg={11} xl={11} xxl={11}  >
-                            <FormEmailHome onEnter={this.onEnterEmail} translate={this.props.translate} />
+                        <Col xs={0}  md={0} lg={11} xl={11} xxl={11}  className="box-home-bg" >
+                            <FormEmailHome  onEnter={this.onEnterEmail} translate={this.props.translate}
+                                            bottomBlock={true}
+                                        />
                         </Col>
                         <Col xs={1}  md={1}  lg={0}  xl={0}  xxl={0} ></Col>
-                        <Col xs={22} md={22} lg={12} xl={12} xxl={12} >
+                        <Col xs={22} md={22} lg={12} xl={12} xxl={12} className="box-home-bg" >
                             <Row >
                                 <div key={"title"} >
                                     <span className={"chat-line-home title fadeIn"} >{this.props.translate.homeHeader.title}</span>
@@ -52,6 +54,9 @@ class PageHeaderChatbot  extends  React.Component {
                                 }
                             </Row>
                             <ActionButtons showLoginButton={false} translate={this.props.translate} siguienteDiv={this.props.siguienteDiv} />
+                            <Col xs={24}  md={24} lg={0} xl={0} xxl={0}>
+                                <FormEmailHome onEnter={this.onEnterEmail} translate={this.props.translate} bottomBlock={false} />
+                            </Col>
                         </Col>
                     </Row>
             </Row>

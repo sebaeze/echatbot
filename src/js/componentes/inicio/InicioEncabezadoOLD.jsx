@@ -20,7 +20,9 @@ export class InicioEncabezado extends React.Component {
         let sumDelay = 600 ;
         //
         return(
-            <div id={this.props.id ? this.props.id : "idDivInicioEncabezado" } style={{minHeight:'90vh'}} className="bg-inicial" >
+            <div    id={this.props.id ? this.props.id : "idDivInicioEncabezado" }
+                    className="bg-inicial"
+            >
                 <TweenOne style={{marginLeft:(this.props.configuracion.isMobile==true ? '20px':'70px'),marginTop:(this.props.configuracion.isMobile==true ? '10px':'80px')}}
                             animation={{ x:450,y: sumaY, opacity: 0, type: 'from', delay: 300 }}
                             name="TweenOne"

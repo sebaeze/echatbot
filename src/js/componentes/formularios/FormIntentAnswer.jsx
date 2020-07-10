@@ -83,8 +83,8 @@ export class FormIntentAnswerBase extends React.Component {
                 <Col xs={0}  md={0}  lg={2}  xl={2}  xxl={2} ></Col>
                 <Col xs={24} md={24} lg={20} xl={20} xxl={20} >
                     <Form>
-                    <Collapse bordered={false} accordion={false} >
-                        <Collapse.Panel forceRender={true} key={"2"}  {...addPropsPanel}
+                    <Collapse bordered={false} accordion={false} defaultActiveKey={"text"} >
+                        <Collapse.Panel forceRender={true} key={"text"}  {...addPropsPanel}
                                         header={<Tooltip    placement="topRight"
                                                             title={this.props.translate.tooltip.answerText}
                                                             getPopupContainer={(trigger) => { return trigger.parentNode ; }}
@@ -188,7 +188,7 @@ export class FormIntentAnswerBase extends React.Component {
                         </Collapse>
                         <Form.Item style={{paddingTop:'15px',paddingBottom:'15px',paddingLeft:'30px' }} >
                             <Button type="primary" size="large" onClick={this.onSubmitForm} >
-                                {this.props.translate.form.submit}
+                                {this.props.translate.form.save}
                             </Button>
                             <Button
                                 style={{marginLeft:'10px'}}

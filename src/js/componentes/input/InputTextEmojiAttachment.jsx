@@ -79,6 +79,7 @@ export class InputTextAnswer extends React.Component {
                 <div style={styleWrapper}>
                     <div style={{width:'100%',position:'relative', fontSize:'25px' /* backgroundColor:'#f0f0f0', */  }}>
                         <Popover    trigger="click"
+                                    title={false}
                                     content={
                                         <div    style={{width:'100%',marginTop:'80px'}}
                                                 className={ "waiboc-emoji-wrapper" }

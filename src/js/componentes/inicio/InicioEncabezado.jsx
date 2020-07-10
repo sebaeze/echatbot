@@ -27,13 +27,12 @@ export class InicioEncabezado extends React.Component {
     } ;
     //
     render(){
-        //
+        // <Col xs={0}  md={0}   lg={1}  xl={1}  xxl={1}></Col>
         return(
             <div id={this.props.id} className="bg-inicial" >
                 <Row>
                     <Row>
-                        <Col xs={0}  md={0}   lg={1}  xl={1}  xxl={1}></Col>
-                        <Col xs={24} md={24}  lg={22} xl={22} xxl={22} style={{height:'90vh'}} >
+                        <Col xs={24} md={24}  lg={24} xl={24} xxl={24} style={{height:'90vh'}} >
                             <CarouselImagenes
                                 settings={{ infinite:true, autoplay: false, autoplaySpeed: 5000,centerMode:false,variableWidth:false}}
                                 styleArrows={{background:'none',opacity:'0.2'}}

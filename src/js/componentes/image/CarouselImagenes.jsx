@@ -3,6 +3,7 @@
 */
 import React                                    from 'react' ;
 import { Carousel }                             from 'antd'  ;
+import { styleArrowCarousel }                   from '../style/styleCarousel' ;
 //
 import '../../../css/iconArrows.css' ;
 //
@@ -12,7 +13,7 @@ const CarouselArrowPrev = ( props ) => {
         <div    className="custom-arrow prev" onClick={props.onClick}
                 style={props.visible==true ? {visibility: 'visible', opacity:'1'} : {visibility: 'hidden', opacity:'0'} }
         >
-            <img src="/img/ARROW-PREV.png" style={{width:'80px',height:'65px',margin:'5px'}} />
+            <img src="/img/ARROW-PREV-BLUE.png" style={styleArrowCarousel} />
         </div>
     )
 } ;
@@ -23,7 +24,7 @@ const CarouselArrowNext = ( props ) => {
         <div    className="custom-arrow next" onClick={props.onClick}
                 style={props.visible==true ? {visibility: 'visible', opacity:'1'} : {visibility: 'hidden', opacity:'0'} }
         >
-            <img src="/img/ARROW-NEXT.png" style={{width:'80px',height:'65px',margin:'5px'}} />
+            <img src="/img/ARROW-NEXT-BLUE.png" style={styleArrowCarousel} />
         </div>
     )
 } ;
@@ -37,7 +38,7 @@ export class CarouselImagenes extends React.Component {
             currentSlide: 0,
             refCarousel: false,
             visible: false ,
-            // visible: true ,
+            //  visible: true ,
             styleArrows: {...tempStyle, transition: 'all 0.3s ease-in-out',display:'none'}
             //styleArrows: {...tempStyle, transition: 'all 0.3s ease-in-out',display:'none'}
         } ;
@@ -90,7 +91,7 @@ export class CarouselImagenes extends React.Component {
     onMouseOutCarousel(argEE){
         try {
             if ( argEE && argEE.preventDefault  ){ argEE.preventDefault(); }
-            this.setState({ visible: false }) ;
+            // this.setState({ visible: false }) ;
         } catch(errOMO){
             console.log('...ERROR: errOMO: ',errOMO) ;
         }

@@ -6,6 +6,8 @@ const webpack                     = require("webpack");
 const CopyWebpackPlugin           = require('copy-webpack-plugin');
 const HtmlWebpackPlugin           = require('html-webpack-plugin');
 const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
+const BundleAnalyzerPlugin        = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+//
 const APP_AMBIENTES               = require('./config.js').APP_AMBIENTES ;
 const APP_ID                      = require('./config.js').APP_ID ;
 const ASSET_PATH                  = process.env.ASSET_PATH || '/';
@@ -93,6 +95,7 @@ module.exports = {
     }
   },
   plugins: [
+      new BundleAnalyzerPlugin() ,
       new CopyWebpackPlugin([ {from: 'src/img',to: 'img'}, {from: 'src/css',to: 'css'}, {from: 'src/xls'} ]),
       new HtmlWebpackPlugin({
         filename: "app.html",
@@ -109,7 +112,7 @@ module.exports = {
           useShortDoctype: true
         },
         hash:true
-      }),
+      }) ,
       new HtmlWebpackPrefixPlugin(),
       new webpack.DefinePlugin({
         'process.env.AMBIENTE': JSON.stringify(process.env.AMBIENTE),

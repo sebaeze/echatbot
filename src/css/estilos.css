@@ -1,6 +1,9 @@
 /*
 *
 */
+@import url( 'https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300;400;500;600;700&display=swap') ;
+@import url( 'https://fonts.googleapis.com/css2?family=Audiowide&display=swap' ) ;
+/*   */
 :root {
     --font-color-important: #002DFF ;
     --background-dashboard-edit: #F4F4F4 ;
@@ -389,6 +392,7 @@ div {
 /*  */
 #waiboc-main-node .box-home-bg {
     min-height: 400px ;
+    font-family: 'Encode Sans', sans-serif ;
 }
 .box-plan {
     width: 80% ;
@@ -1752,32 +1756,35 @@ span.waiboc-span-emoticon:hover {
 */
 /*  */
 .chat-line-home {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif  ;
-    font-Size: 40px !important ;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif  ; */
+    font-family: 'Encode Sans', sans-serif ;
+    font-Size:   68px ;
+    line-height: 100px ;
     font-Weight: 700 ;
+    height: 85px ;
     color: blue ;
     letter-spacing: 0.015rem;
-    /* background: #49B6F9 ; */
     background-color: transparent ;
     border-radius: 1.25rem;
     border-bottom-right-radius: 1.25rem;
     border-bottom-right-radius: 0;
     text-align: left;
     display: block;
-    height: 60px ;
-    line-height: 45px ;
     padding: 3px 3px 3px 3px ;
+    width: 100% ;
+    text-align: center ;
 }
 span.chat-line-home.title {
+    font-weight: 800 ;
     margin-top: 50px  ;
-    font-size: 70px  ;
-    line-height: 120px  ;
+    font-size: 80px  ;
+    line-height: 140px  ;
     height: 120px ;
     text-align: left ;
 }
 span.chat-line-home.sub-title {
-    font-size: 20px !important ;
-    line-height: 28px !important ;
+    font-size: 20px  ;
+    line-height: 28px  ;
     /* color: rgb(92, 89, 89)153, 149, 149) ; */
     color: #5E5959 ;
 }
@@ -1855,6 +1862,14 @@ span.chat-line-home.sub-title {
         line-height: 26px !important ;
         text-align: center !important ;
     }
+    .waiboc-home-tryus {
+        margin-top: 20px ;
+        margin-bottom: 30px ;
+    }
+    .waiboc-home-row-moreinfo {
+        margin-top: 40px ;
+        margin-bottom: 30px ;
+    }
     .waiboc-home-row-actions {
         text-align: center !important ;
         padding-top: 5px ;
@@ -1883,6 +1898,22 @@ span.chat-line-home.sub-title {
         font-size: 18px ;
         line-height: 20px ;
         vertical-align: left ;
+    }
+    #waiboc-main-node .box-home-bg {
+        min-height: 10px ;
+    }
+    span.chat-line-home.title {
+        font-size: 65px  ;
+        line-height: 100px  ;
+        height: 120px ;
+    }
+    .waiboc-home-tryus {
+        margin-top: 10px ;
+        margin-bottom: 10px ;
+    }
+    .waiboc-home-row-moreinfo {
+        margin-top: 15px ;
+        margin-bottom: 10px ;
     }
     /*  */
 }

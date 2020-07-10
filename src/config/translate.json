@@ -137,6 +137,7 @@
             "state":"State",
             "zipCode":"Zip Code",
             "phone":"Phone",
+            "save":"Save",
             "savechanges":"Save Changes",
             "submit":"Submit",
             "lastName":"Last Name",
@@ -181,9 +182,8 @@
         "homeHeader":{
             "title":"Chatbot for your website",
             "text":[
-                "Create a chatbot in minutes",
-                "No technical knowledge required",
-                "Integrate It to your website with a link"
+                "Integrate easily a Chatbot to your website",
+                "Build and train your bot in minutes"
             ],
             "ourProposal":"Our proposal"
         },
@@ -374,6 +374,7 @@
             "submit":"Enviar",
             "zipCode":"Codigo Postal",
             "phone":"Telefono",
+            "save":"Guardar",
             "savechanges":"Guardar Cambios",
             "lastName":"Apellido",
             "description":"Descripción",
@@ -490,18 +491,16 @@
         "homeHeader":{
             "title":"Chatbot para tu página",
             "text":[
-                "Crea un chatbot en minutos",
-                "Sin conocimientos tecnicos",
-                "Integralo en tu página con un link"
+                "Integra fácilmente un Chatbot en tu sitio web",
+                "Crea y entrena tu bot en minutos"
             ],
             "ourProposal":"Nuestra Propuesta"
         },
         "homeWebsitDev":{
-            "title":"Página web o tienda para tu negocio",
+            "title":"Implementamos el chatbot por vos",
             "text":[
-                "Desarrollamos tu página web o tienda",
-                "Te asesoramos en la digitalización de tu negocio",
-                "Contáctanos y agendamos una reunión"
+                "Creamos y entrenamos el chatbot en base a sus requerimientos",
+                "Automatizamos las necesidades de su negocio"
             ],
             "ourProposal":"Nuestra Propuesta"
         },
@@ -648,6 +647,7 @@
             "state":"Estado",
             "zipCode":"Código Postal",
             "phone":"Telefone",
+            "save":"Salvar",
             "savechanges":"Salvar alterações",
             "submit":"Enviar",
             "lastName":"Sobrenome",
@@ -675,9 +675,8 @@
         "homeHeader":{
             "title":"Chatbot para o seu site",
             "text":[
-                "Crie um chatbot em minutos",
-                "Nenhum conhecimento técnico necessário",
-                "Integre-o ao seu site com um link"
+                "Integre facilmente um Chatbot ao seu site",
+                "Crie e treine seu bot em minutos"
             ],
             "ourProposal":"Our proposal"
         },

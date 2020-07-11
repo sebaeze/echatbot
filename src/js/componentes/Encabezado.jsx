@@ -85,7 +85,8 @@ class Encabezado extends React.Component  {
             </Col>
             <Col  xs={10} md={10} lg={0} xl={0} xxl={0} ></Col>
             <Col xs={2} md={2} lg={2} xl={2} xxl={2} >
-              <FiltroLenguaje seleccion={this.props.onchangeLanguage} translate={this.props.translate}
+              <FiltroLenguaje seleccion={this.props.onchangeLanguage}
+                              translate={this.props.translate}
                               customStyle={{width:'90%',marginLeft:'5%',}}
                         />
             </Col>

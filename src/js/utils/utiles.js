@@ -1,7 +1,7 @@
 /*
 *
 */
-//
+import ls                                 from 'local-storage' ;
 import translate                          from "../../config/translate.json" ;
 import localeES                           from 'antd/es/date-picker/locale/es_ES';
 import localeBR                           from 'antd/es/date-picker/locale/pt_BR';
@@ -11,13 +11,29 @@ import localePaginationEN                 from 'rc-pagination/es/locale/en_US' ;
 import localePaginationES                 from 'rc-pagination/es/locale/es_ES' ;
 import localePaginationPT                 from 'rc-pagination/es/locale/pt_BR' ;
 //
+import {PARAMETROS}                       from './parametros'  ;
+//
 export const languageLocale = (argUserLang=false) => {
     let outLocate = localeEN ;
     try {
         //
-        let tempLenguaje   = argUserLang!=false ? argUserLang : (navigator.language || navigator.languages[0] || "EN") ;
+        let tempLenguaje   = ls( PARAMETROS.SESSION.LANGUAGE ) ;
+        console.log('...(A) tempLenguaje: ',tempLenguaje) ;
+        //
+        if ( argUserLang==false ){
+            if ( !tempLenguaje ){
+                tempLenguaje = navigator.language || navigator.languages[0] || "EN" ;
+            }
+        } else {
+            tempLenguaje = argUserLang ;
+        }
+        console.log('...(B) tempLenguaje: ',tempLenguaje) ;
+        //
+        // let tempLenguaje   = argUserLang!=false ? argUserLang : (navigator.language || navigator.languages[0] || "EN") ;
+        //
         tempLenguaje       = tempLenguaje.substr(0,2).toUpperCase() ;
         let tempLocaleBI   = translate[tempLenguaje] || {} ;
+        ls( PARAMETROS.SESSION.LANGUAGE, tempLenguaje ) ;
         //
         switch( tempLenguaje ){
           case 'ES':

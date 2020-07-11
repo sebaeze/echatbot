@@ -9,7 +9,7 @@ const updateAccount = (argAccount) => {
     return new Promise(function(respOk,respRech){
         try {
             //
-            ls( PARAMETROS.SESSION.USUARIO, argAccount ) ;
+            ls( PARAMETROS.SESSION.USUARIO, argAccount )  ;
             //
             let tempOptPost = opcionesPOST ;
             tempOptPost.body = JSON.stringify(argAccount)  ;

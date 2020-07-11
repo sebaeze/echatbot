@@ -39,7 +39,8 @@ export class App extends React.Component {
   }
   //
   onchangeLanguage(argNewLang){
-    this.setState({ translate: languageLocale(argNewLang) }) ;
+    let newLangg = typeof argNewLang=="string" ? argNewLang : argNewLang.key ;
+    this.setState({ translate: languageLocale(newLangg) }) ;
   }
   //
   render() {

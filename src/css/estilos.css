@@ -414,6 +414,15 @@ div {
 #waiboc-main-node, #waiboc-main-node h1, #waiboc-main-node h2, #waiboc-main-node h3 ,#waiboc-main-node .ant-typography {
     font-family: 'Encode Sans', sans-serif ;
 }
+#waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar ,
+#waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active
+{
+    color: var(--font-color-important) ;
+    font-weight: 500 ;
+}
+#waiboc-main-node .ant-tabs.ant-tabs-card .ant-tabs-card-bar .anticon svg {
+    color: #2d15da ;
+}
 #waiboc-main-node .box-home-bg {
     min-height: 400px ;
     font-family: 'Encode Sans', sans-serif ;

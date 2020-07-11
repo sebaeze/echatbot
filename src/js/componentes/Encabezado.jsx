@@ -9,11 +9,12 @@ import { BackTop }                         from 'antd'  ;
 import { LogoEmpresa }                     from './link/LogoEmpresa'  ;
 import { NavMenu    }                      from './menu/NavMenu'      ;
 import { MenuHeaderMobile   }              from './menu/MenuHeaderMobile'   ;
+import { FiltroLenguaje }                  from './filtros/FiltroLenguaje'       ;
 import { api, sendError2Backend }          from '../api/api' ;
 //
 const { Header } = Layout;
 //
-class Encabezado extends React.Component {
+class Encabezado extends React.Component  {
   constructor(props) {
     super(props) ;
     this.state       = { flagScroll:false, menuNavVisible: false, isMobile: (window.innerWidth<796), userInfo: false } ;
@@ -69,7 +70,7 @@ class Encabezado extends React.Component {
               <div className="ant-back-top-inner"><Icon type="arrow-up" /></div>
           </BackTop>
           <Row>
-            <Col xs={10} md={10} lg={10} xl={10} xxl={10}  >
+            <Col xs={10} md={10} lg={9} xl={9} xxl={9}  >
               <LogoEmpresa />
             </Col>
             <Col  xs={0} md={0} lg={13} xl={13} xxl={13} >
@@ -83,6 +84,11 @@ class Encabezado extends React.Component {
                 }
             </Col>
             <Col  xs={10} md={10} lg={0} xl={0} xxl={0} ></Col>
+            <Col xs={2} md={2} lg={2} xl={2} xxl={2} >
+              <FiltroLenguaje seleccion={this.props.onchangeLanguage} translate={this.props.translate}
+                              customStyle={{width:'90%',marginLeft:'5%',}}
+                        />
+            </Col>
             <Col  xs={2} md={2} lg={0} xl={0} xxl={0} >
                 <MenuHeaderMobile
                       isMobile={this.state.isMobile}

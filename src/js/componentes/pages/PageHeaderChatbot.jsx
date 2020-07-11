@@ -58,7 +58,7 @@ class PageHeaderChatbot  extends  React.Component {
                                     </Col>
                                 </Row>
                             </Row>
-                            <Row style={styleHomeTryUs} >
+                            <Row className="waiboc-home-email-us" >
                                 <Col xs={0}  md={0}  lg={2}  xl={2}  xxl={2} ></Col>
                                 <Col xs={24} md={24} lg={15} xl={15} xxl={15}>
                                     <FormEmailHome  onEnter={this.onEnterEmail} translate={this.props.translate}

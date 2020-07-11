@@ -16,7 +16,7 @@ import { CuerpoTrain   }                   from "./js/componentes/cuerpoPagina/C
 import { CuerpoEditBot }                   from "./js/componentes/cuerpoPagina/CuerpoEditBot" ;
 import { CuerpoReset }                     from "./js/componentes/cuerpoPagina/CuerpoReset"   ;
 //
-import { languageLocale }                  from "./js/utils/utiles" ;
+import { languageLocale }                  from "./js/utils/utiles"  ;
 import configApp                           from "./config/configApp.json" ;
 //
 import 'antd/dist/antd.css' ;
@@ -31,9 +31,15 @@ export class App extends React.Component {
   constructor(props){
     super(props) ;
     this.state = {
-      isMobile: (window.innerWidth<797)
+      isMobile: (window.innerWidth<797) ,
+      translate: languageLocale()
     } ;
-    this.translate = languageLocale() ;
+    this.onchangeLanguage = this.onchangeLanguage.bind(this)
+    // this.translate = languageLocale() ;
+  }
+  //
+  onchangeLanguage(argNewLang){
+    this.setState({ translate: languageLocale(argNewLang) }) ;
   }
   //
   render() {
@@ -42,7 +48,7 @@ export class App extends React.Component {
     return (
       <Layout id="waiboc-main-node" style={{ background: '#fff',padding: '0' }}>
           <Router>
-            <EncabezadoLazy translate={{...this.translate}} />
+            <EncabezadoLazy translate={{...this.translate}} onchangeLanguage={this.onchangeLanguage} />
             <Content style={{ minHeight: '90vh', background: '#fff',padding: '0' }}>
               <Route exact path="/account"                      component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />
               <Route exact path="/account/:seccion"             component={(argMach) => <CuerpoCuenta  translate={{...this.translate}} configuracion={configApp} {...argMach} />}  />

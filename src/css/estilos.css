@@ -68,6 +68,22 @@ header ul.ant-menu {
     padding-left: 5px ;
     padding-right: 5px ;
 }
+/*
+.waiboc-select-dropdown-header {
+    width: 100px !important ;
+    border: 2px solid red ;
+}
+*/
+.waiboc-select-img {
+    width: 25px ;
+    height: 20px ;
+    border-radius: 3px ;
+}
+.waiboc-select-name {
+    padding-left: 10px ;
+    font-size: 18px ;
+    font-weight: 600 ;
+}
 .waiboc-sys-icon {
     height: 30px ;
     line-height: 30px ;
@@ -136,6 +152,10 @@ header ul.ant-menu {
 .waiboc-home-row-actions .waiboc-btn-action span:hover {
     text-decoration: underline ;
 }
+.waiboc-home-email-us {
+    margin-top: 20px ;
+    margin-bottom:  40px ;
+}
 .waiboc-home-whyus {
     min-height: 100vh ;
     padding-top:  5px ;
@@ -143,9 +163,10 @@ header ul.ant-menu {
     background: linear-gradient(0deg, rgba(204,210,240,1) 4%, rgba(131,151,244,1) 100%);
 }
 .waiboc-home-whyus h1.ant-typography {
-    color: white ;
-    font-size: 45px ;
-    line-height: 49px ;
+    color: var(--font-color-important) ;
+    font-size: 60px ;
+    line-height: 80px ;
+    margin-top: 30px ;
 }
 .waiboc-home-whyus h3.ant-typography {
     font-size: 28px ;
@@ -390,6 +411,9 @@ div {
 }
 */
 /*  */
+#waiboc-main-node, #waiboc-main-node h1, #waiboc-main-node h2, #waiboc-main-node h3 ,#waiboc-main-node .ant-typography {
+    font-family: 'Encode Sans', sans-serif ;
+}
 #waiboc-main-node .box-home-bg {
     min-height: 400px ;
     font-family: 'Encode Sans', sans-serif ;
@@ -1692,8 +1716,8 @@ span.waiboc-span-emoticon:hover {
     padding-top: 50px ;
 }
 .waiboc-home-email-in {
-    width: 85% ;
-    padding-top: 12vh ;
+    width: 100% ;
+    /* padding-top: 12vh ; */
     padding-left: 5px;
     padding-right: 30px ;
     line-height: 30px ;
@@ -1728,12 +1752,13 @@ span.waiboc-span-emoticon:hover {
 .waiboc-home-email-in .ant-input-affix-wrapper input {
     padding: 10px ;
     padding-left: 20px ;
-    line-height: 60px !important ;
-    height: 70px !important ;
-    font-size: 30px !important ;
+    line-height: 60px /* !important */ ;
+    height:      70px /* !important */  ;
+    font-size:   30px /* !important */  ;
     font-weight: 500 ;
     border-width: 4px;
-    border-color: #C2CCF9 !important;
+    border-radius: 10px ;
+    border-color: #C2CCF9 /* !important */ ;
 }
 .waiboc-home-email-in .ant-input-affix-wrapper .ant-input-suffix {
     right: 0px ;
@@ -1907,6 +1932,10 @@ span.chat-line-home.sub-title {
         line-height: 100px  ;
         height: 120px ;
     }
+    .waiboc-home-email-us {
+        margin-top: 20px ;
+        margin-bottom:  40px ;
+    }
     .waiboc-home-tryus {
         margin-top: 10px ;
         margin-bottom: 10px ;
@@ -1914,6 +1943,14 @@ span.chat-line-home.sub-title {
     .waiboc-home-row-moreinfo {
         margin-top: 15px ;
         margin-bottom: 10px ;
+    }
+    .waiboc-home-email-in {
+        padding: 0 ;
+    }
+    .waiboc-home-email-in .ant-input-affix-wrapper input {
+        line-height: 40px ;
+        height: 50px ;
+        font-size: 22px ;
     }
     /*  */
 }

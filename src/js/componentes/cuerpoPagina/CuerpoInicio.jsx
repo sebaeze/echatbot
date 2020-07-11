@@ -7,7 +7,7 @@ import { CuerpoAbout  }                   from "../cuerpoPagina/CuerpoAbout"   ;
 import FormContacto                       from "../formularios/FormContacto"   ;
 import { InicioEncabezado }               from  '../inicio/InicioEncabezado'   ;
 import { InicioPorque  }                  from  '../inicio/InicioPorque'       ;
-// 
+//
 class CuerpoInicio extends React.Component {
   constructor(props) {
     super(props)  ;

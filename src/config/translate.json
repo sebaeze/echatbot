@@ -188,23 +188,22 @@
             "ourProposal":"Our proposal"
         },
         "homeWebsitDev":{
-            "title":"Website or eCommerce for your business",
+            "title":"We implement the chatbot for you",
             "text":[
-                "We develop your website or eCommerce",
-                "We advise you on the digitization of your business",
-                "Contact us and we will schedule a meeting"
+                "Automate your business",
+                "We create and train the chatbot based on your needs"
             ],
             "ourProposal":"Our proposal"
         },
         "HomeWhy":[
             {
-                "title":"Chatbot en la nube",
-                "description":"El servicio no requiere de hosting adicional",
+                "title":"Chatbot in the Cloud",
+                "description":"The service does not require hosting",
                 "image": [
                     {
                         "src":"/img/cloud-transparent.png",
                         "style":{
-                            "width":"80%",
+                            "width":"100%",
                             "height":"auto",
                             "position": "absolute"
                         }
@@ -212,7 +211,7 @@
                     {
                         "src":"/img/CHATBOT.TRANSPARENT.png",
                         "style":{
-                            "width":"25%",
+                            "width":"20%",
                             "height":"auto",
                             "position": "absolute",
                             "marginLeft":"30%",
@@ -221,9 +220,10 @@
                     }
                 ],
                 "text":[
-                    "Se crea el chatbot en segundos",
-                    "Se lo entrena",
-                    "Se copia / pega el link del widget en el sitio web"
+                    "You create an account",
+                    "Create a chatbot",
+                    "Traing the chatbot",
+                    "Copy / Paste the url link in your website"
                 ]
             },
             {
@@ -266,7 +266,7 @@
         "services":"Services",
         "prices":"Prices",
         "news":"News",
-        "login":"Login in",
+        "login":"Log in",
         "FAQ":"FAQ",
         "chatbot":"Chatbot",
         "help":"Help",
@@ -491,8 +491,8 @@
         "homeHeader":{
             "title":"Chatbot para tu página",
             "text":[
-                "Integra fácilmente un Chatbot en tu sitio web",
-                "Crea y entrena tu bot en minutos"
+                "Crea y entrena tu bot en minutos",
+                "Integra fácilmente un Chatbot en tu sitio web"
             ],
             "ourProposal":"Nuestra Propuesta"
         },
@@ -767,6 +767,66 @@
             "free":"Gratuito",
             "metrics":"Metricas",
             "createAccount":"Criar Conta"
+        },
+        "HomeWhy":[
+            {
+                "title":"Chatbot na nuvem",
+                "description":"O serviço não requer hospedagem",
+                "image": [
+                    {
+                        "src":"/img/cloud-transparent.png",
+                        "style":{
+                            "width":"100%",
+                            "height":"auto",
+                            "position": "absolute"
+                        }
+                    },
+                    {
+                        "src":"/img/CHATBOT.TRANSPARENT.png",
+                        "style":{
+                            "width":"20%",
+                            "height":"auto",
+                            "position": "absolute",
+                            "marginLeft":"30%",
+                            "marginTop":"12%"
+                        }
+                    }
+                ],
+                "text":[
+                    "Você cria uma conta",
+                    "Crie um chatbot",
+                    "Treinando o chatbot",
+                    "Copie / cole o link do URL no seu site"
+                ]
+            },
+            {
+                "title":"Pago por Consumo",
+                "description":"Se cobrara por cantidad de mensajes respondidos",
+                "image":[
+                    {
+                        "src":"/img/payAsYouGo.png",
+                        "style":{
+                            "width":"80%",
+                            "height":"auto",
+                            "position": "absolute"
+                        }
+                    }
+                ],
+                "text":[
+                    "Crea una cuenta y chatbots gratis",
+                    "Utiliza nuestras herramientas para entrenar y testear",
+                    "A fin de mes, pagas por cantidad de mensajes respondidos en tu sitio web"
+                ]
+            }
+        ],
+        "homeWebsitDev":{
+            "title":"Site ou comércio eletrônico para sua empresa",
+            "text":[
+                "Desenvolvemos seu site ou comércio eletrônico",
+                "Aconselhamos na digitalização do seu negócio",
+                "Entre em contato e agendaremos uma reunião"
+            ],
+            "ourProposal":"Our proposal"
         }
     }
 }

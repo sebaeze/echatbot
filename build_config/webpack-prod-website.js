@@ -9,9 +9,14 @@ const HtmlWebpackPrefixPlugin     = require('html-webpack-prefix-plugin') ;
 const CompressionPlugin           = require('compression-webpack-plugin');
 const BrotliPlugin                = require('brotli-webpack-plugin');
 const { CleanWebpackPlugin }      = require('clean-webpack-plugin') ;
+// const BundleAnalyzerPlugin        = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+//
 const APP_AMBIENTES               = require('./config.js').APP_AMBIENTES ;
 const APP_ID                      = require('./config.js').APP_ID ;
 const ASSET_PATH                  = process.env.ASSET_PATH || '/';
+//
+// Solo para analizar chunks::
+// process.env.AMBIENTE = APP_AMBIENTES.PRODUCCION ;
 //
 const HASH_VERSION                = require('./defineHash').HASH_VERSION ;
 let hashType                      = process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ? '.[contenthash]' : '' ;
@@ -99,30 +104,32 @@ module.exports = {
         maxInitialRequests: Infinity,
         minSize: 0,
         cacheGroups: {
-          /*
           reactVendor: {
             test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
             name: "vendorReact"
           },
-          */
           utilityVendor: {
             test: /[\\/]node_modules[\\/](lodash|moment|moment-timezone)[\\/]/,
             name: "VendorUtility"
           },
           antdVendor: {
-            test: /[\\/]node_modules[\\/](antd)[\\/]/,
+            test: /[\\/]node_modules[\\/](antd|@ant-design)[\\/]/,
             name: "vendorAntd"
           },
+          waibocWidget: {
+            test: /[\\/]node_modules[\\/](waiboc-widget-react)[\\/]/,
+            name: "waibocWidget"
+          } ,
           vendor: {
-            test: /[\\/]node_modules[\\/](!antd)(!lodash)(!moment)(!moment-timezone)[\\/]/,
+            test: /[\\/]node_modules[\\/](!react)(!react-dom)(!antd)(!lodash)(!moment)(!moment-timezone)(!waiboc-widget-react)[\\/]/,
           name: "vendor"
         },
       },
     },
   },
   plugins: [
-      // new BundleAnalyzerPlugin() ,
       new CleanWebpackPlugin(),
+      // new BundleAnalyzerPlugin() ,
       //{  verbose: true, ['../dist'] }),
       new CopyWebpackPlugin([{from: 'src/img',to: 'img'},{from: 'src/css',to: 'css'}]),
       new webpack.DefinePlugin({

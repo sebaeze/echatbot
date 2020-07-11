@@ -90,7 +90,7 @@ module.exports = {
 		}
   },
   */
-  optimization: {
+ optimization: {
     runtimeChunk: 'single',
     moduleIds: 'hashed',
     splitChunks: {
@@ -98,27 +98,29 @@ module.exports = {
         maxInitialRequests: Infinity,
         minSize: 0,
         cacheGroups: {
-          /*
           reactVendor: {
             test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-            name: "reactvendor"
+            name: "vendorReact"
           },
-          */
           utilityVendor: {
             test: /[\\/]node_modules[\\/](lodash|moment|moment-timezone)[\\/]/,
-            name: "utilityVendor"
+            name: "VendorUtility"
           },
           antdVendor: {
-            test: /[\\/]node_modules[\\/](antd)[\\/]/,
-            name: "antdVendor"
+            test: /[\\/]node_modules[\\/](antd|@ant-design)[\\/]/,
+            name: "vendorAntd"
           },
+          waibocWidget: {
+            test: /[\\/]node_modules[\\/](waiboc-widget-react)[\\/]/,
+            name: "waibocWidget"
+          } ,
           vendor: {
-             test: /[\\/]node_modules[\\/](!antd)(!lodash)(!moment)(!moment-timezone)[\\/]/,
+            test: /[\\/]node_modules[\\/](!react)(!react-dom)(!antd)(!lodash)(!moment)(!moment-timezone)(!waiboc-widget-react)[\\/]/,
           name: "vendor"
-        },
         },
       },
     },
+  },
   plugins: [
       new webpack.DefinePlugin({
         'process.env.AMBIENTE': JSON.stringify(process.env.AMBIENTE),

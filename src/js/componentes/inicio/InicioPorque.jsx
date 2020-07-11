@@ -13,7 +13,7 @@ const WhyElement = (props) => {
         <div style={{minHeight:'100vh'}} id={props.currentId} >
             <Row>
                 <Col xs={1} md={1}   lg={1}  xl={1}  xxl={1} ></Col>
-                <Col xs={22} md={22} lg={14} xl={14} xxl={14} >
+                <Col xs={22} md={22} lg={11} xl={11} xxl={11} >
                     <Title level={1}  >{props.why.title}</Title>
                     <Title level={3}  className="sub-title" >{props.why.description}</Title>
                     {
@@ -28,7 +28,7 @@ const WhyElement = (props) => {
                 </Col>
                 {
                     props.why.image ?
-                        <Col xs={0} md={0} lg={8} xl={8} xxl={8} >
+                        <Col xs={0} md={0} lg={11} xl={11} xxl={11} >
                             {
                                 props.why.image.map((elemImg,imgKey)=>{
                                     return(
@@ -89,7 +89,7 @@ export class InicioPorque extends React.Component {
                     this.props.translate.HomeWhy.map((elemWhy,whyIdx)=>{
                         let elemProps = {
                             ...this.props,
-                            currentId: this.props.id+"_"+whyIdx ,
+                            currentId:  this.props.id+"_"+whyIdx ,
                             nextId: (this.props.translate.HomeWhy.length==(whyIdx+1)) ? this.props.siguienteDiv : this.props.id+"_"+(whyIdx+1)
                         };
                         elemProps.siguienteDiv = elemProps.nextId ;

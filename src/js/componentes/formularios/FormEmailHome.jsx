@@ -68,10 +68,10 @@ export class FormEmailHome extends React.Component {
                 </Button>
             </LinkRouter>
         */
-        let extraStyle = this.props.bottomBlock==true ? {position:'absolute',bottom:'70px'} : {} ;
+        // let extraStyle = this.props.bottomBlock==true ? {position:'absolute',bottom:'0px'} : {} ;
         //
         return(
-            <div className={"waiboc-home-email-in"} style={extraStyle} >
+            <div className={"waiboc-home-email-in"} >
                 <div>
                     <Input
                         ref={ (argREf)=>{ if (argREf && this.inputEmail==false ){ this.inputEmail = argREf ; } } }

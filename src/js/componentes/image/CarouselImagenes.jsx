@@ -91,7 +91,7 @@ export class CarouselImagenes extends React.Component {
     onMouseOutCarousel(argEE){
         try {
             if ( argEE && argEE.preventDefault  ){ argEE.preventDefault(); }
-            // this.setState({ visible: false }) ;
+            this.setState({ visible: false }) ;
         } catch(errOMO){
             console.log('...ERROR: errOMO: ',errOMO) ;
         }

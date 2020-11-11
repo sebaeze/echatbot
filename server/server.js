@@ -66,7 +66,7 @@ if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ){
             res.redirect(301, "https://" + host);
         } ;
     } else {
-        console.log("...voy a redirect:: host: ",host," indexof: ",(String(host).toUpperCase().indexOf("WWW"),";");
+        console.log("...voy a redirect:: host: ",host," indexof: ",(String(host).toUpperCase().indexOf("WWW")),";");
       res.redirect(301, "https://www." + host);
     } ;
   }) ;

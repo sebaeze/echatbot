@@ -59,11 +59,15 @@ if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ){
   //
   app.all(/.*/, function(req, res, next) {
     var host = req.header("host");
-    if ( host.match(/^www\..*/i) && req.protocol.match(/^https\..*/i) ) {
-      next();
+    if ( host.match(/^www\..*/i) ) {
+        if ( req.protocol.match(/^https\..*/i) ){
+            next();
+        } else {
+            res.redirect(301, "https://" + host);
+        } ;
     } else {
       res.redirect(301, "https://www." + host);
-    }
+    } ;
   }) ;
   //
 } ;

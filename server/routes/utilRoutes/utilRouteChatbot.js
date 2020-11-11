@@ -5,7 +5,7 @@ const fs         = require('fs')    ;
 const fsPromises = require('fs').promises;
 const axios      = require('axios') ;
 const path       = require('path')  ;
-const rootCA     = require('ssl-root-cas/latest').inject().addFile( path.join(__dirname,'../../cert/waiboc.com.fullchain.pem') );
+const rootCA     = require('ssl-root-cas/latest').inject().addFile( path.join(__dirname,'../../cert/fullchain.pem') );
 //
 let API_NLP      = false ;
 //

@@ -119,8 +119,8 @@ try {
             });
             //
             var puerto      = process.env.PORT || 443  ;
-            var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.privkey.pem') );
-            var certificate = fs.readFileSync( path.join(__dirname,'./cert/waiboc.com.cert.pem') );
+            var privateKey  = fs.readFileSync( path.join(__dirname,'./cert/privkey.pem') );
+            var certificate = fs.readFileSync( path.join(__dirname,'./cert/cert.pem') );
             //
             app.get('*', function(req, res) {
               res.set('access-Control-Allow-Origin', '*');

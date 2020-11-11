@@ -21,10 +21,15 @@
         }
     },
     "database":{
-        "dev":{
+        "OLD:dev":{
             "type":"mongodb",
             "url":"mongodb://localhost:27017",
             "database":"Waibocdev"
+        },
+        "dev":{
+            "type":"mongodb",
+            "url":"mongodb://sebaeze:qaz11qaz@66.97.35.197:20017",
+            "database":"WaibocDEV"
         },
         "produccion":{
             "type":"mongodb",

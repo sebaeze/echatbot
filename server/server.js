@@ -48,13 +48,25 @@ app.disable('etag');
 // app.enable('trust proxy');
 //
 if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ){
+  /*
   app.use(
         require('express-naked-redirect')({
           subDomain: 'www',
           protocol: 'https'
         })
   ) ;
-}
+  */
+  //
+  app.all(/.*/, function(req, res, next) {
+    var host = req.header("host");
+    if ( host.match(/^www\..*/i) && req.protocol.match(/^https\..*/i) ) {
+      next();
+    } else {
+      res.redirect(301, "https://www." + host);
+    }
+  }) ;
+  //
+} ;
 /*
 *   Rutas
 */
@@ -62,6 +74,7 @@ try {
     //
     app.all('*', function(req, res, next) {
       //
+      console.log("...req.protocol: ",req.protocol," match: ",(req.protocol.match(/^https\..*/i)),";") ;
       var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
       if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION && String(hhost).toUpperCase().indexOf('WAIBOC.COM')==-1 ){
           console.log('\n\n ***************** \n *** (B) ALGUN LOGI HIZO REDIRECT \n hhost: '+hhost+' \n****************** ');

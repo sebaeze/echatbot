@@ -59,13 +59,14 @@ if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ){
   //
   app.all(/.*/, function(req, res, next) {
     var host = req.header("host");
-    if ( host.match(/^www\..*/i) ) {
-        if ( req.protocol.match(/^https\..*/i) ){
+    if ( String(host).toUpperCase().indexOf("WWW")>-1 ) {
+        if ( String(req.protocol).toUpperCase().indexOf("HTTPS")>-1 ){
             next();
         } else {
             res.redirect(301, "https://" + host);
         } ;
     } else {
+        console.log("...voy a redirect:: host: ",host," indexof: ",(String(host).toUpperCase().indexOf("WWW"),";");
       res.redirect(301, "https://www." + host);
     } ;
   }) ;

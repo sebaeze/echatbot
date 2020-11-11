@@ -66,7 +66,7 @@ if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION ){
             res.redirect(301, "https://" + host);
         } ;
     } else {
-        console.log("...voy a redirect:: host: ",host," indexof: ",(String(host).toUpperCase().indexOf("WWW")),";");
+      // console.log("...voy a redirect:: host: ",host," indexof: ",(String(host).toUpperCase().indexOf("WWW")),";");
       res.redirect(301, "https://www." + host);
     } ;
   }) ;
@@ -79,7 +79,6 @@ try {
     //
     app.all('*', function(req, res, next) {
       //
-      console.log("...req.protocol: ",req.protocol," match: ",(req.protocol.match(/^https\..*/i)),";") ;
       var hhost = (req.headers.host && String(req.headers.host).indexOf(':')!=-1) ? req.headers.host.split(":")[0] : req.headers.host ;
       if ( process.env.AMBIENTE==APP_AMBIENTES.PRODUCCION && String(hhost).toUpperCase().indexOf('WAIBOC.COM')==-1 ){
           console.log('\n\n ***************** \n *** (B) ALGUN LOGI HIZO REDIRECT \n hhost: '+hhost+' \n****************** ');
